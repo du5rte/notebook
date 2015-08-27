@@ -1,0 +1,60 @@
+//// Advanced Mixin Arguments
+//
+// Passing Content Blocks to a Mixin
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-content
+//
+// Variable Scope and Content Blocks
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_scope_and_content_blocks
+//
+// Keyword Arguments
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#keyword_arguments_2
+//
+// Variable Arguments
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_arguments
+
+
+
+// the problem with our previous loop is that we can't add more members
+
+// Instead we can use $members... to let it know we want to pass a array
+
+@mixin band($name, $members...) { //we can remove the ... if we remove the commas we we call our functions ($name, $members) @include band(radiohead, thom jonny colin phil);
+		@each $member in $members {
+		.#{$name}.#{$member} {
+			background: url("image/#{$name}/#{$member}.jpg");
+		}
+	}
+}
+
+
+@include band(radiohead, thom, jonny, colin, phil);
+@include band(nin, trent);
+
+///* line 17, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+//.radiohead.phil {
+//  background: url("image/radiohead/phil.jpg"); }
+//
+///*# sourceMappingURL=main.css.map */
+
+// we can set defaults in mixins $display: block
+@mixin box ($size: 10px, $color: black, $display: block) {
+	width: $size;
+	height: $size;
+	background: $color;
+	display: $display;
+}
+
+.box {
+	@include box(10px, blue);
+	
+	// we can also call mixins like to make it easier to know what they are
+	@include box($color: blue, $size: 20px);
+	
+	// Now that we've set the defaults we can pass them empty
+	@include box();
+	
+	// or change only what we want
+	@include box($display: inline);
+}
+
+

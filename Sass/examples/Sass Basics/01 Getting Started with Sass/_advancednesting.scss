@@ -1,0 +1,67 @@
+// Advanced Nesting
+
+// here we using sass in more complicated situations
+
+
+// Parent Selector &
+.blog .entry {
+	h1 {
+		font-size: 20px;
+		color: blue;
+	}
+	p {
+		font-size: 12px;
+		margin: 20px;
+		// with the ampersand we can move 1 step and select it's parent .blog .entry
+		html.csscolumns & { 
+			column-count: 2;
+			column-gap: 10px;
+			margin: 10px;
+		}
+	}
+	a {
+		color: red;
+	}
+}
+
+// giving us a inline option of reversing the order of nesting.
+
+//  html.csscolumns .blog .entry p {
+//    column-count: 2;
+//    column-gap: 10px;
+//    margin: 10px; }
+
+
+// when we wanted to style the first h1
+//h1 {
+//	color: red;
+//	border: 1px solid red;
+//}
+
+// we have a problem because there's more than one, we could add .blog
+//.blog h1 {
+//	color: red;
+//	border: 1px solid red;
+//}
+// but continue to have the same problem as both h1 are inside .blog
+
+// We can use the direct ancester, so it only targets the direct children of .blog
+//.blog > h1 {
+//	color: red;
+//	border: 1px solid red;
+//}
+
+// But we can reduce it even further
+.blog {
+	> h1 {
+		color: red;
+		border: 1px solid red;
+		padding: 10px 20px;
+	}
+	a {
+		color: red
+			&:hover {
+				color; blue;
+				}
+	}
+}

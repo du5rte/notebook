@@ -1,0 +1,45 @@
+// ==========================================================================
+// Main
+// ==========================================================================
+
+// Layout
+
+.container {
+  max-width: em(1000px);
+  margin: 0 auto;
+  padding: 0 em(15px) em(50px) em(15px);
+}
+
+// Icons
+
+.site-logo {
+	@include img-replace("logo.svg", 115px, 45px, inline-block);
+	margin-bottom: 2em;
+}
+
+.icn-toggle {
+	width: 25px;
+	height: 17px;
+	border-top: solid 3px palette(grey);
+	border-bottom: solid 3px palette(grey);
+	position: absolute;
+	@include p-el(before, 25px, 3px) {
+	  background: palette(grey, light);
+	  top: 4px;
+	}
+  display: none;
+}
+
+// Buttons
+
+.btn {
+	@include bg-colors($ui-colors);
+}
+
+[class^="btn--"] {
+  @extend %btn;
+  margin-bottom: em(20px, 14px); 
+  width: auto;
+  display: inline-block;
+  margin-right: em(15px, 14px);
+}

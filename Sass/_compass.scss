@@ -1,0 +1,71 @@
+//// Compass ////
+	//
+
+
+//// Install
+	// We need to have gem and sass already installed
+	sudo gem install compass
+	compass --version
+	compass create desktop/my-project
+	compass watch
+	ctrl + c // to stop watch
+
+//// Configuring Project
+	// We can confire our project settings with config.rb
+	// http://compass-style.org/help/tutorials/configuration-reference/
+	http_path = "/"
+	css_dir = "css"
+	sass_dir = "scss"
+	images_dir = "img"
+	javascripts_dir = "js"
+
+//// Reset
+	// Uses the Eric Meyer's css reset
+	@import "compass/reset";
+		// If we want more customization we can use Reset Utilities
+		@import "compass/reset/utilities";
+		@include global-reset;
+		// e.g. if we just want to reset html5 block elements
+		body, div, h1, h2, h3, p { @include reset-html5; }
+		// e.g. if we want to add box model to a few elements
+		body, div, h1, h2, h3, p { @include reset-box-model; }
+		// resets all elements inside selector
+		.secondary { @include nested-reset; }
+
+//// Vendor Prefixes
+	// Compass provides cross-browser mixins so we write less prefixes
+	@import "compass/css3";
+		// e.g. box-sizing
+		* { @include box-sizing(border-box); } 
+		// e.g. linear-gradient
+		.box { 
+		@include background(linear-gradient(top, blue, purple 100% ));
+		// e.g. transform
+  	@include transform(translateX(100px) rotate(45deg));	
+		// e.g. single-transition
+  	@include single-transition(transform, 2s, ease-out, 1s);
+		// or we can set it once for all transitions
+		$default-transition-duration: 2s;
+		$default-transition-function: ease-out;
+		$default-transition-delay: 1s;
+		@include single-transition(transform);
+			// e.g. translateX
+			&:hover {
+				@include translateX(400px);
+			}
+	}
+
+//// Typography
+	// Provides a mixins for styling links, test, list and vertical rhythm
+	@import "compass/typography";
+	// e.g. link-colors($normal, $hover, $active, $visited, $focus)
+	a { 
+		@include link-colors(steel, blue, coral, red, green); 
+	}
+	// e.g. heading selecting
+	#{ headings(all) } {
+		color: red;
+	}
+	#{ headings(4,6) } {
+		color: blue;
+	}

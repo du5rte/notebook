@@ -1,0 +1,87 @@
+// Nesting
+
+// Nested Rules http://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_rules
+
+// Sass is a css compilar so buy writing plain css you're writing sass
+
+body {
+	background: #eee;
+}
+
+// Traditionally css projects are mapped like this
+
+//	<body>
+//		<div class="blog-entry">
+//	        <h1>My Blog Post</h1>
+//	        <p>
+//	        	Text 
+//	        	<a href=”/info.html”>Link</a>
+//	        </p>
+//	    </div>
+//	</body>
+
+//  with multiple repeating selectors/styles, and in big projects it can be a mess
+
+.blog-entry h1 {
+	font-size: 20px;
+	color: blue;
+}
+.blog-entry p {
+	font-size: 12px;
+}
+
+// often we wanna change classes around to reduce repeating styles, and we would have to go through multiple selectors and css files to change the order arounds
+
+//	<body>
+//		<div class="blog-entry">
+//	        <h1>My Blog Post</h1>
+//	        <p>
+//	        	Text 
+//	        	<a href=”/info.html”>Link</a>
+//	        </p>
+//	    </div>
+//	</body>
+
+// But it's still very repeative and makes it hard to write good responsable css
+
+.blog .entry h1 {
+	font-size: 20px;
+	color: blue;
+}
+.blog .entry p {
+	font-size: 12px;
+}
+
+// Instead we can nest selectors
+
+.blog .entry {
+	h1 {
+		font-size: 20px;
+		color: blue;
+	}
+	p {
+		font-size: 12px;
+	}
+	a {
+		color: red;
+	}
+}
+
+// and Sass does all the work of repeating styles
+
+// DRY - Don't Repeat Yourself
+
+///* line 61, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/text.scss */
+//.blog .entry h1 {
+//  font-size: 20px;
+//  color: blue; }
+///* line 65, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/text.scss */
+//.blog .entry p {
+//  font-size: 12px; }
+///* line 68, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/text.scss */
+//.blog .entry a {
+//  color: red; }
+
+
+
+// IMPORTANT try not to get carried away with nesting! don't go more than 4 or 5 levels of nesting

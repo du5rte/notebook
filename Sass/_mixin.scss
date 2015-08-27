@@ -1,0 +1,59 @@
+////	Sass Mixins //
+	//
+	//	Mixins 
+	//	Include
+	//	Power Mixins
+	//	Extend
+
+//// Mixins 
+	// Allow us to store multiple parameters inside a mixin
+	@mixin green_links {
+		a {
+			color: blue;
+			&:clicked {color: red;}
+			&:hover {color: purple;}
+			&:active {color: green;}
+		}
+	}
+
+//// Include
+	// Allow us to include a mixing in our project
+	.button {@include green_links;}
+
+	// The Golden Rule of Sass Mixins:
+	// Mixin if you're coding in a simiar pattern 2 or 3 times
+	// Global Mixin only if you use it 6 or more times
+
+//// Power Mixins
+	// Allows arguments to use similar parameters with interactive values
+	// Example: 
+	@mixin roundy($radius, $color) {
+		border-radius: $radius;
+		border-top-right-radius: $radius * 2;
+		border-bottom-left-radius: $radius * 2;
+		background: $color;
+	}
+	.box {
+		@include roundy(4px, inherit);
+	}
+
+//// Extend
+	// Allows to copy/merge the attributes of a class or id onto another selector
+	// Example:
+	.bar {
+		> div {}
+	}
+	//.bar, .menu {}
+	//  .bar > div, .menu > div {}
+	.menu {@extend .bar;}
+
+	// Or create a placeholder by using %
+	// Example
+	%bar {
+		> div {}
+	}
+	.menu {@extend %bar;}
+
+	// Rule of thumbs for using @mixins and @extend is:
+	// @mixin is better for more advance, dynamic calculators
+	// @extend is better for simple copy/paste

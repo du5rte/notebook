@@ -1,0 +1,171 @@
+/* line 10, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+body {
+  background: #333;
+  font-family: Futura, "Trebuchet MS", sans-serif; }
+  /* line 13, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  body > h1 {
+    font-size: 3em;
+    color: #eee;
+    margin: 5px 0 0 5px; }
+
+/* line 20, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+.entry {
+  background: white;
+  margin: 5px;
+  padding: 5px; }
+  /* line 24, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  .entry h1 {
+    font-size: 1.2em;
+    margin: 0px; }
+  /* line 28, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  .entry .date {
+    font-size: 0.3em;
+    color: #333; }
+  /* line 32, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  .entry a {
+    color: #333; }
+
+/* line 51, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+body {
+  background: #d35050;
+  font-family: Futura, "Trebuchet MS", sans-serif; }
+  /* line 54, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  body > h1 {
+    font-size: 3em;
+    color: #eee;
+    margin: 5px 0 0 5px; }
+
+/* line 61, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+.entry {
+  background: white;
+  margin: 5px;
+  padding: 10.5px;
+  padding: 4.66667px;
+  padding: 8.5px;
+  padding: 5.5px;
+  padding: 10.5px; }
+  /* line 71, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  .entry h1 {
+    font-size: 1.2em;
+    margin: 0px; }
+  /* line 75, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  .entry .date {
+    font-size: 0.3em;
+    color: #d35050; }
+  /* line 79, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/variables.scss */
+  .entry a {
+    color: #d35050; }
+
+/* line 12, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+.box {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px; }
+
+/* line 19, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+.button {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px; }
+
+/* line 46, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+.box {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px; }
+  /* line 37, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+  .box a {
+    color: gree; }
+    /* line 39, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+    .box a:hover {
+      color: blue; }
+  /* line 53, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+  .box .innerbox {
+    border-radius: 4px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px; }
+
+/* line 57, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/mixins.scss */
+.button {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background: #345; }
+
+/* line 27, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/powermixins.scss */
+.box {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px; }
+
+/* line 31, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/powermixins.scss */
+.button {
+  border-radius: 2px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: #345; }
+
+/* line 45, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/powermixins.scss */
+.box {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px; }
+
+/* line 49, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/powermixins.scss */
+.button {
+  border-radius: 2px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: #345; }
+
+/* line 63, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/powermixins.scss */
+.box {
+  border-radius: 4px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background: inherit; }
+
+/* line 67, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/powermixins.scss */
+.button {
+  border-radius: 2px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: #345; }
+
+/* line 16, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+.bar, .menu {
+  height: 14px;
+  font-size: 10px; }
+  /* line 19, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+  .bar > div, .menu > div {
+    float: left;
+    clear: none; }
+
+/* line 25, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+.menu {
+  height: 14px;
+  font-size: 10px; }
+  /* line 28, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+  .menu > div {
+    float: left;
+    clear: none; }
+
+/* line 35, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+.menu {
+  background: #345; }
+
+/* line 51, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+.menu, .nav {
+  height: 14px;
+  font-size: 10px; }
+  /* line 54, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+  .menu > div, .nav > div {
+    float: left;
+    clear: none; }
+
+/* line 60, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/02 Variables, Mixins, and Extending Selectors/extend.scss */
+.menu {
+  background: #345; }
+
+
+/*# sourceMappingURL=main.css.map */

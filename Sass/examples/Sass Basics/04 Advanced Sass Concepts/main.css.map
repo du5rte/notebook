@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "file": "main.css",
+  "sources": [
+    "main.scss",
+    "_advance-mixin.scss"
+  ],
+  "names": [],
+  "mappings": ";ACsBA,UAAU;EACP,YAAY;;;AADf,UAAU;EACP,YAAY;;;AADf,UAAU;EACP,YAAY;;;AADf,UAAU;EACP,YAAY;;;AADf,IAAI;EACD,YAAY;;;AAuBf;EANC,OAOa;EANb,QAMa;EALb,YAKmB;EAJnB,SAJiD;EACjD,OAUkC;EATlC,QASkC;EARlC,YAQqB;EAPrB,SAJiD;EACjD,OADkB;EAElB,QAFkB;EAGlB,YAHgC;EAIhC,SAJiD;EACjD,OADkB;EAElB,QAFkB;EAGlB,YAHgC;EAIhC,SAauB",
+  "sourceRoot": ""
+}

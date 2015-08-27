@@ -1,0 +1,72 @@
+//// Extending Selectors
+//
+// @extend
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extend
+//
+// Extending Complex Selectors
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#extending_complex_selectors
+//
+// @extend in Directives
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_in_directives
+
+
+
+// @extend directive 
+// Allows you to extend the attributes from one class or id onto another selector
+.bar {
+	height: 14px;
+	font-size: 10px;
+	> div {
+		float: left;
+		clear: none;
+	}
+}
+// Traditionally if we wanted to create another item we would copy&paste
+.menu {
+	height: 14px;
+	font-size: 10px;
+	> div {
+		float: left;
+		clear: none;
+	}
+}
+
+// By using extend we can copy/merge both the style of .bar
+.menu {
+	@extend .bar;
+	background: #345;
+}
+//.bar, .menu {
+//  height: 14px;
+//  font-size: 10px; }
+//  .bar > div, .menu > div {
+//    float: left;
+//    clear: none; }
+
+
+
+// It's nice we can use classes sometimes we might want to not have .bar repeated all over
+
+// So we can use placeholder selector by using a %
+%bar {
+	height: 14px;
+	font-size: 10px;
+	> div {
+		float: left;
+		clear: none;
+	}
+}
+
+.menu {
+	@extend %bar;
+	background: #345;
+}
+.nav {
+	@extend %bar;
+}
+
+//// Rule of thumbs for using @mixins and @extend is:
+
+// @mixin is better for more advance, dynamic calculators
+
+// @extend is better for simple copy/paste

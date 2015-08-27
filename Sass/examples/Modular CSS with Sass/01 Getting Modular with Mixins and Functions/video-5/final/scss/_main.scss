@@ -1,0 +1,22 @@
+// ==========================================================================
+// Main
+// ==========================================================================
+
+.site-logo {
+  margin-bottom: 2em;
+}
+
+.btn,
+.progbar,
+.tooltip {
+	@include bg-colors($ui-colors);
+}
+
+.icn-toggle {
+	width: 25px;
+	height: 17px;
+	position: absolute;
+	border-top: solid 3px palette(grey);
+	border-bottom: solid 3px palette(grey);
+	
+}

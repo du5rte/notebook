@@ -1,0 +1,84 @@
+// ==========================================================================
+// Base Styles
+// ==========================================================================
+
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+  color: palette(grey);
+  font-size: $base__font-size;
+  line-height: ($base__line/$base__font-size);
+  font-family: $font-family--primary;
+}
+
+header {
+  text-align:center;
+  padding: em(48px) 0;
+}
+
+h1 {
+  font-weight: $font-weight--light;
+  font-size: em(42px);
+  line-height: (46px / 42px);
+  margin-bottom: em(70px, 42px);
+	color: palette(grey, x-dark);
+}
+
+h2 {
+  font-family: $font-family--secondary;
+  font-weight: $font-weight--thin;
+  font-size: em(24px);
+	color: palette(grey, light);
+}
+
+h3 {
+	font-size: em(18px);
+}
+
+h4 {
+	margin-top: em(22px, 14px);
+	margin-bottom: em(32px, 14px);
+	color: palette(grey, x-light);
+	text-transform: uppercase;
+	letter-spacing: $letter-space;
+	font-weight: $font-weight--medium;
+	font-size: em(14px);
+}
+
+a {
+	color: palette(grey, dark); 
+	text-decoration: none;
+	font-weight: $font-weight--medium;
+}
+
+// Lists
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+// Form elements
+
+input, 
+textarea {
+	display: block;
+	outline: 0;
+	border: 0;
+}
+
+input:focus, 
+textarea:focus {
+	transition: $trns_duration;
+}
+
+// Button
+
+button {
+	outline: 0;
+}

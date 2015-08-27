@@ -1,0 +1,82 @@
+//// Defining Variables
+//
+// Variables
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variables_
+
+
+
+// often in traditional css projects we repeat multiple color codes, and worst if we wanted to change the color we would have to change in multiple lines
+
+body {
+	background: #333;
+	font-family: Futura, "Trebuchet MS", sans-serif;
+	> h1 {
+		font-size: 3em;
+		color: #eee;
+		margin: 5px 0 0 5px;
+	}
+}
+
+.entry {
+	background: white;
+	margin: 5px;
+	padding: 5px;
+	h1 {
+		font-size: 1.2em;
+		margin: 0px;
+	}
+	.date {
+		font-size: 0.3em;
+		color: #333;
+	}
+	a {
+		color: #333;
+	}
+}
+
+// Variables are placeholders for a value
+// All variables start with a dollar sign
+// example $primary-color, $light_blue
+
+// Variable can also then be changed and automaticly update everyone $primary-color
+$primary-color: #d35050;
+
+// They can work with other values, example margins
+$margin: 5px;
+
+// We can set variables to be other variables values
+$padding: $margin + 2pt; // here Sass automaticly converts points into pixels
+//$padding: $margin + 2em; // although are incompatible units
+
+body {
+	background: $primary-color; // $primary-color
+	font-family: Futura, "Trebuchet MS", sans-serif;
+	> h1 {
+		font-size: 3em;
+		color: #eee;
+		margin: $margin 0 0 $margin; // $margin
+	}
+}
+
+.entry {
+	background: white;
+	margin: $margin; // $margin
+	// we could also just do inline math
+	padding: $padding * 1.5; // multiplication
+	padding: $padding / 1.5; // division
+	padding: $padding + 1.5; // addition
+	padding: $padding - 1.5; // subtration
+	// We can also do math on variables
+	padding: $padding * 1.5; // $margin * 1.5 = 7.5px
+	h1 {
+		font-size: 1.2em;
+		margin: 0px;
+	}
+	.date {
+		font-size: 0.3em;
+		color: $primary-color; // $primary-color
+	}
+	a {
+		color: $primary-color; // $primary-color
+	}
+}

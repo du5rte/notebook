@@ -1,0 +1,71 @@
+/* line 7, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+body {
+  background: #eee; }
+
+/* line 25, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog-entry h1 {
+  font-size: 20px;
+  color: blue; }
+
+/* line 29, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog-entry p {
+  font-size: 12px; }
+
+/* line 47, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog .entry h1 {
+  font-size: 20px;
+  color: blue; }
+
+/* line 51, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog .entry p {
+  font-size: 12px; }
+
+/* line 58, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog .entry h1 {
+  font-size: 20px;
+  color: blue; }
+/* line 62, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog .entry p {
+  font-size: 12px; }
+/* line 65, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/nesting.scss */
+.blog .entry a {
+  color: red; }
+
+/* line 17, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/modernizr.scss */
+.blog .entry p {
+  margin: 20px;
+  color: red; }
+
+/* line 24, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/modernizr.scss */
+html.csscolumns .blog .entry {
+  column-count: 2;
+  column-gap: 10px;
+  margin: 10px; }
+
+/* line 8, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/advancednesting.scss */
+.blog .entry h1 {
+  font-size: 20px;
+  color: blue; }
+/* line 12, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/advancednesting.scss */
+.blog .entry p {
+  font-size: 12px;
+  margin: 20px; }
+  /* line 16, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/advancednesting.scss */
+  html.csscolumns .blog .entry p {
+    column-count: 2;
+    column-gap: 10px;
+    margin: 10px; }
+/* line 22, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/advancednesting.scss */
+.blog .entry a {
+  color: red; }
+
+/* line 56, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/advancednesting.scss */
+.blog > h1 {
+  color: red;
+  border: 1px solid red;
+  padding: 10px 20px; }
+/* line 61, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/01 Getting Started with Sass/advancednesting.scss */
+.blog a {
+  color: red; }
+
+/*# sourceMappingURL=main.css.map */

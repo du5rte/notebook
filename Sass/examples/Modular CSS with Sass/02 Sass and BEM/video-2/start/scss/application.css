@@ -1,0 +1,346 @@
+@import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
+/* line 17, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_helpers.scss */
+.srt {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+/* line 30, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_helpers.scss */
+.icn-toggle:before {
+  display: block;
+  content: '';
+  position: absolute; }
+
+/* line 11, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+/* line 19, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+body {
+  margin: 0; }
+
+/* line 40, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block; }
+
+/* line 51, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+audio, canvas, progress, video {
+  display: inline-block;
+  vertical-align: baseline; }
+
+/* line 60, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/* line 70, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+[hidden], template {
+  display: none; }
+
+/* line 78, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+a {
+  background: transparent; }
+
+/* line 86, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+a:active, a:hover {
+  outline: 0; }
+
+/* line 94, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/* line 102, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+b, strong {
+  font-weight: bold; }
+
+/* line 109, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+dfn {
+  font-style: italic; }
+
+/* line 117, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/* line 125, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/* line 133, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+small {
+  font-size: 80%; }
+
+/* line 141, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 148, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+sup {
+  top: -0.5em; }
+
+/* line 152, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+sub {
+  bottom: -0.25em; }
+
+/* line 160, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+img {
+  border: 0; }
+
+/* line 167, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* line 175, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+figure {
+  margin: 1em 40px; }
+
+/* line 182, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/* line 191, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+pre {
+  overflow: auto; }
+
+/* line 201, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* line 221, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0; }
+
+/* line 230, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+button {
+  overflow: visible; }
+
+/* line 241, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+button, select {
+  text-transform: none; }
+
+/* line 255, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+/* line 264, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+button[disabled], html input[disabled] {
+  cursor: default; }
+
+/* line 272, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/* line 281, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+input {
+  line-height: normal; }
+
+/* line 293, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+* input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0; }
+
+/* line 304, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/* line 313, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+/* line 326, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/* line 333, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/* line 343, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+legend {
+  border: 0;
+  padding: 0; }
+
+/* line 351, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+textarea {
+  overflow: auto; }
+
+/* line 359, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+optgroup {
+  font-weight: bold; }
+
+/* line 367, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 373, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_reset.scss */
+td, th {
+  padding: 0; }
+
+/* line 5, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 10, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+body {
+  color: #797e83;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+/* line 17, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+header {
+  text-align: center;
+  padding: 3em 0; }
+
+/* line 22, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+h1 {
+  font-weight: 300;
+  font-size: 2.625em;
+  line-height: 1.09524;
+  margin-bottom: 1.66667em;
+  color: #525559; }
+
+/* line 30, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 1.5em;
+  color: #999da1; }
+
+/* line 37, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+h3 {
+  font-size: 1.125em; }
+
+/* line 41, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+h4 {
+  margin-top: 1.57143em;
+  margin-bottom: 2.28571em;
+  color: #d6d7d9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 0.875em; }
+
+/* line 51, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+a {
+  color: #656a6e;
+  text-decoration: none;
+  font-weight: 400; }
+
+/* line 60, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+/* line 69, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+input, textarea {
+  display: block;
+  outline: 0;
+  border: 0; }
+
+/* line 76, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+input:focus, textarea:focus {
+  transition: 0.3s; }
+
+/* line 82, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_base.scss */
+button {
+  outline: 0; }
+
+/* line 7, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_extends.scss */
+[class^="btn--"] {
+  padding: 15px 30px;
+  border: 0;
+  border-radius: 0.4em;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.875em;
+  font-weight: 400;
+  transition: opacity 0.3s;
+  display: block; }
+  /* line 17, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_extends.scss */
+  [class^="btn--"]:hover {
+    opacity: .75; }
+  /* line 20, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_extends.scss */
+  [class^="btn--"]:active {
+    opacity: initial; }
+
+/* line 7, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_main.scss */
+.container {
+  max-width: 62.5em;
+  margin: 0 auto;
+  padding: 0 0.9375em 3.125em 0.9375em; }
+
+/* line 15, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_main.scss */
+.site-logo {
+  background-image: url('../img/logo.svg');
+  background-repeat: no-repeat;
+  width: 115px;
+  height: 45px;
+  display: inline-block;
+  margin-bottom: 2em; }
+
+/* line 20, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_main.scss */
+.icn-toggle {
+  width: 25px;
+  height: 17px;
+  border-top: solid 3px #797e83;
+  border-bottom: solid 3px #797e83;
+  position: absolute;
+  display: none; }
+  /* line 46, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_utilities.scss */
+  .icn-toggle:before {
+    width: 25px;
+    height: 3px;
+    background: #999da1;
+    top: 4px; }
+
+/* line 27, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_utilities.scss */
+.btn--default {
+  background-color: #52bab3; }
+/* line 27, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_utilities.scss */
+.btn--success {
+  background-color: #5ece7f; }
+/* line 27, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_utilities.scss */
+.btn--error {
+  background-color: #e67478; }
+/* line 27, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_utilities.scss */
+.btn--warning {
+  background-color: #ff784f; }
+/* line 27, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_utilities.scss */
+.btn--info {
+  background-color: #9279c3; }
+
+/* line 39, /Users/monteiro/Developmemt/treehouse/Library/Modular CSS with Sass/02 Sass and BEM/video-2/start/scss/_main.scss */
+[class^="btn--"] {
+  margin-bottom: 1.42857em;
+  width: auto;
+  display: inline-block;
+  margin-right: 1.07143em; }
+
+/*# sourceMappingURL=application.css.map */

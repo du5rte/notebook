@@ -1,0 +1,66 @@
+//// Debugging Sass
+// 
+// @debug
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_4
+//	 
+// @warn
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_5
+
+
+
+
+
+
+
+$primary-color: #369;
+// Top Sass bugs are forgeting columns
+$margin: 5px;
+//$margin: 5px 
+$padding: $margin * 1.5;
+
+body {
+	background: $primary-color;
+	font-family: Futura, "Trebuchet MS", sans-serif;
+	> h1 {
+		font-size: 3em;
+		color: #eee;
+		margin: $margin 0 0 $margin;
+	}
+}
+
+.entry {
+	background: white;
+	margin: $margin;
+	padding: $padding;
+	h1 {
+		font-size: 1.2em;
+		margin: 0px;
+		// Another common bug is forgetting to close a curly brace
+		// Here Sass would think it's all inside .entry h1
+	}
+	.date {
+		font-size: 0.3em;
+		color: $primary-color;
+	}
+	a {
+		color: $primary-color;
+	}
+}
+
+// We also have a few options for how css if compressed
+
+// sass --style
+	// Nested(default), compact, compressed or expandaded
+		// sass --style compressed main.scss:main.css
+
+// sass --l
+	// lets you know what lines you're working on
+
+
+// if we have a mixin we don't wanna use anymore
+@mixin old {
+	@warn "Please use new() instead";
+}
+
+@include old;
+// will give a warning in the command line

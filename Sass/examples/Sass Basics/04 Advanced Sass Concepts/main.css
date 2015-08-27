@@ -1,0 +1,40 @@
+/* line 23, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+.radiohead.thom {
+  background: url("image/radiohead/thom.jpg"); }
+
+/* line 23, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+.radiohead.jonny {
+  background: url("image/radiohead/jonny.jpg"); }
+
+/* line 23, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+.radiohead.colin {
+  background: url("image/radiohead/colin.jpg"); }
+
+/* line 23, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+.radiohead.phil {
+  background: url("image/radiohead/phil.jpg"); }
+
+/* line 23, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+.nin.trent {
+  background: url("image/nin/trent.jpg"); }
+
+/* line 47, /Users/monteiro/Developmemt/treehouse/Library/Sass Basics/04 Advanced Sass Concepts/advance-mixin.scss */
+.box {
+  width: 10px;
+  height: 10px;
+  background: blue;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: blue;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: black;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: black;
+  display: inline; }
+
+/*# sourceMappingURL=main.css.map */

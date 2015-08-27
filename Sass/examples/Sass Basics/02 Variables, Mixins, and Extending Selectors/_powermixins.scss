@@ -1,0 +1,74 @@
+//// The Power of Mixins
+//
+// Mixin Arguments
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-arguments
+//
+// Keyword Arguments
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#keyword_arguments_2
+//
+// Variable Arguments
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#variable_arguments
+//
+// Passing Content Blocks to a Mixin
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-content
+
+
+
+// We can use mixin arguments to use similar parameters but different numbers
+
+// Similar to using functions in javascript 
+
+@mixin roundy($radius-one, $radius-two) {
+	border-radius: $radius-one;
+  border-top-right-radius: $radius-two;
+  border-bottom-left-radius: $radius-two;
+}
+
+.box {
+  @include roundy(4px, 8px);
+}
+
+.button {
+	@include roundy(2px, 4px);
+	background: #345;
+}
+
+// But we can make this even more efficient
+
+// $radius-two is double the value of $radius-one
+@mixin roundy($radius) {
+	border-radius: $radius;
+  border-top-right-radius: $radius * 2;
+  border-bottom-left-radius: $radius * 2;
+}
+
+.box {
+  @include roundy(4px);
+}
+
+.button {
+	@include roundy(2px);
+	background: #345;
+}
+
+// And we can add more parameters to it, like color
+
+@mixin roundy($radius, $color) {
+	border-radius: $radius;
+  border-top-right-radius: $radius * 2;
+  border-bottom-left-radius: $radius * 2;
+	background: $color;
+}
+
+.box {
+  @include roundy(4px, inherit);
+}
+
+.button {
+	@include roundy(2px, #345);
+}
+
+// The Golden Rule of Sass Mixin 
+
+// Mixin if you're coding in a simiar pattern 2 or 3 times
+// Global Mixin only if you use it 6 or more times

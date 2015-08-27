@@ -1,0 +1,117 @@
+////	Sass Maps ////
+
+// http://www.sitepoint.com/using-sass-maps/
+// http://sass-lang.com/documentation/Sass/Script/Functions.html
+
+
+//// Maps
+	// Represent keys and values, where keys are used to look up values
+	// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
+	//
+	// e.g. Each button will have a different background color
+	$ui-colors: (
+		default : #52bab3,
+		success : #5ece7f,
+		error   : #e67478,
+		warning : #ff784f,
+		info    : #9279c3
+	);
+	@each $theme, $color in $ui-colors {
+		.btn--#{$theme} {
+			background-color: $color;
+		}
+	}
+	// Or to make it even more re-usable
+	@mixin bg-colors($map) {
+		@each $theme, $color in $map {
+			&--#{$theme} {
+				background-color: $color;
+			}
+		}
+	}
+	// Now we can use it on any element it needs bg-colors
+	.btn {@include bg-colors($ui-colors);}
+
+	// e.g. Each font size will have a different size
+	$headline-sizes: (
+		h1 	:47,
+		h2 	:34,
+		h3 	:26,
+		h4 	:21,
+		h5 	:18,
+		h6 	:16
+	);
+	@each $h, $size in $headline-sizes {
+		#{$h} {
+			font-size: $size;
+		}
+	}
+
+//// Nested Maps
+	// We can Nest Maps inside maps and use map-get to retrieve values
+	//
+	// e.g. Color Pallete
+	$white    : #fff;
+	$black    : #0b0b0b;
+	$grey     : #797e83;
+	$palettes: (
+		grey: (
+			xx-light : lighten($grey, 43%),
+			x-light  : lighten($grey, 35%),
+			light    : lighten($grey, 12%),
+			base     : $grey,
+			dark     : darken($grey, 8%),
+			x-dark   : darken($grey, 16%)
+		),
+		black: (
+			light    : lighten($black, 10%),
+			base     : $black,
+			dark     : darken($black, 10%)
+		)
+	);
+	// Then we can use map-get to retrieve the key : values
+	h2 {
+		color: map-get(map-get($palettes, grey), x-dark);
+	}
+	// But that it's too much code so we can write a function for it
+	@function pallete($pallete, $shade: 'base') {
+		@return map-get(map-get($palettes, $pallete), $shade)
+	}
+	h2 {
+		color: pallete(grey, x-dark);
+	}
+
+//// Nested @each
+	// Creates css style for each pair
+	$paragraph-styles: (
+		title: (
+			color 					: palette(medium, x-dark),
+			font-family 		: $font-1st,
+			font-weight 		: $weight-light,
+			margin-bottom		: 1.5em,
+		),
+		subtitle: (
+			color 					: palette(medium, light),
+			font-family 		: $font-2nd,
+			font-weight 		: $weight-thin,
+			letter-spacing  : $letter-space,
+		),
+		label: (
+			font-size				: em(14),
+			color 					: palette(medium, x-light),
+			font-family 		: $font-2nd,
+			font-weight 		: $weight-medium,
+			letter-spacing  : $letter-space,
+			text-transform  : uppercase,
+		)
+	);
+
+	@mixin paragraph-styles {
+		@each $key, $pair in $paragraph-styles {
+			.#{$key} {
+				@each $pro, $val in $pair {
+					#{$pro}: #{$val};
+				}
+			}
+		}
+	}
