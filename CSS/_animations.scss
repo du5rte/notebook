@@ -1,0 +1,87 @@
+//// Animations	////
+	//
+	//	Shorthand Animation
+	//	Animation
+	//		Name
+	//		Duration
+	//		Function
+	//		Iteration Count
+	//		Delay
+	//		Fill Mode
+	//		Play State
+	//	KeyFrames
+	//		Keyframes Shorthand
+
+//// Shorthand Animation
+	// Values: name duration function iteration delay
+.box {
+	-webkit-animation: animation-name 3s ease-in-out infinite 3s forwards;
+}
+
+//// Animation 
+	// CSS Animation consist of two points, Keyframes and a set of properties
+	// To be able to see it we need to bind it to a selector
+	.box {
+		// Name: Defines what animation keyframes we are using on the element
+		-webkit-animation-name: animation-name;
+		
+		//// Duration: Defines how longs it takes to complete a play cicle
+		-webkit-animation-duration: 2s;
+		
+		// Function: Define the speed of the transition timing
+		// Values: ease(default), linear, ease-in, ease-out, ease-in-out, 	step-start, step-end, steps(), cubic-bezier()
+		-webkit-animation-function: linear;
+		
+		// Iteration Count: Define the number of times a animation it played
+		// Values: 1(default), infinite
+		-webkit-animation-iteration-count: infinite;
+		
+		// Animation delay: Define the pause before the animation runs
+		-webkit-animation-delay: 3s;
+		
+		// Animation Direction: Defines if the animation plays on reverse 
+		// Values: normal, reverse, alternate (evens) alternate-reverse (odds)
+		-webkit-animation-direction: normal;
+		
+		// Fill Mode: Defines the style before and after styles of the runned element
+		// Backwards: causes to hold first keyframe at the end
+		// ! only works on animation with a delay bigger than 0 !
+		//	-webkit-animation-fill-mode: backwards;
+		// Backwards: causes the first keyframe to be applied 
+		-webkit-animation-fill-mode: backwards;
+		
+		// Forward: makes the animation hold on the last keyframe 
+		-webkit-animation-fill-mode: forwards;
+		
+		// Both: Does both jobs
+		-webkit-animation-fill-mode: both;
+		
+		// Play State: Paused allows us to then use a pseudo class to call it
+		// Values: running(default), paused
+		-webkit-animation-play-state: running;
+}
+
+//// Keyframes
+	// Allows us to set the start, end and inbetween points of animation
+	// Values: from and to, or percentages 0% 50% 100%
+	// We can comma seperate values 30%, 60% {width: 50%;}
+	// ! we need to add browser prefixes -webkit-, -moz-, -o- unprefixed
+	@-webkit-keyframes animation-name {
+		0% 		{ width:	  0; }
+		30%,
+		60		{ width:  50%; }
+		70% 	{ width:  80%; }
+		100%	{ width: 100%; }
+	}
+
+//// Keyframes Shorthand
+	// If the 0% and 100% are the same we can simply delete them
+	//@-webkit-keyframes rock-boat {
+	//	0% 		{ -webkit-transform: rotate(0) translateY(0); }
+	//	50%		{ -webkit-transform: rotate(-5deg) translateY(-10px) }; 
+	//	100%	{ -webkit-transform: rotate(0) translateY(0); }
+	//}
+	// The browser automaticly creates 0% and 100% according to the element properties
+	@-webkit-keyframes rock-boat {
+		50%		{ -webkit-transform: rotate(-5deg) translateY(-10px) }; 
+	}

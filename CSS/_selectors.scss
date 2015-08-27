@@ -1,0 +1,190 @@
+//// Selectors /////
+	//
+	//	Universal Selector
+	//	Type/Element Selectors
+	//	Descendant Selectors
+	//	Class Selector
+	//	ID Selector
+	//	Selector Groups
+	//	Child Selector
+	//	General Sibling Selector
+	//	Attribute Selectors
+	//	Pseudo Classes
+	//	Structural Pseudo Classes
+
+//// Universal Selector
+	// Selects every element on the page at once and appliess the style we set
+	* {}
+
+//// Type/Element Selectors
+	// targets the element type (html tags)
+	// Example: html, body, header, section, div, span, footer, h1, h2, h3, p, etc
+	body {}
+
+
+//// Descendant Selectors
+	// Targets a selector that is inside another selector
+	h1 span {}
+
+//// Class Selector
+	// targets selectors based on class attribute
+	// Example: <div class="container"></div>
+	// classes can be repeated throughout the page
+	.container {}
+
+//// ID Selector
+	// An element can only have one ID and a page can only have one element with the same ID name
+	#main-footer {}
+	// IDs have browser functionality
+	// They can be used for fragment identifier, to create landmarks or  anchors in th epage
+	//<a href="#top">Back to top</a>
+
+//// Selector Groups
+	// Rules containing various selector seperated by commas
+	// <div class="square"></div>
+	// <div class="circle"></div>
+	// <div class="ellipse"></div>
+	.square {
+		display: inline-block;
+		margin: 0 15px;
+		width: 200px;
+		height: 200px;
+		background-color: lightcoral;
+	}
+	.circle {
+		display: inline-block;
+		margin: 0 15px;
+		width: 200px;
+		height: 200px;
+		background-color: lightcoral;
+		border-radius: 50%;
+	}
+	.ellipse {
+		display: inline-block;
+		margin: 0 15px;
+		width: 200px;
+		height: 120px;
+		background-color: lightcoral;
+		border-radius: 50%;
+	}
+	// To keep our code DRY we can share the common css properties
+	.square,
+	.circle,
+	.ellipse {
+		display: inline-block;
+		margin: 0 15px;
+		width: 200px;
+		height: 200px;
+		background-color: lightcoral;
+	}
+	// Then we can add the specifiques
+	.circle,
+	.ellipse {
+		border-radius: 50%;
+	}
+	.ellipse {
+		height: 120px;
+	}
+	// We can also rename the classes according to their properties and add them to the html
+	// For ellipse element: <div class="base radius ellipse"></div>
+	.base {
+		display: inline-block;
+		margin: 0 15px;
+		width: 200px;
+		height: 200px;
+		background-color: lightcoral;
+	}
+	// Then we can add the specifiques
+	.radius {
+		border-radius: 50%;
+	}
+	.ellipse {
+		height: 120px;
+	}
+
+//// Child Selector
+	// Target the direct (only) children of a element
+	// > Child Combinator
+	main > a {}
+
+//// Adjacent Sibling Selector
+	// Targets elements next sibling on the page
+	// + Plus-sign Combinator
+	// Example:
+	// the first <p> will be targets but no the second
+	// <h2><h2>
+	// <p></p>
+	// <p></p
+	h2 + p {}
+
+
+//// General Sibling Selector
+	// Targets all selected elements sibling on the page
+	// ~ (tilda symbol) General Sibling Combinator
+	// Example:
+	// all <p> will be targets
+	// <h2><h2>
+	// <p></p>
+	// <p></p
+	h2 ~ p {}
+
+//// Attribute Selectors
+	// Target elements based on given attribute or value
+	// [class] targets any given element that has a class
+	[class] {}
+	// Element[class] Targets elements with classes
+	a[class] {}
+	// Element[class="name"] Targets elements with a specific classes name
+	// ! not good pratice best yo use a a .foo {}
+	a[class="foo"] {}
+	// Targets text input element
+	// <input text="text" name="email">
+	input[type="text"] {}
+	// Targets <a> that open in a new tab (external links)
+	// <a href="#" targets="_blank"></a>
+	a[target="_blank"] {}
+
+//// Pseudo Classes
+	// Targets only <a> with a href attribute
+	// Targets unvisited <a> 
+	a:link{}
+	// Targets visited <a> 
+	a:visited{}
+	// Targets a elements while it's being clicked <a> 
+	a:active{}
+	// Targets hovered <a> can also be applied to any element
+	div:hover{}
+	// Target only interactive forms elements and (tab ->|) selected links
+	:focus {}
+	// Has best use for input elements
+	input:focus {}
+
+//// Structural Pseudo Classes
+	// Target elements based on their position on the html document
+	// Targets the very first child of a element
+	li:first-child {}
+	// Targets the very last child of a element
+	li:last-child {}
+	// Targets a element only if it's the only element inside a parent
+	span:only-child {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

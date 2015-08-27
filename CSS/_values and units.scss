@@ -1,0 +1,174 @@
+//// Values and Units ////
+	//
+	//	Absolute Length Units
+	//		Centimeters
+	//		milimeters
+	//		Inches
+	//		Picas
+	//		Points
+	//		Pixels
+	//	Relative Length Units
+	//		Ex Units
+	//		Em Units
+	//		Rem Units
+	//	View Port Relative Units
+	//		vw
+	//		vh
+	//		vmin
+	//	Textual Data Types
+	//		Auto Value
+	//		Inherit Value
+	//		Initial Value
+	//		Strings
+	//		URLs
+	//	Integers and Numeric Values
+	//		Negative Values
+	//		Integerns
+	//		Percentages
+	//	Color Values
+	//		Color Keywords
+	//		Extended Color Keywords
+	//		Hexadecimal Value
+	//		RGB Method
+	//		RGBa Method
+	//		HSL Method
+	//		HSLa Method
+
+//// Absolute Length Units //
+	// Centimeters
+	{width: 21.16cm;}
+	// milimeters
+	{width: 211.6mm;}
+	// Inches
+	{width: 8.33in;}
+	// Picas
+	{width: 50pc;}
+	// Points
+	{width: 600pt;}
+	// Pixels
+	{width: 800px;}
+
+////	Relative Length Units ////
+
+//// Ex Units
+	// High of the x character
+	// 1ex = 16 pixels by default
+	// Scales acording to it's parent value
+	{font-size: 3ex;}
+
+//// Em Unit 
+	// 1em = 16 pixels by default
+	// Scales acording to it's inherit value
+	{font-size: 0.75em;} // 12pixels
+
+//// rem Unit 
+	// Rem stands for Root Em
+	// Relates back to the scale of the root html element
+	{font-size: 1.2em;} // 19.2px
+
+//// View Port Relative Units ////
+	// Scale based on the viewport size
+	// ! Not very common yet in browsers
+	
+//// vw
+	// vw stands for Viewport Width
+	// 1vw = 1%; of the viewport width
+	{width: 15vw;}
+
+//// vw
+	// vw stands for Viewport Height
+	// 1vw = 1%; of the viewport height
+	{width: 80vh;}
+
+//// vmin
+	// 1vmin = 1% of the mininum height/width
+	{width: 80vmin;}
+
+//// Textual Data Types ////
+
+//// Auto Value
+	// Calculate the margins automaticly for each side
+	{margin: auto;}
+
+//// Inherit Value
+	// Inherits the value from it's parent (good use for <a> elements)
+	{color: inherit;}
+
+//// Initial Value
+	// Reverts back to its unstyled state
+	// ! Not support by i9 and moz needs prefix {color: -moz-inherit;}
+	{color: initial;}
+
+//// Strings
+	// Passes a string either inside "" or ''
+	// ! To pass quote inside a string we need to add backslashes 
+	// Example: \"Text\"
+	// ! To add back slashes to a string they also need backslashes
+	// "This is a black slashe \\"
+	div:after {
+		content: "A string with \"escape\" double quotes";
+	}
+
+//// URLs
+	// A value can also be a url reference 
+	// It can be quotes with "" or '' and have white space after or before
+	// Example: url( "img/avatar.png" );
+	{background-image: url('img/bg.jpg');}
+
+//// Integers and Numeric Values //
+
+	// Negative Values
+	{margin-top: -5em;}
+
+	// Integerns
+	{margin-top: 3.5em;}
+
+	// Percentages
+	{width: 50%;}
+
+	//// Color Values //
+
+	// Color Keywords
+	// One of the 16 predefined keywords
+	// Example: red, green, blue
+	{color: blue;}
+
+	// Extended Color Keywords
+	// Use with the predefined keywords
+	// Example: lightblue, tomato, sandybrown
+	// Complete list on http://www.w3.org/TR/css3-color/#svg-color
+	{color: lightblue;}
+
+//// Hexadecimal Value
+	// A combination of RGB values using values of 0-9 a-f
+	// Example: #ff0033 or #f03 = R=255 G=0 Blue=51
+	{color: #ff0033;}
+
+//// RGB Method
+	// Uses a functional to pass the values of Red Green and Blue from 0 to 255
+	{color: rgb(255, 0, 51);}
+
+//// RGBa Method
+	// Similar to above but allows a alpha value (transperancy)
+	{color: rgb(255, 0, 51, .3);}
+
+//// HSL Method
+	// Stands for Hue Saturation and Lightness
+	// Hue is a value of the 360 color wheel, saturation and lighness are measured in percentages
+	{color: hsl(348, 100%, 50%);}
+
+//// HSLa Method
+	// Just like RGBa it allows a alpha value (transperancy)
+	{color: hsl(348, 100%, 50%, .7);}
+
+
+
+
+
+
+
+
+
+
+
+

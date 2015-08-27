@@ -1,0 +1,229 @@
+# Webpack
+
+Resources
+- [Webpack](http://webpack.github.io)
+- [Getting Started](http://webpack.github.io/docs/tutorials/getting-started/)
+- [Pete Hunt OSCON 2014](https://youtu.be/VkTCL6Nqm6Y)
+- [Pete Hunt - webpack how to](https://github.com/petehunt/webpack-howto)
+- [Ditching RequireJS for Webpack](http://blog.player.me/ditching-requirejs-webpack-reasons-lessons-learned/)
+- [Webpack & Angular](http://shmck.com/webpack-angular-part-1/)
+
+## Module Bundler
+It's job it's to take all different assets, `.js`, `.css` and turn them into a static bundle
+
+## Old Days
+Traditionally we'd have to define a huge list of `script` tags and they would have to be in order
+
+> e.g. the code in `app.js` might depend on `angular.js`
+
+
+```html
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/slick.js/slick/slick.min.js"></script>
+<script src="bower_components/sticky/jquery.sticky.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ux.js"></script>
+```
+
+
+## JavaScript
+We want too import the content from `file2` into our `document.write()`
+
+entry.js
+```js
+// by default it looks for `.js`, otherwise use extention e.g. `.coffee`
+document.write(require('./content'));
+```
+
+content.js
+```js
+module.exports = "It works from content.js.";
+```
+
+We can bundle it together
+```sh
+# webpack <entry> <output>
+$ webpack ./entry.js bundle.js
+```
+```js
+document.write(require(  "It works from content.js."  ));
+```
+
+## Styles
+
+`entry.js`
+```js
+document.write(require("./content.js"));
+// can be imported here
+require("!style!css!./style.css");
+```
+
+`content.js`
+```js
+// or here
+// require("!style!css!./style.css");
+module.exports = "It works from content.js.";
+```
+
+## Binding Loaders
+We don’t want to write such long requires `require("!style!css!./style.css");`
+
+```js
+// require("!style!css!./style.css");
+require("./style.css");
+```
+```sh
+$ webpack ./entry.js bundle.js --module-bind 'css=style!css'
+```
+
+## Config File
+We want to move the config options into a config file: add `webpack.config.js`
+
+```sh
+$ webpack
+```
+```js
+module.exports = {
+    // Main Entry File
+    entry: "./entry.coffee",
+    output: {
+        // This is where images AND js will go, './build'
+        path: __dirname,
+        // This is used to generate URLs to e.g. images
+        // publicPath: 'http://mycdn.com/',
+        filename: "bundle.js"
+    },
+    module: {
+        // Loaders
+        loaders: [
+
+            { test: /\.css$/, loader: "style!css" },
+            // use ! to chain loaders `!css!autoprefixer`
+            { test: /\.scss$/, loader: "style!css!autoprefixer!sass" },
+            // Sass Indented Syntax
+            { test: /\.sass$/, loader: "style!css!autoprefixer!sass?indentedSyntax" },
+            { test: /\.coffee$/, loader: "coffee-loader" },
+            // inline base64 URLs for <=8k images, direct URLs for the rest
+            {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+    ]
+        ]
+    },
+    resolve: {
+        // you can now require('file') instead of require('file.coffee')
+        extensions: ['', '.js', '.json', '.coffee']
+    },
+    externals: [
+      // Tells webpack we're loading `require('angular')` from somewhere else, like a CDN
+      'Modernizr',
+      'jQuery',
+      'angular'
+    ],
+};
+```
+
+Multiple entry points
+```js
+// webpack.config.js
+module.exports = {
+  entry: {
+    Profile: './profile.js',
+    Feed: './feed.js'
+  },
+  output: {
+    //path to where webpack will build your stuff
+    path: 'build/assets',
+    //path that will be considered when requiring your files
+    publicPath: "/assets/",
+    filename: '[name].js' // Template based on keys in entry above
+  }
+};
+```
+
+## Development
+Invoke Webpack flags for development
+
+```sh
+$ webpack # for building once for development
+$ webpack -p # for building once for production (minification)
+$ webpack --watch # for continuous incremental build in development (fast!)
+$ webpack -d # to include source maps
+```
+
+Extra flags
+```sh
+$ webpack --progress --colors --watch
+--progress # Show's a progress bar
+--colors # Show's colors
+--watch # compiles on save
+```
+
+## Web Development Server
+Creates a watch server on `http://localhost:8080/`
+
+```sh
+$ npm install --save-dev webpack-dev-server
+```
+```sh
+$ webpack-dev-server
+```
+Extras
+```sh
+--hot # hot module replace
+--inline
+--config webpack.config.js # define webpack config
+```
+
+## Utilities
+
+### $script
+https://github.com/ded/script.js/
+http://www.dustindiaz.com/scriptjs
+
+```js
+$script = require('../files/bower_components/scriptjs/dist/script.js'); // no bower file
+$script = require('scriptjs'); // from npm package
+
+$script('//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js', function() {
+  // run once it loads
+  $('body').html('It works!');
+});
+```
+
+### UI-Router
+http://www.codeplats.com/0mxWVVUjVX/webpackbrowserify-and-uirouter.html
+
+
+### Dependencies
+[Webpack ProvidePlugin vs externals?](http://codereply.com/answer/7upd1z/webpack-provideplugin-vs-externals.html)
+http://dontkry.com/posts/code/single-page-modules-with-webpack.html#comment-1337363183
+
+```html
+<!-- Loading from CDN -->
+<script src="https://code.jquery.com/jquery-git2.min.js"></script>
+```
+```js
+// loading from local files
+resolve: { alias: { jquery: "/path/to/jquery-git2.min.js" } }
+```
+```js
+// the artifial module "jquery" exports the global var "jQuery"
+externals: { jquery: "jQuery" }
+
+// inside any module
+var $ = require("jquery");
+
+// OR
+
+plugins: [
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'windows.jQuery': 'jquery',
+  })
+]
+
+// If you use "$", jquery is automatically required
+$('body').html("It works!");
+```

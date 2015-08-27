@@ -1,0 +1,170 @@
+//// Advance Selectors	////
+	//
+	//	Substring Matching Attribute Selectors
+	//		"Begins With" Selector
+	//		"Ends With" Selector
+	//		"Contains" Selector
+	//		nth child Selector
+	//		nth of type Selector
+	//		only of type Selector
+	//	Advance Pseudo-Class Selectors
+	//		Root Selector
+	//		target Selector
+	//		Empty Selector
+	//		Not Selectors
+	//	UI Element States Pseudo-Class Selectors
+	//		Enabled Selector
+	//		Disabled Selector
+	//		Checked Selector
+	//	Sudo Element Selectors
+	//		First Line Selector
+	//		First Letter Selector
+	//		Before Pseudo-Elements
+	//		After Pseudo-Elements
+
+//// Substring Matching Attribute Selectors //
+	// Targets specifics attributer values
+
+//// "Begins With" Selector
+	// Targets attribute begining with selected value
+	// <a href="http://foo.com">
+	 a[href^="http://"] {}
+
+//// "Ends With" Selector
+	// Targets attribute ending with selected value
+	// <a href="file.pdf">
+	 a[href$=".pdf"] {}
+
+//// "Contains" Selector
+	// Targets elements by selected containing value
+	// <image src="images/sky_thumbnail.jpg" alt="sky" />
+	img[src*="thumb"] {}
+
+//// nth child Selector
+	// Target child or combination of child elements
+	// () allows a value or argument to be passed 
+	// Example: even, odd, 2, 3, 9, etc
+	// Expression syntax :nth-child(an+b) b= first item selected, an=cicle of elements to be selected after the first one has been selected
+	// Example: (2n+3) 3rd item is selected then every second one after
+	// Example: (1n+3) or (n+3) or (3n) selects the third item and all after
+	// Example: (3n+0) or (3nd) selects every third item
+	// Example: (-n+5) selects the fifth item and all before it
+	li:nth-child() {}
+	// nth-last-child Selector
+	// Works the opposite way
+	li:nth-last-child() {}
+
+//// nth of type Selector
+	// Target a specific child or combination of child elements
+	// Example: div:nth-of-type(2) selects only the 2nd div 
+	// Example: div:nth-of-type(odd) selects odd divs
+	div:nth-of-type() {}
+	div:nth-last-of-type() {}
+
+//// only of type Selector
+	// Targets a element only if it's the only kind of it's type inside a parent
+	p:only-of-type {}
+
+//// Advance Pseudo-Class Selectors ////
+
+//// Root Selector
+	// Targets the element that is the root of the document (html)
+	// ! root has more specifity than html
+	:root {}
+
+//// target Selector
+	// Target elements that elements ID matches the # in the url
+	// <a herf="#s1">Target Section 1 </a>
+	// <div id="s1"></div>
+	:target {}
+
+//// Empty Selector
+	// Target empty elements
+	// Example: div::empty {} targets all empty <div>
+	:empty {}
+
+//// Not Selectors
+	// Targets everything but what we select
+	// Example: div:not(:empty) {} targets all <div> expect the empty one
+	// Example: div:not([id="s1"]) {} targets all elements expect not ID with #s1
+	div:not() {}
+
+//// UI Element States Pseudo-Class Selectors
+	// Targets element based on certain interations
+	//Most commonly used on forms
+
+	//// Enabled Selector
+	// Targets UI elements that are on a enabled state
+	// <input type="text" name="name" placeholder="name" disable>
+	input[type="text"]:enabled {}
+
+//// Disabled Selector
+	// Targets UI elements that are disabled state (that can not be clicked)
+	// <input type="text" name="email" placeholder="email" disable>
+	:disabled {}
+
+//// Checked Selector
+	// Targets UI elements that are in a checked state
+	// Example: Targets the radio button and it's sibling label
+	input[type="radio"]:checked + label {}
+
+
+//// Sudo Element Selectors  //
+	// Targets virtual elements that are not defined or the markup or source code
+	// Sudo elements can be use :fist-letter or ::first-letter
+	// :: are more common are its distinguices it better
+
+//// First Line Selector
+	// Targets the first line of text 
+	.intro::first-line {}
+
+//// First Letter Selector
+	// Targets the first letter of text (like drop caps)
+	.intro::first-letter {}
+
+	//// Before Pseudo-Elements
+	// Allow us to add generated content on a page
+	::before {
+		content: "";
+	}
+	// Example: Places a special character phone icon before the number
+	//	<p class="phone">555-867-5309</p>
+	.phone::before {
+		content: "\2706";
+	}
+	// Example: Places a .pdf image before any <a> with a .pdf link
+	// <a class="dload" href="examples pdf" title="- PDF">Download File</a>
+	 a[href$=".pdf"]::before {
+		content: url(../img/pdf.png);
+	}
+
+//// After Pseudo-Elements
+	// Works the same way, only it adds after
+	// ! Pseudo elements are actually inserded as child elements 
+	::after {
+		content: "";
+	}
+	// Example: places the href link infront of the <a>
+	// <a class="dload" href="examples pdf" title="- PDF">Download File</a>
+	.dload::after {
+		content: attr(href);
+	}
+	// Example: Generates a circle before and infront of the text
+	// <div class="box">Generated Shapes</div>
+	.box::before,
+	.box::after {
+		content: "";
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		background: royalblue;
+		border-radius: 50%;
+		margin: 15px 15px 0 15px;
+	}
+
+
+
+
+
+
+

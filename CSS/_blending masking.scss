@@ -1,0 +1,18 @@
+//// CSS - Blending Modes and Masking	////
+	//
+
+
+//// Blending Modes
+	// 
+
+//// Masking
+	// Allows us to obscure visual portions of an element by masking out certain areas
+	// ! Only chrome and safari support it and requires the -webkit-prefix !
+	-webkit-mask-image: url('mask.png');
+	// When aligning with a background it's best pratice to use padding
+	padding: 210px 0 0 120px;
+
+//// Alpha Mask
+	// The less opaque a portion of the mask is, the less visible the element will be at that position
+	// ! We should .PNG image for this !
+	mask.png
