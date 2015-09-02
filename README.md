@@ -11,3 +11,6 @@ A simple collections of different development languages notebooks
 
 - [ ] Yeoman
 - [ ] ES6-7
+- [ ] mocha and unit testing
+- [ ] ReactJS
+- [ ] 
