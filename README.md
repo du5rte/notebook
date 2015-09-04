@@ -3,16 +3,11 @@
 A simple collections of different development languages notebooks
 
 ## Learning Road Map
-
-<<<<<<< HEAD
-- [ ] Yeoman
+- [x] Yeoman
 - [ ] ES6-7
 - [ ] mocha and unit testing
 - [ ] ReactJS
-- [ ] 
-=======
-1. Yeoman
-2. ES6-7
+- [ ]
 
 ## TODO
 - [ ] AJAX
@@ -33,4 +28,3 @@ A simple collections of different development languages notebooks
 - [ ] console
 - [ ] jQuery
 - [x] markdown
->>>>>>> d76bef7e2424a4644215f4841d49e85bf55f25f2

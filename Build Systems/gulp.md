@@ -61,17 +61,15 @@ Note: tasks run asynscronously (all at the same time)
 gulp.task('default', ['scripts','watch']);
 ```
 
-
 Installing Gulp
-
-     $ npm install gulp --save-dev
-
+```sh
+$ npm install gulp --save-dev
+```
 
 Create a empty `gulpfile.js`
-
-
-    $ touch gulpfile.js
-
+```sh
+$ touch gulpfile.js
+```
 
 
 ## Erros

@@ -94,7 +94,7 @@
   }( awesomeNewModule || {} ));
   // Now all of exports values will be assigned to awesomeNewModule
   // if it's the first file or it will be assigned to awesomeNewModule
-  // NOTE repeated variables names will be overwriten
+  // ! repeated variables names will be overwriten
 
 
 //// SubModule Pattern

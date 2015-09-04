@@ -90,7 +90,7 @@ Uses a Queueing System is made of different default tasks that use [Grouped Queu
 7. end
 
 ## Initializing
-Checking current project state, greeting, getting configs, etc. [Yosay](https://github.com/yeoman/yosay) is used to display the greeting Yeoman and [Chalk](https://github.com/chalk/chalk) is used to style text in the console.
+Checks current project state, greeting, getting configs, etc. [Yosay](https://github.com/yeoman/yosay) is used to display the greeting Yeoman and [Chalk](https://github.com/chalk/chalk) is used to style text in the console.
 
 ```js
 var yosay = require('yosay');
@@ -113,13 +113,14 @@ Initializing: function() {
 ```
 
 ## Prompting
-Prompt users for options
+Uses [Inquirer](https://github.com/SBoudrias/Inquirer.js) API to prompt users for options
 ```js
 prompting: function() {
   // pauses yo while it waits for the answers
   var done = this.async();
 
   this.prompt({
+    type: 'input',
     name: 'name',
     message: 'What is the name of your project?',
     // refeers to the folder name its running in
