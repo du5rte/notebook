@@ -7,6 +7,7 @@ Resources
 - [Pete Hunt - webpack how to](https://github.com/petehunt/webpack-howto)
 - [Ditching RequireJS for Webpack](http://blog.player.me/ditching-requirejs-webpack-reasons-lessons-learned/)
 - [Webpack & Angular](http://shmck.com/webpack-angular-part-1/)
+- [Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/#ECMAScript_6_compilation)
 
 ## Module Bundler
 It's job it's to take all different assets, `.js`, `.css` and turn them into a static bundle
@@ -28,7 +29,7 @@ Traditionally we'd have to define a huge list of `script` tags and they would ha
 ```
 
 
-## JavaScript
+## Scripts
 We want too import the content from `file2` into our `document.write()`
 
 entry.js
@@ -174,26 +175,6 @@ Extras
 --inline
 --config webpack.config.js # define webpack config
 ```
-
-## Utilities
-
-### $script
-https://github.com/ded/script.js/
-http://www.dustindiaz.com/scriptjs
-
-```js
-$script = require('../files/bower_components/scriptjs/dist/script.js'); // no bower file
-$script = require('scriptjs'); // from npm package
-
-$script('//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js', function() {
-  // run once it loads
-  $('body').html('It works!');
-});
-```
-
-### UI-Router
-http://www.codeplats.com/0mxWVVUjVX/webpackbrowserify-and-uirouter.html
-
 
 ### Dependencies
 [Webpack ProvidePlugin vs externals?](http://codereply.com/answer/7upd1z/webpack-provideplugin-vs-externals.html)

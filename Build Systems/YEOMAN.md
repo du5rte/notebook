@@ -288,3 +288,25 @@ $ yo test --help
 Arguments:
   sass  # Use classic Sass Indented Syntax or Scss  Type: String  Required: false
 ```
+
+## Generator API's
+- [API's](http://yeoman.github.io/generator/index.html)
+
+[user](http://yeoman.github.io/generator/user.html)
+```js
+// Retrieves user's email from Git in the global scope or the project scope
+git.email()
+// Retrieves user's name from Git in the global scope or the project scope.
+git.name()
+// Retrieves GitHub's username from the GitHub API.
+github.username()
+```
+example
+```js
+{
+  type: 'input',
+  name: 'email',
+  message: 'What is your email address?',
+  default: this.user.git.email() // example@gmail.com
+}
+```
