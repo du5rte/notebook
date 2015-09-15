@@ -292,7 +292,7 @@ Arguments:
 ## Generator API's
 - [API's](http://yeoman.github.io/generator/index.html)
 
-[user](http://yeoman.github.io/generator/user.html)
+[user](http://yeoman.github.io/generator/actions_user.html)
 ```js
 // Retrieves user's email from Git in the global scope or the project scope
 git.email()
