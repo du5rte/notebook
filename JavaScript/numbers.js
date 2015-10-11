@@ -46,7 +46,9 @@
 	var score = 0;
 	score = score + 100;
 
-//// Math Shorthands
+//// Math with same variables Shorthands
+	var score = 30;
+	score = score + 10; // or score += 10;
 	// Addiction
 	score += 10;
 	// Substraction
@@ -55,6 +57,10 @@
 	score *= 5;
 	// Division
 	score /= 2;
+
+//// Increament
+score ++; // score += 1;
+score --; // score -= 1;
 
 //// Numbers and Strings
 	// Returned inputs by prompt or forms come as a string

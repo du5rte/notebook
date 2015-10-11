@@ -1,5 +1,6 @@
 # BrowserSync
 
+Resources
 - [BrowserSync](http://www.browsersync.io)
 - [API](http://www.browsersync.io/docs/api/)
 

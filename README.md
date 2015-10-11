@@ -1,30 +1,23 @@
 # notebook
-
-A simple collections of different development languages notebooks
+My Web Development Notebook
 
 ## Learning Road Map
-- [x] Yeoman
 - [ ] ES6-7
+- [ ] node / io
+- [ ] express
 - [ ] mocha and unit testing
-- [ ] ReactJS
-- [ ]
+- [ ] mongoDB
+- [ ] polyfillers
+- [ ] React & Flux
 
 ## TODO
-- [ ] AJAX
-- [ ] API's (uncomplete notes)
 - [x] Angular
 - [x] Build Systems
-- [ ] CSS (missing basic note)
-- [x] CoffeeScript
-- [ ] Git
+- [ ] CSS (missing basic note
 - [ ] HTML
 - [ ] Jade (uncomplete notes)
 - [ ] JavaScript
 - [ ] NodeJS
-- [x] SVG
+- [x] SVG (+snap.svg)
 - [ ] Sass
 - [x] Technology Foundations
-- [ ] brew (uncomplete notes)
-- [ ] console
-- [ ] jQuery
-- [x] markdown

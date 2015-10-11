@@ -1,13 +1,20 @@
-# YEOMAN - Basics
+# YEOMAN
+Creates a scafoldings for webapps (or just about anything)
 
-Creates a scafolding of our webapp
+Resources:
+- [yeoman.io](http://yeoman.io/authoring/)
+- [stephenplusplus](http://stephenplusplus.github.io/yeoman.io/generators.html)
+- [tuts+](https://code.tutsplus.com/tutorials/build-your-own-yeoman-generator--cms-20040)
+- [tuts+ class](http://code.tutsplus.com/courses/create-a-custom-yeoman-generator)
+- [tagtree](http://tagtree.tv/yeoman-generator)
+- [youtube](https://www.youtube.com/watch?v=1OAfGm_cI6Y)
 
 ## Installing
 ```sh
 $ npm install -g yo bower gulp
 ```
 
-## Using
+## CLI
 ```sh
 $ yo
 # ? 'Allo User! What would you like to do? (Use arrow keys)
@@ -22,12 +29,6 @@ $ yo
 ```
 
 ## Creating a Generator
-- [yeoman.io](http://yeoman.io/authoring/)
-- [stephenplusplus](http://stephenplusplus.github.io/yeoman.io/generators.html)
-- [tuts+](https://code.tutsplus.com/tutorials/build-your-own-yeoman-generator--cms-20040)
-- [tuts+ class](http://code.tutsplus.com/courses/create-a-custom-yeoman-generator)
-- [tagtree](http://tagtree.tv/yeoman-generator)
-- [youtube](https://www.youtube.com/watch?v=1OAfGm_cI6Y)
 
 ```sh
 # we can extend `yeoman-generator`
@@ -47,7 +48,6 @@ Adds files in `package.json`
   ]
 }
 ```
-
 
 ## Extending a Generator
 Creates a new generator by extending `generators`

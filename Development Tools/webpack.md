@@ -208,3 +208,32 @@ plugins: [
 // If you use "$", jquery is automatically required
 $('body').html("It works!");
 ```
+
+### Code Spliting
+- [code splitting](http://webpack.github.io/docs/code-splitting.html)
+- [bundle-loader](https://github.com/webpack/bundle-loader)
+- [bundle-loader "lazy" meaning](https://github.com/webpack/bundle-loader/issues/2)
+- [oclazyload](https://oclazyload.readme.io)
+- [lazy load with angular and webpack](http://michalzalecki.com/lazy-load-angularjs-with-webpack/)
+- [Alexand Rubadiu](http://alexandrubadiu.ro/talks/angular_webpack/#/)
+
+
+```js
+var bundle = require("bundle!./file.js"); // <= browser sends request here
+bundle(function(fileExports) { // callback is called when the module is ready
+  // fileExports can be used
+});
+```
+Basically the bundle-loader is like:
+```js
+require(["./file.js"], function(fileExports) {
+  // fileExports can be used  
+});
+```
+
+```js
+var bundle = require("bundle?lazy!./file.js");
+bundle(function(fileExports) { // <= browser sends request here
+  // fileExports can be used
+});
+```

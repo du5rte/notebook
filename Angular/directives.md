@@ -1,5 +1,6 @@
 # AngularJS - Directives
 A directive is a marker on a `HTML` tag that tells Angular to run or reference some JavaScript, they work much like *start* `function() {}`
+[A Practical Guide to AngularJS Directives](http://www.sitepoint.com/practical-guide-angularjs-directives/)
 
     Extend the HTML by teaching it new tricks
 
@@ -25,9 +26,25 @@ app.controller('StoreController', function() {
 
 
 ## {{ }}
-Uses Mustache's double brackets to (ng-bind) bind to a property
+Uses Mustache's double brackets to (ng-bind) bind to a property [Angular Expressions](https://docs.angularjs.org/guide/expression)
 ```html
 {{ product.name }}
+```
+
+### Numeric Operations
+```xml
+<p>
+  I am {{ 4 + 6 }}
+  <!-- I am 10 -->
+</p>
+```
+
+### String Operations
+```xml
+<p>
+  {{ "Hello" + " you" }}
+  <!-- hello you -->
+</p>
 ```
 
 
