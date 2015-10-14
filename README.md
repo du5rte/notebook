@@ -1,23 +1,14 @@
 # notebook
-My Web Development Notebook
+My Web Development Decoding Notebook
+
+underscored `_`files/folders are in draft state.
 
 ## Learning Road Map
 - [ ] ES6-7
-- [ ] node / io
+- [ ] node
 - [ ] express
 - [ ] mocha and unit testing
 - [ ] mongoDB
-- [ ] polyfillers
+- [ ] Angular 2
 - [ ] React & Flux
-
-## TODO
-- [x] Angular
-- [ ] Build Systems (half done)
-- [ ] CSS (missing basic note
-- [ ] HTML
-- [ ] Jade (uncomplete notes)
-- [ ] JavaScript <-------------- priority
-- [ ] NodeJS
-- [x] SVG (+snap.svg)
-- [ ] Sass
-- [x] Technology Foundations
+- [ ] polyfillers

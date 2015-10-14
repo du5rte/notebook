@@ -40,6 +40,30 @@ function testMic(sequence, callback) {
 
 
 ## Generators
+Is a function that can return **multiple** values with `yield`, which works like an intermediante `return`.
+
+
+Iterator , Observer = generator
+
+Iterator only flows data one way
+
+Generator allow 2 sides communication
+
+```js
+function* awesomeGenerator() {
+  yield 'generator'
+  yield 'functions'
+  yield 'are'
+  return 'great'
+}
+
+var iterator = awesomeGenerator()
+
+iterator.next() // {value: "generator", done: false}
+iterator.next() // {value: "functions", done: false}
+iterator.next() // {value: "are",       done: false}
+iterator.next() // {value: "great",     done: true}
+```
 
 
 ## Async Functions
