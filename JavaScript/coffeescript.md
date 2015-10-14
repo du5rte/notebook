@@ -1,4 +1,4 @@
-# CoffeeScript - Basics
+# CoffeeScript
 
 ## Installing
 First we need `node` and `npm`

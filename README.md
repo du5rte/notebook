@@ -12,11 +12,11 @@ My Web Development Notebook
 
 ## TODO
 - [x] Angular
-- [x] Build Systems
+- [ ] Build Systems (half done)
 - [ ] CSS (missing basic note
 - [ ] HTML
 - [ ] Jade (uncomplete notes)
-- [ ] JavaScript
+- [ ] JavaScript <-------------- priority
 - [ ] NodeJS
 - [x] SVG (+snap.svg)
 - [ ] Sass
