@@ -52,7 +52,7 @@
 	// Calls the first array of the body children
 	Document.body.children[0]
 	// Calls an Array of all class="warning"
-	document.getElementsByClassName("myClass"); 
+	document.getElementsByClassName("myClass");
 	// Then we can select an elements
 	document.getElementsByClassName("myClass")[0];
 	// ! Very britle way to work, alot of old browser don't support some of these selectors and there's where jQuery comes in handy !
@@ -72,13 +72,13 @@
 	$(function() {
 		$(".myClass").hide().show("slow");
 	});
-	// But including jQuery before </body> will save us all the hustle 
+	// But including jQuery before </body> will save us all the hustle
 	$(".myClass").hide().show("slow");
 
 //// jQuery
 	// Uses a javascript library to write Unobtrusive JavaScript that works regardless of the user devise, browser or connection.
 	// We can use jQuery just like a function
-	jQuery(); 
+	jQuery();
 	// jQuery has a dollar sign short hand version $
 	$();
 
@@ -117,5 +117,15 @@
 	$egInput.focus(myFunction).keyup(myFunction);
 
 
+//// event.preventDefault()
+	// Default actions of the event will not be triggered.
+	$egAnchor.click(function(event){
+		event.preventDefault();
+	});
 
-
+//// .on()
+	// Attach an event handler to the selected elements.
+	// !! When we bind an event handler jQuery only listens for those elements so when we add new new elements we need to use .on() !!
+	$(".parent").on("click", "childen", function() {
+		//insert code
+	});

@@ -1,7 +1,7 @@
 # notebook
 My Web Development Decoding Notebook
 
-underscored `_`files/folders are in draft state.
+underscored `_`files/folders are drafts or work in progress.
 
 ## Learning Road Map
 - [ ] ES6-7

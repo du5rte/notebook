@@ -1,6 +1,36 @@
 ## JavaScript - Asynchronous
 
 
+
+
+
+
+
+
+
+## Blocking
+Most web servers, languages and frameworks handle one set of tasks from beginning to end before repeating the process again, doing the same set of steps for another task, this can be problematic when accessing a database or uploading files, as it blocks the handling of other requests as the application can't do anything until it finishes executing the first task.
+
+## Blocking vs Non-Blocking
+
+Blocking
+```
+action1######### action2######### action3#########
+|-------------------------|-----------------------------|
+0s                       0.5s                           1s
+```
+
+Non-Blocking
+```
+action1#########
+action2#########
+action3#########
+|-------------------------|-----------------------------|
+0s                       0.5s                           1s
+```
+
+
+
 ## Callbacks
 Functions can be passed as `arguments`, a common use for it is with `callbacks` a way to let us know a function has finished it's job.
 

@@ -52,9 +52,23 @@ When a browser follows the instructions in a program, it "runs" or "executes" th
 These objects are native to javascript and will be available everywhere.
 [Native Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
 
+```
+String, Array, Date, Math, etc.
+```
+
 ## Host Objects
 Available depending where JavaScript is running, its called the `host environment`. e.g. In the `Browser` or in `Node.js`
 [Host Objects](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+
+Browser Host Objects
+```
+Window, Document, History, XMLHttpRequest, etc.
+```
+
+Node.js Environment
+```
+http, https, fs, url, etc
+```
 
 ## Custom Objects
 Anything you create or import

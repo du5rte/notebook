@@ -5,8 +5,6 @@ resources:
 - [npm](http://npmjs.com/)
 - [How to Use npm as a Build Tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)
 - [Publishing npm packages](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-- [Running scripts with npm](http://www.jayway.com/2014/03/28/running-scripts-with-npm/)
-- [task automation with npm run](http://substack.net/task_automation_with_npm_run)
 
 # CLI
 
@@ -85,18 +83,21 @@ node_modules/
 config/database.yml
 ```
 
-## Commands
-We can create custom npm commads flags within `package.json`
+## Scripts
+Custom commands can be stores within `package.json`, [How npm handles the "scripts" field](https://docs.npmjs.com/misc/scripts)
 
 ```json
 {
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start" "node app.js"
+
   }
 }
 ```
 ```sh
-$ npm test
+$ npm test # $ mocha
+$ npm start # $ node app.js
 ```
 
 

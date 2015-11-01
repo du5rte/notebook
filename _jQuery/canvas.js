@@ -24,11 +24,11 @@
 	// We can set the line coordinates to cursor location on the window
 	$canvas.mousedown(function(e) {
 		// get's the x, y location of the pointer
-		lastEvent = e; 
+		lastEvent = e;
 		mouseDown = true;
 	}).mousemove(function(e) {
 		// only draw if the mouse if down
-		if (mouseDown) { 
+		if (mouseDown) {
 			context.beginPath();
 			// starts the path where we first click
 			context.moveTo(lastEvent.offsetX, lastEvent.offsetY);
@@ -45,3 +45,9 @@
 		mouseDown = false;
 		// $canvas.mouseup(); // trigger
 	});
+
+
+//// .css()
+	// Gets or set the style property of elements
+	.css( "background-color" ) || .css( "backgroundColor" )
+	.css({ "background-color": "#ffe", "border-left": "5px solid #ccc" })
