@@ -7,6 +7,7 @@ resources:
 - [Publishing npm packages](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 - [Running scripts with npm](http://www.jayway.com/2014/03/28/running-scripts-with-npm/)
 - [task automation with npm run](http://substack.net/task_automation_with_npm_run)
+- [https://www.npmjs.com/package/ttab](https://www.npmjs.com/package/ttab)
 
 # CLI
 
@@ -34,6 +35,9 @@ $ npm install --save-dev mocha
 $ npm i -D mocha
 # install only production dependencies
 NODE_ENV=production npm install mocha
+# installing different versions or beta versions
+$ npm i angular@1.5.0-beta.1
+$ npm i gulpjs/gulp.git#4.0
 ```
 
 ## Global Packages

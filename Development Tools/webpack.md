@@ -209,6 +209,13 @@ plugins: [
 $('body').html("It works!");
 ```
 
+## libraries
+What about third party libraries that doesn’t have Webpack support? I mean, libraries that are not exporting anything. That will include thelibrary on the build and that is good enough.
+
+```js
+import 'thelibrary';
+```
+
 ### Code Spliting
 - [code splitting](http://webpack.github.io/docs/code-splitting.html)
 - [bundle-loader](https://github.com/webpack/bundle-loader)

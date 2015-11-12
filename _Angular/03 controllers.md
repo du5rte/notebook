@@ -1,12 +1,13 @@
 # AngularJS - Controllers
-Helps us get data into the page
 
+Resources:
+- [“Controller as”](http://toddmotto.com/digging-into-angulars-controller-as-syntax/)
 
+## Controllers
+Bind `data`, `functionality` or `services` to the `$scope`
 
 ## Creating a Controller
-[“Controller as”](http://toddmotto.com/digging-into-angulars-controller-as-syntax/)
-
-
+Controllers are created by binding `.controller` to the angular app
 ```js
 angular.module('store', [])
   // For consistency we capitalize Controllers

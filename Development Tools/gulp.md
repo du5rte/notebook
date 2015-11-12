@@ -95,6 +95,17 @@ function swallowError (error) {
 }
 ```
 
+## Flattening Files
+By default gulp preserves the directory structure of files, `gulp.dest` has a `base` option that flattens all files in a single directory.
+
+```js
+gulp.task('styles', function() {
+  return gulp.src( paths.styles )
+      .pipe($.sass()
+    .pipe(gulp.dest( './build', {base: './'} ))
+})
+```
+
 ## Asynchronous
 `return` before `gulp.src()` indicates that the task returns a stream so it's **Asynchronous**.
 
@@ -108,25 +119,28 @@ gulp.task('templates', function() {
 ```
 
 ## Custom Flags
-Define your plugins here, make sure you have `gulp-util`
+Custom flags can be pass into `gulp-util` and with `gulp-if` can make tasks more dynamic
 [Example](https://gist.github.com/markgoodyear/9100177)
 
 ```js
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 
-// Define dev CLI flag
-var isDev = gutil.env.dev;
+//
+var production = $.util.env.type === 'production' ? true : false;
 
 gulp.task('scripts', function() {
   return gulp.src('src/scripts/*/**.js')
       .pipe(concat('main.js'))
-      // If we use the `--dev` flag, uglify will not take place.
-      .pipe(gulpif(!isDev, uglify()))
+      // If in Production uglify, else beautify
+      .pipe(gulpif( production, uglify(), beautify() ))
       .pipe(gulp.dest('dist/scripts'));
 });
-
 ```
+```sh
+$ gulp --type production
+```
+
 
 ## Gulp 4
 [installing Gulp 4 before it's released](https://demisx.github.io/gulp4/2015/01/15/install-gulp4.html)

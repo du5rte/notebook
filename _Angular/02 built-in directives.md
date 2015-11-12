@@ -1,9 +1,12 @@
-# AngularJS - Directives
-A directive is a marker on a `HTML` tag that tells Angular to run or reference some JavaScript, they work much like *start* `function() {}`
+# AngularJS - Built-In Directives
+
+
+# Built-In Directives
+A directive is a marker on a `HTML` tag that tells Angular to run or reference some JavaScript, they work much like *start* `function() {}`, angular comes with numerous Built-In directives
 [A Practical Guide to AngularJS Directives](http://www.sitepoint.com/practical-guide-angularjs-directives/)
-
-    Extend the HTML by teaching it new tricks
-
+```
+Directives extend the HTML by teaching it new tricks
+```
 
 ## ng-app
 Attaches the Application Module to the page
@@ -11,7 +14,6 @@ Attaches the Application Module to the page
 <html ng-app>
 <html ng-app="myModule">
 ```
-
 
 ## ng-controller
 Attaches a controller function to the page
@@ -32,7 +34,7 @@ Uses Mustache's double brackets to (ng-bind) bind to a property [Angular Express
 ```
 
 ### Numeric Operations
-```xml
+```html
 <p>
   I am {{ 4 + 6 }}
   <!-- I am 10 -->
@@ -40,7 +42,7 @@ Uses Mustache's double brackets to (ng-bind) bind to a property [Angular Express
 ```
 
 ### String Operations
-```xml
+```html
 <p>
   {{ "Hello" + " you" }}
   <!-- hello you -->
@@ -99,7 +101,7 @@ writing a `<li>` for each value in the array
 ## ng-click
 performs a expression or calls a function, that should exist inside a controller
 
-```xml
+```html
 <!-- expression -->
 <button ng-click="tab = 1">Add Customer</button>
 <!-- function -->
@@ -110,7 +112,7 @@ performs a expression or calls a function, that should exist inside a controller
 ## ng-init
 Create initialization data (most used for testing or debugging)
 
-```xml
+```html
 <!-- initializing a variable -->
 <div ng-init="tab = 1"></div>
 <!-- initializing an array -->
@@ -121,11 +123,11 @@ Create initialization data (most used for testing or debugging)
 ## ng-model
 Binds the form element value to the property, angular has built-in validations for common input types
 
-```xml
+```html
 <!-- input: text -->
 <input type="text" ng-model="review.title">
 ```
-```xml
+```html
 <!-- select -->
 <select ng-model="review.starts">
   <options value="1">1 star</option>
@@ -147,8 +149,12 @@ Binds the form element value to the property, angular has built-in validations f
 
 ## ng-submit
 Allows us to call a function when the form is submitted
-```xml
-<form name="reviewForm" ng-controller="ReviewContrller as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+```html
+<form
+  name="reviewForm"
+  ng-controller="ReviewContrller as reviewCtrl"
+  ng-submit="reviewCtrl.addReview(product)"
+>
 ```
 ```js
 app.controller('ReviewContrller', function() {
@@ -166,20 +172,29 @@ Allows to specify what our form needs before being submitted
 
 #### novalidate
 Turns off default `html` validation
-```xml
-<form name="reviewForm" ng-controller="ReviewContrller as reviewCtrl" ng-submit="reviewCtrl.addReview(product)" novalidate>
+```html
+<form name="reviewForm"
+  ng-controller="ReviewContrller as reviewCtrl"
+  ng-submit="reviewCtrl.addReview(product)"
+  novalidate
+>
 ```
 
 #### required
 Lets angular now it's a required input field
-```xml
-<input type="email" name="author" ng-model="reviewCtrl.review.author" required>
+```html
+<input
+  type="email"
+  name="author"
+  ng-model="reviewCtrl.review.author"
+  required
+>
 ```
 
 #### $valid
-Call a property on a forms to check if it's value is valid
+Call a property on a forms to check if it's value is valid.
 
-```xml
+```html
 <div> reviewForm is {{reviewForm.$valid}} </div>
 <!-- only submits if reviewForm is valid -->
 <form name="reviewForm"
@@ -190,13 +205,35 @@ Call a property on a forms to check if it's value is valid
 ```
 #### ng-invalid
 As $valid changes so does the class on the input
-```xml
-<!-- invalid -->
+```html
+<!-- untyped and invalid -->
 <input name="author" ... class="ng-pristine ng-invalid">
 <!-- typed in and invalid -->
-<input name="author" ... class="ng-dirty ng-valid">
+<input name="author" ... class="ng-dirty ng-invalid">
 <!-- typed in and valid -->
 <input name="author" ... class="ng-dirty ng-valid">
+```
+
+Styled on top of `.ng-dirty` so it only show's up when user starts to write
+```css
+.ng-dirty.ng-invalid {
+  border-color: red;
+}
+.ng-dirty.ng-valid {
+  border-color: green;
+}
+```
+
+Inputs can also have validation rules
+```html
+<!-- checks for a `name@mail.com` -->
+<input type="email" name="email">
+<!-- checks for a `url` -->
+<input type="url" name="homepage">
+<!-- checks for a `integern` -->
+<input type="number" name="quantity">
+<!-- checks for range between 1 ~ 10 -->
+<input type="number" name="quantity" min=1 max=10 >
 ```
 
 ## ng-focus & ng-blur

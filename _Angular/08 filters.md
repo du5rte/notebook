@@ -1,6 +1,11 @@
-# AngularJS - filters
-Passes a values through a `pipe` `|` which formats and output its - [Angular Filters](https://docs.angularjs.org/api/ng/filter/filter)
-[Everything about custom filters in AngularJS](http://toddmotto.com/everything-about-custom-filters-in-angular-js/)
+# AngularJS - Filters
+
+Resources:
+- [Angular Filters](https://docs.angularjs.org/api/ng/filter/filter)
+- [Everything about custom filters in AngularJS](http://toddmotto.com/everything-about-custom-filters-in-angular-js/)
+
+## Filers
+Passes a values through a `pipe` `|` which formats and output its
 
 ```html
 <!-- 2 gets piped into $2.00 -->
@@ -10,14 +15,14 @@ Passes a values through a `pipe` `|` which formats and output its - [Angular Fil
 ## Formate
 Angular as loads of filter each all work like:
 ```html
-{{ data | filter:options }}
+{{ date | filter:options }}
 ```
 
 ## Examples
 ```html
 
 <!-- data -->
-{{ '1388123412323' | data:'MM/dd/yyyy @ h:mma' }} <!-- 12/27/2013 @ 12:50AM -->
+{{ '1388123412323' | date:'MM/dd/yyyy @ h:mma' }} <!-- 12/27/2013 @ 12:50AM -->
 
 <!-- uppercase and lowercase -->
 {{ 'octagon gem' | uppercase }} <!-- OCTAGON GEM -->
