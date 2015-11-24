@@ -73,9 +73,9 @@ Hides a element only if the value of it's expression is `true` or `Truthy`
 Sets classes dynamically by data binding an expression, uses the `:` operator to perform the equivalent of an `if` modifier - [conditionally apply a class?](http://stackoverflow.com/questions/7792652/what-is-the-best-way-to-conditionally-apply-a-class)
 ```html
 <!-- activates the class .active when on the correct tab -->
-<li ng-class="{active: tab === 1}">
+<li ng-class="{'active': tab === 1}">
 <!-- adds class .instore when the state is withing '/store' -->
-<div class="navbar" ng-class="{instore: $state.includes('store')}">
+<div class="navbar" ng-class="{'instore': $state.includes('store')}">
 ```
 
 
