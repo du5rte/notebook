@@ -16,8 +16,6 @@ resources:
 $ npm
 # to Initializing a package.json
 $ npm init
-# for help on a commands use
-$ npm install -h
 ```
 
 ## Installing Packages
@@ -38,6 +36,8 @@ NODE_ENV=production npm install mocha
 # installing different versions or beta versions
 $ npm i angular@1.5.0-beta.1
 $ npm i gulpjs/gulp.git#4.0
+# installing for production (not Devdepencies)
+$ npm production
 ```
 
 ## Global Packages
@@ -90,7 +90,7 @@ config/database.yml
 ```
 
 ## Commands
-We can create custom npm commads flags within `package.json`
+We can create custom npm scripts to run in `package.json`
 
 ```json
 {
@@ -101,6 +101,18 @@ We can create custom npm commads flags within `package.json`
 ```
 ```sh
 $ npm test
+```
+To chain scripts use `&&` to run in sequence or `&` to run in parallel [task automation with npm run](http://substack.net/task_automation_with_npm_run)
+```json
+{
+  "scripts": {
+    "custom": "gulp && mocha && node server.js"
+  }
+}
+```
+npm supports some scripts (e.g. `start`, `install`, 'preinstall') but custom scripts need to be called with `run`
+```sh
+$ npm run custom-script
 ```
 
 

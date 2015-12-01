@@ -5,6 +5,7 @@ Resouces:
 - [Installing](http://docs.mongodb.org/master/tutorial/install-mongodb-on-os-x/?_ga=1.148455231.929616701.1431273906)
 - [MongoDB Tutorial for Beginners - YouTube](https://www.youtube.com/watch?v=W-WihPoEbR4)
 - [Getting Started With MongoDB Queries](https://github.com/sedouard/mongodb-mva/tree/master/module2_getting_started)
+- [robomongo](http://robomongo.org)
 
 ## MongoDB
 Is a NoSQL `Document Oriented` database, where data is structured in `Documents` like `json` files and `Collections` arrays of
@@ -51,271 +52,161 @@ $ mongod --dbpath ./data/db
 The `mongo` shell works like an JavaScript shell, for a guide write `help`
 
 ```js
-var eddie = {
-  name: "Eddie",
-  surname: "Monteiro",
-  email: "monteirocode@gmail.com",
-  mobile: "07123456789",
-  address: {
-    street: "123 Awesome Road",
-    city: "Gateshead",
-    location: "Tyne and Wear",
-    postcode: "NE8 1PX",
-    telephone: "019123456789"
-  }
-}
+// variables and functions can be created
+var hello = "hello world"
 
-// values can be accessed
-eddie.surname # Monteiro
+hello // "hello world"
+```
 
-// and changed
-eddie.name # Eddie
-eddie.name = "Duarte"
-eddie.name # Duarte
+## mongoDB Driver
+To access the mongoDB with an application it needs a driver for it's language
+
+```sh
+$ npm install --save mongodb
+# or mongoose
+$ npm install --save mongoose
+```
+```js
+var mongo = require('mongodb');
+var mongoClient = mongo.Client
+
 ```
 
 ## BSON
-Documents are persisted in a formated called `BSON`, similar to `JSON` but with some additions
+Documents are persisted in a formated called `BSON`, similar to `JSON` but with some additions. [BSON Types](https://docs.mongodb.org/manual/reference/bson-types/#bson-types-comparison-order)
 
 Stores:
-- Strings: "Invisibility"
-- Numbers: 1400, 3.14
-- Booleans: true, false
-- Arrays: ["newt toes", "pickles"]
-- Objects: {"type": "potion"}
-- Null: null
-- ObjectID: ObjectId(...)
-- Date: ISODate(...)
+- Strings: `"Invisibility"`
+- Numbers: `1400`, `3.14`
+- Booleans: `true`, `false`
+- Arrays: `["newt toes", "pickles"]`
+- Objects: `{"type": "potion"}`
+- Null: `null`
+- ObjectID: `ObjectId(...)`
+- Date: `ISODate(...)`
 
-
-## Databases
-To create a database use `use` <databasename>, creates (if it does not exist) and switches to it.
-
+Example:
 ```js
-use reviews // switched to db reviews
-```
-
-## Collections
-Documents are always store in `collections` within a database.
-
-Adding document
-```js
-// potions collection gets automatically created within database
-db.potions.insert(
-  {
-    "name": "Invisibility",
-    "vendor": "Kettlecooked",
-    "price": 10.99,
-    "score": 59,
-    "tryDate": new Date(2012, 8, 13), // Turns into a ISODate( ... )
-    "ingredients": ["newt toes", "secret", "laughter"],
-    // Objects can be embedded in the document
-    "ratings": {
-      "strength": 2,
-      "flavour": 5
-    },
-    "sizes": [2, 8, 16]
-  }
-)
-```
-
-Retrieving document
-```js
-db.potions.find()
-// each document gets assigned an unique `_id`
-// { "_id" : ObjectId("5656785f311d5a7ec2dd3510"), "name" : "Invisibility" .... }
-```
-
-Deleting collection
-```js
-db.potions.drop()
-```
-
-## Sort
-
-```js
-sort({ "price": 1 }}) // sorts documents descending by price
-sort({ "price": -1 }) // sorts documents ascending by price
-```
-
-## Queries
-The `find` function queries for specific documents from the collection.
-
-```js
-db.bank_data.find()         // finds all documents e.g. {} * 50000
-db.bank_data.find().count() // prints the count of documents e.g. 50000
-db.bank_data.findOne()      // finds the first document e.g. {..}
-```
-
-#### Query by Field
-Uses a `query` parameter to return matching set of documents. **Queries are case sensitive**.
-```js
-// finds potions that match the name
-db.potions.find({"name": "Invisibility"})    
-// finds potions with laughter
-db.potions.find({"ingredients": "laughter"})
-// finds the best tasting potions within ratings
-db.potions.find({"ratings.flavour": 5})      
-```
-
-#### Query Projection
-Uses a `projection` object to return only specific data from the results. `1` as `show` or `0` as `hide`
-
-```js
-db.potions.find({"vendor": "Kettlecooked"}, {_id:0, "name": 1,} )
-```
-```json
-{ "name" : "Invisibility" }
-{ "name" : "Passion" }
-{ "name" : "Shrinking" }
-```
-
-#### Comparison Query Operators
-
-- `$gt`: Greater than
-- `$gte`: Greater than or equal to
-- `$lt`: Less than
-- `$lte`: Less than or equal to
-- `$ne`: Not equal to
-
-
-Finds document priced less than 20.
-```js
-db.potions.find({"price": {$lt: 20}})         
-```
-Finds document priced between 10 and 20.
-```js
-db.potions.find({"price": {$t: 10, $lt: 20}})
-```
-Finds documents not vended by Brewers.
-```js
-db.potions.find({"vendor": {$ne: "Brewers"}})
-```
-Finds documents with a size(Array) key bigger than 10 and a key less than 16. **Warning** `[2, 8, 16]` would return as a match because it's `8` is less than `$lt:16` and `16` is bigger than `$gt:10`.
-```js
-db.potions.find({"sizes": {$elemMatch: {$gt: 10, $lt: 16}}})
-```
-
-
-## Deleting
-Uses a `query` parameter to delete matching set of documents.
-
-```js
-db.potions.remove({"name": "Shrinking"})      // WriteResult({ "nRemoved": 1 })
-db.potions.remove({"vendor": "Kettlecooked"}) // WriteResult({ "nRemoved": 3 })
-```
-
-## Updating
-Uses a `query` parameter and `update` parameter to update matching set of documents, **without using `$set` it overwrites the whole document**, to update multiple files `{multi: true}` needs to be added.
-
-```js
-// updates price
-db.potions.remove({"name": "Love"}, {$set: {"price": 39.99} })                         
-// updates multiple all KC vendors to Kettlecooked
-db.potions.remove({"vendor": "KC"}, {$set: {"vendor": "Kettlecooked"}}, {multi: true})
-// increments the click count
-db.potions.remove({"name": "Shrinking"}, {$inc: {"count": 1}})                         
-// creates it even if it does not exist
-db.potions.update({"potion": "Love"}, {$inc: {"count": 1}}, {upsert: true})            
-```
-
-## Advanced Modifications
-[Update Operators](https://docs.mongodb.org/manual/reference/operator/update/)
-
-```js
-// removes color field on all documents
-db.potions.update({}, {$unset: {"color": ""}}, {"multi": true})       
-// renames `score` field on all documents
-db.potions.update({}, {$rename: {"score": "grade"}}, {"multi": true})
- // changes the `2nd` ingredient(Array) on all documents
-db.potions.update({}, {$set: {"ingredients.1": 42}}, {"multi": true})
-// changes the `secret` ingredient(Array) on all documents
-// $ is a placeholer for the matched value
-// e.g. ["newt toes", "secret", "laughter"] | $ equals position 1
-// e.g. ["quark", "rubber duck", "secret"] | $ equals position 2
-db.potions.update( {"ingredients": "secret"}, {$set: {"ingredients.$": 42}}, {"multi": true} )
-// changes the `strength` rating(Object) on the document
-db.potions.update( {"name": "Shrinking"}, {$set: {"ratings.strength": 5}})
-// Adds a category(Array) on the document
-db.potions.update( {"name": "Shrinking"}, {$push: {"category": "budget"}} )
-// Adds a category(Array) on the document, only if it doesn't exists already
-db.potions.update( {"name": "Shrinking"}, {$addToSet: {"category": "budget"}} )
-// Removes the 2nd category(Array) on the document | 1 for last element, -1 for first element
-db.potions.update( {"name": "Shrinking"}, {$pop: {"category": 1}} )
-// Removes specify category(Array) on the document | if empty "" will remove all
-db.potions.update( {"name": "Shrinking"}, {$pull: {"category": "tasty"}} )
-```
-
-
-
-
-
-
-
-
-
-
-
-
-#### Element Match
-The `$elemMatch` projection operator allows us to return just the first element in an array that meets the criteria.
-```js
-db.bank_data.find({last_name: "SMITH", "accounts.account_type": "Savings" }, { first_name: 1, last_name: 1, accounts: { $elemMatch : { 'account_type' : 'Savings' } } } )[12]
-```
-```json
 {
-  "first_name": "CHRISTOPHER",
-  "last_name": "SMITH",
-  "accounts": [ /* just the saving account */ ]
+  "_id": ObjectId("56577932e33e68f07fc31d1f")
+  "name": "Invisibility",
+  "vendor": "Kettlecooked",
+  "price": 10.99,
+  "score": 59,
+  "tryDate": ISODate("2012-09-12T23:00:00Z"),
+  "ingredients": ["newt toes", "secret", "laughter"],
+  // Objects can be embedded in the document
+  "ratings": {
+    "strength": 2,
+    "flavour": 5
+  },
+  "sizes": [2, 8, 16]
 }
 ```
 
 
+## Document Referencing
+Sometimes `referencing` is better than `embedding`
 
-
-
-
-#### Query by Condition
-Uses [Conditional and Comparison Operators](http://docs.mongodb.org/manual/reference/operator/query/) to return a matching set of documents.
-
+To update the embedded `vendor` to non-organic we would have to change all documents that contain it, **not to mention duplication**
 ```js
-// And `$and`
-db.bank_data.find({ $and: [{ first_name: "JOE"}, {last_name: "MARTINEZ"} ] }).count() // 1
-db.bank_data.find({ first_name: "JOE", last_name: "MARTINEZ" }).count() //  1
-
-// Or `$or`
-db.bank_data.find({ $or: [{ first_name: "JOE"}, {last_name: "MARTINEZ"} ] }).count() // 599
-
-// Greater than `$gt`
-db.bank_data.find({ 'accounts.account_balance': {$gt: 9000000} }).count() // 19464
-
-// Less than `$lt`
-db.bank_data.find({ 'accounts.account_balance': {$lt: 100} }).count() // 3
-
-// Greater than + And
-// Might seem like it's searches for a 9 Billion USD dollars account
-// But in fact searches for a 9 billion account and a USD account
-db.bank_data.find({ 'accounts.account_balance': {$gt: 9000000}, 'accounts.currency': 'USD' }).count()
-12481
-
-// Element Match + Greater than
-// Now it searches for a 9 Billion USD dollars account
-db.bank_data.find({ accounts: { $elemMatch: { 'account_balance': {$gt: 9900000}, currency: "USD"  } } } ).count() // 445
-
-
-// Element Match + Greater than + Projection Object `$` + Sort Descendent
-db.bank_data.find({ accounts: { $elemMatch: { 'account_balance': {$gt: 9900000}, currency: "USD"  } } }, {'accounts.$':1 } ).sort({ 'accounts.account_balance': -1 })
-
-```
-
-#### Iterating
-With a `for loop` it can iterate just like JavaScript. To print in the mongo shell use `print()` not console.log
-
-```js
-var smithPersons = db.bank_data.find({last_name : "SMITH"}, {first_name : 1, last_name: 1});
-// For Loop
-for(var i = 0; i < smithPersons.count(); i++) {
-  // print to the mongo shell
-  print(smithPersons[i].first_name + ' ' + smithPersons[i].last_name );
+{
+  "_id": ObjectId( ... ),
+  "name": "Invisibility",
+  ...
+  "vendor": {
+    "name": "Kettlecooked",
+    "phone": 555555555,
+    "organic": true
+  }
 }
 ```
+
+Instead we can create a new vendor `collection` where we create a vendor with the name as the `_id`
+```js
+db.vendors.insert({
+  "_id": "Kettlecooked",
+  "phone": 555555555,
+  "organic": false
+})
+```
+Then we can reference it in our potion document
+```js
+{
+  "_id": ObjectId( ... ),
+  "name": "Invisibility",
+  ...
+  "vendor_id": "Kettlecooked" // Referes to vendor "Kettlecooked"
+}
+```
+
+Query the whole document first we query the potion
+```js
+db.potions.find({"name": "Invisibility"})
+```
+Then the potion vendor
+ ```js
+ db.vendors.find({"_id": "Kettlecooked"})
+ ```
+
+## Embed vs Reference
+
+#### Atomicity
+When we write on `embedded` documents it writes completely or doesn't write at all
+
+When writing multiple documents it does not support `atomicity`, if a new `potion` is successful created but a new `vendor` fails, the `potion` is still created, **and it can reference a `potion` that doesn't exist**.
+```
+db.potions.insert({ ... }) // succeed
+db.vendors.insert({ ... }) // failed
+```
+
+#### Embedded Documents
+Data is readily available, with a single query we can get all the data, supports `atomicity`.
+
+
+#### Referenced Documents
+Data exists in a entirely different `collection`, it only needs to be change in one place, requires an **additional query per reference**, does not support multi-document `atomicity`.
+
+#### Deciding
+Lets say we want to allow users to comment on potions, potions are gonna have many comments and each comment will belong to a user.
+```
+Potion -> Comment -> User
+```
+
+In most cases embedding is the best option
+
+How often it's used together? | Always | Sometimes | Rarely
+------------------------------|--------|-----------|-------
+Embed                         | X      | X         | X
+Reference                     |        | X         | X
+
+Depending on it's size or expansion it might be a good idea to reference instead
+
+Expected Size | Less than 100 | More than a few hundred | Thousands
+--------------|---------------|-------------------------|----------
+Embed         | X             | X                       |
+Reference     |               | X                       | X
+
+Data that it's not expected to change often can be safely embedded but dynamic data is better of being referenced
+
+Frequency of Change | Never/Rarely | Occasionally | Constantly
+--------------------|--------------|--------------|-----------
+Embed               | X            | X            |
+Reference           |              | X            | X
+
+#### Verdict
+Comments are strongly related to potions, small in size and rarely change, so embedding is the best option, on the other hand although users are even related to it's comments, they can be much bigger in size and their data can change occasionally.
+
+```js
+{
+  "name": "Invisibility",
+  ...
+  "comments": [
+    "title": "The best potion!",
+    "body": "Lorem ipsum abra cadrbra",
+    "user_id": "Azrius" // usernames can be changed and are unique
+  ]
+}
+```
+
+Generally, embedding is the best starting point and referencing as data expands in size and frequency of change.

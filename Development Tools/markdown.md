@@ -1,4 +1,4 @@
-# Markdown Basics
+# Markdown
 A writing tool to write plain text and tag formated code
 
 Resources:
