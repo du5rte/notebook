@@ -8,7 +8,9 @@ resources:
 ## Express
 A small framework inspired by `Sinatra` that sits on top of `Node,js`, with a lot of `APIs` ready out the box to start building big Web Apps.
 
-## Installing
+## Getting Started
+
+#### Installing
 
 ```sh
 $ npm install --save express
@@ -17,33 +19,14 @@ $ npm install -g express-generator
 $ express # appName (optional)
 ```
 
-## Using It
+#### Starting a Server
 
 ```js
 var express = require('express');
 var app = express();
-```
 
-## Routes
-The path the user uses to access data from a server `HTTP Request`, or to a server a set of instructions to load content.
-
-```
-http://teamtreehouse.com/home
-http://teamtreehouse.com/about
-```
-
-## Server
-
-```js
-var express = require('express')
-var app = express()
-
+// There's no routes yet configured, so it will through a `Cannot GET /` error
 app.listen(3000)
-```
-
-There's not routes configured, so it will through this error
-```html
-Cannot GET /
 ```
 
 It can take a function as a `2nd parameter`

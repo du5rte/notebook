@@ -5,7 +5,7 @@ Resources:
 - [Animations: the Angular Way](https://css-tricks.com/animations-the-angular-way/)
 https://github.com/AngularClass/ng-fx
 - [AngularHotkeys.js](http://chieffancypants.github.io/angular-hotkeys/)
-
+- [AngularJS UI Router Animated View Transitions](https://www.youtube.com/watch?v=W89DYSthCTQ)
 ## ngAnimate
 Triggers a series of classes that we can use to style transition and add animations
 

@@ -1,7 +1,7 @@
 # Console
 
 Resources:
--
+- [Initial Server Setup with Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04)
 
 ## The Console
 Most Websites and web applications are deployed on remote computers called `servers` and most of the time, the only way to interact directly with these machines is to use a `command line` over a remote connection called `SSH`.
@@ -100,7 +100,7 @@ $ mv hello.txt hi.txt
 # Moves to documents and renames it
 $ mv hi.txt documenets/hello.txt
 # Also works on directories
-$ mov documents docs
+$ mv documents docs
 ```
 
 #### Copy
@@ -113,7 +113,7 @@ $ cp -r documents docs
 ```
 
 #### Remove
-Removes a File or Directory, again, to copy `directories` it needs the `-r` recursive flag
+Removes a File or Directory, again, to copy `directories` it needs the `-r` recursive flag or `-rf` recursive and force
 ```sh
 $ rm hi.txt
 $ rm -r docs
@@ -259,12 +259,21 @@ Interactive tool for creating users
 ```sh
 $ adduser
 $ sudo adduser mike
+# Add user to the sudo group
+$ gpasswd -a mike sudo
 ```
 
 #### Switch User
 Logs as a different user
 ```sh
 $ su mike
+```
+
+#### Delete User
+Deletes a user which then should be followed up by the deleting the user’s home directory
+```sh
+userdel josh
+rm -rf /home/josh
 ```
 
 #### File Permissions

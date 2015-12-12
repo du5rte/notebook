@@ -38,7 +38,7 @@ myShopping.push('chips', 'broccoli'); // ['rice', 'bread', 'bananas', 'chicken',
 ##### `.unshift(  )`
 Pushes a item to the beginning of the array
 ```js
-myShopping.push('chips', 'broccoli'); // ['chips', 'broccoli', 'rice', 'bread', 'bananas', 'chicken']
+myShopping.unshift('chips', 'broccoli'); // ['chips', 'broccoli', 'rice', 'bread', 'bananas', 'chicken']
 ```
 
 ##### `.pop(  )`

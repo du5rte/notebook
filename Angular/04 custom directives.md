@@ -1,5 +1,7 @@
 # Angular - Custom Directives
 
+Resources:
+- [Binding to Directive Controllers](http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html)
 
 ## ng-include
 Makes and ajax call for the include and includes it in the page, the name of the files has to be placed in `'single'` quotes, inside the `"double"` quotes

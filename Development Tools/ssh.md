@@ -49,6 +49,15 @@ $ rsync -av . will@domain.com:~/newapp
 ## Generate SSH keypair
 For passwordless SSH we need to create a public ssh key pair and copy/paste it into the other machine
 
+#### ssh-copy-id
+Sets up the shh `authorized_keys` on a remote machine
+
+```sh
+brew install ssh-copy-id
+ssh-copy-id user@domain.com
+```
+
+#### Manually
 In our machine
 ```sh
 # Generate keypair, add a comment `-C` to different it to the user
