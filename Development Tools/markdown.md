@@ -21,7 +21,7 @@ Hashtags '#' define headings, the more hashtags it has the higher the heading.
 
 *Italic Text*
 ```
-*Italic Text*
+_Italic Text_
 ```
 **Bold Text**
 ```
