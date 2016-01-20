@@ -66,8 +66,10 @@ function testMic(sequence, callback) {
 }
 ```
 
-## Promises
 
+
+## Promises
+<!-- TODO: document better promises functions -->
 
 ## Generators
 Is a function that can return **multiple** values with `yield`, which works like an intermediante `return`.
@@ -97,3 +99,29 @@ iterator.next() // {value: "great",     done: true}
 
 
 ## Async Functions
+<!-- TODO: document better async functions -->
+
+
+```js
+// finished last
+$.getJSON( "http://www.filltext.com/?callback=?", {rows: 5,delay: 1,address: '{streetAddress}'})
+  .done(function( data ) {
+    $.each( data, function( i, item ) {
+      console.log(item.email)
+    })
+  });
+
+
+// finished second (delay 1 second)
+(async function() {
+
+  let data = await $.getJSON( "http://www.filltext.com/?callback=?", {rows: 5,delay: 1,address: '{streetAddress}'})
+  data.forEach(function(item) {
+    console.log(item)
+  })
+
+})()
+
+// finished first
+console.log('Hello World')
+```

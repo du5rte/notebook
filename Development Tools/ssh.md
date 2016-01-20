@@ -79,3 +79,17 @@ $ cd .ssh
 # Open `authorized_keys` in nano and paste the contents in
 $ nano authorized_keys
 ```
+
+
+## ssh-add
+[Authentication failure](https://github.com/mscdex/ssh2/issues/137)
+
+```
+$ ssh-add
+```
+
+## Removing a shh-key
+
+```sh
+$ ssh-keygen -R awesome.com
+```

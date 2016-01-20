@@ -10,11 +10,13 @@ Resources:
 - [youtube](https://www.youtube.com/watch?v=1OAfGm_cI6Y)
 
 ## Installing
+
 ```sh
 $ npm install -g yo bower gulp
 ```
 
 ## CLI
+
 ```sh
 $ yo
 # ? 'Allo User! What would you like to do? (Use arrow keys)
@@ -41,6 +43,7 @@ $ npm link
 ```
 
 Adds files in `package.json`
+
 ```json
 {
   "files": [
@@ -68,9 +71,8 @@ module.exports = generators.Base.extend({
 ```
 
 ## Running Context
-Private methods are added to default and run automatically, but
-Helper Methods `_methods:` with underscore won't be run automatically
-[Running Context](http://yeoman.io/authoring/running-context.html)
+Private methods are added to default and run automatically, but Helper Methods `_methods:` with underscore won't be run automatically [Running Context](http://yeoman.io/authoring/running-context.html)
+
 ```js
 _method: function() {
   console.log('generating...');
@@ -79,7 +81,6 @@ _method: function() {
 
 ### The run loop
 Uses a Queueing System is made of different default tasks that use [Grouped Queue](https://github.com/SBoudrias/grouped-queue) to prioritizing tasks.
-
 1. initializing
 2. prompting
 3. configuring
@@ -87,7 +88,7 @@ Uses a Queueing System is made of different default tasks that use [Grouped Queu
 5. writing
 6. conflicts
 7. install
-7. end
+8. end
 
 ## Initializing
 Checks current project state, greeting, getting configs, etc. [Yosay](https://github.com/yeoman/yosay) is used to display the greeting Yeoman and [Chalk](https://github.com/chalk/chalk) is used to style text in the console.
@@ -96,6 +97,7 @@ Checks current project state, greeting, getting configs, etc. [Yosay](https://gi
 var yosay = require('yosay');
 var chalk = require('chalk');
 ```
+
 ```js
 Initializing: function() {
   // in a environment where it's not in the console it won't be displayed
@@ -114,6 +116,7 @@ Initializing: function() {
 
 ## Prompting
 Uses [Inquirer](https://github.com/SBoudrias/Inquirer.js) API to prompt users for options
+
 ```js
 prompting: function() {
   // pauses yo while it waits for the answers
@@ -134,7 +137,9 @@ prompting: function() {
   }.bind(this));
 }
 ```
+
 or we can cut it to sections by using a helper method `_getPrompts`
+
 ```js
 _getPrompts: function() {
   var prompts = [
@@ -152,7 +157,9 @@ _getPrompts: function() {
   return prompts;
 }
 ```
+
 Save Answers
+
 ```js
 _saveAnswers: function(answers, callback) {
   this.appname = answers.name;
@@ -160,7 +167,9 @@ _saveAnswers: function(answers, callback) {
   callback();
 }
 ```
+
 Prompting
+
 ```js
 prompting: function() {
   var done = this.async();
@@ -172,9 +181,11 @@ prompting: function() {
 
 ## Create Directories
 Uses [mkdirp](https://www.npmjs.com/package/mkdirp) to creates directories
+
 ```js
 var mkdirp = require('mkdirp');
 ```
+
 ```js
 mkdirp(this.destinationRoot() + '/app' + '/scripts');
 ```
@@ -183,21 +194,25 @@ mkdirp(this.destinationRoot() + '/app' + '/scripts');
 Using [mem-fs-editor](https://github.com/SBoudrias/mem-fs-editor) we can copy files
 
 `this.sourceRoot()` gets a reference to the source directory
+
 ```js
 var sourceRoot = this.sourceRoot();
 ```
 
 `this.destinationRoot()` gets a reference to the destination directory
+
 ```js
 var destRoot = this.destinationRoot();
 ```
 
 Uses `mem-fs-editor` methods e.g. `fs.copy()`
+
 ```js
 this.fs.copy(sourceRoot + '/.bowerrc', destRoot + '/.bowerrc');
 ```
 
 Yeoman has an in-memory file-system, file collisions need to be approved
+
 ```sh
 conflict bower.json
 # Yes, No, All, X(abort), Diff, Help
@@ -208,6 +223,7 @@ conflict bower.json
 Using [Lodash Template](https://lodash.com/docs#template) we can make our files more dynamic.
 
 Uses a different `mem-fs-editor` method to copy and template `fs.copyTpl(origin, destination, object)`
+
 ```js
 var templateContext = {
   appname = this.appname;
@@ -218,10 +234,13 @@ var templateContext = {
   appemail = this.appemail;
 }
 ```
+
 ```js
 this.fs.copyTpl(sourceRoot + '/bower.json', destRoot + '/bower.json', templateContext);
 ```
+
 Now we can template files
+
 ```json
 {
   "name": "<%= appname %>",
@@ -239,7 +258,9 @@ Now we can template files
   ]
 }
 ```
+
 README.md
+
 ```markdown
 ## <%= appname %>
 <% if (appdescription !== "") { %><%= appdescription %><% } %>
@@ -272,6 +293,7 @@ constructor: function() {
 
 },
 ```
+
 ```js
 var sassFileExtension = (this.options.sass) ? '.sass' : '.scss';
 this.fs.copyTpl(sourceRoot + '/styles/main' + sassFileExtension, appDir + '/styles/main' + sassFileExtension, templateContext);
@@ -293,6 +315,7 @@ Arguments:
 - [API's](http://yeoman.github.io/generator/index.html)
 
 [user](http://yeoman.github.io/generator/actions_user.html)
+
 ```js
 // Retrieves user's email from Git in the global scope or the project scope
 git.email()
@@ -301,7 +324,9 @@ git.name()
 // Retrieves GitHub's username from the GitHub API.
 github.username()
 ```
+
 example
+
 ```js
 {
   type: 'input',

@@ -20,8 +20,6 @@ git commit -m "first commit"
 
 Create a `flightplan.js` file set the ssh `host` and `username`
 
-"build": "gulp --type production && webpack -p",
-
 ```js
 var plan = require('flightplan');
 

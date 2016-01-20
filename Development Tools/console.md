@@ -244,6 +244,10 @@ $ kill -9 1399  # kill -KILL 1399
 $ kill -STOP    # pause the progress
 ```
 
+#### Reboot
+```
+$ reboot
+```
 
 ## Users and Permissions
 
@@ -272,8 +276,10 @@ $ su mike
 #### Delete User
 Deletes a user which then should be followed up by the deleting the user’s home directory
 ```sh
-userdel josh
-rm -rf /home/josh
+$ userdel josh
+$ rm -rf /home/josh
+# or
+$ deluser --remove-home john
 ```
 
 #### File Permissions
@@ -355,8 +361,10 @@ chmod 640 hello.txt # rw-r-----
 ### Get Application
 The program installer in linux systems similar to `brew` for mac, in a new server we should always run an update first to update it's catalog.
 ```sh
-# Updates
+# Updates the repositories
 $ sudo apt-get update
+# Upgrades outdates applications, `-y` answers yes to everything
+$ sugo apt-get -y upgrade
 # Installs the packaged and any packages it needs to runs it
 $ apt-get install git
 # Removes the packaged but not the additional packages
