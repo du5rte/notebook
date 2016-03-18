@@ -8,6 +8,7 @@ Resources
 - [Ditching RequireJS for Webpack](http://blog.player.me/ditching-requirejs-webpack-reasons-lessons-learned/)
 - [Webpack & Angular](http://shmck.com/webpack-angular-part-1/)
 - [Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/#ECMAScript_6_compilation)
+- [What's new in webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7)
 
 ## Module Bundler
 It's job it's to take all different assets, `.js`, `.css` and turn them into a static bundle

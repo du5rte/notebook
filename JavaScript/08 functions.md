@@ -35,8 +35,7 @@ function goToCoffeeShop() {
 goToCoffeeShop() // 'Go to coffee shop.'
 ```
 
-## Multiple Returns
-Multiple returns can be used with `if` statements, only one return can pass.
+Multiple returns can be used with `if` statements, only the first evaluated return passes.
 
 ```js
 var inbox = ['invoice from dave', 'plane tickets', 'spam'];
@@ -114,8 +113,8 @@ var dice = {
 }
 ```
 
-## Context
-Because `this` referees to it's parent scope, when wrapping a function inside another function it will be adopted by it's new parent.
+## Scope
+Each function has it's own scope `this` referees to it's parent, when wrapping a function inside another function it will be adopted by it's new parent context.
 
 ```js
 var dice = {
@@ -145,7 +144,7 @@ setTimeout(function () {
 ```
 
 ## Arrow Functions
-A simpler ES6 Syntax to create simple functions, and they also automatically binds to `this`.
+A simpler ES6 Syntax to create functions, arrow functions also automatically bind to `this`.
 
 Before
 ```js
@@ -232,7 +231,15 @@ Promise.all([promise1, promise2]).then(function([results1, results2]) {
 Default `parameters` can be set in the function in ES6, it creates a variable which if the value is undefined, defaults to the value provided.
 
 ```js
-function calcBMI({ weight, height, fitness = 1.2 }) {
+function loadProfiles(userNames = []) {
+  console.log(userNames.length)
+}
+
+loadProfiles() // 0
+```
+
+```js
+function calcBMI({ weight, height, fitness = 1.2 } = {}) {
   // var fitness = _ref.fitness === undefined ? 1.2 : _ref.fitness;
   var bmi = weight / (height * height)
   if (f > 1) {
@@ -258,4 +265,49 @@ function sum(...numbers) {
 }
 
 sum(1, 2, 3, 4, 5) // 15
+```
+
+## Generator Functions
+Is a function that can return **multiple** values with `yield`, which works like an intermediante `return`.
+
+```js
+function* awesomeGenerator() {
+  yield 'generator'
+  yield 'functions'
+  yield 'are'
+  return 'great'
+}
+
+var iterator = awesomeGenerator()
+
+iterator.next() // {value: "generator", done: false}
+iterator.next() // {value: "functions", done: false}
+iterator.next() // {value: "are",       done: false}
+iterator.next() // {value: "great",     done: true}
+```
+
+```js
+for(let awesome of awesomeGenerator()) {
+  console.log(awesome)
+}
+// generator
+// functions
+// are
+```
+
+```js
+let names = [...awesomeGenerator()]
+
+console.log(names) // ["generator","functions","are"]
+```
+
+
+## Async Functions
+Anything inside an `async` function that depends on a value intercepted by `await` will wait until it returns a `promise`
+
+```js
+async function() {
+  let friends = await $.get("http://www.filltext.com/?rows=3")
+  console.log(friends)
+}
 ```

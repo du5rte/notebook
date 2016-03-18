@@ -7,6 +7,7 @@ Resources
 - [LevelUpTuts -  AngularJS For Everyone](https://www.youtube.com/watch?v=NJ4FYsRV3nU&list=PLLnpHn493BHF6utwkwpo7RN-GPg1sZhvK)
 - [8 Tips for Angular.js Beginners](http://leftshift.io/8-tips-for-angular-js-beginners/)
 - [Angular, ES6 and Webpack](http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/)
+- [Angular 1.5](https://toddmotto.com/exploring-the-angular-1-5-component-method)
 
 
 ## MVC

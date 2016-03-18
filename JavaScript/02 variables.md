@@ -64,30 +64,29 @@ alert(message); // Go away!
 ```
 
 ## Let
-Uses Block Scoping, in ES6 `let` is the new `var`.
-```js
-var counter = 2;
+Uses Block Scoping in ES6 inside `function, if, else, for, while ...`,  using block scoping prevents variables `hoisting`
 
-for (var i=0; i<=10; i++) {
-	// Even though we create it here
-	// it will overwrite or generate a global variable
-  var counter = i;
+the variable `user` is hoisted outsite the loop, causing it to outputs the same value on all iterations.
+```js
+var users = ['john', 'lewis', 'smith']
+
+// var user;
+for (var user in users) {
+	console.log(user) // smith smith smith
 }
-console.log(counter); // 10
 ```
+
+the variable `user` is created an destroyed inside the loop, preventing overwrite
 ```js
-let counter = 2
+var users = ['john', 'lewis', 'smith']
 
-for (var i=0; i<=10; i++) {
-	// It's created and destroyed inside this scope
-  let counter = i;
+for (let user in users) {
+	console.log(user) // john lewis Smith
 }
-
-console.log(counter); // 2
 ```
 
 ## Const
-Also uses block scoping, `const` can't be overwriten, although `keys` can.
+Is a `read-only` variable that also uses block scoping, `const` can't be overwritten but it's `keys` can.
 
 ```js
 const fruit = 'apple'

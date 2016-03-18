@@ -2,6 +2,11 @@
 
 Resources:
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [State of the art JavaScript 2016](https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b#.7suptki37)
+- [ES6 Features](https://github.com/lukehoban/es6features)
+- [Babel Documentation](https://babeljs.io/docs/learn-es2015/)
+- [Javascript ES6 Cheatsheet - LearnCode.academy](https://www.youtube.com/watch?v=AfWYO8t7ed4)
+- [ES6 and ES7 the future of Javascript](https://youtu.be/6AytbSdWBKg)
 
 ## Syntax
 A programming language's commands, special words and punctuation.
@@ -48,6 +53,30 @@ Allows us to document or add comments to code
 ## Run or Execute
 When a browser follows the instructions in a program, it "runs" or "executes" that program.
 
+## Event-Driven Environment
+JavaScript run on events, it stays in memory doing nothing just listening for event triggers.
+
+## Object Oriented
+JavaScript is a object oriented language everything is powered by `objects`. `variables` and `functions` are no exceptions. When we define a variable we're really saying "attach an key value in the `global name space`" which in the browser is `window` or in node is `global`
+
+```js
+var name = "john"
+
+function sayName() {
+  console.log(name)
+}
+```
+```js
+window: {
+  ..
+  name: "john",
+  sayName: function() {
+    console.log(name)
+  }
+  ..
+}
+```
+
 ## Native Objects
 These objects are native to javascript and will be available everywhere.
 [Native Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
@@ -88,6 +117,22 @@ $('div').click(function() {
   /**/
 });
 ```
+
+## Global Name Space
+When working with bigger scale project a lot of libraries we risk colliding variables so it's important to name them accordantly
+
+```js
+function greet(val) {
+  console.log(vale)
+}
+// window.greet = function greet(val) { console.log(vale) }
+
+
+var greet = 'Hello'
+// overwrites the function `greet()`
+// window.greet = "greet"
+```
+
 
 ## Adding JavaScript
 Inserting a JavaScript file to a webpage:
@@ -146,6 +191,7 @@ pops up an enquiry with a message
 ```js
 alert('how are you?');
 ```
+
 
 ## Strict
 A statement that causes JavaScript to run in a `strict mode`, when it strict mode JavaScript is extra picky and throw errors to common syntax bad pratices.

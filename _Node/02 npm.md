@@ -4,41 +4,53 @@ Node(no longer just node) Package Manager
 resources:
 - [npm](http://npmjs.com/)
 - [How to Use npm as a Build Tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)
+- [fixing npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 - [Publishing npm packages](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 
-# CLI
+
+## Creating a package.json
+Create a package.json file in the current directory, this is used to save a registry of the packages our project uses
 
 ```sh
-# shows all commands available
-$ npm
-# to Initializing a package.json
 $ npm init
-# for help on a commands use
-$ npm install -h
 ```
 
 ## Installing Packages
+Running `npm install`  will install all dependencies found in the local `package.json` file
 
 ```sh
-# install all dependencies in package.json
 $ npm install
-# install
-$ npm install mocha
-# install and save as dependency
-$ npm install --save mocha
-$ npm i -S mocha
-# install and save as development dependency
-$ npm install --save-dev mocha
-$ npm i -D mocha
-# install only production dependencies
-NODE_ENV=production npm install mocha
+# install only "dependencies"
+$ NODE_ENV=production npm install
+$ npm install --production
 ```
 
+Installing individual packages
+```sh
+# install mocha
+$ npm install mocha
+# install and save as "dependencies"
+$ npm install --save mocha
+$ npm i -S mocha
+# install and save as "devDependencies"
+$ npm install --save-dev mocha
+$ npm i -D mocha
+```
+
+Which can then be required using `require` or in ES6 `import` in our project
+
+```js
+var mocha = require('mocha')
+// or in es6
+import mocha from 'mocha'
+```
+
+
 ## Global Packages
-Some packages can be useful to install globably some we can access them from any location - [fixing npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
+Some packages can be useful to install globally some we can access them from any location in our console but can't be required in our project
 
 ```sh
-$ npm install -g http-server
+$ npm install -g mocha
 ```
 
 Packages are installed in `node_modules` each module can have it's own node_modules in `npm 3` all dependencies are installed in the top folder.
@@ -91,7 +103,6 @@ Custom commands can be stores within `package.json`, [How npm handles the "scrip
   "scripts": {
     "test": "mocha",
     "start" "node app.js"
-
   }
 }
 ```

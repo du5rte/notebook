@@ -155,12 +155,32 @@ students.forEach(function(student /*, index*/) {
 ```
 
 ## For Of
-Loops through an array using an `iterator function`, a ES6 feature
+Loops through an array using a ES6 `iterator function`
 
 ```js
-var students = ['Sarah', 'Lynn', 'Jennifer', 'Paul'];
+let students = ['Sarah', 'Lynn', 'Jennifer', 'Paul']
 
-for (var student of students) {
-  console.log(student); // 'Sarah' 'Lynn' 'Jennifer' 'Paul'
-};
+for (let student of students) {
+  console.log(student) // 'Sarah' 'Lynn' 'Jennifer' 'Paul'
+}
+```
+
+## Iterator
+A object that knows how to access items from a collection 1 at the time while keeping track of its current position.
+
+`next` method returns an object with they key values `{value, done}`, `done` will be `false` if there's more values to be returned and be `true` when there's no longer nothing to return. `value` will return any value until it reaches the end which then returns `undefined`.
+
+```js
+let students = ['Sarah', 'Lynn', 'Jennifer', 'Paul']
+
+let iterator = students[Symbol.iterator]()
+
+let firstRun = iterator.next() // {value: "Sarah", done: false}
+// or with destructuring
+// let {value: student} = iterator.next()
+let student = firstRun.value
+
+// ...
+
+let lastRun = iterator.next() // {value: undefined, done:t rue}
 ```

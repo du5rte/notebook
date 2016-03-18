@@ -1,5 +1,8 @@
 # JavaScript Arrays
 
+Resources:
+- [Array Methods You Should Use Today](http://colintoh.com/blog/5-array-methods-that-you-should-use-today)
+
 ## Arrays
 Stores multiple values inside on container
 
@@ -90,10 +93,22 @@ grades[1][0] // 75
 grades[2][2] // 77
 ```
 
-## Spread
-Extend arrays similarly to `array.concat(anotherArray)` in ES6
+## Array Destructuring
 
 ```js
-var myShopping = ['rice', 'bread', 'bananas', 'chicken']
-var moreShopping = [...myShopping, 'eggs', 'milk']; // ['rice', 'bread', 'bananas', 'chicken', 'eggs', 'milk']
+let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+
+ // c is discarded
+let [a, b, ,d] =  myShopping
+let [first, ...remainingItems]
+
+console.log(a, b, d)
+```
+
+## Spread
+Spreads an array into individual items in ES6
+
+```js
+let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+let moreShopping = [...myShopping, 'eggs', 'milk']; // ['rice', 'bread', 'bananas', 'chicken', 'eggs', 'milk']
 ```

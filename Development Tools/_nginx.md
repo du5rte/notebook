@@ -10,6 +10,7 @@ Web Server default port `80` https `443`
 https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-to-use-custom-error-pages-on-ubuntu-14-04
 
 - [How To Redirect www to Non-www](https://www.digitalocean.com/community/tutorials/how-to-redirect-www-to-non-www-with-nginx-on-centos-7)
+- [How To Add gzip](https://www.digitalocean.com/community/tutorials/how-to-add-the-gzip-module-to-nginx-on-ubuntu-14-04?utm_content=buffer2687d&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
 ---------
 
 # Nginx
@@ -18,6 +19,13 @@ Resources:
 - [Tuts+ Nginx Guide](http://code.tutsplus.com/series/nginx-guide--cms-792)
 - [Codemy School DevOps](https://www.youtube.com/watch?v=TIaBrUo2944&list=PLjQo0sojbbxUav7I746f0lT4apGX8-iON&index=3)
 
+
+## Sites Enabled
+Any file in `etc/nginx/sites-enabled` will be runned by `nginx` we can create a link from our home folder to `sites-enabled`
+
+```sh
+$ sudo ln -s ~/nginx.conf /etc/nginx/sites-enabled/example
+```
 
 ## Static Server
 
@@ -30,6 +38,20 @@ server {
   root /home/example/public;
   # point it to the index (default)
   # index index.html
+}
+```
+
+## WWW to NON-WWW
+
+```sh
+server {
+  server_name example.com;
+  root /home/example/public;
+}
+
+server {
+  server_name www.example.com;
+  return 301 $scheme://example.com$request_uri;
 }
 ```
 

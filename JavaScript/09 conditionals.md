@@ -62,3 +62,30 @@ checkFriends(0); // 'You have no friends.'
 checkFriends(1); // 'You have 1 friend.'
 checkFriends(3); // 'You have 3 friends.'
 ```
+
+## Switch
+A cleaner way to define actions based on multiple conditions
+
+```js
+function counter(state = 0, action) {
+  if(action.type === 'INCREMENT') {
+    return state + 1
+  } else if (action.type === 'DECREMENT') {
+    return state - 1
+  } else {
+    return state
+  }
+}
+```
+```js
+function counter(state = 0, action) {
+  switch (action.type) {
+  case 'INCREMENT':
+    return state + 1
+  case 'DECREMENT':
+    return state - 1
+  default:
+    return state
+  }
+}
+```

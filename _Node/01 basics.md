@@ -2,13 +2,13 @@
 
 Resources:
 - [node.js](https://nodejs.org/en/)
-- [Real-time Web with Node.js](https://www.codeschool.com/courses/real-time-web-with-node-js)
-- [nodemon](http://nodemon.io/)
+- [7 Things you should stop doing in node](http://webapplog.com/seven-things-you-should-stop-doing-with-node-js/)
 
 ## Installing
-Node comes with `npm` (Node) Package Manager to handle our dependecies. It can be downloaded from the main website [node.js](https://nodejs.org/en/)
+Node comes with `npm` (Node) Package Manager to handle our dependencies. It can be downloaded from the main website [node.js](https://nodejs.org/en/)
 
 ```sh
+# Check both are installed
 $ node -v # 4.2.1
 $ npm -v # 2.14.4
 ```
@@ -23,7 +23,8 @@ Read Evalute Print Loop runs node on the console. To start run `$ node`, to exit
 ```sh
 $ node
 1 + 2 # 3
-let name = 'Sarah'
+var name = 'Sarah'
+name # "Sarah"
 ```
 There's not a `window` in node but there is `global` root object.
 ```sh
@@ -33,9 +34,10 @@ process
 ```
 
 ## Running File
-To execute a file we run `$ node filename.js`, node automatically looks for `.js` file so it's not needed.
+To execute a file we run `$ node filename.js`, node automatically looks for `index.js` file so it's not needed.
 ```sh
-$ node app # $ node ./app.js
+$ node app # node ./app.js
+$ node . # node ./index.js
 ```
 
 ## Blocking
@@ -75,45 +77,13 @@ task_3 >>>>>>>>>
 A thin wrapper around node that automatically restarts it on file changes. A ignore file can be created `.nodemonignore`
 
 ```sh
-$ npm install nodemon -g
-# Call just like node
-$ nodemon app.js # $ node app.js
-```
-With babel-node
-```sh
-$ nodemon --exec babel-node app.js
+$ nodemon app.js # watches for changes
 ```
 
 ## Node Inspector
 Uses the browser to debug the node application with `breakpoints`, breakpoints give access to it's current `scope`, writing `debugger` in the code will also create a breakpoint in the application.
 
 ```sh
-$ npm install -g -node-inspector
-$ node-debug app.js
-```
-
-With babel
-```sh
-npm install -g babel-node-debug
-$ babel-node-debug app.js # or $ bode-debug app.js
-```
-
-Combining inspector with nodemon for live reload
-```sh
-$ node-inspector
-# in separate tab
-$ node --debug # setups node to listener on port 5858
-# or with nodemon for live changes
-$ nodemon --debug # setups nodemon to listener on port 5858
-$ nodemon --debug-brk # breaks the debugger on the first line
-```
-With babel
-```sh
-$ node-inspector
-# in separate tab
-
-$ babel-node-debug app.js
-
-$ nodemon --exec babel-node --debug app.js
-$ nodemon --exec babel-node --debug-brk app.js # for debugger break
+$ node-inspector # listens for port 5858
+$ node --debug app.js # runs a debugger on 58585
 ```

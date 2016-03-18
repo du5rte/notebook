@@ -67,7 +67,7 @@ var people = [
 people[1].name; // 'Lynn'
 ```
 
-## Destructuring
+## Object Destructuring
 Converts `object.keys` into `variables` and vice-versa in ES6
 
 ```js
@@ -89,4 +89,30 @@ var person = {
   age, // age: age
   ["name" + name]: 'some value' // nameWill: 'some value'
 };
+```
+
+Can also be used to destructure the results of a function
+```js
+let {fullName} = getUser("Williams") // returns Obj{ firstName, lastName, fullName .. }
+
+console.log(fullName)
+```
+
+## Object Assign
+Merges various objects into one
+
+```js
+let en = {1: 'one', 2: 'two', 3: 'three'}
+let pt = {2: 'dois'}
+
+let mergedNumbers = Object.assign({}, en, pt, {3: 'trois'})
+// {"1":"one","2":"dois","3":"trois"}
+```
+
+## Object Spread
+A ES7 feature similar to array spread spreads objects keys inside an object
+
+```js
+let newMergedNumbers = {...mergedNumbers, 4: 'cuatro', 5: 'go'}
+// {"1":"one","2":"dois","3":"trois","4":"cuatro","5":"go"}
 ```
