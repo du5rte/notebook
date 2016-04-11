@@ -1,7 +1,7 @@
 # Ubuntu
 
-Resources
-- [Server Setup](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04)
+Resources:
+- [Initial Server Setup with Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04)
 - [How To Add and Delete Users](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 - [Creating user without passowrd](http://unix.stackexchange.com/questions/56765/creating-an-user-without-a-password)
 - [adduser](http://www.unix.com/man-page/Linux/8/adduser/)
@@ -73,17 +73,17 @@ $ service sudo restart
 Now users can be given a sudo access **with** or **without** password
 
 ```sh
-$ adduser --disabled-password --gecos "" <user>
+$ adduser --disabled-password --gecos "" mike
 ```
 
 Sudo access **WITH PASSWORD**
 ```sh
-sudo adduser <user> sudo
+adduser mike sudo
 ```
 
 Sudo access **WITHOUT PASSWORD**
 ```sh
-sudo adduser <user> admin
+adduser mike admin
 ```
 
 ## Server Setup

@@ -1,12 +1,12 @@
 # notebook
-My Web Development Decoding Notebook
+My Development Notebook
 
 underscored `_`files/folders are drafts or work in progress.
 
 ## Learning Road Map
-- [ ] Angular 2
-- [ ] react & Flux
-- [ ] Meteor
-- [ ] regex
-- [ ] mocha and unit testing
-- [ ] Polyfillers
+- [ ] Koa
+- [ ] nginx
+- [ ] ssl
+- [ ] Mocha / unit testing
+- [ ] Meteor?
+- [ ] Polymer?

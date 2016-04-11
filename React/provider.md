@@ -102,7 +102,7 @@ import providers from './providers';
   }
 }
 
-// each parent layer also needs to be decorated with provider
+// The top Component needs to be decorated with provider
 
 @provide export default class App extends Component {
   render() {

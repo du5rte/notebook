@@ -58,7 +58,7 @@ class Hello extends React.Component {
 ```
 or
 ```jsx
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class Hello extends Component {
   render() {

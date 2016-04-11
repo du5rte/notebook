@@ -3,7 +3,8 @@
 Resources:
 - [Redux](http://redux.js.org)
 - [Kurt Weiberth React + Redux + Webpack](https://www.youtube.com/watch?v=fZKaq623y38&list=PLQDnxXqV213JJFtDaG0aE9vqvp6Wm7nBg)
-
+- [redux-promise](https://github.com/acdlite/redux-promise)
+- [redux-saga](https://github.com/yelouafi/redux-saga)
 
 ## Redux
 The three main principles of redux are:

@@ -30,7 +30,7 @@ $ brew install mongodb
 
 ## Import Data
 ```sh
-$ mongoimport <path to file.json> --jsonArray --db <db name> --collection <coll name>
+$ mongoimport --db test --collection restaurants --drop --file primer-dataset.json
 ```
 
 ## mongod (server)
@@ -69,7 +69,6 @@ $ npm install --save mongoose
 ```js
 var mongo = require('mongodb');
 var mongoClient = mongo.Client
-
 ```
 
 ## BSON
