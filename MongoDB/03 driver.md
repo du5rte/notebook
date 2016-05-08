@@ -1,4 +1,4 @@
-## MongoDB - MongoDB Driver
+## MongoDB - MongoDB Node Native Driver
 
 Resources:
 - [Node MongoDB Native Driver Documentation](http://mongodb.github.io/node-mongodb-native/2.1/api/)

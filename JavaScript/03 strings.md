@@ -57,7 +57,7 @@ string.toUpperCase()  // 'EXAMPLE'
 ```
 
 ## Template Strings
-In ES6 backsticks do `Interpolation` and `breaks` no need for backslash escapes.
+In ES6 backsticks allow to do `interpolation` and `breaks` without backslash escapes.
 
 ```js
 /*
@@ -85,4 +85,17 @@ ${hobby.toUpperCase()}!`
 ```js
 console.log(dedent `hello ${name},
                     how are you ${time}?`);
+```
+
+## Template Strings
+Modify it's output by tagging a `function`
+
+```js
+function titleCase(strings) {
+  return strings
+    .join()
+    .replace(/\b\w/g, match => match.toUpperCase())
+}
+
+titleCase`javascript is awesome` // Javascript Is Awesome
 ```

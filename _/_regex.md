@@ -3,7 +3,7 @@
 Resources:
 - [Regxr](http://regexr.com/)
 - [Regular Expressions Tuts+](http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149)
-- [](http://www.w3schools.com/js/js_regexp.asp)
+- [js regexp](http://www.w3schools.com/js/js_regexp.asp)
 
 
 ## Regular Expression

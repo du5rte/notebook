@@ -1,85 +1,13 @@
-# Javascript - Weird and Awesome
+# JavaScript - Scope
 
-
-
-
-## Module Import Pattern
-Self executing functions are commonly used to extend libraries by importing it into the module, there's also a slight performance benefit as now it's referencing the `local scope`  instead for crawling through the `global scope` searching for it
-
-```js
-(function(underscore) {
-  underscore.awesomeMethod = function() {
-    return 'Yaay!'
-  }
-  console.log(underscore.VERSION)
-})(_)
-
-_.awesomeMethod() // "Yay"
-```
-
-## Module Export Pattern
-Also know as `Loose Augmentation` keeps the code from cluttering the name space but can also work be split through different files.
-
-```js
-var awesomeNewModule = (function(exports){
-  var exports = {
-    foo: 5,
-    bar: 10
-  }
-  exports.helloMars = function() {
-    console.log("Hello Mars!")
-  }
-  exports.goodbye = function() {
-    console.log("Goodbye!")
-  }
-  return exports
-// If awesomeNewModule extend it, otherwise create it
-}( awesomeNewModule || {} ))
-
-awesomeNewModule.foo
-awesomeNewModule.helloMars // Hello Mars!
-```
-
-
-
-## Event-Driven Environment
-
-A big advantage of JavaScript is that it works on events, white PHP script starts, runs and dies and we have to start the whole process again. JavaScript runs and stays in memory waiting for changes in events. JavaScript is basically doing **nothing** all we do is set up listeners until we give it an event trigger
-
-## Closures
-
-    Closure
-    to retain state and scope after executing
-
-When we first run this code it sets up the listeners, and it's done! Only inside `.click` gets re-run but what about `var a = 1;`? JavaScript is smart enough to remember it and store it in the scope to use it later on. As long there's a reference to `var a = 1;` JavaScript will keep it in memory.
-
-```js
-// $(document).ready(function() {
-//   var a = 1;
-      $('button').on('click', function () {
-          alert(a);
-      });
-// });
-```
-
-If we were to call `.off` and terminate the `listener` JavaScript would automatically bin it and `var a = 1;` from memory as it no longer needs it.
-
-```js
-// $(document).ready(function() {
-//   var a = 1;
-//   $('button').on('click', function () {
-//      alert(a);
-//   });
-      $('button').off('click');
-// });
-```
 
 ## Scope
+The variable access we have access to when a piece of script is running.
 
-    scope === variable access
-    context === this
-
-Scope means variable access, when a piece of script is running what variables do I access to?
+```
+scope === variable access
+context === this
+```
 
 When we create `a` we are actually creating `window.a`
 ```js
@@ -92,7 +20,7 @@ window.a === a // true
 
 We can create child `scopes` with functions.
 
-    If a `parents` buys cookies into his home the child automatically has access to the cookies but if a child buys cookies with it's own money the parents doesn't have access to the cookies
+If a `parents` buys cookies into his home the child automatically has access to the cookies but if a child buys cookies with it's own money the parents doesn't have access to the cookies
 
 ```js
 // parent
@@ -124,7 +52,7 @@ foo();
 console.log(a); // 2
 ```
 
-### Context
+## Context
 
 ```js
 console.log(this); // window
@@ -156,7 +84,7 @@ var obj = {
 
 obj.foo();
 ```
-### Methods of changing context
+## Methods of changing context
 
 #### Call
 Change the `context` in which it fires `foo`
@@ -188,7 +116,7 @@ $('body').on('click', obj.foo); // this === <body></body>
 
 Here we want to increment all `li` but we only want to increment one at the time, not all at once!
 
-```xml
+```html
 <ul>
     <li>Clicked <span>0<span> </li>
     <li>Clicked <span>0<span> </li>

@@ -7,7 +7,7 @@ Resources:
 - [Star Wars API GraphiQL](http://graphql-swapi.parseapp.com)
 - [Awesome list of GraphQL & Relay](https://github.com/chentsulin/awesome-graphql)
 - [graphqlhub Medium](https://medium.com/the-graphqlhub)
-- [MyNameIsNodeJs GraphQL](https://www.youtube.com/watch?v=Ws5RTLfLIWY)
+- [sitepoint graphql with mongodb](http://www.sitepoint.com/creating-graphql-server-nodejs-mongodb/)
 
 # GraphQL
 Makes better data communication performance and developer experience. Typical REST APIs make clients highly dependable and couple with the server. GraphQL Give the client a lot more power, ability to varies queries, edge cases all in a single trip
@@ -23,7 +23,7 @@ http://graphql-swapi.parseapp.com/?query={person(personID: 3) {name}}
 ```
 
 
-Very useful for more complex data queries
+Like `JSON` but without the values
 ```
 query {
   person(personID: 3) {
@@ -110,4 +110,23 @@ let query = function () {
 
   return results
 }
-```  
+```
+
+
+
+```js
+fetch(`//localhost:4000/
+  ?query={
+    customer(_id: "57291e756f4beb1c569c657b") {
+      _id
+      first_name
+      last_name
+      accounts {
+        account_balance
+        account_type
+        currency
+      }
+    }
+  }`
+)
+```

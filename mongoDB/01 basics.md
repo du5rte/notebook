@@ -2,6 +2,7 @@
 
 Resouces:
 - [MongoDB Docs](https://docs.mongodb.org/getting-started/node/introduction/)
+- [MongoDB Jump Start by sedouard](https://github.com/sedouard/mongodb-mva)
 - [Installing](http://docs.mongodb.org/master/tutorial/install-mongodb-on-os-x/?_ga=1.148455231.929616701.1431273906)
 - [MongoDB Tutorial for Beginners - YouTube](https://www.youtube.com/watch?v=W-WihPoEbR4)
 - [Getting Started With MongoDB Queries](https://github.com/sedouard/mongodb-mva/tree/master/module2_getting_started)

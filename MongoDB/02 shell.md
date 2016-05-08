@@ -1,4 +1,4 @@
-# MongoDB - Mongo
+# MongoDB - Mongo Shell
 
 
 ## Mongo

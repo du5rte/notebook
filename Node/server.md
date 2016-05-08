@@ -1,10 +1,27 @@
-## Node - Express.js
+## Node - Server
 
 resources:
 - [Express](http://expressjs.com/)
 - [Connect](https://github.com/senchalabs/connect/)
 - [HTTP Wiki](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
 - [HTTP Status Codes Wiki](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+## Creating a Server
+A server will listen to any request from port 3000 and respond `'Hello World'`, it will stay in memory waiting for request until the process is exited with `CTRL+C` Twice or killed e.g. `$ kill -9 479`
+
+*Open browser on `http://localhost:3000` or `$curl http://localhost:3000`*
+
+```js
+var http = require('http')
+
+http.createServer(function (request, response) {
+	response.writeHead(200, {
+    'Content-Type': 'text/plain'
+  });
+	response.write('Hello World\n')
+	response.end()
+}).listen(3000)
+```
 
 ## Express
 A small framework inspired by `Sinatra` with a lot `methods` inherited from node's `http` ready out the box to start building Web Apps.
@@ -18,7 +35,9 @@ Source code
 ```js
 http.ServerResponse(request, response) {
   if(request.url == "/") {
-    response.writeHead(200, {'Content-type': 'text/html'})
+    response.writeHead(200, {
+      'Content-type': 'text/html'
+    })
     response.write('Hello World')
     response.end()
   }
@@ -199,5 +218,24 @@ app.get('/blog/:title?', function(req, res) {
 
 app.listen(3000, function() {
   console.log('Blog is running on port 3000!')
+})
+```
+
+## Multiple Servers
+We can direct server APIs to another server using `request`
+
+```js
+var request = require('request').defaullts({
+	json: true
+})
+
+app.get('/anotherserver', (req, res) => {
+	request({uri: 'http://localhost:3001'}, (err, res, body) {
+		if (!err && response.statusCode === 200) {
+			res.json(body)
+		} else {
+			res.send(response.statusCode)
+		}
+	})
 })
 ```
