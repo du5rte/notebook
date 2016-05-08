@@ -2,7 +2,8 @@
 
 Resources:
 
-- [jwt.io](https://jwt.io/)
+- [jwt.io](https://auth0.com/learn/json-web-tokens/)
+- [Get Started with JSON Web Tokens](https://auth0.com/learn/json-web-tokens/)
 - [IETF JWT](https://tools.ietf.org/html/rfc7519)
 - [Auth0 - Secure Your React and Redux App with JWT Authentication](https://auth0.com/blog/2016/01/04/secure-your-react-and-redux-app-with-jwt-authentication/)
 - [scotch.io - Anatomy of JTW](https://scotch.io/tutorials/the-anatomy-of-a-json-web-token)
@@ -10,7 +11,7 @@ Resources:
 
 
 ## JWT
-Json Web Tokens are most commonly used to pass data securely and to represent an authentication
+Json Web Tokens are most commonly used for authentication and passing data securely
 
 #### Header
 Contains information about the `type` and `algorithm`
