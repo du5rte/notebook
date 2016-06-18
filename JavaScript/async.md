@@ -1,4 +1,4 @@
-# JavaScript - Asynchronous
+# JavaScript - Asynchronous Programming
 
 
 ## Callbacks

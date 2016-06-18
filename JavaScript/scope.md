@@ -122,7 +122,6 @@ Here we want to increment all `li` but we only want to increment one at the time
     <li>Clicked <span>0<span> </li>
     <li>Clicked <span>0<span> </li>
 </ul>
-
 ```
 ```js
 $('li').on('click', function() {

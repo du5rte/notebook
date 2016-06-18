@@ -1,5 +1,7 @@
 # MongoDB - Mongo Shell
 
+Resources:
+- [Using Vim with the Mongo Shell](https://www.compose.io/articles/how-i-stopped-worrying-and-learned-to-love-the-mongo-shell/)
 
 ## Mongo
 The `mongo` shell is an JavaScript shell to interact with the MongoDB Server

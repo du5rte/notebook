@@ -1,5 +1,9 @@
 # OAuth
 
+Resouces:
+- [DigitalOcean - An Introduction to OAuth 2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2)
+- [StackOverFlow - How OAuth 2.0 works in real life](http://stackoverflow.com/questions/4727226/on-a-high-level-how-does-oauth-2-work)
+
 ## OAuth2
 *Open Authorization* is a framework for delegating authorization through tokens which grant web apps access to resources.
 

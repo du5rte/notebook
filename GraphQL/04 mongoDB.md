@@ -4,34 +4,33 @@ Resources:
 - [sitepoint graphql with mongodb](http://www.sitepoint.com/creating-graphql-server-nodejs-mongodb/)
 
 
-
-
+Although graphql filters only the necessary fields in the query `mongoDB` is returning all the fields no being efficient.
 ```js
-export const customer = {
+import { db, ObjectId } from 'mongodb'
+
+const customer = {
   type: customerType,
   args: {
     _id: {type: new GraphQLNonNull(GraphQLString)},
   },
-  resolve(root, args, ctx, info) {
+  resolve(root, args, context, info) {
     return db.collection('bank_data')
       .findOne({_id: ObjectId(args._id)})
   }
 }
 ```
 
-
-MongoDB will return the projected fields
+This function uses the query `info` to create a mongoDB `projection`
 ```js
-export function fieldsToProjection(info) {
+function fieldsToProjection(info) {
   let projection = {}
   info.fieldASTs[0].selectionSet.selections.map(function(selection) {
     projection[selection.name.value] = 1
   })
   return projection
 }
-```
-```js
-export const customer = {
+
+const customer = {
   type: customerType,
   args: {
     _id: {type: new GraphQLNonNull(GraphQLString)},
@@ -43,7 +42,6 @@ export const customer = {
 }
 ```
 
-
 ```js
 export const customers = {
   type: new GraphQLList(customerType),
@@ -51,11 +49,11 @@ export const customers = {
     limit: {type: GraphQLInt},
     skip: {type: GraphQLInt}
   },
-  resolve(root, { limit = 50, skip = 0 }, ctx, info) {
+  resolve(root, args, context, info) {
     return db.collection('bank_data')
       .find({}, infoToProjection(info))
-      .limit(limit)
-      .skip(skip)
+      .limit(args.limit)
+      .skip(args.skip)
       .toArray()
   }
 }

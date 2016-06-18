@@ -115,8 +115,7 @@ let query = function () {
 
 
 ```js
-fetch(`//localhost:4000/
-  ?query={
+fetch(`//localhost:3000/graphql/?query={
     customer(_id: "57291e756f4beb1c569c657b") {
       _id
       first_name

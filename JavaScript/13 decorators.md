@@ -4,7 +4,7 @@ Resources:
 - [Higher Order functions - Sitepoint](http://www.sitepoint.com/higher-order-functions-javascript/)
 - [Decorators in JavaScript](https://www.youtube.com/watch?v=d8CDFsQHZpE)
 
-## Callbacks
+## Callback Function
 JavaScript works on a single tread some tasks can take longer so it's important to keep our code `asynchronous`, `functions` can be passed as `arguments`, why a lot of Javascript syntax is the way it is.
 
 ```js

@@ -9,8 +9,13 @@ Resources:
 ## SVG
 SVG (Scalable Vector Graphics) is an XML markup language that is capable of creating images using vectors.
 
+```html
+<svg></svg>
+```
 
-## As Images
+## Usage
+
+###### Image Tag
 The easiest way to use svg images is as a `<img>` element.
 
 ```html
@@ -28,32 +33,21 @@ or as a `background-image` style
 }
 ```
 
-## Embedded
+###### Embedded
 By embedding it in the `html` markup we can style and animate svg with css
 
 ```html
 <html>
   <bod>
 
-    <svg version="1.1" class="logo__wrapper" x="0px" y="0px" viewBox="0 0 208 208"xml:space="preserve">
-      <!-- elements can be grouped together using the `<g>` tag -->
-      <g class="logo">
-        <!-- ... -->
-      </g>
+    <svg version="1.1" height="100" width="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     </svg>
 
   </body>
 </html>
 ```
-```css
-.logo:hover {
-  fill: steelblue;
-  stroke-width: 6;
-  transition: fill 0.3s;
-}
-```
 
-## URIs
+###### URIs
 You can use data URIs for SVG too. nice way of including a resource that would have otherwise been a separate HTTP request.
 
 ```html
@@ -63,4 +57,17 @@ You can use data URIs for SVG too. nice way of including a resource that would h
 .bg {
   background: url('data:image/svg+xml;utf8,<svg ...> ... </svg>');
 }
+```
+
+## Elements
+
+
+###### Rectangle
+```html
+<svg version="1.1" height="100" width="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- dimensions -->
+  <rect height="80" width="100" fill="blue" />
+  <!--  -->
+  <rect fill="red" height="40" width="80" x="10" y="20" />
+</svg>
 ```

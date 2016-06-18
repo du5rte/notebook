@@ -1,5 +1,7 @@
 # JavaScript Strings
 
+Resources:
+- [Removing leading whitespace in ES6 template strings](https://muffinresearch.co.uk/removing-leading-whitespace-in-es6-template-strings/)
 
 ## Strings
 Stores text format (text, words, sentences, etc). Wrapping in quotes lets JavaScript know it's just text, in single quotes `' '`, double quotes `" "` or in ES6, backsticks for templating.
@@ -91,11 +93,34 @@ console.log(dedent `hello ${name},
 Modify it's output by tagging a `function`
 
 ```js
-function titleCase(strings) {
-  return strings
-    .join()
-    .replace(/\b\w/g, match => match.toUpperCase())
+function nospaces(strings, ...values) {
+
+  // interweaving the strings with values
+  let output = ''
+
+  for (let i = 0; i < values.length; i++) {
+    output += strings[i] + values[i]
+  }
+  output += strings[values.length]
+
+  return output.replace(/^\s+/gm, '')
 }
 
-titleCase`javascript is awesome` // Javascript Is Awesome
+let first_name = "John"
+let last_name = "Steward"
+
+console.log(
+  nospaces`http://someurl.com?query?
+            name=${first_name}&
+            last_name=${last_name}`)
+
+let first_name = "John"
+let last_name = "Steward"
+
+nospaces`
+  http://someurl.com?query?
+    name=${first_name}&
+    last_name=${last_name}
+`
+// http://someurl.com?query?name=John&last_name=Steward
 ```

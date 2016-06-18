@@ -77,10 +77,10 @@ store.subscribe(() => {
 A representation of a dispatcher
 
 ```js
-function someAction(payload) {
+function increment(payload) {
   return {
-    type: 'SOME_VALUE', // required
-    payLoad: {} // optional
+    type: 'INCREMENT', // required
+    // payLoad: {} // optional
   }
 }
 ```
