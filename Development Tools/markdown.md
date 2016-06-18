@@ -78,5 +78,5 @@ We start with an '!' enter and `alt` text in the `[ ]`, the link in the `( )`, o
 ![Alt text](http://placekitten.com/g/408/287 "Optional title")
 
 ```
-![Alt text](http://placekitten.com/g/408/287" "Optional title")
+![Alt text](http://placekitten.com/g/408/287 "Optional title")
 ```
