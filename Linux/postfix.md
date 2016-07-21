@@ -1,6 +1,7 @@
 # PostFix
 
 resources:
+- [How To Install and Configure Postfix on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-on-ubuntu-16-04)
 - [Redirect domain emails to gmail](http://codewithintent.com/how-to-redirect-your-domain-emails-to-gmail-for-free-digital-ocean-postfix-dns-setup/)
 - [Forwarding email for self-hosting multiple domains using Ubuntu](https://blog.ham1.co.uk/tag/email-forwarding/)
 
@@ -24,7 +25,6 @@ $ sudo nano /etc/postfix/main.cf
 ```
 
 ```sh
-
 # Custom Configuration
 # add domains
 virtual_alias_domains = example.com, another.com, evenmore.com

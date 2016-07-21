@@ -23,7 +23,7 @@ myShopping[3]; // 'chicken'
 ## Array Methods
 Arrays have method that can be used
 
-##### `.length`
+##### Length
 The number of keys in a array
 ```js
 myShopping.length // 4
@@ -32,37 +32,37 @@ myShopping.length // 4
 myShopping[ numbers.length ] = 'chips'; // myShopping[4] = 'chips';
 ```
 
-##### `.push(  )`
+##### Push
 Pushes item(s) to the end of the array
 ```js
 myShopping.push('chips', 'broccoli'); // ['rice', 'bread', 'bananas', 'chicken', 'chips', 'broccoli']
 ```
 
-##### `.unshift(  )`
+##### Unshift
 Pushes a item to the beginning of the array
 ```js
 myShopping.unshift('chips', 'broccoli'); // ['chips', 'broccoli', 'rice', 'bread', 'bananas', 'chicken']
 ```
 
-##### `.pop(  )`
+##### Pop
 Removes (and can store in a variable) the last item of an array
 ```js
 var lastItem = myShopping.pop(); // 'chicken'
 ```
 
-##### `.shift(  )`
+##### Shift
 Removes (and can store in a variable) the first item of an array
 ```js
 var firstItem = myShopping.shift(); // 'rice'
 ```
 
-##### `.join(  )`
+##### Join
 Joins a array in a string separated by a supply of characters
 ```js
 myShopping.join(', '); // "rice, bread, bananas, chicken"
 ```
 
-##### `.concat(  )`
+##### Concat
 Joins one or more arrays to another array
 ```js
 var moreShopping = ['potatos', 'salmon', 'orange juice'];
@@ -71,7 +71,7 @@ myShopping.concat(moreShopping, evenMoreShopping);
 // ["rice", "bread", "bananas", "chicken", "potatos", "salmon", "orange juice", "bacon", "lettuce"]
 ```
 
-##### `.indexOf(  )`
+##### Index Of
 Searches and returns the position of a value in a array
 ```js
 var fruit = myShopping.indexOf('bananas'); // 2
@@ -111,4 +111,56 @@ Spreads an array into individual items in ES6
 ```js
 let myShopping = ['rice', 'bread', 'bananas', 'chicken']
 let moreShopping = [...myShopping, 'eggs', 'milk']; // ['rice', 'bread', 'bananas', 'chicken', 'eggs', 'milk']
+```
+
+## Newer Array Methods
+
+##### Map
+Iterates over each child, which then can be modified and returned
+
+```js
+let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+
+let prettyShopping = myShopping.map((child, index, array) => {
+  // Capitalizes
+  return child.replace(/^[a-z]/, (w) => w.toUpperCase())
+})
+
+console.log(prettyShopping) // ["Rice","Bread","Bananas","Chicken"]
+```
+
+
+##### Filter
+Optionally filter children
+
+```js
+let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+
+let halfShopping = myShopping.filter((child, index, array) => {
+  if(index < array.length / 2) {
+    return child
+  }
+})
+
+console.log(halfShopping)
+```
+
+
+##### Reduce
+
+```js
+let x = ['a', 'b', 'c', 'd', 'e']
+
+let initialValue = []
+
+let y = x.reduce((previousValue, currentValue, currentIndex, array) => {
+  // or initialValue
+  console.log(previousValue) // []
+
+  console.log(currentValue, currentIndex) // a 0
+
+  return currentValue.replace(/^[a-z]/, (w) => w.toUpperCase()) // A
+}, initialValue);
+
+console.log(y)
 ```

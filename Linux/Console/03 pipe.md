@@ -4,6 +4,9 @@
 Pipes the output of Command `A` to the input of Command `B`
 ```sh
 $ ps aux | grep bash
+
+# passes content to clipboard
+$ cat file.txt | clipboard
 ```
 
 ## Grep

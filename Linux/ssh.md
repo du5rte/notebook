@@ -1,7 +1,8 @@
 # SSH
 
 resources:
-- [How To Use SSH Keys with DigitalOcean Droplets](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets) [Gist](https://gist.github.com/learncodeacademy/5850f394342a5bfdbfa4)
+- [How To Use SSH Keys with DigitalOcean Droplets](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets)
+- [Gist](https://gist.github.com/learncodeacademy/5850f394342a5bfdbfa4)
 - [LearnCode.academy - SSH Tutorial](https://www.youtube.com/watch?v=DbPDraCYju8)
 
 

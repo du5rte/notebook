@@ -5,10 +5,13 @@ Resources:
 - [How To Add and Delete Users](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 - [Creating user without passowrd](http://unix.stackexchange.com/questions/56765/creating-an-user-without-a-password)
 - [adduser](http://www.unix.com/man-page/Linux/8/adduser/)
-- [Installing Node 5.x on Ubuntu](https://github.com/nodesource/distributions)
+- [Installing Node 6.x on Ubuntu](https://github.com/nodesource/distributions)
 - [fixing npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 - [7 Security Measures](https://www.digitalocean.com/community/tutorials/7-security-measures-to-protect-your-servers?utm_source=Customerio&utm_medium=Email_Internal&utm_campaign=Email_UbuntuDistroNginxWelcome)
-- [Setup a Firewall with UFW](https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server)
+- [How To Set Up a Firewall with UFW on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server)
+- [How to Install MongoDB on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04)
+- [How To Install and Configure Postfix on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-on-ubuntu-16-04)
+
 
 ## Setup SSH
 
@@ -17,10 +20,10 @@ Digital Ocean already sets this up so it can be skipped
 # with ssh-copy-id
 local$ ssh-copy-id myuser@example.com
 # or manually
-local$ cat ~/.ssh/id_rsa.pub | pbcopy
+local$ cat .ssh/id_rsa.pub | pbcopy
 
-root$ mkdir ~/.ssh
-root$ nano ~/.ssh/authorized_keys # paste and save
+# root$ mkdir .ssh
+root$ nano .ssh/authorized_keys # paste and save
 ```
 
 SSH into root
@@ -56,18 +59,12 @@ Setup the admin group in `visudo` to not require password with sudo commando
 $ sudo visudo
 ```
 
-Edit `admin` `ALL` to `NOPASSWD:ALL`
+Create a user or group to have `sudo` privileges without password
 ```sh
-# Members of the admin group may gain root privileges
 %admin  ALL=(ALL) NOPASSWD:ALL
+# or
+server ALL=(ALL) NOPASSWD:ALL
 ```
-
-Create the user (non-existante by default) and restart `sudo`
-```sh
-$ groupadd admin
-$ service sudo restart
-```
-
 
 ## Add User
 Now users can be given a sudo access **with** or **without** password
@@ -97,6 +94,11 @@ $ su - server
 $ sudo apt-get -y update
 $ sudo apt-get -y upgrade
 
+# *** System restart required ***
+$ sudo reboot
+```
+
+```sh
 # Install curl git
 $ sudo apt-get install -y build-essential curl git
 
@@ -109,18 +111,25 @@ $ sudo add-apt-repository -y ppa:nginx/stable
 $ sudo apt-get update
 $ sudo apt-get install -y nginx
 
+# Install Let's Encrypt
+$ sudo apt-get install -y letsencrypt
+
 # Install PostFix
-# Choose `Internet Site`
-$ sudo apt-get install postfix
+$ sudo apt-get install -y postfix # Choose `Internet Site`
 
 # Install Node v5.x
-$ curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 
 # Install PM2
 $ sudo npm install -g pm2
 # Set it to start on reboot within user server
 $ pm2 startup ubuntu -u server
+
+# Install MongoDB
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+$ sudo apt-get install -y --allow-unauthenticated mongodb-org
+# Follow instructions on How to Install MongoDB on Ubuntu
 ```
 
 ## Setup Firewall
@@ -129,23 +138,9 @@ $ pm2 startup ubuntu -u server
 $ sudo ufw default deny incoming
 $ sudo ufw default allow outgoing
 $ sudo ufw allow ssh
-$ sudo ufw allow www
-$ sudo ufw allow mail
-# $ sudo ufw status
+$ sudo ufw allow 'Nginx Full'
+# $ sudo ufw allow mail
+
+# when all set
 $ sudo ufw enable
-```
-
-## Setup Development Tools
-
-- yo
-- bower
-- gulp-cli
-- webpack
-- flightplan
-- nodemon
-- node-inspector
-- npm-check-updates
-
-```sh
-$ npm install -g yo bower gulp-cli webpack flightplan nodemon node-inspector npm-check-updates
 ```
