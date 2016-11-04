@@ -134,8 +134,15 @@ server {
   ## SSL Params
   include snippets/ssl-params.conf;
 
+  # Any route containing a file extension (e.g. /devicesfile.js)
+  location ~ (?:.+\/)((?:.+)\.(?:.+)) {
+    # $1 is the filename
+    try_files $uri /$1 =404;
+  }
+
+  # Any route that doesn't have a file extension (e.g. /devices)
   location / {
-    root /home/savagni/public;
+    try_files $uri /index.html;
   }
 }
 ```
