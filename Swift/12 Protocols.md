@@ -1,9 +1,7 @@
-
+# Swift - Protocols
 
 ## Protocols
-Also know as interface in other programing languages
-efforce it
-provides an expection of certain behaviors
+A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality. Also know as `interface` in other programing languages it enforce an expectation of behaviors without using inheritance.
 
 `User` and `Friend` both differ in their implementation but both conform to `FullyNameable`
 
@@ -35,3 +33,196 @@ struct Friend: FullyNameable {
 let friend = Friend(firstName: "Taylor", middleName: "Alison", lastName: "Swift")
 friend.fullName // "Taylor Alison Swift"
 ```
+
+
+## Modeling Behavior with Protocols
+In the case that we have different `Employee`s and we want them to be `Payable`, adding a pay
+
+```swift
+class Employee {
+    // ...
+
+    // A extendable pay method sounds like a logic solution, but if we forget to override than on it will still work and pay the employee `0`
+    func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
+        return (0, 0, 0, 0)
+    }
+}
+
+class HourlyEmployee: Employee {
+    var hourlyWage: Double = 15.00
+    var hoursWorked: Double = 0
+    let availableVacation = 0
+
+    // it works but it's a bad pratice
+    override func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
+        return (hourlyWage * hoursWorked, 0, 0, availableVacation)
+    }
+}
+
+func payEmployee (employee: Employee) {
+    employee.pay()
+}
+```
+
+This a good example where protocols are useful to model class behaviors to ensure that the code behavior don't go wrong, so it helps you to avoid some errors based on human error, In this case it helps you showing you an error if you forgot to override the superclass method (pay method)
+```swift
+protocol Payable {
+    func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int)
+}
+
+class Employee {
+    // ...
+
+    // No longer needs a default method
+    // func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
+    //     return (0, 0, 0, 0)
+    // }
+}
+
+// extends on `Employee` and `Payable`
+class HourlyEmployee: Employee, Payable {
+    var hourlyWage: Double = 15.00
+    var hoursWorked: Double = 0
+    let availableVacation = 0
+
+    // no longer needs to override
+    func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
+        return (hourlyWage * hoursWorked, 0, 0, availableVacation)
+    }
+}
+
+// on type of `Payable`
+func payEmployee (employee: Payable) {
+    employee.pay()
+}
+```
+
+
+## Protocols as Types
+Also useful to conform loosely related objects, protocols can be use as a type, as a parameter type or return type in a function, method or initializer, as the type of a constant, variable or property, or as the type of items in a array, dictionary or any other container.
+
+
+```swift
+protocol Blendable {
+    func blend()
+}
+
+class Fruit: Blendable {
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+
+    func blend() {
+        print("I'm mush")
+    }
+}
+
+// not every Dairy ingredient is good for a smoothly
+class Dairy {
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Cheese: Dairy {}
+
+class Milk: Dairy, Blendable {
+
+    func blend() {
+        print("I'm milkshake")
+    }
+}
+```
+
+Because all of them conform to the blendable protocol we are sure they will have the blend method
+```swift
+func makeSmoothie(ingredients: [Blendable]) {
+    for ingredient in ingredients {
+        ingredient.blend()
+    }
+}
+
+let strawberry = Fruit(name: "Strawberry")
+let cheddar = Cheese(name: "Cheddar")
+let chocolateMilk = Milk(name: "Chocolate")
+
+//let ingredients = [strawberry, chocolateMilk] // Error add explicit type annotation [Any]
+//let ingredients: [Blendable] = [strawberry, cheddar] // Error 'Cheese' does not conform
+let ingredients: [Blendable] = [strawberry, chocolateMilk]
+
+makeSmoothie(ingredients: ingredients)
+```
+
+## IS-A vs HAS-A
+If a model want to use the same features and maybe expand on them `inheritance` is the best option on the flip side is a model has common features with another model `composition` is a better option.
+
+### IS-A
+`Jetplane` is a `Airplane`
+```swift
+class Airplane {}
+
+// inherits and maybe expands on Airplane
+class Jetplane: Airplane {}
+```
+
+### HAS-A
+`Bird` has a `Fly` feature
+```swift
+// Extract Fly feature into a protocol
+protocol Fly {}
+
+// both share a common relationship with Fly protocol
+class Airplane: Fly {}
+
+struct Bird: Fly {}
+```
+
+## Protocol Inheritance
+protocol can be inherit other protocols
+
+```swift
+protocol Printable {
+    func description() -> String
+}
+
+// extends on `Printable`
+protocol PrettyPrintable: Printable {
+    func prettyDescription() -> String
+}
+
+// User now conforms with PrettyPrintable which in turn conforms to Printable
+struct User: PrettyPrintable {
+    let name: String
+    let age: Int
+    let address: String
+
+    func description() -> String {
+        return "\(name). \(age). \(address)"
+    }
+
+    func prettyDescription() -> String {
+        return "name: \(name) age: \(age) address: \(address)"
+    }
+}
+
+let user = User(name: "eddie", age: 25, address: "sesame street")
+
+user.description()
+user.prettyDescription()
+```
+
+
+## Swift's Standard Library Protocols
+Swift has 55 Swift Standard Library Protocols, mostly grouped into 3 categories. [What the 55 Swift Standard Library Protocols Taught Me](https://www.skilled.io/gregheo/what-the-55-swift-standard-library-protocols-taught-me).
+
+- `Can do` (-able) .eg Equatable, FullyNameable
+- `Is a` (-Type) .eg IntType
+- `Can be` (-Convertible) .eg FloatLiteralConvertible, NilLiteralConvertable
+
+
+## Protocol Oriented Programming
+Carefully defining the defining of objects
