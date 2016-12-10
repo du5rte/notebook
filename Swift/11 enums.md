@@ -340,3 +340,26 @@ Using Nil Coalescing Operator that's not necessary
 ```swift
 displayName = firstName ?? userName
 ```
+
+## Computed Properties
+Instead of using a function we can just user computed Properties
+
+```swift
+let UIFontTextStyleHeadline = "UIFontTextStyleHeadline"
+let UIFontTextStyleBody = "UIFontTextStyleBody"
+let UIFontTextStyleFootnote = "UIFontTextStyleFootnote"
+
+enum Text: String {
+    case Headline
+    case Body
+    case Footnote
+
+    var style: String {
+        switch self {
+            case .Headline: return UIFontTextStyleHeadline
+            case .Body: return UIFontTextStyleBody
+            case .Footnote: return UIFontTextStyleFootnote
+        }
+    }
+}
+```

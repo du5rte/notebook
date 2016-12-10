@@ -1,5 +1,8 @@
 # Swift - Basics
 
+References:
+- [iOS Human Interface Guidelines](https://developer.apple.com/ios/human-interface-guidelines/ui-views/alerts/)
+
 ## Xcode
 IDE (Integrated Developer Environment)
 
@@ -69,3 +72,17 @@ let area = height * width
 // All values are of type Float/Double
 let areaInSquareMeters = area / 10.764
 ```
+
+## Type aliases
+`Any` is an instance of any type `AnyObject` is an instance of any class type.
+
+```swift
+var something: Any
+var someObject: AnyObject
+```
+
+## Property List
+Organises data into named values and lists of values in a `.plist` file
+
+## XML
+Extensible Markup Language is a set of rules for encoding documents in both machines and human readable format.

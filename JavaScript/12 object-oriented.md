@@ -234,3 +234,18 @@ var p = new Person()
 
 p.setName('Jane', 'Lee').sayName().setName('John', 'Smith').sayName()
 ```
+
+## Class of methods
+
+```js
+class myMethods {
+  static shout(something) {
+    this.say(something.toUpperCase())
+  }
+
+  static say(something) {
+    console.log(something)
+  }
+}
+
+```

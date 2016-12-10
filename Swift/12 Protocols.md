@@ -226,3 +226,140 @@ Swift has 55 Swift Standard Library Protocols, mostly grouped into 3 categories.
 
 ## Protocol Oriented Programming
 Carefully defining the defining of objects
+
+## Protocol Conformance Using Extensions
+One of the most useful aspects of extensions is that we can add protocol conformance to any existing types
+
+```swift
+import UIKit
+import GameKit
+
+protocol UniqueType {
+    var id: Int { get }
+}
+
+extension UIView: UniqueType {
+    var id: Int {
+        return Int(arc4random_uniform(1000) + 1)
+    }
+}
+```
+
+```swift
+protocol PrettyPrintable {
+    var prettyDescription: String { get }
+}
+
+struct User {
+    let name: String
+    let ID: Int
+}
+
+// Enter your code below
+
+extension User: PrettyPrintable {
+    var prettyDescription: String {
+        return "name: \(self.name) id: \(self.ID)"
+    }
+}
+```
+
+## Protocol Extensions
+extends protocols themselves to provide default implementations
+
+```swift
+import Foundation
+import UIKit
+
+protocol UniqueType {
+    var id: Int { get }
+}
+
+extension UniqueType {
+  // we extend a protocol we can make calculated properties & methods
+    var id: Int {
+        return Int(arc4random_uniform(1000) + 1)
+    }
+}
+
+extension UIView: UniqueType {
+    // protocols extensions work as defaults and can be override
+   var id: Int {
+       return 1
+   }
+}
+
+let view = UIView()
+view.id
+```
+
+
+## Method Dispatch in a Protocol Extension
+
+```swift
+protocol PersonType {
+
+    var firstName: String { get }
+    var middleName: String? { get }
+    var lastName: String { get }
+
+    func fullName() -> String
+}
+
+
+extension PersonType {
+    // default implementations
+    func  fullName() -> String {
+        return "\(firstName) \(middleName ?? "") \(lastName)"
+    }
+
+    func greeting() -> String {
+        return "Hi, " + fullName()
+    }
+}
+
+struct User: PersonType {
+
+    let firstName: String
+    let middleName: String?
+    let lastName: String
+
+    // defined implemation for greeting()
+    func greeting() -> String{
+        return "Hey there, " + fullName()
+    }
+
+    func fullName() -> String {
+        return "\(lastName), \(firstName)"
+    }
+}
+
+let someUser = User(firstName: "Pasan", middleName: nil, lastName: "Premaratne")
+// conforms to PersonType again
+let anotherUser: PersonType = User(firstName: "Gabriel", middleName: nil, lastName: "Nadel")
+
+// uses `greeting()` from the struct
+someUser.greeting() // "Hey there, Premaratne, Pasan"
+// uses `greeting()` from the protocol
+anotherUser.greeting() // "Hi, Nadel, Gabriel"
+
+
+struct Friend: PersonType {
+    let firstName: String
+    let middleName: String?
+    let lastName: String
+
+    func greeting() -> String {
+        return "Hello, " + fullName()
+    }
+}
+
+let someFriend = Friend(firstName: "Ben", middleName: nil, lastName: "Jakuben")
+
+let people = [someUser, anotherUser, someFriend]
+
+// uses the default implementation
+for person in people {
+    print (person.greeting())
+}
+```
