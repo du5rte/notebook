@@ -1,7 +1,7 @@
 # Ubuntu
 
 Resources:
-- [Initial Server Setup with Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04)
+- [Initial Server Setup with Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
 - [How To Add and Delete Users](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 - [Creating user without passowrd](http://unix.stackexchange.com/questions/56765/creating-an-user-without-a-password)
 - [adduser](http://www.unix.com/man-page/Linux/8/adduser/)
@@ -15,16 +15,22 @@ Resources:
 
 ## Setup SSH
 
-Digital Ocean already sets this up so it can be skipped
+Some servers like Digital Ocean already already set it up so it can be skipped
 ```sh
-# with ssh-copy-id
-local$ ssh-copy-id myuser@example.com
-# or manually
-local$ cat .ssh/id_rsa.pub | pbcopy
-
-# root$ mkdir .ssh
-root$ nano .ssh/authorized_keys # paste and save
+local$ ssh-keygen -t rsa
+local$ ssh-copy-id root@<Server-IP>
 ```
+
+Same as
+```
+local$ cat ~/.ssh/id_rsa.pub | pbcopy
+root$ ssh root@<Server-IP>
+root$ mkdir .ssh
+root$ nano .ssh/authorized_keys # paste and save
+root$ service ssh restart
+```
+Make sure your .ssh directory has 700 and your files are 700 permissions (rwx------).
+
 
 SSH into root
 ```sh

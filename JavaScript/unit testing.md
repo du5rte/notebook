@@ -48,3 +48,14 @@ describe("Mocha", () => {
 ```
 
 ## Chai
+
+## Debugger
+Alts run time execution allowing to debugging the current scope
+```js
+
+app.use((ctx) => {
+  // stops here
+  debugger;
+})
+
+```
