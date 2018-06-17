@@ -6,7 +6,7 @@ Likes a phonebook, directs domain names to device's IP addresses
 ## IP Address
 A number that corresponds to a device on the network, usually in the format 1.2.3.4.
 
-////Network
+## Network
 Either a local network or the Internet.
 
 ## TLD - Top Level Domain

@@ -1,13 +1,11 @@
 ## React Native
 
-
-
 ## Installing
+[getting-started](https://facebook.github.io/react-native/docs/getting-started.html)
 
 ```sh
 $ brew install node
-$ brew install --HEAD watchman
-$ brew install flow
+$ brew install watchman
 $ npm install -g react-native-cli
 ```
 
@@ -15,8 +13,16 @@ $ npm install -g react-native-cli
 
 ```sh
 $ react-native init AwesomeProject
+$ npm install
+$ npm start
+$ react-native run-ios
 ```
 
+
+
+## Primitives
+Instead of `div` we have `View`, `p` as `Text`, `img` as `Image`.
+
 ```js
-class testApp extends Component {}
+import { View, Text, StyleSheet } from 'react-native';
 ```
