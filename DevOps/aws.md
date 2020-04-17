@@ -1,32 +1,120 @@
 # AWS
 
-Amazon Web Services
+Amazon Web Services is a collection of over 55+ services to choose from and develop with, many services depend on another services.
+
+Most services communicate with each other over `TCP` or sometimes `HTTP(S)` connections or a designated port based on the service
+
+|             |                      |
+| ----------- | -------------------- |
+| S3          | https://...          |
+| EC2         | 10.0.0.4             |
+| ElastiCache | 10.0.0.3             |
+| DynamoDB    | arn.aws:dynamodb:... |
+
+### Access
+AWS can be accessed by `Web Console` their web interface, `CLI` through the terminal or their `SDK` through our application.
 
 ## Elastic Cloud Compute (EC2)
+The core of the web of AWS is `EC2`, it serves the bases of many other services. It's basicly the service that provides `instances` of a computers, you can login use as a remote virtual machine, install programs, compute and run applications.
 
-Basically a instance of a computer, you can login use as a remote virtual machine, install programs, compute and run applications.
+- `Elastic`: Means instance can increase or decrease at will
+- `Cloud Compute`: Computing `instances` operating in remote data servers around the world
+- `Instance`: A virtual server machine, the basic building block of EC2.
 
-### Cloud Compute
+### Creating a Test EC2
 
-Computing services operating in remote data servers around the world
+1. Create a `t2.micro` EC2 instance, with default setting and `http` access
+2. Create a `key pair` to access that instance later on, this should be a `.pem` file.
+3. SSH into the instance using the `.pem`
 
-### Elastic
+```sh
+ssh -i "test01.pem" ec2-user@ec2-3-248-195-49.eu-west-1.compute.amazonaws.com
+```
 
-Means instance can increase or decrease at will
+Incase this error comes up
 
-### EC2 Instance
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for 'myinstance.pem' are too open.
+```
 
-A virtual server machine, the basic building block of EC2,
+You just need to adjust the file permissions
+
+```sh
+chmod 400 myinstance.pem
+```
 
 ### Amazon Machine Image (AMI)
 
 Operating system and software used on an EC2 instance. Once you select an image you'll need to select an image type (e.g. CPU, RAM, Network performance)
+
+## Elastic Computing Service (ECS)
+
+Handles high availability, scaling and load balancing.
+
+- `Cluster`: Is the top level element in ECS, used to container and organised tasks and services.
+- `Tasks`: Is a package of metadata defining an application along with network, storage and security environment it will need. A tasks need a `Container` which is the heart of the whole thing.
+- `Container`: An instance of a `Container Image` from the `registry`.
+- `Container Image`: A template for a container, this has everything it needs to run the application code.
+- `Registry`: Where application images are stored (e.g. `Docker Hub`, `Elastic Container Registry`).
+
+### Orchestrator
+
+In ECS the `service` is what manages all of this.
+
+- Fargate: Fully managed
+- Ansible
+- Kubernetes
+
+Tools thse intelligence
+
+## Create a cluster
+
+```sh
+aws ecs create-cluster --cluster-name myapp
+```
 
 ### Auto Scaling Group
 
 Rules for automatically scaling EC2 images up and down
 
 ### Elastic Block Storage (EBS)
+
+### Elastic Container Registry
+
+Amazon ECR provides a Docker credential helper which makes it easier to store and use Docker credentials when pushing and pulling images to Amazon ECR. [](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html)
+
+1. Create a repository
+
+```sh
+aws ecr create-repository --repository-name myimage
+```
+
+2. Retrieve an authentication token and authenticate your Docker client to the registry
+
+```sh
+aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <account_id>.dkr.ecr.eu-west-1.amazonaws.com/myimage
+```
+
+2. Build the Docker image
+
+```sh
+docker build -t myimage .
+```
+
+3. Tag the image
+
+```sh
+docker tag myimage:latest <account_id>.dkr.ecr.eu-west-1.amazonaws.com/myimage:latest
+```
+
+4. Push to the repository
+
+```sh
+docker push <account_id>.dkr.ecr.eu-west-1.amazonaws.com/myimage:latest
+```
 
 ### Security Group
 
@@ -333,3 +421,73 @@ Run script file
 ```sh
 sh cli-demo.sh
 ```
+
+## IAM
+Allows to give `groups`, `users`, `roles`, etc, access to services and resources by attaching them `policies`. Custom policies can be created as well each will be a collection of `access`. 
+
+- `Programmatic access`: Uses a `access key ID` and `secret access key` to access AWS API, CLI, SDK, and other development tools.
+- `AWS Management Console access`: Allows access to AWS Management Console web interface.
+
+## Adding a API Access
+
+1. Add a label `username`
+2. Restrisct to only `AWS Management Console access`
+3. Create a custom `policy` and only give access to the resources it needs
+4. Pass `access key ID` and `secret access key` securely
+
+## Adding Another Developer
+
+1. Add their email to `username`
+2. Allow `Programmatic access` and `AWS Management Console access`
+3. Attach existing policies directly, `AdministratorAccess`
+4. Give them their credentials including the `Console login link`
+
+## Fargate
+A compute engine for `Elastic Container Service` that allows to run `containers` without having to provision, configure or scale clusters of VMs.
+
+- [Deep Dive into AWS Fargate (22 May, 2018)](https://www.youtube.com/watch?v=xBgiArJHv7E)
+- [Deep Dive into AWS Fargate 2 (Apr 25, 2018)](https://www.youtube.com/watch?v=IEvLkwdFgnU)
+- [ECS vs. Fargate: What's the difference?](https://cloudonaut.io/ecs-vs-fargate-whats-the-difference/)
+
+### Task Definition
+A blueprint for the launch type of our containers, e.g. `ports`, `memory`, `cpu`, etc.
+
+```js
+{
+  "family": "webserver",
+  "executionRoleArn": "ecsTaskExecutionRole",
+  "requiresCompatibilities": ["FARGATE"],
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "nginx",
+      "memory": "100",
+      "cpu": "99"
+    }
+  ],
+  "networkMode": "awsvpc",
+  "memory": "1024",
+  "cpu": "256"
+}
+```
+
+
+### Health Check
+Allows you to customise the health check inside the task definition, the default command is `"curl -f http://localhost/ || exit 1"` which tries to hits port `80`
+
+[TaskDefinition HealthCheck](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html)
+
+
+```json
+{
+  "healthCheck": {
+    "command": [ "CMD-SHELL", "curl -f http://localhost/.well-known/apollo/server-health || exit 1" ],
+    "interval": 30,
+    "timeout": 5,
+    "retries": 3,
+    "startPeriod": 3
+  }
+}
+```
+
+[Task Networking in AWS Fargate](https://aws.amazon.com/blogs/compute/task-networking-in-aws-fargate/)
