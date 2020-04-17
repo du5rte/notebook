@@ -471,11 +471,13 @@ A blueprint for the launch type of our containers, e.g. `ports`, `memory`, `cpu`
 }
 ```
 
-
 ### Health Check
 Allows you to customise the health check inside the task definition, the default command is `"curl -f http://localhost/ || exit 1"` which tries to hits port `80`
 
 [TaskDefinition HealthCheck](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html)
+
+#### NOTE!
+This implementation runs on the container, the container might not have `curl` installed. [Docker Healthcheck](https://docs.docker.com/engine/reference/builder/#healthcheck). 
 
 
 ```json
