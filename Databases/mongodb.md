@@ -611,13 +611,11 @@ db.posts.getIndexes()
 db.posts.createIndex({  title: 1  })
 ```
 
-## MongoDB - MongoDB Node Native Driver
+## Driver
+`mongodb` is the NodeJS driver to communicate with the `mongo` server
 
 Resources:
 - [Node MongoDB Native Driver Documentation](http://mongodb.github.io/node-mongodb-native/2.1/api/)
-
-## MongoDB Driver
-`mongodb` is the NodeJS driver to communicate with the `mongo` server
 
 
 ```js
@@ -656,4 +654,22 @@ MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
   })
 
 })
+```
+
+## Dump and Restore
+
+```sh
+mongodump --db database_name  --out ./data
+mongorestore --db database_name --drop ./data
+```
+
+Or
+
+```sh
+mongorestore --uri="mongodb+srv://username:password@myexamplecluster0-kjge4.mongodb.net/haystack-development" --drop .
+```
+
+copy & paste a db
+```sh
+mongodump --uri="mongodb+srv://username:password@myexamplecluster0-kjge4.mongodb.net/old_database" --gzip --archive | mongorestore --uri="mongodb://localhost:27017/new_database" --nsFrom="old_database.*" --nsTo="new_database.*" --gzip --archive
 ```

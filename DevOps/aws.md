@@ -481,11 +481,11 @@ Allows you to customise the health check inside the task definition, the default
 ```json
 {
   "healthCheck": {
-    "command": [ "CMD-SHELL", "curl -f http://localhost/.well-known/apollo/server-health || exit 1" ],
+    "command": [ "CMD-SHELL", "curl -f http://localhost:4000/.well-known/apollo/server-health || exit 1" ],
     "interval": 30,
     "timeout": 5,
     "retries": 3,
-    "startPeriod": 3
+    "startPeriod": 120
   }
 }
 ```
