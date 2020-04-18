@@ -12,9 +12,11 @@ Most services communicate with each other over `TCP` or sometimes `HTTP(S)` conn
 | DynamoDB    | arn.aws:dynamodb:... |
 
 ### Access
+
 AWS can be accessed by `Web Console` their web interface, `CLI` through the terminal or their `SDK` through our application.
 
 ## Elastic Cloud Compute (EC2)
+
 The core of the web of AWS is `EC2`, it serves the bases of many other services. It's basicly the service that provides `instances` of a computers, you can login use as a remote virtual machine, install programs, compute and run applications.
 
 - `Elastic`: Means instance can increase or decrease at will
@@ -423,7 +425,8 @@ sh cli-demo.sh
 ```
 
 ## IAM
-Allows to give `groups`, `users`, `roles`, etc, access to services and resources by attaching them `policies`. Custom policies can be created as well each will be a collection of `access`. 
+
+Allows to give `groups`, `users`, `roles`, etc, access to services and resources by attaching them `policies`. Custom policies can be created as well each will be a collection of `access`.
 
 - `Programmatic access`: Uses a `access key ID` and `secret access key` to access AWS API, CLI, SDK, and other development tools.
 - `AWS Management Console access`: Allows access to AWS Management Console web interface.
@@ -443,14 +446,16 @@ Allows to give `groups`, `users`, `roles`, etc, access to services and resources
 4. Give them their credentials including the `Console login link`
 
 ## Fargate
-A compute engine for `Elastic Container Service` that allows to run `containers` without having to provision, configure or scale clusters of VMs.
+
+A compute engine for `Elastic Container Service` that allows to run `containers` without having to provision or manage EC2 instances, configure or scale clusters of VMs.
 
 - [Deep Dive into AWS Fargate (22 May, 2018)](https://www.youtube.com/watch?v=xBgiArJHv7E)
 - [Deep Dive into AWS Fargate 2 (Apr 25, 2018)](https://www.youtube.com/watch?v=IEvLkwdFgnU)
 - [ECS vs. Fargate: What's the difference?](https://cloudonaut.io/ecs-vs-fargate-whats-the-difference/)
 
 ### Task Definition
-A blueprint for the launch type of our containers, e.g. `ports`, `memory`, `cpu`, etc.
+
+A blueprint for the launch type of our containers. There can be up to 10 `containerDefinitions` with their own configurations
 
 ```js
 {
@@ -471,19 +476,168 @@ A blueprint for the launch type of our containers, e.g. `ports`, `memory`, `cpu`
 }
 ```
 
+### Resources
+
+Resources can be defined in the task manager and allocated to containers, `memory`, `cpu`, etc.
+
+#### Task Level Resources
+
+Total cpu/memory accross all containers, `required fields`, decides billing axis.
+
+#### Container Level Resources
+
+Defined sharing of task resources among containers, `optional fields`
+
+allocated to each container in the cluster
+
+```js
+{
+  "family": "chat",
+
+  // Task Level Resources
+
+  "cpu": "1 vCpu",
+  "memory": "2 gb",
+
+  "containerDefinitions": [
+    {
+      "name": "chat",
+      "image": "xxx.dkr.ecr.us-east-1.amazonaws.com/chat-app",
+
+      // Container Level Resources
+
+      "cpu": 256,
+      "memoryReservation": 512,
+    },
+    {
+      "name": "another-container",
+      "image": "xxx.dkr.ecr.us-east-1.amazonaws.com/api",
+
+      // Container Level Resources
+
+      "cpu": 768,
+      "memoryReservation": 512,
+    }
+  ],
+}
+```
+
+#### CPU Memory Configurations
+You pay for what you provision (For Task level CPU and Memory)
+
+- `cpu-units`, 1 vCPU = 1024 cpu-units
+- `memory`: MB
+
+| CPU            | Memory                                 |
+| -------------- | -------------------------------------- |
+| 256 (.25 vCPU) | 512MB, 1GB, 2GB                        |
+| 512 (.5 vCPU)  | 1GB, 2GB, 3GB, 4GB                     |
+| 1024 (1 vCPU)  | 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB      |
+| 2048 (2 vCPU)  | Between 4GB and 16GB in 1GB increments |
+| 4096 (4 vCPU)  | Between 8GB and 30GB in 1GB increments |
+
+### Networking
+Your task gets a `ENI` Elastic Network Interface, which can be made public or used privately inside `awsvpc`, so other `EC2` instance can connect to it if you choose so. This is also used to pull images from `ECR` or puplib repository and pushing logs to `CloudWatch`. (`awsvpc` is the only support network mode with Fargate)
+
+[Task Networking in AWS Fargate](https://aws.amazon.com/blogs/compute/task-networking-in-aws-fargate/)
+
+### Load Balancing
+We can assign a load balancer to our container port
+
+Task Definition
+```js
+{
+  "family": "chat",
+  "cpu": "1 vCpu",
+  "memory": "2 gb",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "chat",
+      "image": "xxx.dkr.ecr.us-east-1.amazonaws.com/chat-app",
+      "cpu": 256,
+      "memoryReservation": 512,
+      "portMappings": [
+        { "containerPort": 8080 }
+      ]
+    }
+  ],
+}
+```
+
+Load balancer
+```sh
+aws ecs create-service
+  -- task-definition chat:1
+  -- network-configuration
+    "awsvpcConfigration = {
+      subnets=[subnet-id],
+      securityGroups=[sg-id]
+    }"
+  -- Load-balancers
+    "[
+      {
+        "targetGroupArn": "<insert arn>",
+        "containerName": "chat",
+        "containerPort": 8080
+      }
+    ]"
+
+```
+
+### Layer Storage
+<!-- Compose of `layer storage`,  -->
+Docker images are composed of layers. The topmost layer is the `writable` layer to cpature file changes made by the running container. `10GB` of layer storage available per task. Writes are not visible across containers. Ephemeral, storage is not available after the task stops.
+
+### Volume Storage
+Persistent storage, Fargate provied `4GB` volume space per task. This can be visible across containers
+
+### Logs Configurations
+Use the `awslogs` driver to send stdout from your application to `Cloudwatch` logs.
+
+1. Create a log group in `CloudWatch`
+2. Configure the log driver in your task definition
+3. Remember to add permissions via the `ecsTaskExecutionRole`
+
+```js
+{
+  "family": "chat",
+  ...
+  "containerDefinitions": [
+    {
+      "name": "chat",
+      ...
+      "logConfiguration": {
+        "logDiver": "awslogs",
+        "options": {
+          "awslogs-group": "chat-app",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "chat-app"
+        }
+      }
+    }
+  ],
+}
+```
+
+
 ### Health Check
+
 Allows you to customise the health check inside the task definition, the default command is `"curl -f http://localhost/ || exit 1"` which tries to hits port `80`
 
 [TaskDefinition HealthCheck](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html)
 
 #### NOTE!
-This implementation runs on the container, the container might not have `curl` installed. [Docker Healthcheck](https://docs.docker.com/engine/reference/builder/#healthcheck). 
 
+This implementation runs on the container, the container might not have `curl` installed. [Docker Healthcheck](https://docs.docker.com/engine/reference/builder/#healthcheck).
 
 ```json
 {
   "healthCheck": {
-    "command": [ "CMD-SHELL", "curl -f http://localhost:4000/.well-known/apollo/server-health || exit 1" ],
+    "command": [
+      "CMD-SHELL",
+      "curl -f http://localhost:4000/.well-known/apollo/server-health || exit 1"
+    ],
     "interval": 30,
     "timeout": 5,
     "retries": 3,
@@ -492,4 +646,5 @@ This implementation runs on the container, the container might not have `curl` i
 }
 ```
 
-[Task Networking in AWS Fargate](https://aws.amazon.com/blogs/compute/task-networking-in-aws-fargate/)
+### GitHub Actions
+Can auto deploy a new image and task-definition. [octochat example](https://github.com/github-developer/octochat-aws)
