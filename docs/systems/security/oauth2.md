@@ -20,7 +20,7 @@ GOOGLE_CLIENT_SECRET=a1B2c3D4E5f6g7h8
 GOOGLE_CLIENT_REDIRECT_URI=http://coolwebapp.com/oauth2callback
 ```
 
-![Code Flow](oauth2_code_flow.png)
+![[oauth2-code-flow.svg]]
 
 ### User wants to Sign in / up
 
