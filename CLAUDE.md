@@ -7,14 +7,13 @@ Duarte's programming documentation and learning notes. One Obsidian vault, plain
 ```
 raw/       source material (articles, videos, papers). Never edited after it lands.
 wiki/      agent-maintained knowledge: sources/ entities/ concepts/ synthesis/, plus index.md and log.md
-docs/      legacy notebook, human-written: <area>/<topic>/<note>.md, plus index.md
-           areas: web/ javascript/ systems/ languages/ ml/ tools/
+docs/      legacy notebook, human-written: <topic>/<note>.md (css/, node/, git/...), plus index.md
 archive/   obsolete tech and retired drafts, plus index.md. Out of the main index, still searchable.
 ```
 
-New `docs/` notes go in the matching topic folder and get a line in `docs/index.md` (`basics` first, then alphabetical).
+New `docs/` notes go in the matching topic folder and get a line under their area in `docs/index.md` (`basics` first, then alphabetical).
 
-Max three levels deep. No binary or raster files (`.png`, `.ai`, `.pdf`). Diagrams are Mermaid in the note, or `.svg` beside it.
+Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. No binary or raster files (`.png`, `.ai`, `.pdf`). Diagrams are Mermaid in the note, or `.svg` beside it.
 
 ## Rules
 
