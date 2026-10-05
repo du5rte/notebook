@@ -57,6 +57,7 @@ git init my_repository
 # The files will be hidden
 ls -a my_repository # .git
 # Unless the folder is removed keep will keep tracking changes
+# to avoid endless prompts (and force recursively) do from the project folder:
 rm -rf .git
 ```
 
