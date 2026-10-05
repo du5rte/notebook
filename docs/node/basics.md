@@ -5,7 +5,7 @@ created: 2015-11-01
 updated: 2016-04-11
 tags: [node]
 ---
-## Node.js - Basics
+# Node.js - Basics
 
 Resources:
 - [node.js](https://nodejs.org/en/)

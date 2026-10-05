@@ -16,7 +16,7 @@ Resources:
 - [graphqlhub Medium](https://medium.com/the-graphqlhub)
 - [sitepoint graphql with mongodb](http://www.sitepoint.com/creating-graphql-server-nodejs-mongodb/)
 
-# GraphQL
+## GraphQL
 Makes better data communication performance and developer experience. Typical REST APIs make clients highly dependable and couple with the server. GraphQL Give the client a lot more power, ability to varies queries, edge cases all in a single trip
 
 Rest query returns whole person info

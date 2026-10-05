@@ -89,7 +89,7 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 ### node
 - [[docs/node/basics|Node.js - Basics]]
 - [[docs/node/cli|Node - CLI]] *(draft)*
-- [[docs/node/email|Email]] *(draft)*
+- [[docs/node/email|Node - Email]] *(draft)*
 - [[docs/node/events|Node - Events]] *(draft)*
 - [[docs/node/http-server|Node - HTTP Server]] *(draft)*
 - [[docs/node/http|Node - HTTP]] *(draft)*
@@ -99,7 +99,7 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/node/process|Process]] *(draft)*
 - [[docs/node/server|Node - Server]]
 - [[docs/node/socket-io|Node - Socket.io]] *(draft)*
-- [[docs/node/streams|Node.js - Steams]]
+- [[docs/node/streams|Node.js - Streams]]
 
 ### react
 - [[docs/react/basics|React - Basics]]
@@ -149,7 +149,7 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/network/curl|Networking - Curl]]
 - [[docs/network/dns|Technology Foundations]]
 - [[docs/network/http|Networking - HTTP]]
-- [[docs/network/irc|Irc]]
+- [[docs/network/irc|Networking - IRC]]
 - [[docs/network/networking|Networking]]
 - [[docs/network/nginx|Nginx]]
 - [[docs/network/postfix|PostFix]]

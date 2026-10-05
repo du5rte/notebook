@@ -1,11 +1,11 @@
 ---
-title: "Node.js - Steams"
+title: "Node.js - Streams"
 type: doc
 created: 2018-06-18
 updated: 2018-06-18
 tags: [node]
 ---
-#	Node.js - Steams
+# Node.js - Streams
 
 
 ## Streams

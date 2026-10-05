@@ -10,7 +10,7 @@ status: draft
 
 
 
-## Process
+# Process
 when running node it executes `process`, a process can have multiple child processes each with their own scope
 
 

@@ -59,7 +59,7 @@ git add file1
 git commit
 ```
 
-Git automatically will you're solving a merge
+Git automatically knows you're resolving a merge and writes the merge commit message for you
 
 ```
 [master 9c22137] Merge branch 'new_feature'

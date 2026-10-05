@@ -5,7 +5,7 @@ created: 2015-11-12
 updated: 2016-03-18
 tags: [typescript]
 ---
-## JavaScript - TypeScript
+# JavaScript - TypeScript
 
 Resources:
 - [TypeScript Interactive Playground](http://www.typescriptlang.org/Playground)

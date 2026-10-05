@@ -7,30 +7,30 @@ tags: [javascript]
 ---
 # JavaScript Numbers
 
-## Numbers
+### Numbers
 Used for making calculations: adding, subtracting, computing total costs, keeping track of a game score, etc. Unlike strings, numbers don't need quotes.
 
-## Integers
+### Integers
 Whole numbers e.g. `5` `0` `-100` `9999`
 
 ```js
 var score = 0;
 ```
 
-## Floating Point Numbers
+### Floating Point Numbers
 Decimal numbers e.g. `3.14` `-9.888888` `.000009`
 
 ```js
 var pi = 3.14159265359;
 ```
 
-## Scientifc Notation
+### Scientifc Notation
 Very large numbers or very small numbers, e.g. `9e-6` (.000009), `9e+6` (900000)
 ```js
 var numberOfAtomsonEarth = 1.33e+105; // 1,329,999,999,999,999,744,856,320,232,896,408,568,208,984,680,600,256,608,968,528,800,792,688,048,688,776,152,064,608,064,832,992,376,472,832
 ```
 
-# Doing Maths
+## Doing Maths
 
 ```js
 // Addiction
@@ -70,7 +70,7 @@ score ++; // score += 1; score = score + 1;
 score --; // score -= 1; score = score - 1;
 ```
 
-## Parse Integer
+### Parse Integer
 Sometimes returned inputs by prompt or forms come as a string, `parseInt(  )` Converts a string to a Integer.
 
 ```js
@@ -85,14 +85,14 @@ parseInt("That's so 2014!"); // NaN
 parseInt('1.89 light years away'); // 1
 ```
 
-## Parse Float
+### Parse Float
 `parseInt(  )` converts a string to a Float (decimal number)
 
 ```js
 parseInt('1.89 light years away'); // 1.89
 ```
 
-## The Math Object
+### The Math Object
 `Math` is a `Native JavaScript Object` with methods we can use. [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
 
 `Math.round( )`

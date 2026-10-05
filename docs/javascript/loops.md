@@ -10,7 +10,7 @@ tags: [javascript]
 Resources:
 - [forEach, for, for-in, for-of = stackover](http://stackoverflow.com/questions/9329446/for-each-over-an-array-in-javascript)
 
-# Loops
+## Loops
 Loops are block of code that runs over and over again until it's `condition` turns `false`, **loops can be dangerous** if not used correctly, they and run `infintely` and crash a browser.
 
 ```js
@@ -21,7 +21,7 @@ while (true) {
 }
 ```
 
-# While Loop
+## While Loop
 Checks the `condition` at the very start, while it's `true` runs over and over again until the condition is `false`, at which points exists the loop.
 
 
@@ -40,7 +40,7 @@ while ( secret !== "sesame" ) {
 ```
 
 
-# Do While Loop
+## Do While Loop
 Runs once, checks the `condition` and continues to loop while it's condition is `true`.
 
 ```js
@@ -52,7 +52,7 @@ do {
 console.log("You know the secret password. Welcome.");
 ```
 
-## For Loop
+### For Loop
 A compact version of a `while` loop
 
 ```js
@@ -67,7 +67,7 @@ for (var i = 0; i <= 10; i++) {
 }
 ```
 
-## Breaking Loop
+### Breaking Loop
 When a `while` loops encounters a `break`, it exists the loop regardless of it's condition still being `true`
 
 ```js
@@ -88,7 +88,7 @@ if (secret) {
 }
 ```
 
-## For Loop (Array)
+### For Loop (Array)
 Loops through values in a array using `for` loop and the array `.length`
 
 ```js
@@ -99,7 +99,7 @@ for (var i = 0; i < students.length; i++) {
 }
 ```
 
-## For in Loop (Object)
+### For in Loop (Object)
 Loops through keys in a object using `for in` loop
 
 ```js
@@ -116,7 +116,7 @@ for (var key in person) {
 }
 ```
 
-## Looping a Array of Objects
+### Looping a Array of Objects
 Loops through using a combination of previous two techniqes.
 
 ```js
@@ -149,7 +149,7 @@ for (var i =0; i < people.length; i++) {
 }
 ```
 
-## For Each (Array)
+### For Each (Array)
 Loops through an array using an `iterator function`, optionally it can take an index. ES5 feature
 
 ```js
@@ -161,7 +161,7 @@ students.forEach(function(student /*, index*/) {
 });
 ```
 
-## For Of
+### For Of
 Loops through an array using a ES6 `iterator function`
 
 ```js
@@ -172,7 +172,7 @@ for (let student of students) {
 }
 ```
 
-## Iterator
+### Iterator
 A object that knows how to access items from a collection 1 at the time while keeping track of its current position.
 
 `next` method returns an object with they key values `{value, done}`, `done` will be `false` if there's more values to be returned and be `true` when there's no longer nothing to return. `value` will return any value until it reaches the end which then returns `undefined`.

@@ -15,7 +15,7 @@ Resouces:
 - [Getting Started With MongoDB Queries](https://github.com/sedouard/mongodb-mva/tree/master/module2_getting_started)
 - [robomongo](http://robomongo.org)
 
-## MongoDB
+### MongoDB
 Is a NoSQL `Document Oriented` database, where data is structured in `Documents` like `json` files and `Collections` arrays of
 `Objects`.
 
@@ -30,18 +30,18 @@ MongoDB Server ─┤
                               └─ CollectionN
 ```
 
-## Installing
+### Installing
 
 ```sh
 $ brew install mongodb
 ```
 
-## Import Data
+### Import Data
 ```sh
 $ mongoimport --db test --collection restaurants --drop --file primer-dataset.json
 ```
 
-## mongod (server)
+### mongod (server)
 By default `mongod` looks for documents on `/data/db` and runs on port `27017`, the folder needs to be created and given enough permission to use.
 
 ```sh
@@ -56,7 +56,7 @@ $ mkdir -p data/db/
 $ mongod --dbpath ./data/db
 ```
 
-## mongo (shell)
+### mongo (shell)
 The `mongo` shell works like an JavaScript shell, for a guide write `help`
 
 ```js
@@ -66,7 +66,7 @@ var hello = "hello world"
 hello // "hello world"
 ```
 
-## mongoDB Driver
+### mongoDB Driver
 To access the mongoDB with an application it needs a driver for it's language
 
 ```sh
@@ -79,7 +79,7 @@ var mongo = require('mongodb');
 var mongoClient = mongo.Client
 ```
 
-## BSON
+### BSON
 Documents are persisted in a formated called `BSON`, similar to `JSON` but with some additions. [BSON Types](https://docs.mongodb.org/manual/reference/bson-types/#bson-types-comparison-order)
 
 Stores:
@@ -112,7 +112,7 @@ Example:
 ```
 
 
-## Document Referencing
+### Document Referencing
 Sometimes `referencing` is better than `embedding`
 
 To update the embedded `vendor` to non-organic we would have to change all documents that contain it, **not to mention duplication**
@@ -156,9 +156,9 @@ Then the potion vendor
  db.vendors.find({"_id": "Kettlecooked"})
  ```
 
-## Embed vs Reference
+### Embed vs Reference
 
-#### Atomicity
+##### Atomicity
 When we write on `embedded` documents it writes completely or doesn't write at all
 
 When writing multiple documents it does not support `atomicity`, if a new `potion` is successful created but a new `vendor` fails, the `potion` is still created, **and it can reference a `potion` that doesn't exist**.
@@ -167,14 +167,14 @@ db.potions.insert({ ... }) // succeed
 db.vendors.insert({ ... }) // failed
 ```
 
-#### Embedded Documents
+##### Embedded Documents
 Data is readily available, with a single query we can get all the data, supports `atomicity`.
 
 
-#### Referenced Documents
+##### Referenced Documents
 Data exists in a entirely different `collection`, it only needs to be change in one place, requires an **additional query per reference**, does not support multi-document `atomicity`.
 
-#### Deciding
+##### Deciding
 Lets say we want to allow users to comment on potions, potions are gonna have many comments and each comment will belong to a user.
 ```
 Potion -> Comment -> User
@@ -201,7 +201,7 @@ Frequency of Change | Never/Rarely | Occasionally | Constantly
 Embed               | X            | X            |
 Reference           |              | X            | X
 
-#### Verdict
+##### Verdict
 Comments are strongly related to potions, small in size and rarely change, so embedding is the best option, on the other hand although users are even related to it's comments, they can be much bigger in size and their data can change occasionally.
 
 ```js
@@ -218,22 +218,22 @@ Comments are strongly related to potions, small in size and rarely change, so em
 
 Generally, embedding is the best starting point and referencing as data expands in size and frequency of change.
 
-# Mongo Shell
+## Mongo Shell
 
 Resources:
 - [Using Vim with the Mongo Shell](https://www.compose.io/articles/how-i-stopped-worrying-and-learned-to-love-the-mongo-shell/)
 
-## Mongo
+### Mongo
 The `mongo` shell is an JavaScript shell to interact with the MongoDB Server
 
-## Databases
+### Databases
 To create a database use `use` <databasename>, creates (if it does not exist) and switches to it.
 
 ```js
 use reviews // switched to db reviews
 ```
 
-## Collections
+### Collections
 Documents are always store in `collections` within a database.
 
 Adding document
@@ -268,7 +268,7 @@ Deleting collection
 db.potions.drop()
 ```
 
-## Queries
+### Queries
 The `find` function queries for specific documents from the collection.
 
 ```js
@@ -277,7 +277,7 @@ db.bank_data.find().count() // prints the count of documents e.g. 50000
 db.bank_data.findOne()      // finds the first document e.g. {..}
 ```
 
-## Query by Field
+### Query by Field
 Uses a `query` parameter to return matching set of documents. **Queries are case sensitive**.
 
 Finds potions that match the name
@@ -297,7 +297,7 @@ Finds the best tasting potions within ratings
 db.potions.find({ 'ratings.flavour': 5 })
 ```
 
-## Query by Comparison
+### Query by Comparison
 Uses [Comparison Operators](http://docs.mongodb.org/manual/reference/operator/query/) to find a matching documents.
 
 - `$gt`: Greater than
@@ -327,7 +327,7 @@ Finds documents not vended by Brewers.
 db.potions.find({ vendor: { $ne: 'Brewers' } })
 
 ```
-#### $$elemMatch
+##### $$elemMatch
 **Warning** comparisons compare each `key` separately so `[2, 8, 16]` would return as a match because individually `8` is less than `$lt:16` and `16` is bigger than `$gt:10`.
 ```
 [2, 8, 16]    | value within range false | $lt:16 true  | $gt:10 true | match true
@@ -339,7 +339,7 @@ db.potions.find({ sizes: { $elemMatch: { $gt: 10, $lt: 16 } } })
 
 ```
 
-#### And
+##### And
 ```js
 db.wands.find({ maker: { $ne: 'Foxmond' }, level_required: { $lte: 75 } })
 // same as
@@ -348,7 +348,7 @@ db.bank_data.find({
 })
 ```
 
-#### Or
+##### Or
 ```js
 db.bank_data.find({
   $or: [{ maker: { $ne: 'Foxmond' }, level_required: { $lte: 75 } }]
@@ -366,11 +366,11 @@ db.wands.find({
 
 ```
 
-## Query Projection
+### Query Projection
 Find takes a second parameter called a `projection` object that we can use to specify the exact fields we want back by setting their values to `true` or `1` or specify the fields we don't want by setting the values to `false` and `0`. **The only case a projection can both is values when hiding the `_id`**
 
 
-## Pagination
+### Pagination
 Limiting and skipping can be implemented over documents
 
 ```js
@@ -392,14 +392,14 @@ Example advance query pagination
 db.wands.find().sort({ price: -1 }).limit(3) // find 3 most expensive wands
 ```
 
-## Sort
+### Sort
 Sorts documents descending `1` or ascending `-1`
 ```js
 db.potions.find().sort({ price: 1 }) // sorts documents descending by price
 db.potions.find().sort({ price: -1 }) // sorts documents ascending by price
 ```
 
-## Deleting
+### Deleting
 Uses a `query` parameter to delete matching set of documents.
 
 ```js
@@ -407,7 +407,7 @@ db.potions.remove({ name: 'Shrinking' }) // WriteResult({ "nRemoved": 1 })
 db.potions.remove({ vendor: 'Kettlecooked' }) // WriteResult({ "nRemoved": 3 })
 ```
 
-## Updating
+### Updating
 Uses a `query` parameter and `update` parameter to update matching set of documents, **without using `$set` it overwrites the whole document**, to update multiple files `{multi: true}` needs to be added.
 [Update Operators](https://docs.mongodb.org/manual/reference/operator/update/)
 
@@ -436,21 +436,21 @@ db.potions.update({ potion: 'Love' }, { $inc: { count: 1 } }, { upsert: true })
 ```
 
 
-## Advanced Modifications
+### Advanced Modifications
 [Query and Projection Operators](https://docs.mongodb.org/manual/reference/operator/query/)
 
-#### $unset
+##### $unset
 Removes the `color` field on all documents.
 ```js
 db.potions.update({}, { $unset: { color: '' } }, { multi: true })
 ```
-#### $rename
+##### $rename
 Renames the `score` to `grade` field on all documents.
 ```js
 db.potions.update({}, { $rename: { score: 'grade' } }, { multi: true })
 ```
 
-#### $set
+##### $set
 The symbol `$` is a placeholder for the matched value.
 ```
 ["newt toes", "secret", "laughter"]  |  $ equals position 1
@@ -476,31 +476,31 @@ Changes the rating strength `key: value` on the ratings `Object` of the document
 db.potions.update({ name: 'Shrinking' }, { $set: { 'ratings.strength': 5 } })
 ```
 
-#### $push
+##### $push
 Adds the budget `key` to the category `Array` of the document named `"Shrinking"`
 ```js
 db.potions.update({ name: 'Shrinking' }, { $push: { category: 'budget' } })
 ```
 
-#### $addToSet
+##### $addToSet
 Adds the budget `key` to the category `Array` of the document named `"Shrinking"` **only if it doesn't exists already**
 ```js
 db.potions.update({ name: 'Shrinking' }, { $addToSet: { category: 'budget' } })
 ```
 
-#### $pop
+##### $pop
 Removes the 2nd `key` from the category `Array` of the document named `"Shrinking"`. `1` for last element, `-1` for first element.
 ```js
 db.potions.update({ name: 'Shrinking' }, { $pop: { category: 1 } })
 ```
 
-#### $pull
+##### $pull
 Removes the specific `key` from the category `Array` of the document named `"Shrinking"`, if passed an empty value `""` it will remove all
 ```js
 db.potions.update({ name: 'Shrinking' }, { $pull: { category: 'tasty' } })
 ```
 
-## Iteration
+### Iteration
 Using a `for loop` documents can be iterate. To print to the mongo shell use `print()` not `console.log()`
 
 ```js
@@ -517,7 +517,7 @@ for (var i = 0; i < potionsBy.count(); i++) {
 ...
 ```
 
-## Aggregation
+### Aggregation
 A fancy word for combining data, allows for advance computation by using `stage operators`
 
 1. `$group`: Groups data by any the field we specify in it's `group key`
@@ -572,7 +572,7 @@ db.potions.aggregate([
 ]
 ```
 
-#### Aggregation Pipeline
+##### Aggregation Pipeline
 Multiple `stage operators` can be pipped stage to stage within the aggregation method.
 
 ```js
@@ -607,7 +607,7 @@ db.wands.aggregate([
 {"_id": "Sageseer", "average_magic": 47.5}
 ```
 
-## Indexes
+### Indexes
 Allow for quick lookups of documents for queries on fields that have been indexed
 
 ```js
@@ -618,7 +618,7 @@ db.posts.getIndexes()
 db.posts.createIndex({  title: 1  })
 ```
 
-## Driver
+### Driver
 `mongodb` is the NodeJS driver to communicate with the `mongo` server
 
 Resources:
@@ -638,7 +638,7 @@ MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
 })
 ```
 
-## DB
+### DB
 Once it's connected we have access to the `database`
 
 ```js
@@ -663,7 +663,7 @@ MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
 })
 ```
 
-## Dump and Restore
+### Dump and Restore
 
 ```sh
 mongodump --db database_name  --out ./data

@@ -7,10 +7,10 @@ tags: [javascript]
 ---
 # JavaScript - Maps
 
-# Resources
+## Resources
 
 
-## Maps
+### Maps
 Are a `key`/`value` structure. Any value may be used as either a key or a value, and objects are not converted to strings
 
 ```js
@@ -75,7 +75,7 @@ for(let [key, value] of mapSettings) {
 .delete()
 
 
-## Weak Maps
+### Weak Maps
 A more memory efficient type of `Map` that only stores objects and cannot be iterable, `strings`, `numbers` and `booleans` are not allowed.
 
 
@@ -93,7 +93,7 @@ console.log( mapSettings.get(user) ) // "comment"
 mapSettings.set("title", "ES2015") // Invalid value used as weak map key
 ```
 
-## Set
+### Set
 Work much like arrays but only store unique values of any type, they are iterable and can also be deconstructed
 
 ```js
@@ -115,7 +115,7 @@ let [a,b,c] = tags
 console.log(a,b,c)
 ```
 
-## WeakSet
+### WeakSet
 A more memory efficient type of Set that only stores objects and cannot be iterable
 
 ```js

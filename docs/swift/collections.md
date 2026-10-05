@@ -5,7 +5,7 @@ created: 2016-11-04
 updated: 2016-11-04
 tags: [swift]
 ---
-## Swift - Collections and Control Flow
+# Swift - Collections and Control Flow
 
 
 ## Arrays

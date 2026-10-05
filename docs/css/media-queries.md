@@ -7,7 +7,7 @@ tags: [css]
 ---
 # CSS - Media Queries
 
-# Media
+## Media
 
 Specifies what media we want to target
 
@@ -16,7 +16,7 @@ Specifies what media we want to target
 }
 ```
 
-## Media Features
+### Media Features
 
 Checks if the property inputed property is true or not. It can check for various things like
 
@@ -39,7 +39,7 @@ Checks if the property inputed property is true or not. It can check for various
 }
 ```
 
-## Value
+### Value
 
 We can set any value unit `pixels`, `em`, `percentages`, etc.
 
@@ -48,7 +48,7 @@ We can set any value unit `pixels`, `em`, `percentages`, etc.
 }
 ```
 
-## Combined Expressions
+### Combined Expressions
 
 We can combine expressions to get really specific
 
@@ -57,7 +57,7 @@ We can combine expressions to get really specific
 }
 ```
 
-## Multiple media queries
+### Multiple media queries
 
 Separted by a `,` (or)
 
@@ -67,7 +67,7 @@ Separted by a `,` (or)
 }
 ```
 
-## Inline Media Queries
+### Inline Media Queries
 
 We can also link and define media queries in our html file. This is bad practice as it requests multiple files from the server even if the media queries are not true they are still downloaded.
 
@@ -79,7 +79,7 @@ We can also link and define media queries in our html file. This is bad practice
 />
 ```
 
-## Import Media Queries
+### Import Media Queries
 
 We can also import media queries css files into our project. Also bad pratice as it requires multiple file requests from server.
 
@@ -87,7 +87,7 @@ We can also import media queries css files into our project. Also bad pratice as
 @import url("example.css") screen and (max-width: 768px) and (min-width: 481px);
 ```
 
-## Not
+### Not
 
 Allows to specify styles to not target certain medias
 
@@ -96,7 +96,7 @@ Allows to specify styles to not target certain medias
 }
 ```
 
-## Only
+### Only
 
 Useful to prevent older browsers to apply the styles
 
@@ -105,7 +105,7 @@ Useful to prevent older browsers to apply the styles
 }
 ```
 
-## Viewport
+### Viewport
 
 Use a virtual viewport that's bigger than the actual size. We need to add a `<meta>` to make the viewport the width of device.
 
@@ -113,7 +113,7 @@ Use a virtual viewport that's bigger than the actual size. We need to add a `<me
 <meta name="viewport" content="width=device-width" />
 ```
 
-## Devices Media Queries
+### Devices Media Queries
 
 max-device-width actually check for the device (e.g. `desktop`, `laptop`, `smart phone`) total screen width not just the browser width.
 
@@ -122,7 +122,7 @@ max-device-width actually check for the device (e.g. `desktop`, `laptop`, `smart
 }
 ```
 
-## Orientation
+### Orientation
 
 We can define styles for either portrait or landscape.Orientation can also affect desktops, when width is bigger than height it's considered lanscape.
 
@@ -131,7 +131,7 @@ We can define styles for either portrait or landscape.Orientation can also affec
 }
 ```
 
-## Device Pixel Ratio
+### Device Pixel Ratio
 
 Allows us to target devices with retina display for example iPhones, with have a double ratio of pixels densaty. Example iPhone resolution `640x1136`, actual size of screen `320x568`. Older browsers might need -webkit- newer browser use resolution.
 
@@ -140,7 +140,7 @@ Allows us to target devices with retina display for example iPhones, with have a
 }
 ```
 
-## Resolution
+### Resolution
 
 Display resolution of a screen is the total amount of pixels available. Usually define as ppi (pixel per inch) or dpi (pixels per inch). Normal devices are `1 = 96dpi` | `2 * 96dpi = 192dpi`. The comma works as a `or`. E.g. use device pixel ratio `or` resolution. A good catch all value is 1.5 and 144dpi.
 
@@ -150,7 +150,7 @@ Display resolution of a screen is the total amount of pixels available. Usually 
 }
 ```
 
-## dppx
+### dppx
 
 A newer measurement unit for Dots per Pixels. **Lack browser support**.
 
@@ -161,7 +161,7 @@ A newer measurement unit for Dots per Pixels. **Lack browser support**.
 }
 ```
 
-## Media Print
+### Media Print
 
 Targets styles for user who might want to print our website Good Example [thenextweb.com](https://thenextweb.com/). Print style should be simple and hide any unnecessary fields.
 
@@ -189,7 +189,7 @@ Targets styles for user who might want to print our website Good Example [thenex
 }
 ```
 
-## Page
+### Page
 
 Allows us to define styles for the printed page
 

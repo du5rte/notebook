@@ -3,6 +3,5 @@
   "useMarkdownLinks": false,
   "alwaysUpdateLinks": true,
   "attachmentFolderPath": "./",
-  "newFileLocation": "folder",
-  "newFileFolderPath": "raw"
+  "newFileLocation": "current"
 }

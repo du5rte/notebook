@@ -8,7 +8,7 @@ status: draft
 ---
 
 
-## Storage
+# Storage
 
 localStorage.removeItem("lastname")
 

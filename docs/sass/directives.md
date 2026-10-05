@@ -5,7 +5,7 @@ created: 2015-11-01
 updated: 2015-11-01
 tags: [sass]
 ---
-## Sass - Directives
+# Sass - Directives
 
 ## Directives
 With them we can work with complex multiple assignments using `conditionals`, `loops`, `errors`, and more.

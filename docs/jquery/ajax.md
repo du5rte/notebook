@@ -5,7 +5,7 @@ created: 2020-04-11
 updated: 2020-04-11
 tags: [jquery]
 ---
-## jQuery - AJAX
+# jQuery - AJAX
 
 ## AJAX
 

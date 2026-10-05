@@ -5,7 +5,7 @@ created: 2016-12-10
 updated: 2016-12-10
 tags: [swift]
 ---
-## Swift - Memory Management
+# Swift - Memory Management
 
 
 ## MRR

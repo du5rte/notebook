@@ -6,7 +6,7 @@ updated: 2017-08-12
 tags: [node]
 status: draft
 ---
-# Node - Server
+# Node - HTTP Server
 
 ## Routes
 When we type in a web address a request is sent to a server. After a domain name, there's a forward slash and then a path to a resource on the server. Sometimes, this is called a route. In this stage, we'll take a look at how to programmatically handle routes in Node.js.

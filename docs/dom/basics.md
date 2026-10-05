@@ -10,7 +10,7 @@ tags: [dom]
 Resources:
 
 
-# Window
+## Window
 Is the global scope of JavaScript in the browser, everything happens inside it
 
 ```js
@@ -31,7 +31,7 @@ window.location
 window.location.host
 ```
 
-## Document
+### Document
 Accesses all HTML nodes
 
 ```js
@@ -43,7 +43,7 @@ document.body // <body>
 document.getElementById("app") // <div id="app"> ... </div>
 ```
 
-## Document Object Model
+### Document Object Model
 The browser reads html files as tree like structure of 'nodes' the
 
 There's 3 types of actions we can do with the DOM:
@@ -51,7 +51,7 @@ There's 3 types of actions we can do with the DOM:
 - Traversal - selecting an element based on the relationship with another element (For example, we could select a child element of a known parent element like a list item child of an unordered list.)
 - Events - listening to a specific event, like a mouse click or a key press, and having something execute.
 
-## Node
+### Node
 A `branch` is a point that revels more `nodes`, each node is an html `element` or a JavaScript `object` that has `properties` and `methods` that can be accessed and used.
 ```
 window
@@ -67,7 +67,7 @@ window
 							 -- p
 ```
 
-## Selectors
+### Selectors
 
 
 ```js
@@ -82,7 +82,7 @@ let myCheckbox = document.querySelector('input[type=checkbox].myCheckbox')
 ```
 
 
-## Events Handlers
+### Events Handlers
 Events can be attached to nodes
 
 ```js
@@ -102,7 +102,7 @@ or in the DOM
 <input type="checkbox" onclick="sayHello" />
 ```
 
-## Traversing and Manipulating
+### Traversing and Manipulating
 
 ```js
 // Returns the parent of the specified node in the DOM tree
@@ -126,7 +126,7 @@ myNode.removeChild( newButton )
 ```
 
 
-## HTML Elements
+### HTML Elements
 Html elements properties and methods
 
 ```js
@@ -147,7 +147,7 @@ myParagraph.classList.remove("exampleClass")
 myParagraph.classList.toggle("exampleClass")
 ```
 
-## HTML Input Element
+### HTML Input Element
 Input elements have special properties and methods for manipulating the layout and presentation of input elements
 
 ```js

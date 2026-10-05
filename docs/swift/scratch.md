@@ -6,6 +6,8 @@ updated: 2017-02-24
 tags: [swift]
 status: draft
 ---
+# Swift - Scratch
+
 typealias
 
 ## tuples

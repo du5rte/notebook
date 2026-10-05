@@ -1,5 +1,5 @@
 ---
-title: "Archive Index"
+title: "Archive"
 type: doc
 tags: [index]
 ---

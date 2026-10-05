@@ -6,7 +6,7 @@ updated: 2018-06-18
 tags: [security]
 status: draft
 ---
-## OpenID
+# OpenID
 Built on top of `OAuth2` used for authentication.
 
 

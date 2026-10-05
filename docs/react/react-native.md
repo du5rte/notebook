@@ -5,7 +5,7 @@ created: 2017-02-24
 updated: 2018-06-18
 tags: [react]
 ---
-## React Native
+# React Native
 
 ## Installing
 [getting-started](https://facebook.github.io/react-native/docs/getting-started.html)
