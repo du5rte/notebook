@@ -23,7 +23,7 @@ $ ls -a
 ## Print Working Directory
 Display your current location in the file system
 ```sh
-$ pwd # /Users/monteiro/some_folder
+$ pwd # /Users/username/some_folder
 ```
 
 ## Change Directory

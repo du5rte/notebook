@@ -69,7 +69,7 @@ ssh-copy-id user@domain.com
 In our machine
 ```sh
 # Generate keypair, add a comment `-C` to different it to the user
-$ ssh-keygen -C "monteirocode@gmail.com"
+$ ssh-keygen -C "you@example.com"
 
 # Copy the shh public key `id_rsa.pub` to the clipboard
 $ cat ~/.ssh/id_rsa.pub | pbcopy

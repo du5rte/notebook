@@ -25,7 +25,7 @@ node t.js --someflag
 ```
 ```sh
 [ '/usr/local/bin/node',
-  '/Users/monteiro/Desktop/sesion-api/t.js',
+  '/Users/username/Desktop/sesion-api/t.js',
   '--someflag' ]
 ```
 

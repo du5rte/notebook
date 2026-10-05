@@ -20,10 +20,10 @@ XXX, IDEA, NOTE, REVIEW
 
 Example:
 ```
-TODO:5 This is a task +madjs @coding profile:monteirocode
+TODO:5 This is a task +madjs @coding profile:username
 ```
 
 - `5` Priority numbers
 - `+madjs` tag
 - `@coding` context
-- `profile:monteirocode` metadata
+- `profile:username` metadata

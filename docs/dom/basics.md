@@ -14,8 +14,8 @@ Resources:
 Is the global scope of JavaScript in the browser, everything happens inside it
 
 ```js
-var name = "Eddie";
-window.name // "Eddie"
+var name = "Jane";
+window.name // "Jane"
 ```
 
 Methods like `alert()` are actually window methods

@@ -82,7 +82,7 @@ A typical `JWT` looks something like
 ```js
 var jwt = require('jsonwebtoken')
 
-jwt.sign({username: 'monteirocode'}, 'mySecret')
+jwt.sign({username: 'username'}, 'mySecret')
 ```
 result
 ```

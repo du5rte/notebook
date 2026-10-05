@@ -216,7 +216,7 @@ struct User: PrettyPrintable {
     }
 }
 
-let user = User(name: "eddie", age: 25, address: "sesame street")
+let user = User(name: "jane", age: 25, address: "sesame street")
 
 user.description()
 user.prettyDescription()

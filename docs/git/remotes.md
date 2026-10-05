@@ -82,7 +82,7 @@ At the top of your GitHub repository's Quick Setup page, click  to copy the remo
 
 ```bash
 # Sets the new remote
-git remote add origin https://github.com/monteirocode/typoRhythm.git
+git remote add origin https://github.com/username/repo.git
 # Verifies the new remote URL
 git remote -v
 # Pushes the changes in your local repository up to the remote repository you specified as the origin

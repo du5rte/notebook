@@ -82,7 +82,7 @@ $ bower install jquery#1.11.3
 	"name": "test_bower",
 	"version": "0.0.0",
 	"authors": [
-		"Eddie Monteiro <monteirocode@gmail.com>"
+		"Your Name <you@example.com>"
 	],
 	"license": "MIT",
 	"ignore": [
