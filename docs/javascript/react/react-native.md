@@ -1,3 +1,10 @@
+---
+title: "React Native"
+type: doc
+created: 2017-02-24
+updated: 2018-06-18
+tags: [react]
+---
 ## React Native
 
 ## Installing

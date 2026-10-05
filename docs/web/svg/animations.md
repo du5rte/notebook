@@ -1,3 +1,10 @@
+---
+title: "SVG - Animations"
+type: doc
+created: 2015-11-01
+updated: 2017-02-24
+tags: [svg]
+---
 # SVG - Animations
 
 Resources

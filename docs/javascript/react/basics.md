@@ -1,3 +1,10 @@
+---
+title: "React - Basics"
+type: doc
+created: 2016-03-18
+updated: 2016-04-11
+tags: [react]
+---
 # React - Basics
 
 Resources:

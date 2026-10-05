@@ -1,3 +1,10 @@
+---
+title: "Swift - Memory Management"
+type: doc
+created: 2016-12-10
+updated: 2016-12-10
+tags: [swift]
+---
 ## Swift - Memory Management
 
 

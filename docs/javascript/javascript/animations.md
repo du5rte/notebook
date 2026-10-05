@@ -1,3 +1,10 @@
+---
+title: "JavaScript - Animations"
+type: doc
+created: 2016-06-18
+updated: 2017-08-12
+tags: [javascript]
+---
 # JavaScript - Animations
 
 Resources:

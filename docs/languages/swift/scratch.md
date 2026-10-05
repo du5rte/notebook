@@ -1,3 +1,11 @@
+---
+title: "Swift - Scratch"
+type: doc
+created: 2017-02-24
+updated: 2017-02-24
+tags: [swift]
+status: draft
+---
 typealias
 
 ## tuples

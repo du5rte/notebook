@@ -1,3 +1,10 @@
+---
+title: "Technology Foundations"
+type: doc
+created: 2015-08-27
+updated: 2018-06-18
+tags: [network]
+---
 # Technology Foundations
 
 ## DNS Domain Name System

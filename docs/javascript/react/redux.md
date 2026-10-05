@@ -1,3 +1,10 @@
+---
+title: "React - Redux"
+type: doc
+created: 2016-03-18
+updated: 2016-06-18
+tags: [react]
+---
 # React - Redux
 
 Resources:

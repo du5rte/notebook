@@ -1,3 +1,10 @@
+---
+title: "Node - Modules"
+type: doc
+created: 2016-03-18
+updated: 2016-04-11
+tags: [node]
+---
 # Node - Modules
 
 Resources:

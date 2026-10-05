@@ -1,3 +1,10 @@
+---
+title: "JavaScript - Geolocation"
+type: doc
+created: 2016-06-18
+updated: 2016-06-18
+tags: [javascript]
+---
 # JavaScript - Geolocation
 
 Resouces:

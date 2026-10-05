@@ -1,3 +1,10 @@
+---
+title: "SSH"
+type: doc
+created: 2015-12-01
+updated: 2018-06-18
+tags: [linux]
+---
 # SSH
 
 resources:

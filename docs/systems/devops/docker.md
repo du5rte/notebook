@@ -1,3 +1,10 @@
+---
+title: "Docker Basics"
+type: doc
+created: 2020-04-11
+updated: 2020-04-11
+tags: [devops]
+---
 # Docker Basics
 
 - [Infrastructure as Code](https://martinfowler.com/bliki/InfrastructureAsCode.html)

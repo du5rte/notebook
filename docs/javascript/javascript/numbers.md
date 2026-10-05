@@ -1,3 +1,10 @@
+---
+title: "JavaScript Numbers"
+type: doc
+created: 2015-10-14
+updated: 2015-10-14
+tags: [javascript]
+---
 # JavaScript Numbers
 
 ## Numbers

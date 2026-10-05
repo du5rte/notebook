@@ -1,3 +1,11 @@
+---
+title: "Node.js - Modules"
+type: doc
+created: 2016-03-18
+updated: 2017-08-12
+tags: [node]
+status: draft
+---
 # Node.js - Modules
 
 ## How does 'require' return the libaries?

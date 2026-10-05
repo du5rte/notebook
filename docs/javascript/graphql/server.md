@@ -1,3 +1,10 @@
+---
+title: "GraphQL - Server"
+type: doc
+created: 2016-05-08
+updated: 2016-05-08
+tags: [graphql]
+---
 # GraphQL - Server
 
 

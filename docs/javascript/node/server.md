@@ -1,3 +1,10 @@
+---
+title: "Node - Server"
+type: doc
+created: 2016-03-18
+updated: 2016-05-08
+tags: [node]
+---
 ## Node - Server
 
 resources:

@@ -1,3 +1,10 @@
+---
+title: "Git - Basics"
+type: doc
+created: 2016-05-08
+updated: 2016-05-08
+tags: [git]
+---
 # Git - Basics
 
 Resources:

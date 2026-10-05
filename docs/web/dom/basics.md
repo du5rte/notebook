@@ -1,3 +1,10 @@
+---
+title: "DOM - Basics"
+type: doc
+created: 2016-06-18
+updated: 2016-06-18
+tags: [dom]
+---
 # DOM - Basics
 
 Resources:

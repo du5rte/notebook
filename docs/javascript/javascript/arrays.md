@@ -1,3 +1,10 @@
+---
+title: "JavaScript Arrays"
+type: doc
+created: 2015-10-14
+updated: 2016-07-21
+tags: [javascript]
+---
 # JavaScript Arrays
 
 Resources:

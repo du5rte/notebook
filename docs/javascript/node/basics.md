@@ -1,3 +1,10 @@
+---
+title: "Node.js - Basics"
+type: doc
+created: 2015-11-01
+updated: 2016-04-11
+tags: [node]
+---
 ## Node.js - Basics
 
 Resources:

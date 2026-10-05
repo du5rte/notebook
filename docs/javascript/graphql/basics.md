@@ -1,3 +1,10 @@
+---
+title: "GraphQL - Basics"
+type: doc
+created: 2016-04-11
+updated: 2016-06-18
+tags: [graphql]
+---
 # GraphQL - Basics
 
 Resources:

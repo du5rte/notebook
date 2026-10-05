@@ -1,3 +1,11 @@
+---
+title: "Regex - Basics"
+type: doc
+created: 2016-03-18
+updated: 2020-04-11
+tags: [tools]
+status: draft
+---
 # Regex - Basics
 
 Resources:

@@ -1,3 +1,10 @@
+---
+title: "JavaScript - Basics"
+type: doc
+created: 2015-10-14
+updated: 2016-03-18
+tags: [javascript]
+---
 # JavaScript - Basics
 
 Resources:

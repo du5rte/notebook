@@ -1,3 +1,10 @@
+---
+title: "Swift - Enums"
+type: doc
+created: 2016-11-04
+updated: 2016-12-10
+tags: [swift]
+---
 # Swift - Enums
 
 

@@ -1,3 +1,11 @@
+---
+title: "OpenID"
+type: doc
+created: 2016-05-08
+updated: 2018-06-18
+tags: [security]
+status: draft
+---
 ## OpenID
 Built on top of `OAuth2` used for authentication.
 

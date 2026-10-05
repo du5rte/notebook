@@ -1,3 +1,10 @@
+---
+title: "JavaScript Strings"
+type: doc
+created: 2015-10-14
+updated: 2016-06-18
+tags: [javascript]
+---
 # JavaScript Strings
 
 Resources:

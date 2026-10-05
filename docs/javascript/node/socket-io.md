@@ -1,3 +1,11 @@
+---
+title: "Node - Socket.io"
+type: doc
+created: 2015-08-27
+updated: 2017-08-12
+tags: [node]
+status: draft
+---
 # Node - Socket.io
 
 ## Installing

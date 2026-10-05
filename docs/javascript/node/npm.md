@@ -1,3 +1,10 @@
+---
+title: "npm"
+type: doc
+created: 2015-10-11
+updated: 2016-04-11
+tags: [node]
+---
 # npm
 Node(no longer just node) Package Manager
 

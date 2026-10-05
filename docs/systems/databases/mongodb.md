@@ -1,3 +1,10 @@
+---
+title: "MongoDB - Basics"
+type: doc
+created: 2015-12-01
+updated: 2020-04-17
+tags: [databases]
+---
 # MongoDB - Basics
 
 Resouces:

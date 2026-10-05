@@ -1,3 +1,10 @@
+---
+title: "Markdown"
+type: doc
+created: 2015-10-14
+updated: 2020-04-11
+tags: [tools]
+---
 # Markdown
 A writing tool to write plain text and tag formated code
 

@@ -1,3 +1,10 @@
+---
+title: "Javascript - AMD"
+type: doc
+created: 2015-08-27
+updated: 2016-05-08
+tags: [javascript]
+---
 # Javascript - AMD
 
 

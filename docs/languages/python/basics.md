@@ -1,3 +1,10 @@
+---
+title: "Python Basics"
+type: doc
+created: 2020-04-11
+updated: 2020-04-11
+tags: [python]
+---
 # Python Basics
 
 

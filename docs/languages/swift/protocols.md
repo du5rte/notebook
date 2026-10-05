@@ -1,3 +1,10 @@
+---
+title: "Swift - Protocols"
+type: doc
+created: 2016-11-04
+updated: 2017-02-24
+tags: [swift]
+---
 # Swift - Protocols
 
 ## Protocols

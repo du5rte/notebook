@@ -1,3 +1,10 @@
+---
+title: "Git - Stage Area"
+type: doc
+created: 2015-08-27
+updated: 2017-08-12
+tags: [git]
+---
 # Git - Stage Area
 
 ## The Staging Area

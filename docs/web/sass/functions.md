@@ -1,3 +1,10 @@
+---
+title: "Sass - Functions"
+type: doc
+created: 2015-11-01
+updated: 2015-11-01
+tags: [sass]
+---
 # Sass - Functions
 
 Resources:

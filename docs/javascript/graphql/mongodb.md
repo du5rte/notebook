@@ -1,3 +1,10 @@
+---
+title: "GraphQL - MongoDB"
+type: doc
+created: 2016-05-08
+updated: 2016-06-18
+tags: [graphql]
+---
 # GraphQL - MongoDB
 
 Resources:

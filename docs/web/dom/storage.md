@@ -1,3 +1,11 @@
+---
+title: "Storage"
+type: doc
+created: 2016-07-21
+updated: 2016-07-21
+tags: [dom]
+status: draft
+---
 
 
 ## Storage

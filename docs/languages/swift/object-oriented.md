@@ -1,3 +1,10 @@
+---
+title: "Swift - Objects"
+type: doc
+created: 2016-12-10
+updated: 2016-12-10
+tags: [swift]
+---
 # Swift - Objects
 
 ## Structs vs Classes

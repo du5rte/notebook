@@ -1,3 +1,10 @@
+---
+title: "CoffeeScript"
+type: doc
+created: 2015-08-27
+updated: 2015-10-14
+tags: [javascript]
+---
 # CoffeeScript
 
 ## Installing

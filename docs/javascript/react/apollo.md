@@ -1,3 +1,10 @@
+---
+title: "React - Apollo Client"
+type: doc
+created: 2016-06-18
+updated: 2016-06-18
+tags: [react]
+---
 # React - Apollo Client
 
 Resources:

@@ -1,3 +1,10 @@
+---
+title: "AWS"
+type: doc
+created: 2020-04-12
+updated: 2020-04-18
+tags: [devops]
+---
 # AWS
 
 Amazon Web Services is a collection of over 55+ services to choose from and develop with, many services depend on another services.

@@ -1,3 +1,10 @@
+---
+title: "SVG - Basics"
+type: doc
+created: 2015-11-01
+updated: 2016-06-18
+tags: [svg]
+---
 # SVG - Basics
 
 Resources:

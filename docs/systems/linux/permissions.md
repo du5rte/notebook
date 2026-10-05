@@ -1,3 +1,10 @@
+---
+title: "Console - Permissions"
+type: doc
+created: 2016-04-11
+updated: 2018-06-18
+tags: [linux]
+---
 # Console - Permissions
 
 Resources:

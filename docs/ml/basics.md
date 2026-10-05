@@ -1,3 +1,10 @@
+---
+title: "Machine Learning"
+type: doc
+created: 2018-06-18
+updated: 2020-04-11
+tags: [ml]
+---
 # Machine Learning
 Giving a computer the ability to write its own rules and learn about new things, on its own.
 

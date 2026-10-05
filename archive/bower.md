@@ -1,3 +1,10 @@
+---
+title: "Bower"
+type: doc
+created: 2015-08-27
+updated: 2020-04-11
+tags: [tools]
+---
 # Bower
 
 - Package Manager

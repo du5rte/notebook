@@ -1,3 +1,10 @@
+---
+title: "CSS - Animations"
+type: doc
+created: 2020-04-11
+updated: 2020-04-11
+tags: [css]
+---
 # CSS - Animations
 
 ## Animation

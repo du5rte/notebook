@@ -1,3 +1,10 @@
+---
+title: "HTML Tables"
+type: doc
+created: 2015-08-27
+updated: 2016-03-18
+tags: [html]
+---
 # HTML Tables
 
 

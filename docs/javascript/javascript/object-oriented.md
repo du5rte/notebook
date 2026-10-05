@@ -1,3 +1,10 @@
+---
+title: "JavaScript - Classes"
+type: doc
+created: 2015-10-14
+updated: 2016-12-10
+tags: [javascript]
+---
 # JavaScript - Classes
 
 Resources:

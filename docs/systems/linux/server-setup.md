@@ -1,3 +1,10 @@
+---
+title: "Ubuntu"
+type: doc
+created: 2016-01-20
+updated: 2018-06-18
+tags: [linux]
+---
 # Ubuntu
 
 Resources:

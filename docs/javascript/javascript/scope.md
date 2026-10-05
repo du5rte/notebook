@@ -1,3 +1,10 @@
+---
+title: "JavaScript - Scope"
+type: doc
+created: 2015-08-27
+updated: 2016-06-18
+tags: [javascript]
+---
 # JavaScript - Scope
 
 

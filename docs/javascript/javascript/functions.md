@@ -1,3 +1,10 @@
+---
+title: "JavaScript Functions"
+type: doc
+created: 2015-10-14
+updated: 2016-03-18
+tags: [javascript]
+---
 # JavaScript Functions
 JavaScript is often called a `Functional Programing Languages` as functions are at the heart of javascript works.
 

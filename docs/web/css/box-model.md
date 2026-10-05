@@ -1,3 +1,10 @@
+---
+title: "CSS - Box model"
+type: doc
+created: 2020-04-11
+updated: 2020-04-11
+tags: [css]
+---
 # CSS - Box model
 
 It applies and wraps around to all html elements, elements are either displayed as block or inline elements. We can inspect and modify the box model on browsers developer tool/metrics.
