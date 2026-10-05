@@ -17,7 +17,7 @@ The convinent shorthand property for setting all of the properties we just learn
 
 ### Font Family
 
-Specifies a typeface for the text in an element. Ideally it's good to set up a Font Stack so if one is not available css will use the next on on the list. If a font is made of more than one words it needs to be quoted `""`, `''`. [www.w3.org/Style/Examples/007/fonts.en.html](www.w3.org/Style/Examples/007/fonts.en.html).
+Specifies a typeface for the text in an element. Ideally it's good to set up a Font Stack so if one is not available css will use the next on on the list. If a font is made of more than one words it needs to be quoted `""`, `''`. [www.w3.org/Style/Examples/007/fonts.en.html](https://www.w3.org/Style/Examples/007/fonts.en.html).
 
 ```css
 	p {
@@ -210,7 +210,7 @@ list-style: circle inside;
 
 ### List Style Type
 
-Specifies the style of `ul` or `ol` lists. Values: `disc`, `circle`, `square`, `lower-roman`, `decimal-leading-zero`, etc. See more on: [developer.mozzila.org/en-US/docs/CSS/list-style](developer.mozzila.org/en-US/docs/CSS/list-style)
+Specifies the style of `ul` or `ol` lists. Values: `disc`, `circle`, `square`, `lower-roman`, `decimal-leading-zero`, etc. See more on: [developer.mozilla.org/en-US/docs/CSS/list-style](https://developer.mozilla.org/en-US/docs/CSS/list-style)
 
 ```css
 list-style-type: square;

@@ -6,12 +6,18 @@ resources:
 - [How to Use npm as a Build Tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)
 - [fixing npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
 - [Publishing npm packages](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+- [Running scripts with npm](http://www.jayway.com/2014/03/28/running-scripts-with-npm/)
+- [task automation with npm run](http://substack.net/task_automation_with_npm_run)
+- [ttab](https://www.npmjs.com/package/ttab)
 
 
 ## Creating a package.json
 Create a package.json file in the current directory, this is used to save a registry of the packages our project uses
 
 ```sh
+# shows all commands available
+$ npm
+# initialize a package.json
 $ npm init
 ```
 
@@ -35,6 +41,9 @@ $ npm i -S mocha
 # install and save as "devDependencies"
 $ npm install --save-dev mocha
 $ npm i -D mocha
+# installing different versions or beta versions
+$ npm i angular@1.5.0-beta.1
+$ npm i gulpjs/gulp.git#4.0
 ```
 
 Which can then be required using `require` or in ES6 `import` in our project
@@ -109,6 +118,19 @@ Custom commands can be stores within `package.json`, [How npm handles the "scrip
 ```sh
 $ npm test # $ mocha
 $ npm start # $ node app.js
+```
+
+To chain scripts use `&&` to run in sequence or `&` to run in parallel [task automation with npm run](http://substack.net/task_automation_with_npm_run)
+```json
+{
+  "scripts": {
+    "custom": "gulp && mocha && node server.js"
+  }
+}
+```
+npm supports some scripts (e.g. `start`, `install`, `preinstall`) but custom scripts need to be called with `run`
+```sh
+$ npm run custom
 ```
 
 
