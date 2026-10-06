@@ -85,6 +85,10 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/node/socket-io|Node - Socket.io]] *(draft)*
 - [[docs/node/streams|Node.js - Streams]]
 
+### react
+- [[docs/react/basics|React - Basics]]
+- [[docs/react/redux|React - Redux]]
+
 ### graphql
 - [[docs/graphql/basics|GraphQL - Basics]]
 - [[docs/graphql/graphiql|GraphQL - GraphiQL]]

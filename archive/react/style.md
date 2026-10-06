@@ -7,6 +7,8 @@ tags: [react]
 ---
 # React - Style
 
+Still-valid fundamentals moved to [[docs/react/basics|React - Basics]].
+
 Resources:
 - [CSS in JS by Vjeux](https://speakerdeck.com/vjeux/react-css-in-js)
 - [CSS modules by Mark Dalgleish](https://www.youtube.com/watch?v=zR1lOuyQEt8)
@@ -16,57 +18,6 @@ Resources:
 - [Colin Megill - Inline Styles are About to Kill CSS](https://www.youtube.com/watch?v=NoaxsCi13yQ)
 - [PostCSS](https://github.com/postcss/postcss-loader)
 - [PostCSS JS](https://github.com/postcss/postcss-js)
-
-## Styles
-
-```js
-function Button(props) {
-  return (
-    <button style={{color: 'blue'}}>
-      Hello
-    </button>
-  )
-}
-```
-
-## Dynamic Styles
-
-```js
-class Button extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      hovered: false
-    }
-  }
-
-  this.handleMouseEnter() {
-    this.setState({
-      hovered: true
-    })
-  }
-
-  this.handleMouseLeave() {
-    this.setState({
-      hovered: false
-    })
-  }
-
-  render() {
-    let style = {
-      color: this.state.hovered ? 'green' : 'red'
-    }
-
-    return (
-      <h1
-        style={style}
-        onMouseEnter={this.handleMouseEnter.bind(this)}
-        onMouseLeave={this.handleMouseLeave.bind(this)}
-      >Hover Me</h1>
-    )
-  }
-}
-```
 
 ## Radium
 

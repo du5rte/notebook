@@ -7,40 +7,15 @@ tags: [react]
 ---
 # React - Redux
 
+Still-valid fundamentals moved to [[docs/react/redux|React - Redux]].
+
 Resources:
 - [Redux](http://redux.js.org)
 - [Kurt Weiberth React + Redux + Webpack](https://www.youtube.com/watch?v=fZKaq623y38&list=PLQDnxXqV213JJFtDaG0aE9vqvp6Wm7nBg)
 - [redux-promise](https://github.com/acdlite/redux-promise)
 - [redux-saga](https://github.com/yelouafi/redux-saga)
 
-## Redux
-The three main principles of redux are:
-
-- Single source of truth
-- State is read-only
-- Changes are only made with pure functions
-
-States are wrapped in a single object called the `store` **the tree of truth**, which is read only, the only way to change states is to use a store `dispatch` which rewrite a whole new state tree enforcing Immutability and that data only flows one way.
-
-## Reducer
-A pure function with a switch case that returns a new copy of state. It should always return `state` by default
-
-```js
-function counter(state = 0, action) {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
-```
-
 ## Store
-Wraps the `reducer` in a store, which provides three methods `getState`, `dispatch` and `subscribe`
-
 ```js
 import { createStore } from 'redux'
 
@@ -58,38 +33,6 @@ const store = createStore(
   combineReducers({ counter, todo }),
   applyMiddleware(thunk, promise, logger())
 )
-```
-
-#### Get state
-Get the current state from the store
-```js
-store.getState() // {counter: 0}
-```
-
-#### Dispatch
-Dispatches an action to the store reducer
-```js
-store.dispatch({type: 'INCREMENT'}) // {counter: 1}
-```
-
-#### Subscribe
-Registers a callback that trigger every time there's a change, every time `dispatch` is called
-```js
-store.subscribe(() => {
-  // ...
-})
-```
-
-## Actions
-A representation of a dispatcher
-
-```js
-function increment(payload) {
-  return {
-    type: 'INCREMENT', // required
-    // payLoad: {} // optional
-  }
-}
 ```
 
 ## Basic Example
