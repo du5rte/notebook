@@ -59,8 +59,6 @@ Commands, snippets and recipes are reference and belong in `docs/`.
 
 ## Workflows
 
-- **Ingest** a file from `raw/`: one source page, update or create the entities and concepts it touches, update the index, append to the log, report.
-- **Query**: read `wiki/index.md` first, open only relevant pages, answer with `[[links]]`. Also check `docs/`. Say when the vault doesn't cover it.
-- **Lint** (on request): report, don't fix. Orphans, broken links, missing frontmatter, pages missing from the index, stale `updated`, duplicates, contradictions.
-
-`wiki/log.md` is one append-only line per operation: `2026-10-05 ingest raw/x.md -> 1 source, 2 concepts, 9 links`.
+- **Ingest**: `/ingest` skill (`.claude/skills/ingest`).
+- **Lint**: `/lint` skill (`.claude/skills/lint`). Report only.
+- **Query**: read `wiki/index.md` first, then `docs/index.md`. Open only relevant pages and answer with `[[links]]`. Say when the vault doesn't cover it.
