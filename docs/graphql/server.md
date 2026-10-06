@@ -117,6 +117,47 @@ export const hello = {
 }
 ```
 
+## Node Edge Pattern
+Fundamentals kept from [[archive/graphql/relay|GraphQL - Relay (2016)]].
+
+- `type`: adds the edge node pattern along with cursor and pageInfo
+- `args`: adds query parameters (first, last, after and before)
+
+```graphiql
+{
+  store {
+    customers(first: 2) {
+      edges {
+        node {
+          _id
+          first_name
+          last_name
+        }
+      }
+    }
+  }
+}
+```
+
+## Resolvers with MongoDB
+Fundamentals kept from [[archive/graphql/mongodb|GraphQL - MongoDB (2016)]].
+
+Although graphql filters only the necessary fields in the query `mongoDB` is returning all the fields not being efficient.
+```js
+import { db, ObjectId } from 'mongodb'
+
+const customer = {
+  type: customerType,
+  args: {
+    _id: {type: new GraphQLNonNull(GraphQLString)},
+  },
+  resolve(root, args, context, info) {
+    return db.collection('bank_data')
+      .findOne({_id: ObjectId(args._id)})
+  }
+}
+```
+
 ## Related
 - [[docs/graphql/basics|GraphQL - Basics]]
 - [[docs/graphql/graphiql|GraphQL - GraphiQL]]

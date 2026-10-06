@@ -7,6 +7,8 @@ tags: [graphql]
 ---
 # GraphQL - Relay
 
+Still-valid fundamentals moved to [[docs/graphql/server|GraphQL - Server]] (Node Edge Pattern).
+
 Resources:
 - [relay-mongodb-connection](https://github.com/mikberg/relay-mongodb-connection)
 - [graphql-relay-js](https://github.com/graphql/graphql-relay-js)
@@ -43,22 +45,6 @@ var customers = {
     )
 
     return customers
-  }
-}
-```
-
-```graphiql
-{
-  store {
-    customers(first: 2) {
-      edges {
-        node {
-          _id
-          first_name
-          last_name
-        }
-      }
-    }
   }
 }
 ```
