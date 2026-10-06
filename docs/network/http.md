@@ -83,8 +83,7 @@ ok
 
 ## Related
 - [[docs/node/http|Node - HTTP]]
-- [[docs/node/http-server|Node - HTTP Server]]
 - [[docs/node/server|Node - Server]]
 - [[docs/network/curl|Networking - Curl]]
 - [[docs/network/networking|Networking]]
-- [[docs/network/dns|Technology Foundations]]
+- [[docs/network/dns|Networking - DNS]]

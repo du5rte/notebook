@@ -1,11 +1,11 @@
 ---
-title: "Technology Foundations"
+title: "Networking - DNS"
 type: doc
 created: 2015-08-27
 updated: 2018-06-18
 tags: [network]
 ---
-# Technology Foundations
+# Networking - DNS
 
 ## DNS Domain Name System
 Likes a phonebook, directs domain names to device's IP addresses
@@ -121,7 +121,7 @@ The first entry in the DNS zone file. The SOA indicates that this DNS name serve
 
 ## Related
 - [[docs/network/ssl|SSL]]
-- [[docs/network/nginx|Nginx]]
-- [[docs/linux/server-setup|Ubuntu]]
+- [[docs/devops/nginx|Nginx]]
+- [[docs/devops/server-setup|Ubuntu]]
 - [[docs/network/networking|Networking]]
 - [[docs/network/http|Networking - HTTP]]

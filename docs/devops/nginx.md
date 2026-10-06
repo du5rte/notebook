@@ -3,7 +3,7 @@ title: "Nginx"
 type: doc
 created: 2016-07-21
 updated: 2018-06-18
-tags: [network]
+tags: [devops]
 ---
 # Nginx
 
@@ -183,5 +183,5 @@ add_header Strict-Transport-Security max-age=15768000;
 
 ## Related
 - [[docs/network/ssl|SSL]]
-- [[docs/network/dns|Technology Foundations]]
-- [[docs/linux/server-setup|Ubuntu]]
+- [[docs/network/dns|Networking - DNS]]
+- [[docs/devops/server-setup|Ubuntu]]

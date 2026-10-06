@@ -216,4 +216,4 @@ docker run -d -p 8080:3000 -e PERSON="Santa Claus" --name container1 test-node-i
 
 ## Related
 - [[docs/devops/aws|AWS]]
-- [[docs/linux/server-setup|Ubuntu]]
+- [[docs/devops/server-setup|Ubuntu]]

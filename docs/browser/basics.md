@@ -3,7 +3,7 @@ title: "DOM - Basics"
 type: doc
 created: 2016-06-18
 updated: 2016-06-18
-tags: [dom]
+tags: [browser]
 ---
 # DOM - Basics
 
@@ -160,5 +160,5 @@ newInput.value // true
 
 ## Related
 - [[docs/javascript/basics|JavaScript - Basics]]
-- [[docs/dom/storage|Storage]]
-- [[docs/javascript/geolocation|JavaScript - Geolocation]]
+- [[docs/browser/storage|Storage]]
+- [[docs/browser/geolocation|JavaScript - Geolocation]]

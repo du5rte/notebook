@@ -109,8 +109,72 @@ console.log(foolish) // 'foo'
 bar() // 'bar'
 ```
 
+## Creating Modules
+
+There's different methods to import our on modules by using `mode.export` and `require`
+
+### Method 1
+We can only set one object equals to module.exports
+
+
+In `custom_hello.js`
+```js
+var hello = function() {
+console.log("hello");
+}
+module.exports = hello;
+```
+In `app.js`
+```js
+var hello = require('./custom_hello');
+hello();
+```
+
+### Method 2
+We can set multiple methods
+
+In `custom_goodbye.js`
+```js
+exports.goodbye = function() {
+  console.log("goodbye");
+};
+```
+In `app.js`
+```js
+var gb = require('./custom_goodbye');
+gb.goodbye();
+
+// if we only need to call it one, We can require and call it in one line
+require('./custom_goodbye').goodbye();
+```
+
+### Method 3
+
+
+In `my_module.js`
+```js
+var foo = function () {
+  /* some code */
+}
+var bar = function () {
+  /* some other code */
+}
+var baz = function () { // Private function!
+  /* yet other some code */
+}
+module.foo = foo;
+module.bar = bar;
+```
+In `app.js`
+```js
+var myMod = require('./my_module');
+
+myMod.foo();
+
+myMod.bar();
+```
+
 ## Related
 - [[docs/node/npm|npm]]
-- [[docs/node/modules-commonjs|Node.js - Modules]]
 - [[docs/node/basics|Node.js - Basics]]
 - [[docs/javascript/basics|JavaScript - Basics]]

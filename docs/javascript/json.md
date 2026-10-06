@@ -50,4 +50,4 @@ var data = JSON.parse(result)
 ```
 
 ## Related
-- [[docs/dom/storage|Storage]]
+- [[docs/browser/storage|Storage]]

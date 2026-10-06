@@ -3,7 +3,7 @@ title: "SSH"
 type: doc
 created: 2015-12-01
 updated: 2018-06-18
-tags: [linux]
+tags: [devops]
 ---
 # SSH
 
@@ -103,5 +103,5 @@ $ ssh-keygen -R awesome.com
 ```
 
 ## Related
-- [[docs/linux/server-setup|Ubuntu]]
+- [[docs/devops/server-setup|Ubuntu]]
 - [[docs/devops/aws|AWS]]

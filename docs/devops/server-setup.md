@@ -3,7 +3,7 @@ title: "Ubuntu"
 type: doc
 created: 2016-01-20
 updated: 2018-06-18
-tags: [linux]
+tags: [devops]
 ---
 # Ubuntu
 
@@ -160,8 +160,8 @@ $ sudo ufw enable
 
 ## Related
 - [[docs/network/ssl|SSL]]
-- [[docs/network/nginx|Nginx]]
-- [[docs/network/dns|Technology Foundations]]
-- [[docs/linux/ssh|SSH]]
+- [[docs/devops/nginx|Nginx]]
+- [[docs/network/dns|Networking - DNS]]
+- [[docs/devops/ssh|SSH]]
 - [[docs/devops/aws|AWS]]
 - [[docs/devops/docker|Docker Basics]]

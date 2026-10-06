@@ -11,7 +11,7 @@ docs/      legacy notebook, human-written: <topic>/<note>.md (css/, node/, git/.
 archive/   superseded tools, libraries and API versions: <topic>/<note>.md, plus index.md. Out of the main index, still searchable.
 ```
 
-New `docs/` notes go in the matching topic folder and get a line under their area in `docs/index.md` (`basics` first, then alphabetical).
+New `docs/` notes go in the matching topic folder and get a line under their area in `docs/index.md` (`basics` first, then alphabetical). Open a new topic folder only once it would hold three notes; until then file the note under the closest existing topic.
 
 Archive a note when following it today would mislead (tool dead, API superseded). Keep fundamentals even if old:
 - Library still alive but the note is outdated: move the still-valid fundamentals (concepts, principles, patterns) into a `docs/` note, link it to the archived original (`Fundamentals kept from [[archive/...]]`), and archive the rest. Merge into newer notes on the same topic when they exist.

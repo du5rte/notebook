@@ -3,7 +3,7 @@ title: "Storage"
 type: doc
 created: 2016-07-21
 updated: 2016-07-21
-tags: [dom]
+tags: [browser]
 status: draft
 ---
 
@@ -23,6 +23,6 @@ sessionStorage.clickcount = 1
 https://developer.mozilla.org/en-US/docs/Web/API/Window/open
 
 ## Related
-- [[docs/dom/basics|DOM - Basics]]
+- [[docs/browser/basics|DOM - Basics]]
 - [[docs/javascript/basics|JavaScript - Basics]]
 - [[docs/javascript/json|JavaScript - JSON]]

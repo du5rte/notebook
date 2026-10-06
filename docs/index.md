@@ -38,9 +38,10 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/sass/maps|Sass - List Maps]]
 - [[docs/sass/mixins|Sass - Mixins]]
 
-### dom
-- [[docs/dom/basics|DOM - Basics]]
-- [[docs/dom/storage|Storage]] *(draft)*
+### browser
+- [[docs/browser/basics|DOM - Basics]]
+- [[docs/browser/geolocation|JavaScript - Geolocation]]
+- [[docs/browser/storage|Storage]] *(draft)*
 
 ### svg
 - [[docs/svg/basics|SVG - Basics]]
@@ -58,7 +59,6 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/javascript/conditionals|JavaScript - Conditionals]]
 - [[docs/javascript/decorators|JavaScript - Common Patterns]]
 - [[docs/javascript/functions|JavaScript Functions]]
-- [[docs/javascript/geolocation|JavaScript - Geolocation]]
 - [[docs/javascript/json|JavaScript - JSON]]
 - [[docs/javascript/loops|JavaScript - Loops]]
 - [[docs/javascript/maps|JavaScript - Maps]]
@@ -75,9 +75,7 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/node/cli|Node - CLI]] *(draft)*
 - [[docs/node/email|Node - Email]] *(draft)*
 - [[docs/node/events|Node - Events]] *(draft)*
-- [[docs/node/http-server|Node - HTTP Server]] *(draft)*
 - [[docs/node/http|Node - HTTP]] *(draft)*
-- [[docs/node/modules-commonjs|Node.js - Modules]] *(draft)*
 - [[docs/node/modules|Node - Modules]]
 - [[docs/node/npm|npm]]
 - [[docs/node/process|Process]] *(draft)*
@@ -111,21 +109,17 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/linux/permissions|Console - Permissions]]
 - [[docs/linux/pipe|Console - Pipes and Redirection]]
 - [[docs/linux/processes|Console - Processes]]
-- [[docs/linux/server-setup|Ubuntu]]
-- [[docs/linux/ssh|SSH]]
 - [[docs/linux/users|Console - Users]]
 
 ### network
 - [[docs/network/curl|Networking - Curl]]
-- [[docs/network/dns|Technology Foundations]]
+- [[docs/network/dns|Networking - DNS]]
 - [[docs/network/http|Networking - HTTP]]
 - [[docs/network/irc|Networking - IRC]]
 - [[docs/network/networking|Networking]]
-- [[docs/network/nginx|Nginx]]
 - [[docs/network/postfix|PostFix]]
 - [[docs/network/smtp|Networking - SMTP]]
 - [[docs/network/ssl|SSL]]
-- [[docs/network/streams|Networking - Streams]]
 
 ### security
 - [[docs/security/cryptography|Cryptography]]
@@ -138,6 +132,9 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 ### devops
 - [[docs/devops/aws|AWS]]
 - [[docs/devops/docker|Docker Basics]]
+- [[docs/devops/nginx|Nginx]]
+- [[docs/devops/server-setup|Ubuntu]]
+- [[docs/devops/ssh|SSH]]
 
 ### databases
 - [[docs/databases/databases|Databases]]

@@ -3,7 +3,7 @@ title: "JavaScript - Geolocation"
 type: doc
 created: 2016-06-18
 updated: 2016-06-18
-tags: [javascript]
+tags: [browser]
 ---
 # JavaScript - Geolocation
 
@@ -43,4 +43,4 @@ navigator.geolocation.getCurrentPosition((position) => {
 ```
 
 ## Related
-- [[docs/dom/basics|DOM - Basics]]
+- [[docs/browser/basics|DOM - Basics]]
