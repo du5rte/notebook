@@ -179,3 +179,4 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 ### tools
 - [[docs/tools/markdown|Markdown]]
 - [[docs/tools/regex|Regex - Basics]] *(draft)*
+- [[docs/tools/webpack|Webpack]]

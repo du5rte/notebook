@@ -39,5 +39,5 @@ Superseded tools, libraries and API versions. Kept for reference, out of the mai
 - [[archive/tools/flightplan|Flightplan]] *(draft)*
 - [[archive/tools/gulp|Gulp]]
 - [[archive/tools/todo|TODO]]
-- [[archive/tools/webpack|Webpack]]
+- [[archive/tools/webpack|Webpack (v1)]]
 - [[archive/tools/yeoman|YEOMAN]]

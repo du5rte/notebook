@@ -1,11 +1,13 @@
 ---
-title: "Webpack"
+title: "Webpack (v1)"
 type: doc
 created: 2015-08-27
 updated: 2020-04-11
 tags: [tools]
 ---
-# Webpack
+# Webpack (v1)
+
+Still-valid fundamentals moved to [[docs/tools/webpack|Webpack]].
 
 Resources
 - [Webpack](http://webpack.github.io)
@@ -17,40 +19,7 @@ Resources
 - [Introduction to Webpack with practical examples](http://julienrenaux.fr/2015/03/30/introduction-to-webpack-with-practical-examples/#ECMAScript_6_compilation)
 - [What's new in webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7)
 
-## Module Bundler
-It's job it's to take all different assets, `.js`, `.css` and turn them into a static bundle
-
-## Old Days
-Traditionally we'd have to define a huge list of `script` tags and they would have to be in order
-
-> e.g. the code in `app.js` might depend on `angular.js`
-
-
-```html
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/slick.js/slick/slick.min.js"></script>
-<script src="bower_components/sticky/jquery.sticky.js"></script>
-<script src="js/app.js"></script>
-<script src="js/ux.js"></script>
-```
-
-
 ## Scripts
-We want too import the content from `file2` into our `document.write()`
-
-entry.js
-```js
-// by default it looks for `.js`, otherwise use extention e.g. `.coffee`
-document.write(require('./content'));
-```
-
-content.js
-```js
-module.exports = "It works from content.js.";
-```
-
 We can bundle it together
 ```sh
 # webpack <entry> <output>
@@ -88,11 +57,6 @@ $ webpack ./entry.js bundle.js --module-bind 'css=style!css'
 ```
 
 ## Config File
-We want to move the config options into a config file: add `webpack.config.js`
-
-```sh
-$ webpack
-```
 ```js
 module.exports = {
     // Main Entry File
@@ -169,11 +133,6 @@ $ webpack --progress --colors --watch
 ```
 
 ## Web Development Server
-Creates a watch server on `http://localhost:8080/`
-
-```sh
-$ npm install --save-dev webpack-dev-server
-```
 ```sh
 $ webpack-dev-server
 ```
@@ -187,42 +146,6 @@ Extras
 ### Dependencies
 [Webpack ProvidePlugin vs externals?](http://codereply.com/answer/7upd1z/webpack-provideplugin-vs-externals.html)
 http://dontkry.com/posts/code/single-page-modules-with-webpack.html#comment-1337363183
-
-```html
-<!-- Loading from CDN -->
-<script src="https://code.jquery.com/jquery-git2.min.js"></script>
-```
-```js
-// loading from local files
-resolve: { alias: { jquery: "/path/to/jquery-git2.min.js" } }
-```
-```js
-// the artifial module "jquery" exports the global var "jQuery"
-externals: { jquery: "jQuery" }
-
-// inside any module
-var $ = require("jquery");
-
-// OR
-
-plugins: [
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    'windows.jQuery': 'jquery',
-  })
-]
-
-// If you use "$", jquery is automatically required
-$('body').html("It works!");
-```
-
-## libraries
-What about third party libraries that doesn’t have Webpack support? I mean, libraries that are not exporting anything. That will include thelibrary on the build and that is good enough.
-
-```js
-import 'thelibrary';
-```
 
 ### Code Spliting
 - [code splitting](http://webpack.github.io/docs/code-splitting.html)
