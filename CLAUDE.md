@@ -13,7 +13,9 @@ archive/   superseded tools, libraries and API versions: <topic>/<note>.md, plus
 
 New `docs/` notes go in the matching topic folder and get a line under their area in `docs/index.md` (`basics` first, then alphabetical).
 
-Archive a note when following it today would mislead (tool dead, API superseded). Keep fundamentals even if old.
+Archive a note when following it today would mislead (tool dead, API superseded). Keep fundamentals even if old:
+- Library still alive but the note is outdated: move the still-valid fundamentals (concepts, principles, patterns) into a `docs/` note, link it to the archived original (`Fundamentals kept from [[archive/...]]`), and archive the rest. Merge into newer notes on the same topic when they exist.
+- Tool completely obsolete (jQuery, Bower, Gulp, CoffeeScript...): archive whole, nothing kept.
 
 Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. No binary or raster files (`.png`, `.ai`, `.pdf`). Diagrams are Mermaid in the note, or `.svg` beside it.
 
