@@ -5,7 +5,7 @@ tags: [index]
 ---
 # Docs Index
 
-Reference notes, one section per area. Obsolete tech lives in [[archive/index|archive]].
+Reference notes, one section per area. Superseded tech lives in [[archive/index|archive]].
 
 ## Web
 
@@ -22,10 +22,6 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/css/transform-transitions|CSS - Transitions and Transforms]]
 - [[docs/css/values|CSS - Values and Units]]
 
-### dom
-- [[docs/dom/basics|DOM - Basics]]
-- [[docs/dom/storage|Storage]] *(draft)*
-
 ### html
 - [[docs/html/basics|HTML Basics]]
 - [[docs/html/forms|HTML - Forms]]
@@ -33,11 +29,6 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/html/tables|HTML Tables]]
 - [[docs/html/text|HTML - Text]]
 - [[docs/html/video-and-audio|Video and Audio]]
-
-### jquery
-- [[docs/jquery/basics|jQuery - Basics]]
-- [[docs/jquery/ajax|jQuery - AJAX]]
-- [[docs/jquery/plugins|jQuery - Plugins]]
 
 ### sass
 - [[docs/sass/basics|Sass Basics]]
@@ -47,6 +38,10 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/sass/maps|Sass - List Maps]]
 - [[docs/sass/mixins|Sass - Mixins]]
 
+### dom
+- [[docs/dom/basics|DOM - Basics]]
+- [[docs/dom/storage|Storage]] *(draft)*
+
 ### svg
 - [[docs/svg/basics|SVG - Basics]]
 - [[docs/svg/animations|SVG - Animations]]
@@ -54,19 +49,9 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 
 ## JavaScript
 
-### graphql
-- [[docs/graphql/basics|GraphQL - Basics]]
-- [[docs/graphql/apollo|GraphQL - Apollo Server]]
-- [[docs/graphql/graphiql|GraphQL - GraphiQL]]
-- [[docs/graphql/mongodb|GraphQL - MongoDB]]
-- [[docs/graphql/relay|GraphQL - Relay]]
-- [[docs/graphql/server|GraphQL - Server]]
-
 ### javascript
 - [[docs/javascript/basics|JavaScript - Basics]]
-- [[docs/javascript/ajax|JavaScript - AJAX]]
 - [[docs/javascript/algorithms|JavaScript - Algorithms]]
-- [[docs/javascript/animations|JavaScript - Animations]]
 - [[docs/javascript/arrays|JavaScript Arrays]]
 - [[docs/javascript/async|JavaScript - Asynchronous Programming]]
 - [[docs/javascript/booleans|JavaScript - Booleans]]
@@ -82,7 +67,6 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/javascript/objects|JavaScript Objects]]
 - [[docs/javascript/scope|JavaScript - Scope]]
 - [[docs/javascript/strings|JavaScript Strings]]
-- [[docs/javascript/typescript|JavaScript - TypeScript]]
 - [[docs/javascript/unit-testing|JavaScript - Unit Testing]]
 - [[docs/javascript/variables|JavaScript - Variables]]
 
@@ -101,26 +85,12 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/node/socket-io|Node - Socket.io]] *(draft)*
 - [[docs/node/streams|Node.js - Streams]]
 
-### react
-- [[docs/react/basics|React - Basics]]
-- [[docs/react/apollo|React - Apollo Client]]
-- [[docs/react/motion|React - Motion]]
-- [[docs/react/react-native|React Native]]
-- [[docs/react/redux|React - Redux]]
-- [[docs/react/relay|React - Relay]]
-- [[docs/react/style|React - Style]]
+### graphql
+- [[docs/graphql/basics|GraphQL - Basics]]
+- [[docs/graphql/graphiql|GraphQL - GraphiQL]]
+- [[docs/graphql/server|GraphQL - Server]]
 
 ## Systems
-
-### databases
-- [[docs/databases/databases|Databases]]
-- [[docs/databases/elasticsearch|Elastic Search - Basics]]
-- [[docs/databases/mongodb|MongoDB - Basics]]
-- [[docs/databases/redis|Redis - Basics]] *(draft)*
-
-### devops
-- [[docs/devops/aws|AWS]]
-- [[docs/devops/docker|Docker Basics]]
 
 ### git
 - [[docs/git/basics|Git - Basics]]
@@ -165,10 +135,17 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/security/passport|Passport]] *(draft)*
 - [[docs/security/security|Security]]
 
-## Languages
+### devops
+- [[docs/devops/aws|AWS]]
+- [[docs/devops/docker|Docker Basics]]
 
-### python
-- [[docs/python/basics|Python Basics]]
+### databases
+- [[docs/databases/databases|Databases]]
+- [[docs/databases/elasticsearch|Elastic Search - Basics]]
+- [[docs/databases/mongodb|MongoDB - Basics]]
+- [[docs/databases/redis|Redis - Basics]] *(draft)*
+
+## Languages
 
 ### swift
 - [[docs/swift/basics|Swift - Basics]]
@@ -188,14 +165,17 @@ Reference notes, one section per area. Obsolete tech lives in [[archive/index|ar
 - [[docs/swift/variables|Swift - Variables]]
 - [[docs/swift/xcode|Xcode]]
 
+### python
+- [[docs/python/basics|Python Basics]]
+
 ## Machine Learning
 
+### ml
 - [[docs/ml/basics|Machine Learning]]
 - [[docs/ml/data-analysis|Data Analysis]]
 
 ## Tools
 
+### tools
 - [[docs/tools/markdown|Markdown]]
 - [[docs/tools/regex|Regex - Basics]] *(draft)*
-- [[docs/tools/todo|TODO]]
-- [[docs/tools/webpack|Webpack]]
