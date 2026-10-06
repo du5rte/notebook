@@ -161,3 +161,9 @@ Inspect if units can be operated on
 comparable($ems, $ems)    // true
 comparable($ems, $inches) // false
 ```
+
+## Related
+- [[docs/sass/mixins|Sass - Mixins]]
+- [[docs/sass/extends|Sass - Extends]]
+- [[docs/sass/directives|Sass - Directives]]
+- [[docs/sass/maps|Sass - List Maps]]

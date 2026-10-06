@@ -182,3 +182,7 @@ for (key, value) in world {
     // End code
 }
 ```
+
+## Related
+- [[docs/swift/loops|Swift - Loops]]
+- [[docs/swift/collections|Swift - Collections and Control Flow]]

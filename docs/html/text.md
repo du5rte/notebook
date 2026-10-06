@@ -202,3 +202,7 @@ Unicode can be displayed in a few way with [charref](https://dev.w3.org/html5/ht
 <span class="delete">&#xf00d<span>
 <style> .icon:after { family-font: FontAwesome; content: '\f00d' } </style>
 ```
+
+## Related
+- [[docs/html/forms|HTML - Forms]]
+- [[docs/html/tables|HTML Tables]]

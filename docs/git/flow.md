@@ -52,3 +52,9 @@ Fix a bug. Creates a new branch based of master
 ```bash
 git flow hotfix start oh_no_not_a_bug
 ```
+
+## Related
+- [[docs/git/branching|Git - Branching]]
+- [[docs/git/merging|Git - Merging]]
+- [[docs/git/remotes|Git - Remote]]
+- [[docs/git/tag|Git - Tag]]

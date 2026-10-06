@@ -158,3 +158,7 @@ for(let post of postArray) {
   }
 }
 ```
+
+## Related
+- [[docs/javascript/objects|JavaScript Objects]]
+- [[docs/javascript/object-oriented|JavaScript - Classes]]

@@ -318,3 +318,7 @@ async function() {
   console.log(friends)
 }
 ```
+
+## Related
+- [[docs/javascript/scope|JavaScript - Scope]]
+- [[docs/javascript/decorators|JavaScript - Common Patterns]]

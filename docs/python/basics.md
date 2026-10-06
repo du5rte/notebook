@@ -118,3 +118,7 @@ class str(object)
   capitalise(...)
     S.capitalize() -> str
 ...
+
+## Related
+- [[docs/ml/basics|Machine Learning]]
+- [[docs/ml/data-analysis|Data Analysis]]

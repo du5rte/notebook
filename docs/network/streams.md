@@ -123,3 +123,5 @@ process.stdin
   }))
 ```
 
+## Related
+- [[docs/node/streams|Node.js - Streams]]

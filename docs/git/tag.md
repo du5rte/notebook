@@ -54,3 +54,7 @@ Delete existing tags with the given names.
 ```bash
 git tag -d v1.3
 ```
+
+## Related
+- [[docs/git/remotes|Git - Remote]]
+- [[docs/git/flow|Git - Flow]]

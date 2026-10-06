@@ -30,3 +30,9 @@ Without any arguments (or the -a flag) it will default to committing everything 
 ```bash
 git commit -m "changed file1"
 ```
+
+## Related
+- [[docs/git/basics|Git - Basics]]
+- [[docs/git/history|Git - History]]
+- [[docs/git/stashing|Git - Stashing]]
+- [[docs/git/branching|Git - Branching]]

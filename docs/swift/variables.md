@@ -43,3 +43,7 @@ let language = "Swift"
 
 language = "Objective-C" // Error
 ```
+
+## Related
+- [[docs/swift/basics|Swift - Basics]]
+- [[docs/swift/xcode|Xcode]]

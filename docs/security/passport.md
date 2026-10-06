@@ -73,3 +73,8 @@ router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: '/auth'
 }))
 ```
+
+## Related
+- [[docs/security/jwt|JWT]]
+- [[docs/security/oauth2|OAuth]]
+- [[docs/security/openid|OpenID]]

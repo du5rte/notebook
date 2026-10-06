@@ -116,3 +116,7 @@ export const hello = {
   }
 }
 ```
+
+## Related
+- [[docs/graphql/basics|GraphQL - Basics]]
+- [[docs/graphql/graphiql|GraphQL - GraphiQL]]

@@ -157,3 +157,8 @@ newInput.type // 'checkbox'
 // Indicates the current value in the control
 newInput.value // true
 ```	
+
+## Related
+- [[docs/javascript/basics|JavaScript - Basics]]
+- [[docs/dom/storage|Storage]]
+- [[docs/javascript/geolocation|JavaScript - Geolocation]]

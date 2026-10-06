@@ -57,3 +57,9 @@ mkdir bin
 # to the bottom of `.bashrc`
 export PATH=/home/treehouse/bin:$PATH
 ```
+
+## Related
+- [[docs/node/process|Process]]
+- [[docs/node/cli|Node - CLI]]
+- [[docs/linux/processes|Console - Processes]]
+- [[docs/linux/applications|Console - Applications]]

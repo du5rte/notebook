@@ -21,3 +21,8 @@ The sessionStorage object is equal to the localStorage object, except that it st
 sessionStorage.clickcount = 1
 
 https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+
+## Related
+- [[docs/dom/basics|DOM - Basics]]
+- [[docs/javascript/basics|JavaScript - Basics]]
+- [[docs/javascript/json|JavaScript - JSON]]

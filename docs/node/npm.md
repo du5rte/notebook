@@ -155,3 +155,9 @@ $ npm version patch
 # then publish
 $ npm publish
 ```
+
+## Related
+- [[docs/node/modules|Node - Modules]]
+- [[docs/node/modules-commonjs|Node.js - Modules]]
+- [[docs/node/basics|Node.js - Basics]]
+- [[docs/javascript/basics|JavaScript - Basics]]

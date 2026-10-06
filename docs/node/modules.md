@@ -108,3 +108,9 @@ import { foo as foolish, bar } from "./my-module"
 console.log(foolish) // 'foo'
 bar() // 'bar'
 ```
+
+## Related
+- [[docs/node/npm|npm]]
+- [[docs/node/modules-commonjs|Node.js - Modules]]
+- [[docs/node/basics|Node.js - Basics]]
+- [[docs/javascript/basics|JavaScript - Basics]]

@@ -293,3 +293,7 @@ Draw a Elliptical Arc Curve using the `A` property
   <use xlink:href="#triangles" transform="translate(121.5, 211) scale(0.6)" />
 </svg>
 ```
+
+## Related
+- [[docs/svg/basics|SVG - Basics]]
+- [[docs/html/objects|HTML - Objects]]

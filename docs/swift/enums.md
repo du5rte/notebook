@@ -370,3 +370,8 @@ enum Text: String {
     }
 }
 ```
+
+## Related
+- [[docs/swift/object-oriented|Swift - Objects]]
+- [[docs/swift/protocols|Swift - Protocols]]
+- [[docs/swift/memory-management|Swift - Memory Management]]

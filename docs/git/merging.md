@@ -64,3 +64,7 @@ Git automatically knows you're resolving a merge and writes the merge commit mes
 ```
 [master 9c22137] Merge branch 'new_feature'
 ```
+
+## Related
+- [[docs/git/branching|Git - Branching]]
+- [[docs/git/flow|Git - Flow]]

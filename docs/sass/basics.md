@@ -246,3 +246,7 @@ $color: purple !default; // yellow
 ```scss
 $color: purple !default; // purple
 ```
+
+## Related
+- [[docs/css/basics|CSS - Basics]]
+- [[docs/html/basics|HTML Basics]]

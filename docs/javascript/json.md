@@ -48,3 +48,6 @@ Json is returned as a string so it need to be parse into `JavaScript` like data 
 ```js
 var data = JSON.parse(result)
 ```
+
+## Related
+- [[docs/dom/storage|Storage]]

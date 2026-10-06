@@ -112,3 +112,6 @@ const fruits = ['orange', 'peach'];
 
 fruits[1] = 'pineapple' // OK
 ```
+
+## Related
+- [[docs/javascript/scope|JavaScript - Scope]]

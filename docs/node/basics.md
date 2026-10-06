@@ -94,3 +94,8 @@ Uses the browser to debug the node application with `breakpoints`, breakpoints g
 $ node-inspector # listens for port 5858
 $ node --debug app.js # runs a debugger on 58585
 ```
+
+## Related
+- [[docs/node/npm|npm]]
+- [[docs/node/modules|Node - Modules]]
+- [[docs/javascript/basics|JavaScript - Basics]]

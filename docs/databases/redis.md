@@ -19,3 +19,8 @@ brew install redis
 ```sh
 npm install --save redis
 ```
+
+## Related
+- [[docs/databases/databases|Databases]]
+- [[docs/databases/mongodb|MongoDB - Basics]]
+- [[docs/databases/elasticsearch|Elastic Search - Basics]]

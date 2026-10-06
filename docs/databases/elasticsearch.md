@@ -462,3 +462,8 @@ movies/_search?q=title:star
 ```
 movies/_search?q=+year:>2010+title:trek
 ```
+
+## Related
+- [[docs/databases/databases|Databases]]
+- [[docs/databases/mongodb|MongoDB - Basics]]
+- [[docs/databases/redis|Redis - Basics]]

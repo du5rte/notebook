@@ -74,3 +74,10 @@ airportCodes["DUB"] = nil
 
 Optional Type
 A value that can contain of two values, if it doesn't contain it returns nil otherwise it will return the value
+
+## Related
+- [[docs/swift/strings|Swift - Strings]]
+- [[docs/swift/numbers|Swift - Numbers]]
+- [[docs/swift/booleans|Swift - Booleans]]
+- [[docs/swift/conditionals|Swift - Conditionals]]
+- [[docs/swift/loops|Swift - Loops]]

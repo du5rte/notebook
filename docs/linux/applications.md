@@ -68,3 +68,6 @@ $ sudo make install
 # we can double check with which
 $ which sqilte3
 ```
+
+## Related
+- [[docs/linux/environment|Console - Environment]]

@@ -195,14 +195,8 @@ Just like RGBa it allows a alpha value (transperancy)
 color: hsl(348, 100%, 50%, .7);
 ```
 
-
-
-
-
-
-
-
-
-
-
-
+## Related
+- [[docs/css/fonts|CSS - Fonts]]
+- [[docs/css/box-model|CSS - Box model]]
+- [[docs/css/others|CSS - Other Features]]
+- [[docs/css/basics|CSS - Basics]]

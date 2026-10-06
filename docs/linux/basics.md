@@ -39,3 +39,7 @@ $ sudo !! # root
 
 ## Pause Processes
 `ctrl` + `C` terminates or exit the current process
+
+## Related
+- [[docs/linux/files|Console - Files and Directories]]
+- [[docs/linux/pipe|Console - Pipes and Redirection]]

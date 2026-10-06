@@ -131,3 +131,9 @@ nospaces`
 `
 // http://someurl.com?query?name=John&last_name=Steward
 ```
+
+## Related
+- [[docs/javascript/numbers|JavaScript Numbers]]
+- [[docs/javascript/booleans|JavaScript - Booleans]]
+- [[docs/javascript/arrays|JavaScript Arrays]]
+- [[docs/tools/regex|Regex - Basics]]

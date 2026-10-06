@@ -103,3 +103,7 @@ git config
 git config --global user.name "My Name"
 git config --global user.email "myemail@gmail.com"
 ```
+
+## Related
+- [[docs/git/stage|Git - Stage Area]]
+- [[docs/git/history|Git - History]]

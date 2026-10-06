@@ -16,3 +16,8 @@ Not Operator !
 let on = true  // true
 let off = !on  // false
 ```
+
+## Related
+- [[docs/swift/strings|Swift - Strings]]
+- [[docs/swift/numbers|Swift - Numbers]]
+- [[docs/swift/collections|Swift - Collections and Control Flow]]

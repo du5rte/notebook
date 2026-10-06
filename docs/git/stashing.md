@@ -41,3 +41,7 @@ Retrieve selected stash
 ```bash
 git stash apply stash@{1}
 ```
+
+## Related
+- [[docs/git/stage|Git - Stage Area]]
+- [[docs/git/branching|Git - Branching]]

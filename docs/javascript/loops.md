@@ -191,3 +191,7 @@ let student = firstRun.value
 
 let lastRun = iterator.next() // {value: undefined, done:t rue}
 ```
+
+## Related
+- [[docs/javascript/conditionals|JavaScript - Conditionals]]
+- [[docs/javascript/booleans|JavaScript - Booleans]]

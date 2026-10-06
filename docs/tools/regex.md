@@ -245,3 +245,7 @@ if we try to input number it will prompt `Please match the required format`
   <input type="text" pattern="w" required/>
 </form>
 ```
+
+## Related
+- [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/tools/markdown|Markdown]]

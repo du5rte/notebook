@@ -263,3 +263,7 @@ For more animation control we can use `cubic-bezier(P1x,P1y,P2x,P2y)`, Using neg
 ```css
 transition-timing-function: cubic-bezier(0.5, -0.5, 0.3, 1.3);
 ```
+
+## Related
+- [[docs/css/animations|CSS - Animations]]
+- [[docs/svg/animations|SVG - Animations]]

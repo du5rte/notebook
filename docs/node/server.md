@@ -387,3 +387,9 @@ In `/views/tweets.ejs`
 	<% }); %>
 </ul>
 ```
+
+## Related
+- [[docs/node/http|Node - HTTP]]
+- [[docs/node/http-server|Node - HTTP Server]]
+- [[docs/network/http|Networking - HTTP]]
+- [[docs/node/socket-io|Node - Socket.io]]

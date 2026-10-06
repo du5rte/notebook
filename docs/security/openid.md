@@ -62,3 +62,8 @@ inside `uU.vV.wW`
   "exp"
 }
 ```
+
+## Related
+- [[docs/security/jwt|JWT]]
+- [[docs/security/oauth2|OAuth]]
+- [[docs/security/passport|Passport]]

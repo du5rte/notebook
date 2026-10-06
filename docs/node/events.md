@@ -126,3 +126,7 @@ Emits an message Event
 ```js
 chat.emit('message', "Muahahah");
 ```
+
+## Related
+- [[docs/javascript/async|JavaScript - Asynchronous Programming]]
+- [[docs/javascript/decorators|JavaScript - Common Patterns]]

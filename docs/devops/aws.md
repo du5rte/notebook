@@ -655,3 +655,8 @@ This implementation runs on the container, the container might not have `curl` i
 
 ### GitHub Actions
 Can auto deploy a new image and task-definition. [octochat example](https://github.com/github-developer/octochat-aws)
+
+## Related
+- [[docs/linux/ssh|SSH]]
+- [[docs/linux/server-setup|Ubuntu]]
+- [[docs/devops/docker|Docker Basics]]

@@ -87,3 +87,6 @@ execute x = 1
 chmod 777 hello.txt # rwxrwxrwx
 chmod 640 hello.txt # rw-r-----
 ```
+
+## Related
+- [[docs/linux/users|Console - Users]]

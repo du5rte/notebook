@@ -180,3 +180,8 @@ resolver_timeout 5s;
 # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
 add_header Strict-Transport-Security max-age=15768000;
 ```
+
+## Related
+- [[docs/network/ssl|SSL]]
+- [[docs/network/dns|Technology Foundations]]
+- [[docs/linux/server-setup|Ubuntu]]

@@ -113,3 +113,7 @@ $ find / -name "sudoer"
 # Search multiple directories
 $ find documents bin -name "hello.txt"
 ```
+
+## Related
+- [[docs/linux/basics|Console - Basics]]
+- [[docs/linux/pipe|Console - Pipes and Redirection]]

@@ -55,3 +55,8 @@ $ sort
 $ ps aux | grep bash | sort
 $ ps aux | grep bash | sort > sorted_bash_procs.txt
 ```
+
+## Related
+- [[docs/linux/basics|Console - Basics]]
+- [[docs/linux/files|Console - Files and Directories]]
+- [[docs/linux/processes|Console - Processes]]

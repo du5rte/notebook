@@ -123,3 +123,7 @@ A ES7 feature similar to array spread spreads objects keys inside an object
 let newMergedNumbers = {...mergedNumbers, 4: 'cuatro', 5: 'go'}
 // {"1":"one","2":"dois","3":"trois","4":"cuatro","5":"go"}
 ```
+
+## Related
+- [[docs/javascript/object-oriented|JavaScript - Classes]]
+- [[docs/javascript/maps|JavaScript - Maps]]

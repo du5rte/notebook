@@ -28,3 +28,7 @@ In `Interface Builder` Select `ViewController` go to `Editor > Embed In > Naviga
 
 ## Segue
 show or push
+
+## Related
+- [[docs/swift/basics|Swift - Basics]]
+- [[docs/swift/variables|Swift - Variables]]

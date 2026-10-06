@@ -7,3 +7,7 @@ tags: [ml]
 ---
 
 # Data Analysis
+
+## Related
+- [[docs/ml/basics|Machine Learning]]
+- [[docs/python/basics|Python Basics]]

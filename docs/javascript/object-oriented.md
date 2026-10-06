@@ -256,3 +256,7 @@ class myMethods {
 }
 
 ```
+
+## Related
+- [[docs/javascript/objects|JavaScript Objects]]
+- [[docs/javascript/maps|JavaScript - Maps]]

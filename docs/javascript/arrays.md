@@ -171,3 +171,8 @@ let y = x.reduce((previousValue, currentValue, currentIndex, array) => {
 
 console.log(y)
 ```
+
+## Related
+- [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/javascript/numbers|JavaScript Numbers]]
+- [[docs/javascript/booleans|JavaScript - Booleans]]

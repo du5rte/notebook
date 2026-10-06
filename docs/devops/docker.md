@@ -213,3 +213,7 @@ docker exec -it mycontainer
 ```
 docker run -d -p 8080:3000 -e PERSON="Santa Claus" --name container1 test-node-image
 ```
+
+## Related
+- [[docs/devops/aws|AWS]]
+- [[docs/linux/server-setup|Ubuntu]]

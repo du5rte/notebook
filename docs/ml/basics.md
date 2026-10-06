@@ -76,3 +76,7 @@ In a regression problem, we are trying to predict results within a continuous ou
 
 ### Classification
 In a classification problem, we are instead trying to predict results in a discrete output.
+
+## Related
+- [[docs/ml/data-analysis|Data Analysis]]
+- [[docs/python/basics|Python Basics]]

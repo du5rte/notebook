@@ -99,3 +99,8 @@ Each computer can have many services. A port is a number between `1` and `65535`
 - 5432 - postgresql
 - 5984 - couchdb
 - 6667 - IRC
+
+## Related
+- [[docs/network/dns|Technology Foundations]]
+- [[docs/network/http|Networking - HTTP]]
+- [[docs/network/irc|Networking - IRC]]

@@ -173,3 +173,7 @@ let coordinatePoint = Point(x:0, y:0)
 // Method
 coordinatePoint.surroundingPoints()
 ```
+
+## Related
+- [[docs/swift/errors|Swift - Error Handling]]
+- [[docs/swift/scratch|Swift - Scratch]]

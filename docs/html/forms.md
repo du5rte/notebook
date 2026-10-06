@@ -186,3 +186,7 @@ Renders a radio input they must share the same `name` attribute.
 <input type="radio" id="over_13" value="over_13" name="user_age">
 <label for="over_13">Over 13</label>
 ```
+
+## Related
+- [[docs/html/tables|HTML Tables]]
+- [[docs/html/text|HTML - Text]]

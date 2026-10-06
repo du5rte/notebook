@@ -181,3 +181,7 @@ do {
     fatalError("\(error)")
 }
 ```
+
+## Related
+- [[docs/swift/functions|Swift - Functions]]
+- [[docs/swift/scratch|Swift - Scratch]]

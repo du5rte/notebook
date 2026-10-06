@@ -28,3 +28,8 @@ http.get("http://www.google.com/index.html", function(response) {
   console.error("Got error: " + error.message); // error message
 });
 ```
+
+## Related
+- [[docs/node/http-server|Node - HTTP Server]]
+- [[docs/node/server|Node - Server]]
+- [[docs/network/http|Networking - HTTP]]

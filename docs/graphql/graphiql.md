@@ -123,3 +123,7 @@ mutation {
   }
 }
 ```
+
+## Related
+- [[docs/graphql/basics|GraphQL - Basics]]
+- [[docs/graphql/server|GraphQL - Server]]

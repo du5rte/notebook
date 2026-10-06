@@ -761,3 +761,8 @@ extension String {
 
 "2".add(num: 3) // 5
 ```
+
+## Related
+- [[docs/swift/protocols|Swift - Protocols]]
+- [[docs/swift/enums|Swift - Enums]]
+- [[docs/swift/memory-management|Swift - Memory Management]]

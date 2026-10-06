@@ -44,3 +44,7 @@ Creates a 'different' view to demonstrate what has changed between two different
 ```bash
 git diff 7e5e3
 ```
+
+## Related
+- [[docs/git/basics|Git - Basics]]
+- [[docs/git/stage|Git - Stage Area]]

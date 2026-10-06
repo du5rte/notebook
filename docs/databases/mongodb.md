@@ -680,3 +680,8 @@ copy & paste a db
 ```sh
 mongodump --uri="mongodb+srv://username:password@myexamplecluster0-kjge4.mongodb.net/old_database" --gzip --archive | mongorestore --uri="mongodb://localhost:27017/new_database" --nsFrom="old_database.*" --nsTo="new_database.*" --gzip --archive
 ```
+
+## Related
+- [[docs/databases/databases|Databases]]
+- [[docs/databases/redis|Redis - Basics]]
+- [[docs/databases/elasticsearch|Elastic Search - Basics]]

@@ -177,3 +177,8 @@ Server - FrontEnd we know who the user is now.
 Server - Save this token your memory so we can talk securely
 FrontEnd - Great, Welcome in User.
 ```
+
+## Related
+- [[docs/security/jwt|JWT]]
+- [[docs/security/passport|Passport]]
+- [[docs/security/openid|OpenID]]

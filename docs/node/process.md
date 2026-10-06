@@ -108,3 +108,8 @@ var fork = require('child_process').fork
 
 fork('./app')
 ```
+
+## Related
+- [[docs/node/cli|Node - CLI]]
+- [[docs/linux/processes|Console - Processes]]
+- [[docs/linux/environment|Console - Environment]]

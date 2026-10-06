@@ -595,3 +595,8 @@ race.delegate = broadcast
 
 race.end()
 ```
+
+## Related
+- [[docs/swift/object-oriented|Swift - Objects]]
+- [[docs/swift/enums|Swift - Enums]]
+- [[docs/swift/memory-management|Swift - Memory Management]]

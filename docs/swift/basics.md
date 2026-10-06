@@ -93,3 +93,7 @@ Organises data into named values and lists of values in a `.plist` file
 
 ## XML
 Extensible Markup Language is a set of rules for encoding documents in both machines and human readable format.
+
+## Related
+- [[docs/swift/variables|Swift - Variables]]
+- [[docs/swift/xcode|Xcode]]

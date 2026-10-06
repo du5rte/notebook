@@ -45,3 +45,6 @@ $ rm -rf /home/josh
 # or
 $ deluser --remove-home john
 ```
+
+## Related
+- [[docs/linux/permissions|Console - Permissions]]

@@ -136,3 +136,7 @@ fetch(`//localhost:3000/graphql/?query={
   }`
 )
 ```
+
+## Related
+- [[docs/graphql/server|GraphQL - Server]]
+- [[docs/graphql/graphiql|GraphQL - GraphiQL]]

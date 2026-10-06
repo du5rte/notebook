@@ -118,3 +118,9 @@ Extend mixins by defining a point where it can pass a block of CSS rules.
   }
 }
 ```
+
+## Related
+- [[docs/sass/functions|Sass - Functions]]
+- [[docs/sass/extends|Sass - Extends]]
+- [[docs/sass/directives|Sass - Directives]]
+- [[docs/sass/maps|Sass - List Maps]]

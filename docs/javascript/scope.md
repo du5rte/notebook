@@ -177,3 +177,8 @@ $('#opendiv').on('click', function() {
   }.bind(this));
 });
 ```
+
+## Related
+- [[docs/javascript/functions|JavaScript Functions]]
+- [[docs/javascript/decorators|JavaScript - Common Patterns]]
+- [[docs/javascript/variables|JavaScript - Variables]]

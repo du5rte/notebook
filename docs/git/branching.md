@@ -51,3 +51,9 @@ Deletes the branch from the repository.
 ```bash
 git branch -D some_branch
 ```
+
+## Related
+- [[docs/git/merging|Git - Merging]]
+- [[docs/git/flow|Git - Flow]]
+- [[docs/git/stashing|Git - Stashing]]
+- [[docs/git/stage|Git - Stage Area]]

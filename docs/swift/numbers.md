@@ -72,3 +72,8 @@ levelScore += 1 // 1
 levelScore += 1 // 2
 levelScore -= 2 // 0
 ```
+
+## Related
+- [[docs/swift/strings|Swift - Strings]]
+- [[docs/swift/booleans|Swift - Booleans]]
+- [[docs/swift/collections|Swift - Collections and Control Flow]]

@@ -58,3 +58,9 @@ Displays the user you are currently logged in as.
 ```sh
 $ whoami
 ```
+
+## Related
+- [[docs/node/process|Process]]
+- [[docs/node/cli|Node - CLI]]
+- [[docs/linux/environment|Console - Environment]]
+- [[docs/linux/pipe|Console - Pipes and Redirection]]

@@ -117,3 +117,7 @@ The caption element represents the title of the table. Good for `SEO`
 	</tbody>
 </table>
 ```
+
+## Related
+- [[docs/html/forms|HTML - Forms]]
+- [[docs/html/text|HTML - Text]]

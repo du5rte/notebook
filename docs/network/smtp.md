@@ -14,3 +14,7 @@ tags: [network]
 Here we can send an email from `obama@whitehouse.gov` to `substack@localhost`.
 
 .... TODO ...
+
+## Related
+- [[docs/network/postfix|PostFix]]
+- [[docs/node/email|Node - Email]]

@@ -55,3 +55,8 @@ Embed video
 	allowfullscreen>
 </iframe>
 ```
+
+## Related
+- [[docs/svg/basics|SVG - Basics]]
+- [[docs/svg/elements|SVG - Elements]]
+- [[docs/html/video-and-audio|Video and Audio]]

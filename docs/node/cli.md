@@ -32,3 +32,8 @@ mv /usr/local/bin
 ```sh
 npm link
 ```
+
+## Related
+- [[docs/node/process|Process]]
+- [[docs/linux/processes|Console - Processes]]
+- [[docs/linux/environment|Console - Environment]]

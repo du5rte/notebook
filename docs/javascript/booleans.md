@@ -149,3 +149,10 @@ Using a `!` inverts a boolean value, `!true = not true`
 console.log(!true); // false
 console.log(!false); // true
 ```
+
+## Related
+- [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/javascript/numbers|JavaScript Numbers]]
+- [[docs/javascript/arrays|JavaScript Arrays]]
+- [[docs/javascript/conditionals|JavaScript - Conditionals]]
+- [[docs/javascript/loops|JavaScript - Loops]]

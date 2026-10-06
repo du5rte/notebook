@@ -127,3 +127,7 @@ Shorthand example, If the `0%` and `100%` are the same we can simply omit them
   }
 }
 ```
+
+## Related
+- [[docs/css/transform-transitions|CSS - Transitions and Transforms]]
+- [[docs/svg/animations|SVG - Animations]]

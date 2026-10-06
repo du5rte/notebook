@@ -7,3 +7,6 @@ tags: [network]
 ---
 
 # Networking - IRC
+
+## Related
+- [[docs/network/networking|Networking]]

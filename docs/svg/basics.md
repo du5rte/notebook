@@ -78,3 +78,7 @@ You can use data URIs for SVG too. nice way of including a resource that would h
   <rect fill="red" height="40" width="80" x="10" y="20" />
 </svg>
 ```
+
+## Related
+- [[docs/svg/elements|SVG - Elements]]
+- [[docs/html/objects|HTML - Objects]]

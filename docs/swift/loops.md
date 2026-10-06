@@ -77,3 +77,7 @@ repeat {
   statement
 } while condition
 ```
+
+## Related
+- [[docs/swift/conditionals|Swift - Conditionals]]
+- [[docs/swift/collections|Swift - Collections and Control Flow]]

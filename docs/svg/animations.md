@@ -56,3 +56,7 @@ Could also be done with JavaScript. [Animated line drawing in SVG](https://jakea
 var path = document.querySelector('.logo');
 var length = path.getTotalLength(); // 420.27581787109375
 ```
+
+## Related
+- [[docs/css/animations|CSS - Animations]]
+- [[docs/css/transform-transitions|CSS - Transitions and Transforms]]

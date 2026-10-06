@@ -52,3 +52,7 @@ function add(first, second, callback) {
     }
 }
 ```
+
+## Related
+- [[docs/node/events|Node - Events]]
+- [[docs/javascript/decorators|JavaScript - Common Patterns]]

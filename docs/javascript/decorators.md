@@ -209,3 +209,9 @@ var p = new Person()
 
 p.setName('Jane', 'Lee').sayName().setName('John', 'Smith').sayName()
 ```
+
+## Related
+- [[docs/node/events|Node - Events]]
+- [[docs/javascript/async|JavaScript - Asynchronous Programming]]
+- [[docs/javascript/functions|JavaScript Functions]]
+- [[docs/javascript/scope|JavaScript - Scope]]

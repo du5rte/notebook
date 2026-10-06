@@ -45,3 +45,7 @@ extension Page {
 
 ## Linked lists
 A list that has a reference to the next item in the list `singly link list`. A linked list that has both references to the next and previous item is a `doubly link list`
+
+## Related
+- [[docs/swift/functions|Swift - Functions]]
+- [[docs/swift/errors|Swift - Error Handling]]
