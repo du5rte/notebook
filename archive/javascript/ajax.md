@@ -7,29 +7,14 @@ tags: [javascript]
 ---
 # JavaScript - AJAX
 
+Still-valid fundamentals moved to [[docs/javascript/async|JavaScript - Asynchronous Programming]].
+
 
 Resources:
 - [HTTP Request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)
 - [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 - [JSON validator](http://jsonlint.com/)
 - [Fetch](https://github.com/github/fetch)
-
-## Asynchronous
-
-Blocking
-```js
-// blocks everything until it gets back the response
-let results = doLongTask("value")
-
-render(results)
-```
-
-Non-blocking
-```js
-doLongTask("value", function (results) {
-  render(results)
-})
-```
 
 ## AJAX
 *Asynchronous JavaScript and XML* allows the client to `respond` and `request` from a web server.
@@ -116,53 +101,4 @@ function ajax(method, url, callback) {
 ajax("GET", "http://www.filltext.com?rows=10&f={firstName}", function(data) {
   console.log( JSON.parse(data) )
 })
-```
-
-## Promises
-The promise object creates a `pending` task that can either be `resolved` or `rejected`, once it's `fulfilled` it any `then` will run, if any errors occur it's passed to `catch`
-
-
-```js
-function ajax(method, url) {
-  return new Promise((resolve, reject) => {
-    let xhr = new XMLHttpRequest()
-    xhr.open(method, url, true)
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 400) {
-        // resolve if successful
-        resolve(JSON.parse(xhr.response))
-      } else {
-        // reject if the wrong status
-        reject(new Error(xhr.status))
-      }
-    }
-
-    // reject on error
-    xhr.onerror = () => {
-      reject(new Error("Error Fetching Results"))
-    }
-
-    xhr.send()
-
-  })
-}
-```
-```js
-ajax("GET", "http://www.filltext.com?rows=10&f={firstName}")
-  .then((data) => {
-    console.log( data )
-  })
-  .catch((error) => {
-    console.log('Error: ', error)
-  })
-```
-
-## Async Functions
-Can be used with tasks that return a promise. any code inside a `async function` that depends on a value wrapped by `await` is smart enough to wait for it to resolve.
-
-```js
-(async function() {
-  let data = await ajax("GET", "http://www.filltext.com?rows=10&f={firstName}")
-  console.log(data)
-})()
 ```

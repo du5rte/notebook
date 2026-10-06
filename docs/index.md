@@ -67,6 +67,7 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/javascript/objects|JavaScript Objects]]
 - [[docs/javascript/scope|JavaScript - Scope]]
 - [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/javascript/typescript|JavaScript - TypeScript]]
 - [[docs/javascript/unit-testing|JavaScript - Unit Testing]]
 - [[docs/javascript/variables|JavaScript - Variables]]
 
