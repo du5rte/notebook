@@ -11,13 +11,11 @@ docs/      legacy notebook, human-written: <topic>/<note>.md (css/, node/, git/.
 archive/   superseded tools, libraries and API versions: <topic>/<note>.md, plus index.md. Out of the main index, still searchable.
 ```
 
-New `docs/` notes go in the matching topic folder and get a line under their area in `docs/index.md` (`basics` first, then alphabetical). Open a new topic folder only once it would hold three notes; until then file the note under the closest existing topic.
+New `docs/` note: put it in its topic folder and list it under its area in `docs/index.md` (`basics` first, then A-Z). A topic gets its own folder at three notes; before that, use the closest one.
 
-Archive a note when following it today would mislead (tool dead, API superseded). Keep fundamentals even if old:
-- Library still alive but the note is outdated: move the still-valid fundamentals (concepts, principles, patterns) into a `docs/` note, link it to the archived original (`Fundamentals kept from [[archive/...]]`), and archive the rest. Merge into newer notes on the same topic when they exist.
-- Tool completely obsolete (jQuery, Bower, Gulp, CoffeeScript...): archive whole, nothing kept.
+Outdated notes: recommend deleting them; git history keeps them. Merge only what's still worth knowing into the current note on that topic first.
 
-Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. No binary or raster files (`.png`, `.ai`, `.pdf`). Diagrams are Mermaid in the note, or `.svg` beside it.
+Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. Diagrams are Mermaid in the note, or `.svg` beside it.
 
 ## Rules
 
@@ -29,10 +27,9 @@ Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Syste
 
 ## Naming and links
 
-- Filenames: lowercase kebab-case, no numeric prefixes. One H1 matching `title`.
+- Filenames: lowercase kebab-case. One H1 matching `title`.
 - `[[wikilinks]]`, on first meaningful mention. Link to missing pages rather than skip. They become the "Gaps" list in the index.
 - Alternate names go in `aliases`, not in duplicate pages.
-- Drafts use `status: draft`, not a `_` prefix.
 
 ## Frontmatter
 
