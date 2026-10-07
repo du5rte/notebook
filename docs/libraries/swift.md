@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, language]
-category: language
+categories: [language]
 platforms: [ios]
 status: dropped
 since: 2016
@@ -22,6 +22,3 @@ Notes: [[docs/swift/basics]]
 Native iOS. 16 notes from 2016, Swift 2 and 3.
 
 ## Why I dropped it
-
-
-Source: notebook. Status is a guess until `verified: true`.

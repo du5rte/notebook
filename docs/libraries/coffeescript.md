@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, language]
-category: language
+categories: [language]
 platforms: [web]
 status: dropped
 since: 2015
@@ -19,9 +19,4 @@ Notes: [[archive/javascript/coffeescript]]
 
 ## Why I picked it
 
-
-
 ## Why I dropped it
-
-
-Source: notebook. Status is a guess until `verified: true`.

@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, data]
-category: data
+categories: [data]
 platforms: [web]
 status: dropped
 since: 2016
@@ -19,9 +19,4 @@ Notes: [[archive/react/relay]], [[archive/graphql/relay]]
 
 ## Why I picked it
 
-
-
 ## Why I dropped it
-
-
-Source: notebook. Status is a guess until `verified: true`.

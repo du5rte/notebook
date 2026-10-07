@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, ui]
-category: ui
+categories: [ui]
 platforms: [web]
 status: dropped
 replaced_by: "[[docs/libraries/react-aria]]"
@@ -16,9 +16,4 @@ verified: false
 
 ## Why I picked it
 
-
-
 ## Why I dropped it
-
-
-Source: article react-aria-over-radix. Status is a guess until `verified: true`.

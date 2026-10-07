@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, framework]
-category: framework
+categories: [framework]
 platforms: [react-native]
 status: using
 since: 2017
@@ -18,9 +18,4 @@ Notes: [[archive/react/react-native]]
 
 ## Why I picked it
 
-
-
 ## Why I would drop it
-
-
-Source: notebook, notion. Status is a guess until `verified: true`.

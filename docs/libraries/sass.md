@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, styling]
-category: styling
+categories: [styling]
 platforms: [web]
 status: dropped
 since: 2015
@@ -18,10 +18,4 @@ Notes: [[docs/sass/basics]]
 
 ## Why I picked it
 
-
 ## Why I dropped it
-
-Duarte: "I definitely don't use" (2026-10-07).
-
-
-Source: notebook. Status is a guess until `verified: true`.

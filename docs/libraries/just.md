@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, utils]
-category: utils
+categories: [utils]
 platforms: [web, react-native, node]
 status: watching
 url: https://anguscroll.com/just
@@ -15,9 +15,6 @@ verified: false
 
 ## Why I picked it
 
-Silver medal: one-function packages.
+One-function packages, tiny and tree-shakable.
 
 ## Why I would drop it
-
-
-Source: notion ADR Utilities Libraries. Status is a guess until `verified: true`.

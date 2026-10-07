@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, auth]
-category: auth
+categories: [auth]
 platforms: [web, node]
 status: watching
 url: https://www.better-auth.com
@@ -15,9 +15,4 @@ verified: false
 
 ## Why I picked it
 
-
-
 ## Why I would drop it
-
-
-Source: notion ADR Auth. Status is a guess until `verified: true`.

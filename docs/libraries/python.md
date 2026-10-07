@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, language]
-category: language
+categories: [language]
 platforms: [node]
 status: trying
 since: 2018
@@ -21,6 +21,3 @@ Notes: [[docs/python/basics]], [[docs/ml/basics]]
 Picked up in 2018 for machine learning notes.
 
 ## Why I would drop it
-
-
-Source: notebook. Status is a guess until `verified: true`.

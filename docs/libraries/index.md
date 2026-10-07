@@ -9,31 +9,29 @@ tags: [library, index]
 
 One file per library. `status` is one of `using`, `trying`, `watching` or `dropped`; `verified: false` means the status is a guess from old notes and has not been confirmed. The Dropped table at the bottom is the retrospective: filter it by platform for web, backend or mobile.
 
-Categories: `animation`, `auth`, `data`, `database`, `forms`, `framework`, `graphics`, `language`, `navigation`, `services`, `state`, `styling`, `testing`, `tooling`, `ui`, `utils`.
-
-Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparisons/git-hooks|Git hook managers]], [[docs/comparisons/databases|Databases and data layers]], [[docs/comparisons/auth|Auth providers]]
+Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`, `forms`, `framework`, `graphics`, `language`, `navigation`, `services`, `state`, `styling`, `testing`, `tooling`, `ui`, `utils`.
 
 ## Using
 
-| Library | Category | Platforms | Using since | Replaces |
+| Library | Categories | Platforms | Using since | Replaces |
 |---|---|---|---|---|
 | [[docs/libraries/gesture-handler|Gesture Handler]] | animation | react-native |  |  |
 | [[docs/libraries/reanimated|Reanimated]] | animation | react-native |  | [[docs/libraries/react-motion|React Motion]] |
 | [[docs/libraries/apollo-client|Apollo Client]] | data | web, react-native | 2016 | [[docs/libraries/relay|Relay]] |
 | [[docs/libraries/apollo-server|Apollo Server]] | data | node | 2016 |  |
 | [[docs/libraries/graphql|GraphQL]] | data | web, react-native, node | 2016 |  |
-| [[docs/libraries/convex|Convex]] | database | web, react-native |  | [[docs/libraries/firebase|Firebase]], [[docs/libraries/mongodb|MongoDB]] |
-| [[docs/libraries/expo|Expo]] | framework | react-native |  |  |
+| [[docs/libraries/convex|Convex]] | database, data | web, react-native |  | [[docs/libraries/firebase|Firebase]], [[docs/libraries/mongodb|MongoDB]] |
 | [[docs/libraries/react|React]] | framework | web | 2016 | [[docs/libraries/jquery|jQuery]] |
 | [[docs/libraries/react-native|React Native]] | framework | react-native | 2017 | [[docs/libraries/swift|Swift]] |
 | [[docs/libraries/react-native-web|React Native for Web]] | framework | web |  |  |
+| [[docs/libraries/expo|Expo]] | framework, tooling | react-native |  |  |
 | [[docs/libraries/react-native-svg|react-native-svg]] | graphics | react-native |  |  |
 | [[docs/libraries/javascript|JavaScript]] | language | web, react-native, node | 2015 |  |
 | [[docs/libraries/typescript|TypeScript]] | language | web, react-native, node | 2015 | [[docs/libraries/coffeescript|CoffeeScript]] |
 | [[docs/libraries/react-navigation|React Navigation]] | navigation | react-native |  |  |
 | [[docs/libraries/legend-state|Legend State]] | state | web, react-native |  |  |
 | [[docs/libraries/mmkv|MMKV]] | state | react-native |  |  |
-| [[docs/libraries/restyle|Restyle]] | styling | react-native |  |  |
+| [[docs/libraries/restyle|Restyle]] | styling, ui | react-native |  |  |
 | [[docs/libraries/jest|Jest]] | testing | web, react-native, node |  |  |
 | [[docs/libraries/maestro|Maestro]] | testing | react-native |  |  |
 | [[docs/libraries/codesandbox|CodeSandbox]] | tooling | web |  |  |
@@ -57,12 +55,12 @@ Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparison
 
 ## Trying
 
-| Library | Category | Platforms | Trying since | Replaces |
+| Library | Categories | Platforms | Trying since | Replaces |
 |---|---|---|---|---|
-| [[docs/libraries/lottie|Lottie]] | animation | web, react-native |  |  |
+| [[docs/libraries/lottie|Lottie]] | animation, graphics | web, react-native |  |  |
 | [[docs/libraries/clerk|Clerk]] | auth | web, react-native |  |  |
-| [[docs/libraries/skia|Skia]] | graphics | react-native |  |  |
 | [[docs/libraries/vector-icons|Vector Icons]] | graphics | react-native |  |  |
+| [[docs/libraries/skia|Skia]] | graphics, animation | react-native |  |  |
 | [[docs/libraries/python|Python]] | language | node | 2018 |  |
 | [[docs/libraries/bottom-sheet|Bottom Sheet (gorhom)]] | navigation | react-native |  |  |
 | [[docs/libraries/hold-menu|Hold Menu]] | navigation | react-native |  |  |
@@ -81,7 +79,7 @@ Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparison
 | [[docs/libraries/fast-image|FastImage]] | ui | react-native |  |  |
 | [[docs/libraries/shadcn-ui|shadcn/ui]] | ui | web |  |  |
 | [[docs/libraries/sonner|Sonner]] | ui | web, react-native |  |  |
-| [[docs/libraries/tamagui|Tamagui]] | ui | web, react-native |  |  |
+| [[docs/libraries/tamagui|Tamagui]] | ui, styling | web, react-native |  |  |
 | [[docs/libraries/delay|delay]] | utils | web, react-native, node |  |  |
 | [[docs/libraries/ffmpeg|ffmpeg]] | utils | node |  |  |
 | [[docs/libraries/fuse|Fuse.js]] | utils | web, react-native |  |  |
@@ -90,7 +88,7 @@ Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparison
 
 ## Watching
 
-| Library | Category | Platforms |
+| Library | Categories | Platforms |
 |---|---|---|
 | [[docs/libraries/confetti|Confetti]] | animation | react-native |
 | [[docs/libraries/lenis|Lenis]] | animation | web |
@@ -109,10 +107,10 @@ Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparison
 | [[docs/libraries/instantdb|InstantDB]] | database | web, react-native |
 | [[docs/libraries/watermelon-db|WatermelonDB]] | database | react-native |
 | [[docs/libraries/tanstack-form|TanStack Form]] | forms | web |
-| [[docs/libraries/d3|D3.js]] | graphics | web |
 | [[docs/libraries/nano-icons|Nano Icons]] | graphics | react-native |
 | [[docs/libraries/fast-squircle|react-native-fast-squircle]] | graphics | react-native |
 | [[docs/libraries/victory-native|Victory Native]] | graphics | react-native |
+| [[docs/libraries/d3|D3.js]] | graphics, data | web |
 | [[docs/libraries/solidity|Solidity]] | language | web |
 | [[docs/libraries/detour|detour]] | navigation | react-native |
 | [[docs/libraries/expo-motion-tabs|expo-motion-tabs]] | navigation | react-native |
@@ -144,7 +142,7 @@ Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparison
 
 ## Dropped
 
-| Library | Category | Platforms | Used | Replaced by |
+| Library | Categories | Platforms | Used | Replaced by |
 |---|---|---|---|---|
 | [[docs/libraries/react-motion|React Motion]] | animation | web | 2016 | [[docs/libraries/reanimated]] |
 | [[docs/libraries/relay|Relay]] | data | web | 2016 | [[docs/libraries/apollo-client]] |
@@ -173,8 +171,9 @@ Comparisons: [[docs/comparisons/utilities|Utility libraries]], [[docs/comparison
 | [[docs/libraries/jquery|jQuery]] | ui | web | 2015–2016 | [[docs/libraries/react]] |
 | [[docs/libraries/radix|Radix UI]] | ui | web |  | [[docs/libraries/react-aria]] |
 | [[docs/libraries/lodash|Lodash]] | utils | web, react-native, node |  | [[docs/libraries/remeda]] |
+
 ## Not libraries
 
-UI galleries and inspiration sites from the Notion "UI Libraries" database, kept out of the library files: 21st.dev, Uiverse, Codrops, CodyHouse, shadcncraft, Shadcn Studio, Shadcn Space, Vercel Design, Material Design 3, Bit, Watermelon UI, beUI, unlumen UI, FeralUI, Bencho, 02ui Motion, Bklit UI, Evil Charts, KokonutUI, Amicro, Kinetics, Canvas UI, UI root, Layers, 000h, Cobe, ui.camera, Rare UI, Obsidian UI, ArcUI, Libraries.dev, Reactiive demos, React Native Motion.
+UI galleries and inspiration sites, kept out of the library files: 21st.dev, Uiverse, Codrops, CodyHouse, shadcncraft, Shadcn Studio, Shadcn Space, Vercel Design, Material Design 3, Bit, Watermelon UI, beUI, unlumen UI, FeralUI, Bencho, 02ui Motion, Bklit UI, Evil Charts, KokonutUI, Amicro, Kinetics, Canvas UI, UI root, Layers, 000h, Cobe, ui.camera, Rare UI, Obsidian UI, ArcUI, Libraries.dev, Reactiive demos, React Native Motion.
 
-AI apps from the Notion "Libraries" database (MidJourney, Kling, Perplexity, n8n, Windsurf, Claude and others) are tools, not libraries, and are left for a separate list.
+AI apps (MidJourney, Kling, Perplexity, n8n, Windsurf, Claude and others) are tools, not libraries, and are left for a separate list.

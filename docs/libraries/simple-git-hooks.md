@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, tooling]
-category: tooling
+categories: [tooling]
 platforms: [node]
 status: dropped
 replaced_by: "[[docs/libraries/lefthook]]"
@@ -16,10 +16,6 @@ verified: false
 
 ## Why I picked it
 
+Maps hooks to commands in package.json with no magic.
 
 ## Why I dropped it
-
-Considered, too little control for parallel tasks.
-
-
-Source: notion ADR Git Hook Manager. Status is a guess until `verified: true`.

@@ -5,7 +5,7 @@ created: 2026-10-07
 updated: 2026-10-07
 aliases: []
 tags: [library, animation]
-category: animation
+categories: [animation]
 platforms: [web]
 status: dropped
 since: 2016
@@ -19,9 +19,4 @@ Notes: [[archive/react/motion]]
 
 ## Why I picked it
 
-
-
 ## Why I dropped it
-
-
-Source: notebook. Status is a guess until `verified: true`.
