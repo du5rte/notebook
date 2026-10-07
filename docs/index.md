@@ -171,6 +171,15 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/ml/basics|Machine Learning]]
 - [[docs/ml/data-analysis|Data Analysis]]
 
+## Libraries
+
+### libraries
+- [[docs/libraries/index|Libraries]]
+- [[docs/comparisons/utilities|Utility libraries]] *(draft)*
+- [[docs/comparisons/git-hooks|Git hook managers]] *(draft)*
+- [[docs/comparisons/databases|Databases and data layers]] *(draft)*
+- [[docs/comparisons/auth|Auth providers]] *(draft)*
+
 ## Tools
 
 ### tools
