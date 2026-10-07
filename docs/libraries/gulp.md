@@ -11,6 +11,7 @@ status: dropped
 since: 2015
 replaced_by: "[[docs/libraries/webpack]]"
 url: https://gulpjs.com
+repo: https://github.com/gulpjs/gulp
 verified: false
 ---
 # Gulp

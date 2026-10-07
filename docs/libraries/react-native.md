@@ -10,6 +10,7 @@ platforms: [react-native]
 status: using
 since: 2017
 url: https://reactnative.dev
+repo: https://github.com/facebook/react-native
 verified: false
 ---
 # React Native

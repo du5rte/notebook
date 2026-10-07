@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [react-native]
 status: using
 url: https://github.com/ccrossleycw/quickpush
+repo: https://github.com/ccrossleycw/quickpush
 verified: false
 ---
 # QuickPush

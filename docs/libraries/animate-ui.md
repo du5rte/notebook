@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: watching
 url: https://animate-ui.com
+repo: https://github.com/imskyleen/animate-ui
 verified: false
 ---
 # Animate UI

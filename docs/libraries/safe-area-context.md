@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: using
 url: https://github.com/th3rdwave/react-native-safe-area-context
+repo: https://github.com/th3rdwave/react-native-safe-area-context
 verified: false
 ---
 # Safe Area Context

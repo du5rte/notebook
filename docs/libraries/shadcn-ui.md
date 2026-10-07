@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: trying
 url: https://ui.shadcn.com
+repo: https://github.com/shadcn-ui/ui
 verified: false
 ---
 # shadcn/ui

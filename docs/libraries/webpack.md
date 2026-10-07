@@ -11,6 +11,7 @@ status: dropped
 since: 2015
 replaced_by: "[[docs/libraries/vite]]"
 url: https://webpack.js.org
+repo: https://github.com/webpack/webpack
 verified: false
 ---
 # Webpack

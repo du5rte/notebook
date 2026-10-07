@@ -10,6 +10,7 @@ platforms: [web, react-native, node]
 status: using
 since: 2015
 url: https://www.typescriptlang.org
+repo: https://github.com/microsoft/TypeScript
 verified: false
 ---
 # TypeScript

@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: dropped
 url: https://getbootstrap.com
+repo: https://github.com/twbs/bootstrap
 verified: false
 ---
 # Bootstrap

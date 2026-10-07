@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native, ios]
 status: watching
 url: https://docs.swmansion.com/pulsar
+repo: https://github.com/software-mansion/pulsar
 verified: false
 ---
 # Pulsar

@@ -9,6 +9,7 @@ categories: [data]
 platforms: [web, node]
 status: watching
 url: https://trpc.io
+repo: https://github.com/trpc/trpc
 verified: false
 ---
 # tRPC

@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native, ios]
 status: watching
 url: https://github.com/software-mansion-labs/expo-live-activity
+repo: https://github.com/software-mansion-labs/expo-live-activity
 verified: false
 ---
 # expo-live-activity

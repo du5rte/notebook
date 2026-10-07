@@ -9,6 +9,7 @@ categories: [state]
 platforms: [web, react-native]
 status: trying
 url: https://zustand-demo.pmnd.rs
+repo: https://github.com/pmndrs/zustand
 verified: false
 ---
 # Zustand

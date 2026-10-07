@@ -9,6 +9,7 @@ categories: [styling, ui]
 platforms: [react-native]
 status: using
 url: https://shopify.github.io/restyle
+repo: https://github.com/Shopify/restyle
 verified: false
 ---
 # Restyle

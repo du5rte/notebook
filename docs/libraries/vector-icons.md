@@ -9,6 +9,7 @@ categories: [graphics]
 platforms: [react-native]
 status: trying
 url: https://github.com/oblador/react-native-vector-icons
+repo: https://github.com/oblador/react-native-vector-icons
 verified: false
 ---
 # Vector Icons

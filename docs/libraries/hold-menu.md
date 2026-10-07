@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: trying
 url: https://enesozturk.github.io/react-native-hold-menu
+repo: https://github.com/enesozturk/react-native-hold-menu
 verified: false
 ---
 # Hold Menu

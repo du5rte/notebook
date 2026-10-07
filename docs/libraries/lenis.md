@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [web]
 status: watching
 url: https://lenis.darkroom.engineering
+repo: https://github.com/darkroomengineering/lenis
 verified: false
 ---
 # Lenis

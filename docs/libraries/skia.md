@@ -9,6 +9,7 @@ categories: [graphics, animation]
 platforms: [react-native]
 status: trying
 url: https://shopify.github.io/react-native-skia
+repo: https://github.com/Shopify/react-native-skia
 verified: false
 ---
 # Skia

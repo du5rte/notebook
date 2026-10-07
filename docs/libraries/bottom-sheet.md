@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: trying
 url: https://gorhom.dev/react-native-bottom-sheet
+repo: https://github.com/gorhom/react-native-bottom-sheet
 verified: false
 ---
 # Bottom Sheet (gorhom)

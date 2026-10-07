@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: trying
 url: https://github.com/gorhom/react-native-portal
+repo: https://github.com/gorhom/react-native-portal
 verified: false
 ---
 # Portal (gorhom)

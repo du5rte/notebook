@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/edwardloopez/react-native-coachmark
+repo: https://github.com/edwardloopez/react-native-coachmark
 verified: false
 ---
 # react-native-coachmark

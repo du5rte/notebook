@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native]
 status: trying
 url: https://www.fusejs.io
+repo: https://github.com/krisk/Fuse
 verified: false
 ---
 # Fuse.js

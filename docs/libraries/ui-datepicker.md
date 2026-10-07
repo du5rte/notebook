@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/farhoudshapouran/react-native-ui-datepicker
+repo: https://github.com/farhoudshapouran/react-native-ui-datepicker
 verified: false
 ---
 # react-native-ui-datepicker

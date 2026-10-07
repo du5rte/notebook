@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: using
 url: https://shopify.github.io/flash-list
+repo: https://github.com/Shopify/flash-list
 verified: false
 ---
 # FlashList

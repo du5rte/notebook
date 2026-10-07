@@ -9,6 +9,7 @@ categories: [database, data]
 platforms: [web, react-native]
 status: using
 url: https://www.convex.dev
+repo: https://github.com/get-convex/convex-backend
 verified: false
 ---
 # Convex

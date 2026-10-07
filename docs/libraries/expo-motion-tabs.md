@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: watching
 url: https://github.com/rit3zh/expo-motion-tabs
+repo: https://github.com/rit3zh/expo-motion-tabs
 verified: false
 ---
 # expo-motion-tabs

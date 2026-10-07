@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: using
 url: https://docs.swmansion.com/react-native-gesture-handler
+repo: https://github.com/software-mansion/react-native-gesture-handler
 verified: false
 ---
 # Gesture Handler

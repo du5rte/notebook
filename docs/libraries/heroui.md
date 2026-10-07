@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web, react-native]
 status: watching
 url: https://www.heroui.com
+repo: https://github.com/heroui-inc/heroui
 verified: false
 ---
 # HeroUI

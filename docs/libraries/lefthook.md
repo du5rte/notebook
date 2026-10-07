@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [node]
 status: using
 url: https://github.com/evilmartians/lefthook
+repo: https://github.com/evilmartians/lefthook
 verified: false
 ---
 # Lefthook

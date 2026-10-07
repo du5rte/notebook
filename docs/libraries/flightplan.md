@@ -10,6 +10,7 @@ platforms: [node]
 status: dropped
 since: 2015
 url: https://github.com/pstadler/flightplan
+repo: https://github.com/pstadler/flightplan
 verified: false
 ---
 # Flightplan

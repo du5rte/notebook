@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: trying
 url: https://github.com/netguru/sticky-parallax-header
+repo: https://github.com/netguru/sticky-parallax-header
 verified: false
 ---
 # Sticky Parallax Header

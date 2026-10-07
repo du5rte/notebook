@@ -9,6 +9,7 @@ categories: [auth]
 platforms: [web, node]
 status: watching
 url: https://www.better-auth.com
+repo: https://github.com/better-auth/better-auth
 verified: false
 ---
 # Better Auth

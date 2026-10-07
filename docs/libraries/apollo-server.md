@@ -10,6 +10,7 @@ platforms: [node]
 status: using
 since: 2016
 url: https://www.apollographql.com/docs/apollo-server
+repo: https://github.com/apollographql/apollo-server
 verified: false
 ---
 # Apollo Server

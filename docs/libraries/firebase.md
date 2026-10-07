@@ -10,6 +10,7 @@ platforms: [web, react-native]
 status: dropped
 replaced_by: "[[docs/libraries/convex]]"
 url: https://firebase.google.com
+repo: https://github.com/firebase/firebase-js-sdk
 verified: false
 ---
 # Firebase

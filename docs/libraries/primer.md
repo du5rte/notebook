@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: watching
 url: https://primer.style
+repo: https://github.com/primer/react
 verified: false
 ---
 # Primer

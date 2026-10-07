@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native, node]
 status: watching
 url: https://anguscroll.com/just
+repo: https://github.com/angus-c/just
 verified: false
 ---
 # just

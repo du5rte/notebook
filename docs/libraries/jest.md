@@ -9,6 +9,7 @@ categories: [testing]
 platforms: [web, react-native, node]
 status: using
 url: https://jestjs.io
+repo: https://github.com/jestjs/jest
 verified: false
 ---
 # Jest

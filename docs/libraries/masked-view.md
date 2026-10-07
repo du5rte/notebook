@@ -9,6 +9,7 @@ categories: [styling]
 platforms: [react-native]
 status: trying
 url: https://github.com/react-native-masked-view/masked-view
+repo: https://github.com/react-native-masked-view/masked-view
 verified: false
 ---
 # Masked View

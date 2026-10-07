@@ -9,6 +9,7 @@ categories: [framework, tooling]
 platforms: [react-native]
 status: using
 url: https://expo.dev
+repo: https://github.com/expo/expo
 verified: false
 ---
 # Expo

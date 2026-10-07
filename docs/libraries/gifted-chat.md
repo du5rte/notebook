@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/FaridSafi/react-native-gifted-chat
+repo: https://github.com/FaridSafi/react-native-gifted-chat
 verified: false
 ---
 # Gifted Chat

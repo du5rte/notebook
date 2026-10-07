@@ -9,6 +9,7 @@ categories: [state]
 platforms: [web, react-native]
 status: dropped
 url: https://recoiljs.org
+repo: https://github.com/facebookexperimental/Recoil
 verified: false
 ---
 # Recoil

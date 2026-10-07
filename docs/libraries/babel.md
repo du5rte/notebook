@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [web, node]
 status: dropped
 url: https://babeljs.io
+repo: https://github.com/babel/babel
 verified: false
 ---
 # Babel

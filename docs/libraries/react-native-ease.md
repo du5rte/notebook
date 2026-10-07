@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: watching
 url: https://github.com/AppAndFlow/react-native-ease
+repo: https://github.com/AppAndFlow/react-native-ease
 verified: false
 ---
 # react-native-ease

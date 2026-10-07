@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/marceloPrado/flash-calendar
+repo: https://github.com/marceloPrado/flash-calendar
 verified: false
 ---
 # Flash Calendar

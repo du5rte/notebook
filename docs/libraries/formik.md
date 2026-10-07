@@ -9,6 +9,7 @@ categories: [forms]
 platforms: [web, react-native]
 status: dropped
 url: https://formik.org
+repo: https://github.com/jaredpalmer/formik
 verified: false
 ---
 # Formik

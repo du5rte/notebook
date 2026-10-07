@@ -10,6 +10,7 @@ platforms: [node]
 status: trying
 since: 2018
 url: https://www.python.org
+repo: https://github.com/python/cpython
 verified: false
 ---
 # Python

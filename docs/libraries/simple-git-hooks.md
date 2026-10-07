@@ -10,6 +10,7 @@ platforms: [node]
 status: dropped
 replaced_by: "[[docs/libraries/lefthook]]"
 url: https://github.com/toplenboren/simple-git-hooks
+repo: https://github.com/toplenboren/simple-git-hooks
 verified: false
 ---
 # simple-git-hooks

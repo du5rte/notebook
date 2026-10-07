@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://rnr-docs.vercel.app
+repo: https://github.com/founded-labs/react-native-reusables
 verified: false
 ---
 # React Native Reusables

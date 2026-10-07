@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: watching
 url: https://reactbits.dev
+repo: https://github.com/DavidHDev/react-bits
 verified: false
 ---
 # React Bits

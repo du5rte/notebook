@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/software-mansion/react-native-enriched
+repo: https://github.com/software-mansion/react-native-enriched
 verified: false
 ---
 # react-native-enriched

@@ -11,6 +11,7 @@ status: dropped
 since: 2015
 replaced_by: "[[docs/libraries/npm]]"
 url: https://bower.io
+repo: https://github.com/bower/bower
 verified: false
 ---
 # Bower

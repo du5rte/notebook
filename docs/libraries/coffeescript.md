@@ -11,6 +11,7 @@ status: dropped
 since: 2015
 replaced_by: "[[docs/libraries/typescript]]"
 url: https://coffeescript.org
+repo: https://github.com/jashkenas/coffeescript
 verified: false
 ---
 # CoffeeScript

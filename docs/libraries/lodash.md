@@ -10,6 +10,7 @@ platforms: [web, react-native, node]
 status: dropped
 replaced_by: "[[docs/libraries/remeda]]"
 url: https://lodash.com
+repo: https://github.com/lodash/lodash
 verified: false
 ---
 # Lodash

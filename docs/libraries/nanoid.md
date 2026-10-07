@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native, node]
 status: using
 url: https://github.com/ai/nanoid
+repo: https://github.com/ai/nanoid
 verified: false
 ---
 # Nano ID

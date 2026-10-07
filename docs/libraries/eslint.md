@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [web, react-native, node]
 status: using
 url: https://eslint.org
+repo: https://github.com/eslint/eslint
 verified: false
 ---
 # ESLint

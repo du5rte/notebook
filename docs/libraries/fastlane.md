@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [react-native, ios]
 status: using
 url: https://fastlane.tools
+repo: https://github.com/fastlane/fastlane
 verified: false
 ---
 # Fastlane

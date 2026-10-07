@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: watching
 url: https://github.com/software-mansion-labs/react-native-css-animations
+repo: https://github.com/software-mansion-labs/react-native-css-animations
 verified: false
 ---
 # react-native-css-animations

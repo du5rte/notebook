@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: trying
 url: https://github.com/react-native-device-info/react-native-device-info
+repo: https://github.com/react-native-device-info/react-native-device-info
 verified: false
 ---
 # Device Info

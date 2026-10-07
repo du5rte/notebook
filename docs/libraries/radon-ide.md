@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [react-native]
 status: watching
 url: https://ide.swmansion.com
+repo: https://github.com/software-mansion/radon-ide
 verified: false
 ---
 # Radon IDE

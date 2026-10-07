@@ -11,6 +11,7 @@ status: dropped
 since: 2016
 replaced_by: "[[docs/libraries/react-native]]"
 url: https://www.swift.org
+repo: https://github.com/swiftlang/swift
 verified: false
 ---
 # Swift

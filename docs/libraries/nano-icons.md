@@ -9,6 +9,7 @@ categories: [graphics]
 platforms: [react-native]
 status: watching
 url: https://github.com/software-mansion-labs/react-native-nano-icons
+repo: https://github.com/software-mansion-labs/react-native-nano-icons
 verified: false
 ---
 # Nano Icons

@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: watching
 url: https://github.com/software-mansion-labs/react-native-onboarding
+repo: https://github.com/software-mansion-labs/react-native-onboarding
 verified: false
 ---
 # react-native-onboarding

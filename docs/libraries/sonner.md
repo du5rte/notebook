@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web, react-native]
 status: trying
 url: https://sonner.emilkowal.ski
+repo: https://github.com/emilkowalski/sonner
 verified: false
 ---
 # Sonner

@@ -9,6 +9,7 @@ categories: [data]
 platforms: [react-native]
 status: watching
 url: https://github.com/margelo/react-native-nitro-fetch
+repo: https://github.com/margelo/react-native-nitro-fetch
 verified: false
 ---
 # react-native-nitro-fetch

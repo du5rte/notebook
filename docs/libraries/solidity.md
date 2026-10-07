@@ -9,6 +9,7 @@ categories: [language]
 platforms: [web]
 status: watching
 url: https://soliditylang.org
+repo: https://github.com/ethereum/solidity
 verified: false
 ---
 # Solidity

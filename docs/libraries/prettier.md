@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [web, react-native, node]
 status: using
 url: https://prettier.io
+repo: https://github.com/prettier/prettier
 verified: false
 ---
 # Prettier

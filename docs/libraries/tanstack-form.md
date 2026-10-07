@@ -9,6 +9,7 @@ categories: [forms]
 platforms: [web]
 status: watching
 url: https://tanstack.com/form
+repo: https://github.com/TanStack/form
 verified: false
 ---
 # TanStack Form

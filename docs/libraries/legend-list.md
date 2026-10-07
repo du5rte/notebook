@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://legendapp.com/open-source/list
+repo: https://github.com/LegendApp/legend-list
 verified: false
 ---
 # Legend List

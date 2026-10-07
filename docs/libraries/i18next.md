@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native]
 status: trying
 url: https://react.i18next.com
+repo: https://github.com/i18next/react-i18next
 verified: false
 ---
 # i18next

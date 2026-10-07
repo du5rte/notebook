@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: watching
 url: https://github.com/Renegades-Studio/react-native-tickle
+repo: https://github.com/Renegades-Studio/react-native-tickle
 verified: false
 ---
 # react-native-tickle

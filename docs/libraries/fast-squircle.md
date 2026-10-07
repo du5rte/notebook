@@ -9,6 +9,7 @@ categories: [graphics]
 platforms: [react-native]
 status: watching
 url: https://github.com/fbeccaceci/react-native-fast-squircle
+repo: https://github.com/fbeccaceci/react-native-fast-squircle
 verified: false
 ---
 # react-native-fast-squircle

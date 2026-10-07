@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/EvanBacon/expo-quick-actions
+repo: https://github.com/EvanBacon/expo-quick-actions
 verified: false
 ---
 # expo-quick-actions

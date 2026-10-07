@@ -10,6 +10,7 @@ platforms: [web]
 status: dropped
 since: 2015
 url: https://browsersync.io
+repo: https://github.com/BrowserSync/browser-sync
 verified: false
 ---
 # BrowserSync

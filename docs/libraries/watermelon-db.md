@@ -9,6 +9,7 @@ categories: [database]
 platforms: [react-native]
 status: watching
 url: https://watermelondb.dev
+repo: https://github.com/Nozbe/WatermelonDB
 verified: false
 ---
 # WatermelonDB

@@ -11,6 +11,7 @@ status: dropped
 since: 2016
 replaced_by: "[[docs/libraries/apollo-client]]"
 url: https://relay.dev
+repo: https://github.com/facebook/relay
 verified: false
 ---
 # Relay

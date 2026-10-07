@@ -10,6 +10,7 @@ platforms: [web]
 status: using
 since: 2016
 url: https://react.dev
+repo: https://github.com/facebook/react
 verified: false
 ---
 # React

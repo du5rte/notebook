@@ -9,6 +9,7 @@ categories: [ui, styling]
 platforms: [web, react-native]
 status: trying
 url: https://tamagui.dev
+repo: https://github.com/tamagui/tamagui
 verified: false
 ---
 # Tamagui

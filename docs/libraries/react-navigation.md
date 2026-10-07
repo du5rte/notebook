@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: using
 url: https://reactnavigation.org
+repo: https://github.com/react-navigation/react-navigation
 verified: false
 ---
 # React Navigation

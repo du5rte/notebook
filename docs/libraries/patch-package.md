@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [web, react-native, node]
 status: using
 url: https://github.com/ds300/patch-package
+repo: https://github.com/ds300/patch-package
 verified: false
 ---
 # patch-package

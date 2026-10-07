@@ -9,6 +9,7 @@ categories: [auth]
 platforms: [web, react-native]
 status: trying
 url: https://clerk.com
+repo: https://github.com/clerk/javascript
 verified: false
 ---
 # Clerk

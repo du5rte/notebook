@@ -9,6 +9,7 @@ categories: [animation, graphics]
 platforms: [web, react-native]
 status: trying
 url: https://lottiefiles.com
+repo: https://github.com/lottie-react-native/lottie-react-native
 verified: false
 ---
 # Lottie

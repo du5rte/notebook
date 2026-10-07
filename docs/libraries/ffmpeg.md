@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [node]
 status: trying
 url: https://ffmpeg.org
+repo: https://github.com/FFmpeg/FFmpeg
 verified: false
 ---
 # ffmpeg

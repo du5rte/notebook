@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web, react-native]
 status: watching
 url: https://github.com/0xGF/boneyard
+repo: https://github.com/0xGF/boneyard
 verified: false
 ---
 # Boneyard

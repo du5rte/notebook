@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native, node]
 status: trying
 url: https://github.com/sindresorhus/delay
+repo: https://github.com/sindresorhus/delay
 verified: false
 ---
 # delay

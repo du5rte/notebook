@@ -9,6 +9,7 @@ categories: [graphics]
 platforms: [react-native]
 status: watching
 url: https://nearform.com/open-source/victory-native
+repo: https://github.com/FormidableLabs/victory-native-xl
 verified: false
 ---
 # Victory Native

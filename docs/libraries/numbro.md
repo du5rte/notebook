@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native]
 status: trying
 url: https://numbrojs.com
+repo: https://github.com/BenjaminVanRyseghem/numbro
 verified: false
 ---
 # numbro

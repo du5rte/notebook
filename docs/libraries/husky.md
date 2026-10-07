@@ -10,6 +10,7 @@ platforms: [node]
 status: dropped
 replaced_by: "[[docs/libraries/lefthook]]"
 url: https://typicode.github.io/husky
+repo: https://github.com/typicode/husky
 verified: false
 ---
 # Husky

@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: watching
 url: https://github.com/MatiPl01/react-native-sortables
+repo: https://github.com/MatiPl01/react-native-sortables
 verified: false
 ---
 # React Native Sortables

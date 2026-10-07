@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native, node]
 status: using
 url: https://remedajs.com
+repo: https://github.com/remedajs/remeda
 verified: false
 ---
 # Remeda

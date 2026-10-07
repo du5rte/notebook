@@ -9,6 +9,7 @@ categories: [navigation]
 platforms: [react-native]
 status: watching
 url: https://docs.swmansion.com/detour
+repo: https://github.com/software-mansion/detour
 verified: false
 ---
 # detour

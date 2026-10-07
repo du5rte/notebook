@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [react-native]
 status: trying
 url: https://github.com/infinitered/reactotron
+repo: https://github.com/infinitered/reactotron
 verified: false
 ---
 # Reactotron

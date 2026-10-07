@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: trying
 url: https://github.com/DylanVann/react-native-fast-image
+repo: https://github.com/DylanVann/react-native-fast-image
 verified: false
 ---
 # FastImage

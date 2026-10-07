@@ -10,6 +10,7 @@ platforms: [web, react-native, node]
 status: using
 since: 2015
 url: https://www.npmjs.com
+repo: https://github.com/npm/cli
 verified: false
 ---
 # npm

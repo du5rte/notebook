@@ -9,6 +9,7 @@ categories: [styling]
 platforms: [web]
 status: watching
 url: https://unocss.dev
+repo: https://github.com/unocss/unocss
 verified: false
 ---
 # UnoCSS

@@ -9,6 +9,7 @@ categories: [database]
 platforms: [react-native]
 status: dropped
 url: https://realm.io
+repo: https://github.com/realm/realm-js
 verified: false
 ---
 # Realm

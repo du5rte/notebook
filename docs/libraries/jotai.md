@@ -9,6 +9,7 @@ categories: [state]
 platforms: [web, react-native]
 status: dropped
 url: https://jotai.org
+repo: https://github.com/pmndrs/jotai
 verified: false
 ---
 # Jotai

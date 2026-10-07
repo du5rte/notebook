@@ -9,6 +9,7 @@ categories: [framework]
 platforms: [web]
 status: using
 url: https://necolas.github.io/react-native-web
+repo: https://github.com/necolas/react-native-web
 verified: false
 ---
 # React Native for Web

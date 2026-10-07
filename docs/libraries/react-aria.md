@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: using
 url: https://react-spectrum.adobe.com/react-aria
+repo: https://github.com/adobe/react-spectrum
 verified: false
 ---
 # React Aria

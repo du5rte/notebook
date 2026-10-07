@@ -9,6 +9,7 @@ categories: [graphics]
 platforms: [react-native]
 status: using
 url: https://github.com/software-mansion/react-native-svg
+repo: https://github.com/software-mansion/react-native-svg
 verified: false
 ---
 # react-native-svg

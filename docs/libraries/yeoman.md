@@ -10,6 +10,7 @@ platforms: [web]
 status: dropped
 since: 2015
 url: https://yeoman.io
+repo: https://github.com/yeoman/yo
 verified: false
 ---
 # Yeoman

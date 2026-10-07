@@ -9,6 +9,7 @@ categories: [state]
 platforms: [web, react-native]
 status: using
 url: https://legendapp.com/open-source/state
+repo: https://github.com/LegendApp/legend-state
 verified: false
 ---
 # Legend State

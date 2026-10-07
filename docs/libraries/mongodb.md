@@ -11,6 +11,7 @@ status: dropped
 since: 2016
 replaced_by: "[[docs/libraries/convex]]"
 url: https://www.mongodb.com
+repo: https://github.com/mongodb/mongo
 verified: false
 ---
 # MongoDB

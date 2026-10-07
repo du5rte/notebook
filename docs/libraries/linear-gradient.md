@@ -9,6 +9,7 @@ categories: [styling]
 platforms: [react-native]
 status: trying
 url: https://github.com/react-native-linear-gradient/react-native-linear-gradient
+repo: https://github.com/react-native-linear-gradient/react-native-linear-gradient
 verified: false
 ---
 # Linear Gradient

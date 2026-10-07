@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [react-native]
 status: watching
 url: https://re-pack.dev
+repo: https://github.com/callstack/repack
 verified: false
 ---
 # Re.Pack

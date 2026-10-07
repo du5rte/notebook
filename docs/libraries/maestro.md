@@ -9,6 +9,7 @@ categories: [testing]
 platforms: [react-native]
 status: using
 url: https://maestro.mobile.dev
+repo: https://github.com/mobile-dev-inc/maestro
 verified: false
 ---
 # Maestro

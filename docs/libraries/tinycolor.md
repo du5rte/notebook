@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native]
 status: using
 url: https://github.com/bgrins/TinyColor
+repo: https://github.com/bgrins/TinyColor
 verified: false
 ---
 # TinyColor

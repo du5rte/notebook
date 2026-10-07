@@ -9,6 +9,7 @@ categories: [data]
 platforms: [web, react-native]
 status: watching
 url: https://swr.vercel.app
+repo: https://github.com/vercel/swr
 verified: false
 ---
 # SWR

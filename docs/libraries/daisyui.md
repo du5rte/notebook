@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [web]
 status: watching
 url: https://daisyui.com
+repo: https://github.com/saadeghi/daisyui
 verified: false
 ---
 # daisyUI

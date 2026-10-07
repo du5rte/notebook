@@ -10,6 +10,7 @@ platforms: [web]
 status: dropped
 since: 2015
 url: https://sass-lang.com
+repo: https://github.com/sass/dart-sass
 verified: false
 ---
 # Sass

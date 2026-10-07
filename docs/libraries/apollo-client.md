@@ -10,6 +10,7 @@ platforms: [web, react-native]
 status: using
 since: 2016
 url: https://www.apollographql.com/docs/react
+repo: https://github.com/apollographql/apollo-client
 verified: false
 ---
 # Apollo Client

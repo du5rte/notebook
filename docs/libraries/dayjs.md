@@ -9,6 +9,7 @@ categories: [utils]
 platforms: [web, react-native, node]
 status: using
 url: https://day.js.org
+repo: https://github.com/iamkun/dayjs
 verified: false
 ---
 # Day.js

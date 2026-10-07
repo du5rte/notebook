@@ -9,6 +9,7 @@ categories: [styling]
 platforms: [web]
 status: trying
 url: https://tailwindcss.com
+repo: https://github.com/tailwindlabs/tailwindcss
 verified: false
 ---
 # Tailwind CSS

@@ -10,6 +10,7 @@ platforms: [web, react-native, node]
 status: using
 since: 2016
 url: https://graphql.org
+repo: https://github.com/graphql/graphql-js
 verified: false
 ---
 # GraphQL

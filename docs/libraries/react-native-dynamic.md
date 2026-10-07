@@ -9,6 +9,7 @@ categories: [styling]
 platforms: [react-native]
 status: trying
 url: https://github.com/codemotionapps/react-native-dynamic
+repo: https://github.com/codemotionapps/react-native-dynamic
 verified: false
 ---
 # react-native-dynamic

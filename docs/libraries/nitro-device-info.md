@@ -9,6 +9,7 @@ categories: [ui]
 platforms: [react-native]
 status: watching
 url: https://github.com/l2hyunwoo/react-native-nitro-device-info
+repo: https://github.com/l2hyunwoo/react-native-nitro-device-info
 verified: false
 ---
 # react-native-nitro-device-info

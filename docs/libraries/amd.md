@@ -11,6 +11,7 @@ status: dropped
 since: 2015
 replaced_by: "[[docs/libraries/webpack]]"
 url: https://requirejs.org
+repo: https://github.com/requirejs/requirejs
 verified: false
 ---
 # AMD (RequireJS)

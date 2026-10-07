@@ -11,6 +11,7 @@ status: dropped
 since: 2016
 replaced_by: "[[docs/libraries/zustand]]"
 url: https://redux.js.org
+repo: https://github.com/reduxjs/redux
 verified: false
 ---
 # Redux

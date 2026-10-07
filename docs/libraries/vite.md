@@ -9,6 +9,7 @@ categories: [tooling]
 platforms: [web]
 status: using
 url: https://vite.dev
+repo: https://github.com/vitejs/vite
 verified: false
 ---
 # Vite

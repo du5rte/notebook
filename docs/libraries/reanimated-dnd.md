@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: watching
 url: https://github.com/entropyconquers/react-native-reanimated-dnd
+repo: https://github.com/entropyconquers/react-native-reanimated-dnd
 verified: false
 ---
 # react-native-reanimated-dnd

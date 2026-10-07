@@ -9,6 +9,7 @@ categories: [animation]
 platforms: [react-native]
 status: watching
 url: https://github.com/eds2002/react-native-screen-transitions
+repo: https://github.com/eds2002/react-native-screen-transitions
 verified: false
 ---
 # react-native-screen-transitions

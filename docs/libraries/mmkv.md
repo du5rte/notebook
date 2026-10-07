@@ -9,6 +9,7 @@ categories: [state]
 platforms: [react-native]
 status: using
 url: https://github.com/mrousavy/react-native-mmkv
+repo: https://github.com/mrousavy/react-native-mmkv
 verified: false
 ---
 # MMKV
