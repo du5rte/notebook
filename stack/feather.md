@@ -7,7 +7,7 @@ aliases: [Feather Icons]
 tags: [library, icons]
 categories: [icons]
 status: dropped
-replaced_by: "[[docs/libraries/lucide]]"
+replaced_by: "[[stack/lucide]]"
 url: https://feathericons.com
 repo: https://github.com/feathericons/feather
 verified: true
@@ -18,4 +18,4 @@ verified: true
 
 ## Why I dropped it
 
-Replaced by [[docs/libraries/lucide|Lucide]], a superset of Feather: 1,452 icons against Feather's 287.
+Replaced by [[stack/lucide|Lucide]], a superset of Feather: 1,452 icons against Feather's 287.

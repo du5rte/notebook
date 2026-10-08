@@ -9,7 +9,7 @@ categories: [database]
 platforms: [node]
 status: legacy
 since: 2016
-replaced_by: "[[docs/libraries/convex]]"
+replaced_by: "[[stack/convex]]"
 url: https://www.mongodb.com
 repo: https://github.com/mongodb/mongo
 verified: false

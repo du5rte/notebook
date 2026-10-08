@@ -8,7 +8,7 @@ tags: [library, tooling]
 categories: [tooling]
 platforms: [node]
 status: dropped
-replaced_by: "[[docs/libraries/lefthook]]"
+replaced_by: "[[stack/lefthook]]"
 url: https://github.com/toplenboren/simple-git-hooks
 repo: https://github.com/toplenboren/simple-git-hooks
 verified: false

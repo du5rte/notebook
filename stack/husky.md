@@ -8,7 +8,7 @@ tags: [library, tooling]
 categories: [tooling]
 platforms: [node]
 status: dropped
-replaced_by: "[[docs/libraries/lefthook]]"
+replaced_by: "[[stack/lefthook]]"
 url: https://typicode.github.io/husky
 repo: https://github.com/typicode/husky
 verified: false

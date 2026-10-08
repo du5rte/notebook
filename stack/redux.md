@@ -9,7 +9,7 @@ categories: [state]
 platforms: [web, react-native]
 status: legacy
 since: 2016
-replaced_by: "[[docs/libraries/zustand]]"
+replaced_by: "[[stack/zustand]]"
 url: https://redux.js.org
 repo: https://github.com/reduxjs/redux
 verified: false

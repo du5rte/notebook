@@ -5,7 +5,7 @@ tags: [index]
 ---
 # Docs Index
 
-Reference notes, one section per area. *(draft)* marks an incomplete note, *(outdated)* one written for an old version of something I still use. Tools I no longer use live in [[archive/index|archive]].
+Reference notes, one section per area. *(draft)* marks an incomplete note, *(outdated)* one written for an old version of something I still use. Tools I no longer use live in [[archive/index|archive]], and what I use, tried or dropped in [[stack/index|stack]].
 
 ## Web
 
@@ -164,10 +164,6 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 ### ml
 - [[docs/ml/basics|Machine Learning]] *(draft)*
 - [[docs/ml/data-analysis|Data Analysis]] *(draft)*
-
-## Libraries
-
-- [[docs/libraries/index|Libraries]]
 
 ## Tools
 

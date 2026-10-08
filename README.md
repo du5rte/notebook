@@ -5,6 +5,7 @@ My development notebook, set up as an [Obsidian](https://obsidian.md) vault.
 - [docs/](docs/index.md): reference notes on web, JavaScript, Node, systems, languages, ML and tools
 - [wiki/](wiki/index.md): knowledge distilled from sources in `raw/`
 - [archive/](archive/index.md): tools I no longer use
+- [stack/](stack/index.md): everything I have used, with status: using, trying, watching, legacy or dropped
 - [saved/](saved/ui-kits.md): UI kits, icons, fonts and design links I've bookmarked
 
 ## Use

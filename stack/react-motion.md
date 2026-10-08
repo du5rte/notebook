@@ -9,7 +9,7 @@ categories: [animation]
 platforms: [web]
 status: dropped
 since: 2016
-replaced_by: "[[docs/libraries/reanimated]]"
+replaced_by: "[[stack/reanimated]]"
 url: https://github.com/chenglou/react-motion
 repo: https://github.com/chenglou/react-motion
 verified: false

@@ -9,7 +9,7 @@ categories: [tooling]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[docs/libraries/webpack]]"
+replaced_by: "[[stack/webpack]]"
 url: https://gulpjs.com
 repo: https://github.com/gulpjs/gulp
 verified: false

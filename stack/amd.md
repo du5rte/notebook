@@ -1,5 +1,5 @@
 ---
-title: "Bower"
+title: "AMD (RequireJS)"
 type: doc
 created: 2026-10-07
 updated: 2026-10-07
@@ -9,14 +9,14 @@ categories: [tooling]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[docs/libraries/npm]]"
-url: https://bower.io
-repo: https://github.com/bower/bower
+replaced_by: "[[stack/webpack]]"
+url: https://requirejs.org
+repo: https://github.com/requirejs/requirejs
 verified: false
 ---
-# Bower
+# AMD (RequireJS)
 
-Notes: [[archive/bower]]
+Notes: [[archive/javascript/amd]]
 
 ## Why I picked it
 

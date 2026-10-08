@@ -9,7 +9,7 @@ categories: [language]
 platforms: [ios]
 status: dropped
 since: 2016
-replaced_by: "[[docs/libraries/react-native]]"
+replaced_by: "[[stack/react-native]]"
 url: https://www.swift.org
 repo: https://github.com/swiftlang/swift
 verified: false
