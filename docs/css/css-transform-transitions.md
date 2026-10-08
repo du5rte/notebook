@@ -2,268 +2,143 @@
 title: "CSS - Transitions and Transforms"
 type: doc
 created: 2020-04-11
-updated: 2020-04-11
+updated: 2026-10-07
 tags: [css]
 ---
 # CSS - Transitions and Transforms
 
+A **transform** moves, rotates, scales or skews an element without affecting the layout around it. A **transition** animates the change from one value to another, so a hover doesn't snap but glides. Together they give you most of the small, friendly motion on the web: a button that lifts, a card that grows, a menu icon that turns.
 
-## Transform
-
-Allows us to transform elements
-
-Shorthand example:
+## Transforms
 
 ```css
-.box {
-  -webkit-transform: scale(1.5) rotate(25deg) translate(50%, -25%);
+.badge { transform: rotate(-8deg); }
+.card:hover { transform: translateY(-4px) scale(1.02); } /* lift and grow a little */
+```
+
+The four basics:
+
+| Function | Does | Example |
+| --- | --- | --- |
+| `translate(x, y)` | moves | `translate(50%, -1rem)` |
+| `scale(n)` | resizes, `1` is normal | `scale(1.5)` |
+| `rotate(angle)` | turns | `rotate(45deg)`, `rotate(0.5turn)` |
+| `skew(angle)` | slants | `skewX(10deg)` |
+
+Each has `X` and `Y` versions: `translateX()`, `scaleY()` and so on.
+
+**Order matters.** Transforms apply from right to left, so `rotate(45deg) translateX(100px)` and `translateX(100px) rotate(45deg)` end up in different places.
+
+## Individual transform properties
+
+Modern CSS also has `translate`, `rotate` and `scale` as their own properties. They're easier to change one at a time, for example on hover.
+
+```css
+.icon { rotate: 0deg; scale: 1; }
+.icon:hover { scale: 1.2; } /* rotation is untouched */
+```
+
+## Angles
+
+`deg` is the one you'll use. `turn` is handy for full spins.
+
+```
+1turn = 360deg = 400grad ≈ 6.283rad
+```
+
+## transform-origin
+
+The point the transform happens around. The default is the centre.
+
+```css
+.door { transform-origin: left; transform: rotateY(60deg); } /* swings on its hinge */
+```
+
+## Transforms don't move the layout
+
+A transformed element is painted somewhere else, but its original space stays reserved. Neighbours don't move. That's why transforms are smooth: the browser doesn't need to recalculate the layout.
+
+```css
+/* ❌ animating layout properties: the page reflows every frame */
+.card:hover { margin-top: -4px; }
+
+/* ✅ animating a transform: cheap, smooth even on low-end phones */
+.card:hover { transform: translateY(-4px); }
+```
+
+Rule of thumb: animate `transform` and `opacity`. Avoid animating `width`, `height`, `top` or `margin`.
+
+## 3D in one example
+
+3D needs `perspective` on the parent: how far the viewer is from the screen. Smaller numbers mean a stronger effect.
+
+```css
+.scene { perspective: 800px; }
+
+.flip-card {
+  transform-style: preserve-3d;   /* children live in the same 3D space */
+  transition: transform 0.6s;
 }
+.flip-card:hover { transform: rotateY(180deg); }
+
+.flip-card .front,
+.flip-card .back { backface-visibility: hidden; } /* hide the side facing away */
+.flip-card .back { transform: rotateY(180deg); }
 ```
 
-We need the prefixes for different browsers
+That's a card that flips on hover to show its back.
+
+## Transitions
+
+A transition says: "when this property changes, take this long to get there."
 
 ```css
-.box {
-  -webkit-transform: scale(1.5) rotate(25deg) translate(50%, -25%);
-  -webkit-transform: scale(1.5) rotate(25deg) translate(50%, -25%);
-  -moz-transform: scale(1.5) rotate(25deg) translate(50%, -25%);
-  -o-transform: scale(1.5) rotate(25deg) translate(50%, -25%);
-  transform: scale(1.5) rotate(25deg) translate(50%, -25%);
-}
-```
-
-### Rotation
-
-Allows us to rotate objects around a specific axis and turns
-
-```
-400grad = 1 full rotation | 1rad = 57deg | 3.14rad = 180deg | 3.28 = 360deg
-```
-
-```
-1turn = 1 full rotation | 0.5turn = half rotation
-```
-
-```css
-transform: rotate(400grad);
-```
-
-We can combine transforms with transitions
-
-```css
-.box {
-  transition: 1s ease-in-out;
-}
-.box:hover {
-  -webkit-transform: rotate(2turn);
-  /* We can change the rotation axis with keywords or % 1st x-axis | 2nd y-axis */
-  -webkit-transform-origin: 20% 50%;
-}
-```
-
-### Scale
-
-Allows us to scale objects in the `X`, `Y` or both axis. Values `scaleX()`, `scaleY()`, `scale()`
-
-```css
-transform: scaleX(1.5);
-```
-
-### Skew
-
-Allows us to skew objects in the `X` or `Y` axis. Values `skewX()`, `skewY()`
-
-```css
-transform: scaleX(45deg);
-```
-
-### Translate
-
-Allows us to translate (move) objects in the `X`, `Y` or both axis. Values `translateX()`, `translateY()`, `translate()`
-
-```css
-transform: translate(200px, -300px);
-```
-
-## 3D Transform
-
-Allows us to transform 2D elements in 3D perpectives
-
-### Perspective
-
-We can change the perfective origin, which is `center` by default (`50% 50%`). Values: `100% 100%`, `center top`,
-
-```css
-perspective: 800px;
-```
-
-### Rotate 3D
-
-Allow us to rotate in 3 dimensions on the `X`, `Y`, `Z` axis.
-
-Z axis:
-
-```css
-transform: rotateZ(45deg);
-```
-
-3D axis, the first 3 values determine if a element rotates and the last the amount.
-
-```css
-transform: rotate3d(1, 1, 0, 65deg);
-```
-
-### Translate 3D
-
-Allow us to translate in 3 dimensions on the `X`, `Y`, `Z` axis.
-
-Z axis:
-
-```css
-transform: translateZ(-200px);
-```
-
-3D axis:
-
-```css
-transform: translate3d(100px, 50px, 150px);
-```
-
-### Scale 3D
-
-Allow us to scale in 3 dimensions on the `X`, `Y`, `Z` axis.
-
-```css
-transform: scaleZ(2);
-```
-
-ScaleZ is dependable on translateZ (2 \* 100px)
-
-```css
-transform: scaleZ(2) translateZ(200px);
-```
-
-### Preserve 3D
-
-Allows us to pass down the 3D perspective space
-
-```css
-transform-style: preserve-3d;
-```
-
-### Backface Visibility
-
-Default 3d elements by default show the back, with backface-visibility we can hide it
-
-```css
-backface-visibility: hidden;
-```
-
-## Transition
-
-Allows us to transition css properties
-
-```css
-.box {
+.button {
   background: steelblue;
+  transition: background 0.3s ease;
 }
-.box:hover {
-  background: lightcoral;
-  transition-property: background;
-  transition-duration: 0.3s;
+.button:hover {
+  background: lightcoral; /* fades over 0.3s, and back again on mouse out */
 }
 ```
 
-We can create various transitions as long as we add them on properties
+Put the `transition` on the **base** state, not on `:hover`. Then it runs both ways: in and out.
+
+The shorthand is `property duration timing-function delay`, and you can list several:
 
 ```css
-.box:hover {
-  background: lightcoral;
-  border-radius: 50%;
-  /* Or we can write 'all', which is the default value so we can delete it */
-  transition-property: background, border-radius;
-  /* We can optionally add a different duration for each property */
-  transition-duration: 0.3s, 1s;
+.card {
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out 0.05s; /* shadow starts a tiny bit later */
 }
 ```
 
-Shorthand example:
+## Timing functions
 
-```css
-.box {
-  transition: 0.3s ease-in-out;
-}
-```
+How the speed changes along the way.
 
-We can have multiple shorthand transitions:
+- `ease`: the default. Starts fast, ends slow.
+- `ease-out`: fast then slow. Feels responsive for things entering or reacting to the user.
+- `ease-in`: slow then fast. Good for things leaving.
+- `linear`: constant speed. Good for spinners.
+- `steps(4)`: jumps in 4 steps, no smoothing. Good for sprite animations.
+- `cubic-bezier(0.5, -0.5, 0.3, 1.3)`: your own curve. Values below `0` or above `1` overshoot for a bouncy "pop".
 
-```css
-.box {
-  transition: margin 1s cubic-bezier(0.5, -0.5, 0.3, 1.3) 0s, background 0.6s
-      ease 1s;
-}
-```
+## Common mistakes
 
-If we want to slowly revert it back we need add it to the original too
+- `transition: all`. It animates things you didn't mean to, and costs performance. Name the properties.
+- Putting the transition only on `:hover`, so it snaps back instantly.
+- Trying to transition to or from `display: none` or `height: auto`. Neither animates the simple way; fade with `opacity` instead.
+- Forgetting users who turn off motion. Wrap big movements in `@media (prefers-reduced-motion: no-preference)`.
 
-```css
-.box {
-  background: steelblue;
-  transition-duration: 0.3s;
-}
-.box:hover {
-  background: lightcoral;
-  transition-duration: 0.3s;
-}
-```
+## Try it
 
-For the transition duration to be the same we only need it on the original
-
-```css
-.box {
-  background: steelblue;
-  transition-duration: 0.3s;
-}
-.box:hover {
-  background: lightcoral;
-}
-```
-
-We need the prefixes for different browsers
-
-```css
-.box {
-  background: steelblue;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-}
-.box:hover {
-  background: lightcoral;
-}
-```
-
-### Transition timing
-
-We can define the speed of the transition using 8 timing functions. Values: `ease`, `linear`, `ease-in`, `ease-out`, `ease-in-out`, `step-start`, `step-end`, `steps()`, `cubic-bezier()`.
-
-```css
-transition-timing-function: ease-in-out;
-```
-
-Steps allow us to create stops during the animation
-
-```css
-transition-timing-function: steps(4, end);
-```
-
-For more animation control we can use `cubic-bezier(P1x,P1y,P2x,P2y)`, Using negative allows create a more of a realist pop effect.
-
-```css
-transition-timing-function: cubic-bezier(0.5, -0.5, 0.3, 1.3);
-```
+1. Make a button that lifts by `2px` and gets a shadow on hover, smoothly in both directions.
+2. Rotate a "+" icon into an "×" with a transition when its parent has `.is-open`.
+3. Build the flip card above with a coffee name on the front and its price on the back.
 
 ## Related
 - [[docs/css/css-animations|CSS - Animations]]
+- [[docs/css/css-visual-effects|CSS - Visual Effects]]
 - [[docs/svg/svg-animations|SVG - Animations]]

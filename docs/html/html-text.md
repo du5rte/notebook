@@ -2,207 +2,193 @@
 title: "HTML - Text"
 type: doc
 created: 2016-03-18
-updated: 2016-03-18
+updated: 2026-10-07
 tags: [html]
 ---
 # HTML - Text
 
-## Headline
-Used for Headlines from `<h1>` to `<h6>`
+Most of the web is text. HTML gives us elements to say what each piece of text *is*: a heading, a paragraph, a list, a quote, some code. The browser gives each one a default style, but the point is meaning. Style comes later with CSS. In this lesson we mark up a small café blog post from top to bottom.
+
+## Headings
+
+There are six levels, `<h1>` to `<h6>`. Think of them as the outline of a book: one title, then chapters, then sub-chapters.
 
 ```html
-<h1>This is a level 1 headline</h1>
-<h3>This is a level 3 headline</h3>
+<h1>Ana's Coffee Shop</h1>
+<h2>Menu</h2>
+<h3>Hot drinks</h3>
+<h3>Cold drinks</h3>
+<h2>Opening hours</h2>
 ```
 
-## Paragraph
-Used for normal Paragraph text
+Use one `<h1>` per page and don't skip levels. Screen reader users often jump from heading to heading to find their way, so the outline matters more than the size. If `<h2>` looks too big, change it with CSS.
+
+## Paragraphs and line breaks
+
+`<p>` is for a paragraph. The browser collapses extra spaces and new lines in your markup into a single space.
 
 ```html
-<p>This is a paragraph</p>
+<p>We open at 8.
+   Come early,     the croissants go fast.</p>
+<!-- shows: We open at 8. Come early, the croissants go fast. -->
+```
+
+`<br>` forces a line break. Use it only where the line break is part of the content, like a poem or an address, not to add space.
+
+```html
+<p>
+  Roses are red,<br>
+  coffee is brown.
+</p>
+```
+
+`<wbr>` marks a spot where a long word *may* break if it runs out of room, handy for long URLs.
+
+```html
+<p>visit anascoffee<wbr>shop<wbr>.example</p>
 ```
 
 ## Lists
 
+- `<ul>`: unordered list, where order doesn't matter (bullets).
+- `<ol>`: ordered list, where order matters (numbers).
+- `<li>`: each item, in either one.
 
-Used for to create ordered `<ol>` (numbered) lists and unordered `<ul>` (not numbered) lists and `<li>` for list items
+Lists can be nested inside a list item.
 
 ```html
 <ol>
-	<li>First item</li>
-	<li>Second item</li>
-	<li>Third item
-
-		<!-- different lists can be mixed together -->
-		<ul>
-			<li>First Indented item</li>
-			<li>Second Indented item</li>
-		</ul>
-
-	</li>
-	<li>Last item</li>
-
+  <li>Grind the beans</li>
+  <li>Heat the water
+    <ul>
+      <li>About 93°C</li>
+      <li>Not boiling</li>
+    </ul>
+  </li>
+  <li>Pour and wait</li>
 </ol>
 ```
 
-## Definition Lists
-Used for definition lists, defition titles and definitions **Very uncommon**
+A description list `<dl>` pairs terms `<dt>` with descriptions `<dd>`. It is less common, but perfect for glossaries or key/value details.
 
 ```html
 <dl>
-	<dt>Video Pros</dt>
-	<dd>Jon</dt>
-	<dd>Michael</dt>
-	<dd>Teachers</dt>
+  <dt>Espresso</dt>
+  <dd>A small, strong shot of coffee.</dd>
+  <dt>Latte</dt>
+  <dd>Espresso with lots of steamed milk.</dd>
 </dl>
 ```
 
-## Anchor
-Used to link to page elements and inside or external links
+## Links
+
+`<a>` (anchor) links to another page, a file, or a spot on the same page.
 
 ```html
-<a href="#some_text">My Link</a>
-	<p id="some_text"></p>
-<a href="another_page.html">Another page</a>
-<a href="http://google.com">Take me to Google!</a>
+<a href="menu.html">Our menu</a>                    <!-- page on our site -->
+<a href="https://example.com">An external site</a>  <!-- another site -->
+<a href="#hours">Jump to opening hours</a>         <!-- same page -->
+
+<h2 id="hours">Opening hours</h2>
 ```
 
-## Emphasis or Italic
-Used give text emphasis, by default it italicizes text
+Write link text that makes sense on its own. "See the menu" is better than "click here", because screen reader users often list all the links on a page.
+
+## Emphasis: strong and em vs b and i
+
+These pairs look the same by default, but they mean different things.
+
+| Element | Meaning | Default look |
+|---------|---------|-------------|
+| `<strong>` | important, serious, urgent | bold |
+| `<em>` | stress emphasis, changes how you'd say it | italic |
+| `<b>` | draw attention, no extra importance (keywords, product names) | bold |
+| `<i>` | different voice: a foreign word, a thought, a technical term | italic |
 
 ```html
-<p>This is <em>emphasised</em> and <i>italicized</i> text</p>
+<p><strong>Warning:</strong> the cup is hot.</p>
+<p>I said a <em>small</em> coffee.</p>
+<p>The French call it <i lang="fr">café au lait</i>.</p>
 ```
 
-## Strong or Bold
-Used to make a text look bolder, by default it makes text bolder
+If you only want bold for looks, use CSS `font-weight` instead.
+
+## Quotes and citations
+
+`<blockquote>` is for a longer quote on its own. `<q>` is for a short quote inside a sentence, and the browser adds the quote marks. `<cite>` is for the title of a work: a book, a film, a song.
 
 ```html
-<p>This text could be <strong>stronger</strong> and <b>bolder</b></p>
+<blockquote>
+  <p>I think, therefore I am.</p>
+</blockquote>
+
+<p>Descartes wrote <q>I think, therefore I am</q>.</p>
+
+<p>My favourite book is <cite>A Tale of Two Cities</cite> by Charles Dickens.</p>
 ```
 
-## Horizontal Rule
-Used to break up text with a line
+## Code and preformatted text
+
+`<code>` marks a bit of code and uses a monospace font. `<pre>` keeps every space and line break exactly as written. Together they show blocks of code.
 
 ```html
+<p>Call <code>greet()</code> to say hi.</p>
+
+<pre><code>function greet(name) {
+  return `Hi ${name}`
+}</code></pre>
+```
+
+Start the code right after `<pre><code>`, because `<pre>` keeps the indentation and new line you put before it too.
+
+## Small but useful
+
+```html
+<!-- Abbreviation, with the full form in title -->
+<p>We use <abbr title="Hypertext Markup Language">HTML</abbr>.</p>
+
+<!-- Contact details for the page or article author -->
+<address>
+  Ana's Coffee Shop<br>
+  12 Market Street
+</address>
+
+<!-- A thematic break between sections of content -->
 <hr>
 ```
 
-## Quotes
-Used for quotes, `cite` references the origin
+`title` on `<abbr>` only shows on mouse hover, so on touch screens and for many screen readers it's invisible. Spell the term out the first time you use it.
 
-Block quotes indent text by default
-```html
-<blockquote cite="http://example.com/philosophy.html">
-	A wise man once said
-	I think,
-	therefor I am
-</blockquote>
-```
-Inline quoting text, adds quotes by default
+## Special characters
+
+Some characters mean something to HTML, so we write them as *entities*. `&lt;` is `<`, `&gt;` is `>` and `&amp;` is `&`.
 
 ```html
-<p>A wise man once said <q cite="http://example.com/philosophy.html" >I think, therefor I am</q></p>
+<p>5 &lt; 10 &amp; 10 &gt; 5</p>
+<!-- shows: 5 < 10 & 10 > 5 -->
+
+<p>10&nbsp;km</p>
+<!-- &nbsp; is a non-breaking space: "10" and "km" stay on the same line -->
 ```
 
-## code
-Used for showcasing code, uses a monospace font by default
+With `<meta charset="utf-8">` you can type most other characters directly: é, ☕, €. In CSS `content`, use the hex code instead: `content: '\00A0'` is a non-breaking space. The full list of named entities is on MDN.
 
-```html
-<code>
-	(function exec(sth) {
-		return sth
-	})()
-</code>
-```
+## Common mistakes
 
-## Preformatted
-Render the space in the markup, is indented by default
+- Picking headings by size instead of by outline.
+- Using `<br><br>` to make space. Use separate paragraphs, or margin in CSS.
+- Closing tags in the wrong order: `<p><strong>Hot</p></strong>`. Close the inner one first.
+- Typing a raw `<` in text. Write `&lt;` instead.
 
-```html
-<pre>
-	Here is some text,
-		It is ...
-			 Preformatted!
-</pre>
-```
+## Try it
 
-Often used together when showcasing code
-```html
-<pre>
-	<code>
-		(function exec(sth) {
-			return sth
-		})()
-	</code>
-</pre>
-```
-
-## Break
-Used to break up a line of text
-
-```html
-<p>
-	This is the first line of the poem.<br>
-	This is the second line.
-</p>
-```
-
-## Word Break
-Used for line break opportunity, only breaks text if there's not enough space
-
-```html
-<p>think<wbr>vitamin.com</p>
-```
-
-## Abbreviation
-Used for acronyms, we can add a hover title to show the full meaning
-
-```html
-<p>I know how to use <abbr title="Self Contained Underwater Breathing Apparatus">SCUBA</abbr> gear.</p>
-```
-
-
-## Address
-Used for addresses, by default it Italicized text
-
-```html
-<address>
-	Nick Pettit<br>
-	1234 Example Road<br>
-	Metropolis
-</address>
-```
-
-
-## Cite
-Used for titles of books, movies, plays, etc. Italisized by default
-
-```html
-<p>My favourite book is <cite>A tale of Two cities</cites> by Charles Dickens.</p>
-```
-
-
-## Unicode
-Unicode can be displayed in a few way with [charref](https://dev.w3.org/html5/html-author/charref) using `&` or using style content with an `unicode`
-
-```html
-<!--
-	Non-breaking Space
-	Useful to force html to render space
--->
-&nbsp;
-&#x00A0;
-<style> span:after { content: '\00A0' } </style>
-```
-
-```html
-<!-- Font-awesome -->
-&#xf00d
-<span class="delete">&#xf00d<span>
-<style> .icon:after { family-font: FontAwesome; content: '\f00d' } </style>
-```
+1. Mark up a recipe with an `<h1>`, an ingredients `<ul>` and a numbered `<ol>` of steps.
+2. Add a link at the top that jumps to the steps.
+3. Write a sentence where `<em>` changes the meaning, and one where `<strong>` marks a warning.
 
 ## Related
-- [[docs/html/html-forms|HTML - Forms]]
-- [[docs/html/html-tables|HTML Tables]]
+
+- [[docs/html/html|HTML - Basics]]
+- [[docs/html/html-media|HTML - Images and Media]]
+- [[docs/html/html-tables|HTML - Tables]]
+- [[docs/css/css-fonts|CSS - Fonts]]

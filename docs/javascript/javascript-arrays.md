@@ -1,178 +1,186 @@
 ---
-title: "JavaScript Arrays"
+title: "JavaScript - Arrays"
 type: doc
 created: 2015-10-14
-updated: 2016-07-21
+updated: 2026-10-07
+aliases: ["JavaScript Arrays"]
 tags: [javascript]
 ---
-# JavaScript Arrays
+# JavaScript - Arrays
 
-Resources:
-- [Array Methods You Should Use Today](http://colintoh.com/blog/5-array-methods-that-you-should-use-today)
+An array is an ordered list: a shopping list, an inbox, the queue at the counter. It keeps many values under one name, in order, and lets you add, remove, search and sort them. Arrays are the shape most data arrives in, so this is one of the lessons you'll use every day.
 
-## Arrays
-Stores multiple values inside on container
+## Creating an array
 
-```js
-var allKinds = [1, -100, true, 'JavaScript', {a: 1, b: 2}, function(c) { return c;}];
-```
-
-## Arrays Keys
-Each value inside an array is a `key`, ranging from `0 ~ *`
+Square brackets, values separated by commas. Any type of value can go in, but a list usually holds one kind of thing.
 
 ```js
-var myShopping = ['rice', 'bread', 'bananas', 'chicken'];
-
-myShopping[0]; // 'rice'
-myShopping[3]; // 'chicken'
+const shopping = ['rice', 'bread', 'bananas', 'chicken']
+const scores = [80, 95, 72]
+const empty = []
 ```
 
-## Array Methods
-Arrays have method that can be used
+## Reading items by position
 
-##### Length
-The number of keys in a array
-```js
-myShopping.length // 4
-
-// One way to add a value to the end of the array
-myShopping[ numbers.length ] = 'chips'; // myShopping[4] = 'chips';
-```
-
-##### Push
-Pushes item(s) to the end of the array
-```js
-myShopping.push('chips', 'broccoli'); // ['rice', 'bread', 'bananas', 'chicken', 'chips', 'broccoli']
-```
-
-##### Unshift
-Pushes a item to the beginning of the array
-```js
-myShopping.unshift('chips', 'broccoli'); // ['chips', 'broccoli', 'rice', 'bread', 'bananas', 'chicken']
-```
-
-##### Pop
-Removes (and can store in a variable) the last item of an array
-```js
-var lastItem = myShopping.pop(); // 'chicken'
-```
-
-##### Shift
-Removes (and can store in a variable) the first item of an array
-```js
-var firstItem = myShopping.shift(); // 'rice'
-```
-
-##### Join
-Joins a array in a string separated by a supply of characters
-```js
-myShopping.join(', '); // "rice, bread, bananas, chicken"
-```
-
-##### Concat
-Joins one or more arrays to another array
-```js
-var moreShopping = ['potatos', 'salmon', 'orange juice'];
-var evenMoreShopping = ['bacon', 'lettuce'];
-myShopping.concat(moreShopping, evenMoreShopping);
-// ["rice", "bread", "bananas", "chicken", "potatos", "salmon", "orange juice", "bacon", "lettuce"]
-```
-
-##### Index Of
-Searches and returns the position of a value in a array
-```js
-var fruit = myShopping.indexOf('bananas'); // 2
-var fruit = myShopping.indexOf('pineapples'); // -1 ; means does not exist
-```
-
-## Two-Dimensional Arrays
-Create a spreadsheet-like data structure by storing arrays in arrays
+Positions (indexes) start at **0**. `at()` also takes negative numbers, counting from the end.
 
 ```js
-var grades = [
-  [80, 90, 100, 95],
-  [75, 95, 85, 100],
-  [60, 80, 77, 90]
-];
-
-grades[0][3]; // 95
-grades[1][0] // 75
-grades[2][2] // 77
+shopping[0]      // 'rice'
+shopping[3]      // 'chicken'
+shopping[10]     // undefined, nothing there
+shopping.at(-1)  // 'chicken', the last item
+shopping.length  // 4
 ```
 
-## Array Destructuring
+## Adding and removing
+
+These four change the array in place.
 
 ```js
-let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+const queue = ['Ana', 'Ben']
 
- // c is discarded
-let [a, b, ,d] =  myShopping
-let [first, ...remainingItems]
-
-console.log(a, b, d)
+queue.push('Cleo')     // adds to the end    → ['Ana', 'Ben', 'Cleo']
+queue.unshift('Dan')   // adds to the start  → ['Dan', 'Ana', 'Ben', 'Cleo']
+queue.pop()            // removes the last,  returns 'Cleo'
+queue.shift()          // removes the first, returns 'Dan'
+queue                  // ['Ana', 'Ben']
 ```
 
-## Spread
-Spreads an array into individual items in ES6
+## Mutating vs copying
+
+Some methods change the original array; others leave it alone and return a new one. This matters as soon as an array is shared, like state in React.
+
+| ❌ Changes the original | ✅ Returns a new array |
+| --- | --- |
+| `push(x)` | `[...arr, x]` |
+| `sort()` | `toSorted()` |
+| `reverse()` | `toReversed()` |
+| `splice(i, 1)` | `toSpliced(i, 1)` or `filter` |
+| `arr[i] = x` | `with(i, x)` |
 
 ```js
-let myShopping = ['rice', 'bread', 'bananas', 'chicken']
-let moreShopping = [...myShopping, 'eggs', 'milk']; // ['rice', 'bread', 'bananas', 'chicken', 'eggs', 'milk']
+const prices = [4, 1, 3]
+
+const sorted = prices.toSorted((a, b) => a - b)
+sorted // [1, 3, 4]
+prices // [4, 1, 3], untouched
 ```
 
-## Newer Array Methods
+Prefer the copying versions by default. Reach for the mutating ones when you own the array and nobody else is looking.
 
-##### Map
-Iterates over each child, which then can be modified and returned
+## Sorting numbers
+
+`sort()` and `toSorted()` compare items **as strings** unless you give them a compare function.
 
 ```js
-let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+const tips = [10, 1, 2]
 
-let prettyShopping = myShopping.map((child, index, array) => {
-  // Capitalizes
-  return child.replace(/^[a-z]/, (w) => w.toUpperCase())
-})
+tips.toSorted()                // [1, 10, 2] 🤔
+tips.toSorted((a, b) => a - b) // [1, 2, 10] ✅ smallest first
+tips.toSorted((a, b) => b - a) // [10, 2, 1] biggest first
 
-console.log(prettyShopping) // ["Rice","Bread","Bananas","Chicken"]
+const names = ['Lynn', 'ana', 'Ben']
+names.toSorted((a, b) => a.localeCompare(b)) // ['ana', 'Ben', 'Lynn']
 ```
 
+## Searching
 
-##### Filter
-Optionally filter children
+Pick the method by the question you're asking.
 
 ```js
-let myShopping = ['rice', 'bread', 'bananas', 'chicken']
+const shopping = ['rice', 'bread', 'bananas', 'chicken']
 
-let halfShopping = myShopping.filter((child, index, array) => {
-  if(index < array.length / 2) {
-    return child
-  }
-})
+shopping.includes('bread')   // true, is it there?
+shopping.indexOf('bananas')  // 2, where is it? (-1 if missing)
 
-console.log(halfShopping)
+const scores = [80, 95, 72]
+scores.find((s) => s > 90)       // 95, the first match
+scores.findIndex((s) => s > 90)  // 1
+scores.some((s) => s < 75)       // true, does any match?
+scores.every((s) => s >= 70)     // true, do all match?
 ```
 
+## Transforming
 
-##### Reduce
+`map`, `filter` and `reduce` turn one array into something new. They're the modern default for looping and get their own section in [[docs/javascript/javascript-loops|JavaScript - Loops]].
 
 ```js
-let x = ['a', 'b', 'c', 'd', 'e']
-
-let initialValue = []
-
-let y = x.reduce((previousValue, currentValue, currentIndex, array) => {
-  // or initialValue
-  console.log(previousValue) // []
-
-  console.log(currentValue, currentIndex) // a 0
-
-  return currentValue.replace(/^[a-z]/, (w) => w.toUpperCase()) // A
-}, initialValue);
-
-console.log(y)
+scores.map((s) => s + 5)            // [85, 100, 77]
+scores.filter((s) => s >= 80)       // [80, 95]
+scores.reduce((sum, s) => sum + s, 0) // 247
 ```
+
+## Slicing and joining
+
+```js
+const shopping = ['rice', 'bread', 'bananas', 'chicken']
+
+shopping.slice(1, 3)     // ['bread', 'bananas'], from index 1 up to (not including) 3
+shopping.join(', ')      // 'rice, bread, bananas, chicken'
+'a,b,c'.split(',')       // ['a', 'b', 'c']
+```
+
+## Spread: copying and combining
+
+`...` spreads an array's items into a new one.
+
+```js
+const fruit = ['apple', 'pear']
+const veg = ['carrot']
+
+const copy = [...fruit]                  // ['apple', 'pear']
+const all = [...fruit, ...veg, 'eggs']   // ['apple', 'pear', 'carrot', 'eggs']
+```
+
+## Destructuring
+
+Pull items out into their own variables by position. `...rest` collects what's left.
+
+```js
+const podium = ['Ana', 'Ben', 'Cleo', 'Dan']
+
+const [gold, silver] = podium
+gold    // 'Ana'
+silver  // 'Ben'
+
+const [winner, ...others] = podium
+others  // ['Ben', 'Cleo', 'Dan']
+
+const [, , bronze] = podium // skip with empty commas
+bronze  // 'Cleo'
+```
+
+## Arrays inside arrays
+
+An array can hold arrays, like rows in a spreadsheet. Read with two indexes: row, then column.
+
+```js
+const grades = [
+  [80, 90, 100],
+  [75, 95, 85],
+]
+
+grades[1][0]  // 75
+grades.flat() // [80, 90, 100, 75, 95, 85]
+```
+
+## Common mistakes
+
+- Off by one: the last item is `arr[arr.length - 1]` (or `arr.at(-1)`), not `arr[arr.length]`.
+- Sorting numbers without a compare function.
+- Calling `sort()` on an array you didn't mean to change. Use `toSorted()`.
+- `typeof []` is `'object'`. To check for an array, use `Array.isArray(x)`.
+- Copying with `const b = a`. That's the same array with two names; use `[...a]`.
+
+## Try it
+
+1. Make a guest list, add two names to the end and remove the first one.
+2. Sort `[{ name: 'Ana', age: 30 }, { name: 'Ben', age: 25 }]` by age without changing the original.
+3. Use destructuring to get the first and last items of `['mon', 'tue', 'wed', 'thu', 'fri']`.
 
 ## Related
-- [[docs/javascript/javascript-strings|JavaScript Strings]]
-- [[docs/javascript/javascript-numbers|JavaScript Numbers]]
-- [[docs/javascript/javascript-booleans|JavaScript - Booleans]]
+- [[docs/javascript/javascript-loops|JavaScript - Loops]]
+- [[docs/javascript/javascript-objects|JavaScript - Objects]]
+- [[docs/javascript/javascript-maps|JavaScript - Map and Set]]
+- [[docs/javascript/javascript-strings|JavaScript - Strings]]
+- [[docs/javascript/javascript-numbers|JavaScript - Numbers]]

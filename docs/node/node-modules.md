@@ -2,179 +2,172 @@
 title: "Node - Modules"
 type: doc
 created: 2016-03-18
-updated: 2016-04-11
+updated: 2026-10-07
 tags: [node]
 ---
 # Node - Modules
 
-Resources:
-- [ES6 Modules](https://github.com/lukehoban/es6features#modules)
+A module is just a file that shares some of its code with other files. Instead of one giant script, we split our program into small files, each with one job, and pull in only what we need. Modern Node uses ES modules (`import` and `export`), the same syntax the browser uses. You'll still meet the older CommonJS style (`require`) in existing code, so we'll compare them at the end.
 
-## Require
-Used to import `modules` into our project, require can search for modules according to it's directory with `./` or withing `node_modules` and in `node` it-self
+## Turning on ES modules
 
-- `'./my-module'` looks up in the same directory
-- `'../my-module'` looks up in the parent directory
-- `'/Users/user/project/my-module'` looks up in an absolute directory
-- `'http'` looks for module in `node_modules` or in `node` it-self
+Node needs to know a file is an ES module. The simplest way is one line in `package.json`:
 
-```js
-var http = require('http')
+```json
+{
+  "type": "module"
+}
 ```
 
-Or used to break out our code into different files
+Now every `.js` file in the project is an ES module. Without it, use the `.mjs` extension instead.
 
-`file_1.js`
-```js
-console.log('file one')
-```
-`file_2.js`
-```js
-require('./file_1')
-console.log('two')
-```
+## Named exports
 
-## Module Exports
-Allows us to `export` all or parts of the code in the file
+Put `export` in front of anything you want to share. Everything else stays private to the file.
 
 ```js
-// export default
-module.exports = function() { return 'default'; }
+// coffee.js
+export const sizes = ['small', 'medium', 'large']
 
-// export functions or variables
-module.exports.foo = 'foo';
-module.exports.bar = function() { return 'bar' };
-
-// export object literal
-module.exports = {
-  foo: 'foo',
-  bar: function() { return 'bar' }
-};
-```
-
-## Module Require
-Allows us to `import` code from an `export`
-
-```js
-var myModule = require('./my-module');
-myModule.foo();
-console.log(myModule.bar);
-
-// or by reassigning the module to variables
-var foo = myModule.foo;
-console.log(foo);
-
-var bar = myModule.bar;
-bar();
-```
-
-## Export
-A cleaner, more dynamic new syntax for `import` and `exports` need to be at the top of the file, they can also be destructured and renamed.
-
-```js
-// export default
-export default function() { return 'default' }
-
-// export functions or variables
-export var foo = 'foo'
-export function bar() { return 'bar' }
-
-// export object literal
-export default {
-  foo: 'foo',
-  bar() { return 'bar' }
+export function price(size) {
+  return { small: 2, medium: 2.5, large: 3 }[size]
 }
 
-// deconstructed export
-var foo = 'foo'
-function bar() { return 'bar' }
-
-export {foo, bar}
+function secretRecipe() {} // not exported, private
 ```
 
-## Import
+Or list them at the bottom:
 
 ```js
-import myModule from './my-module'
-myModule.foo()
-
-// it can be destructured
-import { each, omit } from 'lodash'
-each()
-omit()
-
-// it also be renamed
-import { foo as foolish, bar } from "./my-module"
-console.log(foolish) // 'foo'
-bar() // 'bar'
+export { sizes, price }
 ```
 
-## Creating Modules
+## Importing
 
-There's different methods to import our on modules by using `mode.export` and `require`
+Import the names you need inside curly braces. For your own files, the path starts with `./` or `../` and includes the `.js` extension.
 
-### Method 1
-We can only set one object equals to module.exports
-
-
-In `custom_hello.js`
 ```js
-var hello = function() {
-console.log("hello");
+// app.js
+import { price, sizes } from './coffee.js'
+
+price('large') // 3
+sizes.length   // 3
+```
+
+Rename on the way in with `as`, or grab everything as one object:
+
+```js
+import { price as coffeePrice } from './coffee.js'
+import * as coffee from './coffee.js'
+
+coffee.price('small') // 2
+```
+
+## Default exports
+
+A file can have one default export: "the main thing this file gives you". The importer picks the name.
+
+```js
+// greet.js
+export default function greet(name) {
+  return `Hi ${name}`
 }
-module.exports = hello;
-```
-In `app.js`
-```js
-var hello = require('./custom_hello');
-hello();
 ```
 
-### Method 2
-We can set multiple methods
-
-In `custom_goodbye.js`
 ```js
-exports.goodbye = function() {
-  console.log("goodbye");
-};
-```
-In `app.js`
-```js
-var gb = require('./custom_goodbye');
-gb.goodbye();
+// app.js
+import greet from './greet.js'
+import sayHello from './greet.js' // any name works
 
-// if we only need to call it one, We can require and call it in one line
-require('./custom_goodbye').goodbye();
+greet('Ana') // 'Hi Ana'
 ```
 
-### Method 3
+Named exports are usually the better default: the names stay consistent across files and editors can auto-import them.
 
+## Where Node looks
 
-In `my_module.js`
+The string after `from` tells Node where to find the module.
+
+| Specifier | Looks in |
+|---|---|
+| `'./coffee.js'`, `'../lib/db.js'` | a file relative to this one |
+| `'node:fs'`, `'node:http'` | Node's built-in modules |
+| `'express'` | `node_modules`, installed with [[docs/node/node-npm\|npm]] |
+
 ```js
-var foo = function () {
-  /* some code */
+import { readFile } from 'node:fs/promises'
+import express from 'express'
+import { price } from './coffee.js'
+```
+
+The `node:` prefix is optional for built-ins, but it makes it obvious the module ships with Node.
+
+## Things ES modules give us
+
+**Top-level `await`.** We can await at the top of a module without wrapping it in a function.
+
+```js
+import { readFile } from 'node:fs/promises'
+
+const config = JSON.parse(await readFile('./config.json', 'utf8'))
+```
+
+**`import.meta`.** Information about the current file. This replaces CommonJS's `__dirname` and `__filename`.
+
+```js
+import.meta.dirname  // '/home/ana/shop'
+import.meta.filename // '/home/ana/shop/app.js'
+```
+
+**Dynamic `import()`.** Load a module only when you need it. It returns a promise.
+
+```js
+if (process.argv.includes('--report')) {
+  const { makeReport } = await import('./report.js')
+  makeReport()
 }
-var bar = function () {
-  /* some other code */
-}
-var baz = function () { // Private function!
-  /* yet other some code */
-}
-module.foo = foo;
-module.bar = bar;
 ```
-In `app.js`
+
+## CommonJS vs ES modules
+
+CommonJS is Node's original module system. It's still everywhere in older packages and tutorials, so it's worth reading fluently.
+
 ```js
-var myMod = require('./my_module');
+// coffee.cjs
+function price(size) { /* ... */ }
+module.exports = { price }
 
-myMod.foo();
-
-myMod.bar();
+// app.cjs
+const { price } = require('./coffee.cjs')
 ```
+
+| | ES modules | CommonJS |
+|---|---|---|
+| Share | `export` | `module.exports = ...` |
+| Use | `import { x } from './x.js'` | `const { x } = require('./x')` |
+| File extension in path | required | optional |
+| Loading | static, resolved before code runs | `require` runs when reached |
+| Top-level `await` | yes | no |
+| Current folder | `import.meta.dirname` | `__dirname` |
+| Turned on by | `"type": "module"` or `.mjs` | the default, or `.cjs` |
+
+Write new code as ES modules. An ES module can import a CommonJS package. Going the other way is more limited, so if you maintain a library, check the Node docs on interoperability.
+
+## Common mistakes
+
+- **Leaving off the extension.** `import './coffee'` fails in an ES module. Write `'./coffee.js'`.
+- **Forgetting `"type": "module"`.** You'll get "Cannot use import statement outside a module". Add it to `package.json` or rename the file to `.mjs`.
+- **Using `__dirname` in an ES module.** It isn't defined. Use `import.meta.dirname`.
+- **Mixing `exports.x = ...` and `module.exports = {...}`** in CommonJS. Reassigning `module.exports` throws away anything added to `exports` before.
+
+## Try it
+
+1. Create `math.js` with named exports `add` and `multiply`, and import both into `app.js`.
+2. Give `greet.js` a default export and import it under a different name.
+3. Read a `config.json` with top-level `await` and print one value from it.
 
 ## Related
-- [[docs/node/node-npm|npm]]
-- [[docs/node/node|Node.js - Basics]]
+- [[docs/node/node|Node - Basics]]
+- [[docs/node/node-npm|Node - npm and pnpm]]
 - [[docs/javascript/javascript|JavaScript - Basics]]
+- [[docs/javascript/javascript-functions|JavaScript - Functions]]

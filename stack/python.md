@@ -15,7 +15,7 @@ verified: false
 ---
 # Python
 
-Notes: [[docs/python]], [[docs/ml/ml]]
+Notes: [[docs/python]], [[docs/ml]]
 
 ## Why I picked it
 

@@ -2,191 +2,195 @@
 title: "HTML - Forms"
 type: doc
 created: 2015-11-12
-updated: 2016-03-18
+updated: 2026-10-07
 tags: [html]
 ---
 # HTML - Forms
 
-Resources:
- - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)
+A form is how a page asks the visitor for something: a name, an email, a coffee order. HTML gives us the controls (text fields, checkboxes, menus), labels that explain them, and free validation, all before we write any JavaScript. In this lesson we build an order form for a coffee shop.
 
+## The form element
 
-## Forms
-Accepts input from the user means creating a web form, which is typically composed of form controls
-
-- text fields
-- radio buttons
-- checkboxes
-- select menus
-- and more.
-
-## Form
-Wraps a section of the document that contains form controls. *Forms cannot be nested inside one another*.
+`<form>` wraps the controls and says where to send the data and how.
 
 ```html
-<form></form>
+<form action="/order" method="post">
+  <!-- controls go here -->
+</form>
 ```
 
-#### method
-The HTTP method that the browser should use to submit the form, such as `POST` or `GET`.
--->
-<form method="post"></form>
+- `action`: the URL that receives the data. Leave it out to send to the current page.
+- `method`: `get` puts the data in the URL (`/search?q=latte`), good for searches. `post` sends it in the request body, good for anything that changes data or is private.
 
+Forms cannot be nested inside one another.
 
-#### action
-The web address of a program that processes the information submitted via the form.
-```html
-<form action="index.html" method="post"></form>
-```
+## Inputs and the name attribute
 
-## Input
-Accepts text input different inputs render differently.
+`<input>` is one element that turns into many controls depending on its `type`. The `name` is the key the server receives.
 
 ```html
-<input>
+<input type="text" name="customer_name">
+<input type="email" name="customer_email">
+<input type="password" name="password">
 ```
 
-#### id attribute
-Useful to target elements with css or javascript
-```html
-<input id="name">
+If someone types "Ana" and "ana@example.com", the server gets something like:
+
+```
+customer_name=Ana&customer_email=ana%40example.com
 ```
 
-#### name attribute
-Submitted with form data so that server-side code can parse the information.
-```html
-<input name="user_name">
-```
-```json
-{
-  "user_name": "furiosa"
-}
-```
+No `name`, no data: a field without one is not sent at all.
 
-#### type attribute
-Specifies the type of form control such as `text`, `email`, `passwords`, and more.
-```html
-<input type="text" id="name" name="user_name">
-<input type="email" id="email" name="user_email">
-<input type="password" id="password" name="user_password">
-```
+Other useful types: `number`, `tel`, `url`, `date`, `time`, `search`, `range`, `color`, `file`. On phones, `email`, `tel` and `number` bring up a matching keyboard. The full list is on MDN.
 
+## Labels: always
 
-
-## Text Area
-Accepts multiple text lines. Most browsers will render the `textarea` element with a widget to allow for resizing
+`<label>` tells everyone what a control is for. Connect it with `for`, which must match the input's `id`.
 
 ```html
-<textarea id="bio" name="user_bio"></textarea>
+<label for="name">Your name</label>
+<input type="text" id="name" name="customer_name">
 ```
 
-## Button
-Renders a clickable button.
+Clicking the label now focuses the input, and screen readers read "Your name" when the field gets focus. You can also wrap the input inside the label, which needs no `id`:
 
 ```html
-<button>Click me</button>
+<label>
+  Your name
+  <input type="text" name="customer_name">
+</label>
 ```
 
-#### type attribute
-Specifies whether the button should `submit` the form data, `reset` the form, or have no `default` behavior for use with JavaScript.
-
 ```html
-<button type="submit">Sign Up</button>
+<!-- ❌ the hint vanishes as soon as you type -->
+<input type="email" name="customer_email" placeholder="Email">
+<!-- ✅ a real label, with an example as the placeholder -->
+<label for="email">Email</label>
+<input type="email" id="email" name="customer_email" placeholder="ana@example.com">
 ```
 
-#### Label
-Helps the user by assigning helpful text to a form control, to understand what kind of data they should add to each form field.
-! When we click on it, it focus on the id="name"!
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
--->
-<label for="name">Name:</label>
+`placeholder` is not a label. It disappears as soon as you type and is often low contrast. Use it for an example value at most.
 
+## id vs name
 
-#### for attribute
-Redirects the *click* or *focus* on the `input` with the same name `id`
+They look alike but do different jobs.
+
+| Attribute | Used by | Must be unique? |
+|-----------|---------|-----------------|
+| `id` | labels, CSS, JavaScript, `#links` | yes, on the whole page |
+| `name` | the server, when the form is sent | no (radios share one) |
+
+## Textarea, select and options
+
+`<textarea>` takes several lines of text. Most browsers let the user resize it.
+
 ```html
-<label for="checkbox">Name:</label>
-<input type="text" id="name">
+<label for="notes">Anything else?</label>
+<textarea id="notes" name="notes" rows="3"></textarea>
 ```
 
-Useful for styling `checkboxes`, by hiding the checkbox it self and using a `label` to toggle it.
-```html
-<label for="checkbox">Name:</label>
-<input type="checkbox" id="checkbox">
-```
-
-
-#### Field Set
-Wraps multiple form elements into common groups. This can help organize a form and make it easier to understand for users.
+`<select>` is a drop-down. Each `<option>` has a `value` (sent to the server) and visible text (shown to the user). `<optgroup>` groups options under a heading.
 
 ```html
-<fieldset></fieldset>
-```
-
-#### Legend
-Adds a legend to a `fieldset` can provide some helpful context for users that are filling out a form.
-```html
-<legend>Your basic info</legend>
-```
-
-#### Select
-Renders a drop-down menu that contains selectable options
-
-```html
-<select id="job" name="user_job"></select>
-```
-
-#### Option
-Represents one of the choices that a user can choose in a select menu.
-```html
-<select id="job" name="user_job">
-  <option value="frontend_developer">Front-End Developer</option>
-</select>
-```
-
-#### Option Group
-Wraps option elements, The `label` attribute specifies the text that the optgroup should display above the nested options.
-
-```html
-<select id="job" name="user_job">
-  <optgroup label="web">
-    <option value="frontend_developer">Front-End Developer</option>
-    <option value="nodejs_developer">Node.js Developer</option>
+<label for="drink">Drink</label>
+<select id="drink" name="drink">
+  <optgroup label="Hot">
+    <option value="espresso">Espresso</option>
+    <option value="latte">Latte</option>
   </optgroup>
-  <option value="business_consultant">Business Consultat</option>
+  <optgroup label="Cold">
+    <option value="iced_tea">Iced tea</option>
+  </optgroup>
 </select>
+<!-- choosing "Latte" sends drink=latte -->
 ```
 
+## Checkboxes vs radio buttons
 
-## Checkboxes
-Renders a checkbox input
+- **Checkboxes**: pick any number. Each one is on or off.
+- **Radio buttons**: pick exactly one from a group. They are a group because they share the same `name`.
 
 ```html
-<h3>Interests:</h3>
+<fieldset>
+  <legend>Size</legend>
+  <input type="radio" id="small" name="size" value="small" checked>
+  <label for="small">Small</label>
+  <input type="radio" id="large" name="size" value="large">
+  <label for="large">Large</label>
+</fieldset>
 
-<input type="checkbox" id="development" value="interest_development" name="user_interest">
-<label for="development">Development</label>
-
-<input type="checkbox" id="design" value="interest_design" name="user_design">
-<label for="design">Design</label>
-
-<input type="checkbox" id="business" value="interest_business" name="user_business">
-<label for="business">Business</label>
+<fieldset>
+  <legend>Extras</legend>
+  <input type="checkbox" id="oat" name="extras" value="oat_milk">
+  <label for="oat">Oat milk</label>
+  <input type="checkbox" id="shot" name="extras" value="extra_shot">
+  <label for="shot">Extra shot</label>
+</fieldset>
 ```
 
-## Radio Button
-Renders a radio input they must share the same `name` attribute.
+`checked` sets the starting choice. An unchecked checkbox sends nothing at all.
+
+## Fieldset and legend
+
+`<fieldset>` groups related controls, and `<legend>` gives the group a caption. For radio buttons this matters: a screen reader says "Size, Small, radio button" instead of just "Small".
+
+## Buttons
+
+`<button>` inside a form is a submit button by default. Be explicit with `type`.
 
 ```html
-<h3>Age:</h3>
-
-<input type="radio" id="under_13" value="under_13" name="user_age">
-<label for="under_13">Under 13</label>
-
-<input type="radio" id="over_13" value="over_13" name="user_age">
-<label for="over_13">Over 13</label>
+<button type="submit">Place order</button>
+<button type="reset">Clear</button>    <!-- rarely what users want -->
+<button type="button">Show menu</button> <!-- does nothing until JavaScript says so -->
 ```
+
+Forgetting `type="button"` on a button that only runs JavaScript is a classic bug: it submits the form and reloads the page.
+
+## Built-in validation
+
+The browser can check inputs before sending, with no JavaScript.
+
+```html
+<input type="email" name="customer_email" required>
+<input type="number" name="cups" min="1" max="10">
+<input type="text" name="postcode" pattern="[0-9]{4}-[0-9]{3}">
+```
+
+`required`, `min`, `max`, `minlength`, `maxlength` and `pattern` all block submit and show a message. This helps the user, but always validate again on the server: anyone can skip the browser.
+
+## Reading a form with JavaScript
+
+`FormData` collects every named field in one go.
+
+```js
+const form = document.querySelector('form')
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault() // stop the page reload
+  const data = Object.fromEntries(new FormData(form))
+  console.log(data) // { customer_name: 'Ana', drink: 'latte', size: 'small' }
+})
+```
+
+`Object.fromEntries` keeps only the last value for repeated names, like several checked `extras`. Use `new FormData(form).getAll('extras')` to get them all.
+
+## Common mistakes
+
+- Inputs without a label, or a label whose `for` doesn't match any `id`.
+- Forgetting `name`, so the field silently isn't sent.
+- Radio buttons with different `name`s, so you can pick them all.
+- Trusting browser validation alone.
+
+## Try it
+
+1. Build the coffee order form: name, email, drink, size, extras, notes and a submit button.
+2. Make name and email required and try sending it empty.
+3. Add the JavaScript above and log the order instead of sending it.
 
 ## Related
-- [[docs/html/html-tables|HTML Tables]]
-- [[docs/html/html-text|HTML - Text]]
+
+- [[docs/html/html|HTML - Basics]]
+- [[docs/html/html-tables|HTML - Tables]]
+- [[docs/browser/browser|Browser - DOM]]
+- [[docs/browser/browser-storage|Browser - Storage]]

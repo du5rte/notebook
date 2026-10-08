@@ -2,136 +2,152 @@
 title: "CSS - Flexbox"
 type: doc
 created: 2020-04-11
-updated: 2020-04-11
+updated: 2026-10-07
 tags: [css]
 ---
 # CSS - Flexbox
 
-## Flex
+Flexbox lays things out in **one direction**: a row or a column. It's the tool for nav bars, button groups, a card's header with a title on the left and an icon on the right, or centring something in a box. You put `display: flex` on a parent (the flex container) and its direct children become flex items that share the space.
 
-Uses flex containers and flex items to easily align elements respecting the container and each other. Some browsers like safari still need prefixes.
-
-https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+## Turning it on
 
 ```css
 .nav {
-  display: -webkit-flex;
+  display: flex;
+  gap: 1rem; /* space between items, no margins needed */
 }
 ```
 
-## Flex Direction
+```html
+<ul class="nav">
+  <li>Menu</li>
+  <li>Order</li>
+  <li>Contact</li>
+</ul>
+<!-- three items side by side, 1rem apart -->
+```
 
-Allows us the change the flexbox axis directions, Main Axis (X left to right), Cross Axis (Y top to bottom). Values `row`, `row-reverse`, `column`, `column-reverse`.
+Only direct children become flex items. Grandchildren keep their normal layout.
+
+## Two axes
+
+Flexbox thinks in a **main axis** (the direction items flow) and a **cross axis** (perpendicular to it). `flex-direction` sets the main axis.
 
 ```css
-.nav {
-  flex-direction: row;
+.nav  { flex-direction: row; }    /* default: main axis runs left to right */
+.menu { flex-direction: column; } /* main axis runs top to bottom */
+```
+
+This is the key idea. The alignment properties below follow the axes, not "horizontal" and "vertical", so they swap meaning when you switch to `column`.
+
+## justify-content: along the main axis
+
+Distributes items along the main axis.
+
+```css
+.nav { justify-content: space-between; } /* first at the start, last at the end */
+```
+
+Common values: `flex-start` (default), `center`, `flex-end`, `space-between`, `space-around`, `space-evenly`.
+
+## align-items: across the cross axis
+
+Lines items up on the cross axis.
+
+```css
+.header { align-items: center; } /* vertically centred in a row */
+```
+
+Default is `stretch`: items grow to fill the container's height in a row. That's why flex items are often taller than you expect.
+
+The famous one-liner for perfect centring:
+
+```css
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* the child sits dead centre */
 }
 ```
 
-## Justify Content
-
-Adjusts the position and spacing of flex items on the X-Axis. Values `flex-start`, `flex-end`, `center`, `space-between`.
+## align-self: one item breaks ranks
 
 ```css
-.nav {
-  justify-content: space-between;
-}
+.toolbar .help { align-self: flex-end; } /* only this item drops to the bottom */
 ```
 
-## Margin Auto
+## margin-left: auto: push things apart
 
-Auto absorbs extra space and push other flex items in opposite way
+An `auto` margin soaks up all the free space on its side. Great for "logo on the left, login button on the right".
 
 ```css
-.nav li:last-child {
-  margin-left: auto; /* pushed to the right others to the left */
-}
+.nav .login { margin-left: auto; } /* login pushed right, the rest stay left */
 ```
 
-## Flex Wrap
+## Growing and shrinking: flex
 
-Fixes overflowing elements by creating a multi-line container
+The `flex` shorthand says how an item shares space.
 
 ```css
-.nav {
+.sidebar { flex: 0 0 15rem; } /* don't grow, don't shrink, start at 15rem */
+.content { flex: 1; }         /* take all the remaining space */
+```
+
+`flex: 1` on several items splits the free space equally. `flex: 2` on one of them gives it twice the share of the others.
+
+The three values are `flex-grow`, `flex-shrink` and `flex-basis` (the starting size). Most of the time you only need `flex: 1` or `flex: none`.
+
+## Wrapping
+
+By default items squeeze onto one line. `flex-wrap: wrap` lets them flow onto the next.
+
+```css
+.tags {
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem; /* tags wrap like words in a sentence */
 }
 ```
 
-## Flex or Flex Grow
+## order
 
-Determins how much the flex item will grow relative to others. all items take the same free space
+Changes the visual order without touching the HTML.
 
 ```css
-.nav li {
-  flex-grow: 1;
-}
-.col-c {
-  flex: 2;
-}
+.featured { order: -1; } /* moves to the front */
 ```
 
-## Order
+Use it sparingly: keyboard and screen reader users still follow the HTML order, so the two can get out of sync.
 
-Allow us to change the order of items
+## Responsive: switch the direction
 
 ```css
-.col-c {
-  -webkit-order: -1;
+.layout { display: flex; flex-direction: column; }
+
+@media (width >= 50rem) {
+  .layout { flex-direction: row; } /* side by side on wide screens */
 }
 ```
 
-## Align Self
+## Flexbox vs grid
 
-Allows us to vertically align blocks
+Flexbox is content-first: items decide their size and flexbox spreads them along a line. When you need rows **and** columns lining up, reach for [[docs/css/css-grid|CSS - Grid]].
 
-```css
-.col-b {
-  -webkit-align-self: center; /* centers on the Y-Axis */
-  -webkit-align-self: flex-end; /* Pushes to the end of Y-Axis */
-  -webkit-align-self: stretch; /* Default values, fill the space */
-}
-```
+## Common mistakes
 
-## Media Queries
+- ❌ Using margins on every item for spacing. ✅ Use `gap` on the container.
+- Expecting `justify-content` to centre vertically in a `column`. In a column, the main axis is vertical, so `align-items` is the horizontal one.
+- Putting `display: flex` on the item instead of the parent.
+- Text overflowing a `flex: 1` item. Flex items won't shrink below their content; add `min-width: 0` to the item.
 
-We can use media queries to easily change layouts
+## Try it
 
-```css
-@media screen and (max-width: 999px) {
-  .main {
-    -webkit-flex-direction: column;
-  }
-}
-```
-
-## Multi-Coulmn Layout
-
-Defines multiple content columns with widths, space and rules
-
-```css
-.main {
-  /* Columns */
-  -webkit-column-count: 3;
-  -webkit-column-gap: 3em;
-  -webkit-column-width: 250px; //acts like a max-width
-  /* shorthand ! with a S ! */
-  -webkit-columns: 250px 3;
-
-  /* Columns-rules */
-  -webkit-column-rule-width: 2px;
-  -webkit-column-rule-style: dotted;
-  -webkit-column-rule-color: black;
-  /* shorthand */
-  -webkit-column-rule: 2px dotted black;
-}
-/* Column Span */
-h1 {
-  -webkit-column-span: all;
-}
-```
+1. Build a nav bar: logo on the left, three links next to it, a "Log in" button on the far right.
+2. Centre a `.modal` horizontally and vertically on the screen.
+3. Make a sidebar of `15rem` with content filling the rest, stacking on narrow screens.
 
 ## Related
-- [[docs/css/css-box-model|CSS - Box model]]
+- [[docs/css/css-grid|CSS - Grid]]
+- [[docs/css/css-box-model|CSS - Box Model]]
 - [[docs/css/css-media-queries|CSS - Media Queries]]
+- [[docs/css/css-tailwind|CSS - Tailwind]]

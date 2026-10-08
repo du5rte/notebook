@@ -1,262 +1,208 @@
 ---
 title: "React - Basics"
 type: doc
-created: 2016-03-18
-updated: 2016-04-11
-tags: [react]
-status: outdated
+created: 2026-10-07
+updated: 2026-10-07
+tags: [react, web]
 ---
 # React - Basics
 
-Resources:
-- [Getting Started with React](https://thinkster.io/getting-started-with-react)
-- [Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html)
-- [React JS Tutorials LearnCode Academy](https://www.youtube.com/playlist?list=PLoYCgNOIyGABj2GQSlDRjgvXtqfDxKm5b)
-- [React with Typescript](http://blog.mgechev.com/2015/07/05/using-jsx-react-with-typescript/)
+React is a library for building user interfaces out of **components**: small functions that take data and return what the screen should look like. You describe the UI for a given state, and React works out what to change in the page when that state changes. Think of a coffee shop menu board: you don't repaint the whole board when the oat milk runs out, you swap one line. React does that swapping for you.
 
+Every example here is TypeScript (`.tsx`). The same ideas carry straight over to [[docs/react-native/react-native|React Native - Basics]], only the building blocks change (`View` instead of `div`).
 
-```sh
-$ npm install --save react react-dom
+## Components are functions
+
+A component is a function whose name starts with a capital letter and that returns JSX.
+
+```tsx
+function Welcome() {
+  return <h1>Welcome to the coffee shop ☕</h1>
+}
+
+// used like an HTML tag
+<Welcome /> // <h1>Welcome to the coffee shop ☕</h1>
 ```
 
-## Components
-Every Component in react is a Virtual DOM `element`, to create a component we need to create a `React Component`, the most simple component that can be created is with the `render` method.
+The capital letter matters: `<welcome />` is treated as an HTML tag, `<Welcome />` as your component.
 
-Because React uses a `virtual DOM` we can't simply return a string.
-```js
-var React = require('react')
-
-var Hello = Reach.createClass({
-  // WILL NOT WORK
-  render: function() {
-    return (
-      // Won't work
-      // '<div>Hello, haters</div>'
-      // Will work
-      React.createElement('div', null, 'Hello World!')
-    )
-  }
-})
-```
+You'll still find class components (`class Welcome extends React.Component`) in old code and old tutorials. Function components plus hooks replaced them. Don't write new ones.
 
 ## JSX
-But it looks really ugly, so facebook invented `jsx`, which uses a transformer to compile `html` like syntax to javascript with `return`
 
-```jsx
-var React = require('react')
+JSX looks like HTML but it's JavaScript. A compiler turns each tag into a function call, so you can put any JavaScript **expression** inside curly braces.
 
-var Hello = Reach.createClass({
-  render: function() {
-    return <div>Hello, World!</div>
-  }
-})
+```tsx
+const name = 'Ana'
+const price = 3.5
+
+const order = (
+  <p>
+    {name} ordered a flat white for £{price.toFixed(2)}
+  </p>
+)
+// <p>Ana ordered a flat white for £3.50</p>
 ```
 
-## ES6
-And with the with new `es6` syntax `class` we can just extend on `React.Component`
+A few differences from HTML:
 
-```jsx
-import React from 'react'
+- `className`, not `class`. `htmlFor`, not `for`.
+- Every tag closes: `<img />`, `<br />`.
+- Attributes are camelCase: `onClick`, `tabIndex`.
+- A component returns **one** root. Wrap siblings in a fragment `<>...</>` when you don't want an extra `div`.
 
-class Hello extends React.Component {
-  render() {
-    return <div>Hello, World!</div>
-  }
-}
-```
-or
-```jsx
-import React, { Component } from 'react'
-
-class Hello extends Component {
-  render() {
-    return <div>Hello, World!</div>
-  }
-}
-```
-
-## Rendering
-The rending engine `ReactDOM` comes separated from `react`, To render to the `DOM` first pass component we want to render then where we want it to render to
-
-```jsx
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-
-
-class Hello extends React.Component {
-  render() {
-    return <div>Hello World!</div>
-  }
-}
-
-ReactDOM.render(<Hello />, document.body)
-```
-
-## Rending Variables
-React is a big believer in vanilla javascript, anything inside curly brackets `{ }` is evaluated as plain JavaScript
-
-```
-<div> Example {1 + 2} </div>
-<div> Example {(function() { return 3 })()} </div>
-<div> Example {/* comment line */} </div>
-```
-```jsx
-class Hello extends React.Component {
-  render() {
-    var name = 'Dude'
-
-    return  <div> {name} </div>
-  }
+```tsx
+function Header() {
+  return (
+    <>
+      <h1>Menu</h1>
+      <p>Open until 6pm</p>
+    </>
+  )
 }
 ```
 
-## Rending Logic
-Logic can be rendered direcly on the `render` method but it's a bad pratice and with `classes` we have a lot of other options.
+## Props: data in
 
-```jsx
-class Hero extends React.Component {
-  constructor() {
-    // we need to pass super
-    super()
-    this.greeting = 'Hello'
-  }
+Props are the arguments of a component. You pass them like attributes and read them as one object. Type them with a `type` and destructure them in the signature.
 
-  getName(name) {
-    return name
-  }
-
-  isActive() {
-    if(true) {
-      return 'active'
-    } else {
-      return 'disabled'
-    }
-  }
-
-  render() {
-    return (
-      <div className={ this.isActive() }>
-        {this.greeting} { this.name('Dude') }!
-      </div>
-    )
-  }
-
+```tsx
+type DrinkProps = {
+  name: string
+  price: number
 }
+
+function Drink({ name, price }: DrinkProps) {
+  return (
+    <li>
+      {name}: £{price.toFixed(2)}
+    </li>
+  )
+}
+
+<Drink name="Latte" price={3.2} /> // <li>Latte: £3.20</li>
 ```
 
-## Multiple Components
-Components can be nested inside other components using self closing `< />` elements and the class name `<Name />`
+Strings can go in quotes; everything else (numbers, booleans, objects, functions) goes in braces. Props are **read-only**: a component never changes its own props. When something needs to change, that's state (see [[docs/react/react-state|React - State and Hooks]]).
 
-```jsx
-class Child extends React.Component {
-  render() {
-    return <span>Bill Junior</span>
-  }
-})
+## Rendering lists with keys
 
-class Parent extends React.Component {
-  render() {
-    return <p>Bill Senior is <Child />'s dad<p>
-  }
+To render a list, `map` an array to elements. Each item needs a `key` that is stable and unique among its siblings, so React can tell which item is which between renders.
+
+```tsx
+type Drink = { id: string; name: string; price: number }
+
+const drinks: Drink[] = [
+  { id: 'latte', name: 'Latte', price: 3.2 },
+  { id: 'mocha', name: 'Mocha', price: 3.6 },
+]
+
+function Menu() {
+  return (
+    <ul>
+      {drinks.map((drink) => (
+        <li key={drink.id}>{drink.name}</li>
+      ))}
+    </ul>
+  )
 }
+// <ul><li>Latte</li><li>Mocha</li></ul>
 ```
 
-Components can be reused multiple times
-```jsx
-class Parent extends React.Component {
-  render() {
-    return (
-      <div>
-        <Child />
-        <Child />
-        <Child />
-      </div>
-      )
-  }
+Use an id from your data. ❌ `key={index}` looks fine until the list is sorted, filtered or has an item removed: React then matches the wrong rows, and an input or animation sticks to the wrong drink. ✅ `key={drink.id}`.
+
+## Conditional rendering
+
+There's no special `if` syntax. You use plain JavaScript: an early `return`, a ternary, or `&&`.
+
+```tsx
+type BasketProps = { itemCount: number }
+
+function Basket({ itemCount }: BasketProps) {
+  if (itemCount === 0) return <p>Your basket is empty</p>
+
+  return (
+    <p>
+      {itemCount} {itemCount === 1 ? 'item' : 'items'}
+    </p>
+  )
 }
+
+<Basket itemCount={0} /> // <p>Your basket is empty</p>
+<Basket itemCount={2} /> // <p>2 items</p>
 ```
 
-Components can be returns as an `array`
-```jsx
-class Parent extends React.Component {
-  render() {
-    return (
-      <div>
-        { <Child />, <Child />, <Child /> }
-      </div>
-      )
-  }
-}
+`&&` renders the right side only when the left is truthy. Watch out for numbers:
+
+```tsx
+// ❌ renders a lonely "0" when count is 0
+{count && <Badge count={count} />}
+
+// ✅ compare to get a real boolean
+{count > 0 && <Badge count={count} />}
 ```
 
-## Properties
-Using `props` we can pass data between components
+React skips `false`, `null` and `undefined`, but it happily renders `0`.
 
-```jsx
-class Child extends React.Component {
-  render() {
-    return <li>Hi, my name is {this.props.name}</li>
-  }
+## Composition with children
+
+Instead of giving a component a dozen props for every variation, let it wrap whatever you put inside it. Whatever sits between the tags arrives as the `children` prop.
+
+```tsx
+import type { ReactNode } from 'react'
+
+type CardProps = {
+  title: string
+  children: ReactNode
 }
 
-class Siblings extends React.Component {
-  render() {
-    return (
-      <ul>
-        <Child name="John" />
-        <Child name="Dave" />
-        <Child name="Lewis" />
-      </ul>
-    )
-  }
+function Card({ title, children }: CardProps) {
+  return (
+    <section className="card">
+      <h2>{title}</h2>
+      {children}
+    </section>
+  )
 }
+
+<Card title="Today's special">
+  <p>Pistachio latte</p>
+  <button>Add to order</button>
+</Card>
 ```
 
-## Iterating
-Each child in an array or iterator should have a unique `key` prop
+`Card` doesn't know or care what's inside. That's the point: small components that **compose** beat one big component with a pile of boolean props (`showButton`, `isSpecial`, `hasImage`...). This is the same idea as atomic design: small pieces (atoms) combine into bigger ones (molecules, organisms).
 
-```jsx
-class Siblings extends React.Component {
-  render() {
-    var names = ['John', 'Dave', 'Lewis']
+## Rendering to the page
 
-    return (
-      <ul>
-        {
-          names.map((name, index) => {
-            return <Child key={index} name={name} />
-          })
-        }
-      </ul>
-    )
-  }
-}
+You rarely write this by hand (Next.js and Expo do it for you), but it's good to know where it starts: React takes over one DOM node and renders your root component into it.
+
+```tsx
+import { createRoot } from 'react-dom/client'
+
+createRoot(document.getElementById('root')!).render(<App />)
 ```
 
-## State
-States are used to change properties within the component scope, each time `setState` is used react renders the component.
+From then on you never touch the DOM directly. You change data, React updates the page.
 
-```jsx
-class Parent extends React.Component {
-  constructor() {
-    super();
-    // Set initial state
-    this.state = {paternity: 'may be'};
-  }
+## Common mistakes
 
-  findOut() {
-    let dnaResults = Math.round(Math.random()) ? 'is' : 'is not'
-    this.setState({paternity: dnaResults})
-  }
+- Lowercase component names: `<menu />` renders an HTML `<menu>`, not your `Menu`.
+- Using the array index as `key` on a list that can change order.
+- `{count && ...}` rendering `0`.
+- Mutating props or data in place and expecting the screen to update. Create new values instead.
+- Calling a component like a function (`Menu()`) instead of rendering it (`<Menu />`). It breaks hooks.
 
-  render() {
+## Try it
 
-    return (
-      <div>
-        <p>Bill Senior {this.state.paternity} the father of <Child />.</p>
-        <button onClick={findOut} >Find Out the Results</button>
-      </div>
-    )
-  }
-}
-```
+1. Build a `Menu` that takes `drinks: Drink[]` as a prop and renders each one with a `Drink` component, keyed by id.
+2. Show "Sold out" next to drinks where `inStock` is `false`, and hide the price for them.
+3. Make a `Card` component with `children` and use it for two different things: a drink and an opening-hours notice.
+
+## Related
+- [[docs/react/react-state|React - State and Hooks]]
+- [[docs/react/react-forms|React - Forms]]
+- [[docs/nextjs|Next.js - Basics]]
+- [[docs/typescript/typescript|TypeScript - Basics]]
+- [[docs/react-native/react-native|React Native - Basics]]
+- [[docs/javascript/javascript-arrays|JavaScript Arrays]]

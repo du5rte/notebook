@@ -2,183 +2,196 @@
 title: "JavaScript - Scope"
 type: doc
 created: 2015-08-27
-updated: 2016-06-18
+updated: 2026-10-07
 tags: [javascript]
 ---
 # JavaScript - Scope
 
-
-## Scope
-The variable access we have access to when a piece of script is running.
+Scope is which variables a piece of code can see. Context is what `this` points to while that code runs. They sound alike and get mixed up a lot, so this lesson takes them one at a time: scope, then closures (scope that sticks around), then `this`.
 
 ```
-scope === variable access
-context === this
+scope   === which variables I can reach
+context === what `this` is
 ```
 
-When we create `a` we are actually creating `window.a`
-```js
-var a = 1;
+## Scope is like a house
 
-a // = 1
-window.a // = 1
-window.a === a // true
-```
-
-We can create child `scopes` with functions.
-
-If a `parents` buys cookies into his home the child automatically has access to the cookies but if a child buys cookies with it's own money the parents doesn't have access to the cookies
+Think of a family house. Children can use whatever the parents bought for the house, but if a child buys cookies with their own money, they keep them in their own room. Inner code can see outer variables; outer code can't see inner ones.
 
 ```js
-// parent
-function foo() {
-  // child
-  var b = 2;
+const shop = 'Corner Café' // outer
+
+function order() {
+  const drink = 'latte' // inner
+  return `${drink} from ${shop}` // can see both
 }
 
-foo();
-console.log(b); // Error! b is not defined
+order() // 'latte from Corner Café'
+drink   // ReferenceError: drink is not defined
 ```
 
-If we create the same variable inside the `foo` scope it create a `Variable Conflict` which will overwrite the link to the global `window.a`
+## Block scope: let and const vs var
+
+`let` and `const` live inside the nearest `{ }` block. The old `var` ignores blocks and lives in the whole function, which leads to surprises. Use `const` by default, `let` when the value changes, and leave `var` in old code.
+
 ```js
-var a = 1;
-function foo() {
-  // a becomes `2`
-  var a = 2;
-  // Unless we re-wire it to the global `window.a`
-  console.log(a); // 2
-  console.log(window.a); // 1
-  // without the `var` JavaScript Will look for an existing variable
-  // So it only redefines `window.a`
-  // if `a` it does not exist, JavaScript will create it as a global
-  a = 2;
+if (true) {
+  const size = 'large'
+  var oldSize = 'large'
 }
-foo();
 
-console.log(a); // 2
+oldSize // 'large': var leaked out of the block
+size    // ReferenceError
 ```
 
-## Context
+| | `var` | `let` / `const` |
+|---|---|---|
+| Scope | function | block `{ }` |
+| Use before declaring | `undefined` | ReferenceError |
+| Redeclare in same scope | allowed | error |
+
+## Shadowing
+
+An inner variable with the same name as an outer one hides it inside that scope. The outer one is untouched.
 
 ```js
-console.log(this); // window
-this === window // true
+const coffee = 'espresso'
 
-var a = 1;
-console.log(this.a); // 1
-console.log(window.a); // 1
-```
-
-Even though it's inside a scope the context by default is where foo runs, in this case in `window.foo` so `this` === `window`
-
-```js
-function foo() {
-  console.log(this);
+function makeTea() {
+  const coffee = 'none today'
+  return coffee
 }
-foo(); // window
+
+makeTea() // 'none today'
+coffee    // 'espresso'
 ```
 
-Because the function is inside a object now it console.logs the `obj` as `this`
-```js
-var obj = {
-    foo: function () {
-      console.log(this);
-      console.log(this === obj); // true
-      console.log(this === window); // false
-    }
-};
+Assigning to a name that doesn't exist anywhere, without `const` or `let`, used to create a global by accident. ES modules and strict mode turn that into an error, which is what we want.
 
-obj.foo();
-```
-## Methods of changing context
+## Closures
 
-#### Call
-Change the `context` in which it fires `foo`
-```js
-obj.foo.call(window); // this === window
-// If we need to pass parameters they would go after the context
-obj.foo.call(window, 1,2,3); // this === window
-```
-
-#### Apply
-Pretty much the same only it only takes 2 values the `context` and a array of `parameters`
-```js
-obj.foo.apply(window, [1,2,3]); // this === window
-```
-
-#### Bind
-Works differently, it doesn't actually execute the function, it return a `bound function`
-```js
-var myBoundFoo = obj.foo.bind(window);
-myBoundFoo(); // this === window
-obj.foo(); // this === obj
-```
-
-In JavaScript when we setup a event listener on the `DOM` it will run with the context of that `DOM element`
+A function remembers the variables around it when it was created, even after the outer function has finished. That memory is a closure.
 
 ```js
-$('body').on('click', obj.foo); // this === <body></body>
+function makeCounter() {
+  let count = 0
+  return () => {
+    count += 1
+    return count
+  }
+}
+
+const nextTicket = makeCounter()
+nextTicket() // 1
+nextTicket() // 2
 ```
 
-Here we want to increment all `li` but we only want to increment one at the time, not all at once!
+Nobody outside can touch `count`. Closures are how we keep private state in plain functions, and they're behind most of the patterns in [[docs/javascript/javascript-patterns|JavaScript - Common Patterns]].
 
-```html
-<ul>
-    <li>Clicked <span>0<span> </li>
-    <li>Clicked <span>0<span> </li>
-    <li>Clicked <span>0<span> </li>
-</ul>
-```
-```js
-$('li').on('click', function() {
-  // var currentTimes = parseInt( $('li span').html() );
-  var currentTimes = parseInt( $(this).find('span').html() );
-  $(this).find('span').html(currentTimes+1);
-})
-```
+## What is `this`?
 
-Common Problem using `this`. Lest say we wanted to create a button which toggles a div to show up, simple enough
-```js
-$('#opendiv').on('click', function() {
-  $(this).toggleClass("active");
-  $('#div1').slideToggle();
-});
-```
-
-now lest say we only want the button to turn `.active` once the animation has finished
-```js
-$('#opendiv').on('click', function() {
-  // So now we have change slideToggle to include a callback
-  $('#div1').slideToggle(300, function() {
-      // and then we toggle it to active
-      // !PROBLEM IS, THIS === #DIV1 !
-      $(this).toggleClass("active");
-  });
-});
-```
-
-We can fix it by creating a variable within the `#opendiv` scoop pointing to `this` ( some people use `_this` `_self` `opendiv`), use `#opendiv` it self
-```js
-$('#opendiv').on('click', function() {
-  var self = this;
-  $('#div1').slideToggle(300, function() {
-
-      $(self).toggleClass("active");
-  });
-});
-```
-Or better yet use bind to always run it within the `#opendiv` scope. A disadvantage is that we can no longer access `this` within `#div1` scope to select itself
+`this` is decided by **how a function is called**, not where it's written. For a regular function, the rule of thumb is: look left of the dot.
 
 ```js
-$('#opendiv').on('click', function() {
-  $('#div1').slideToggle(300, function() {
-      $(this).toggleClass("active");
-  }.bind(this));
-});
+const dice = {
+  sides: 6,
+  describe() {
+    return `A ${this.sides}-sided dice`
+  },
+}
+
+dice.describe() // 'A 6-sided dice': this === dice
+
+const describe = dice.describe
+describe() // TypeError in strict mode: this is undefined
 ```
+
+With nothing left of the dot, `this` is `undefined` in strict mode (modules and classes are always strict). In old sloppy scripts it fell back to the global object, `window` in the browser.
+
+## Losing `this` in callbacks
+
+The classic bug: a method passes a regular function as a callback, and that callback is called with nothing left of the dot.
+
+```js
+const dice = {
+  sides: 6,
+  rollLater() {
+    setTimeout(function () {
+      console.log(this.sides) // undefined: `this` isn't dice here
+    }, 100)
+  },
+}
+```
+
+## Arrow functions keep the outer `this`
+
+Arrow functions don't have their own `this`. They use the `this` of the code around them. That makes them the fix for the bug above.
+
+```js
+const dice = {
+  sides: 6,
+  rollLater() {
+    setTimeout(() => {
+      console.log(Math.floor(Math.random() * this.sides) + 1) // works
+    }, 100)
+  },
+}
+```
+
+Before arrows, people wrote `const self = this` above the callback and used `self` inside. You'll still see `self` and `_this` in older code.
+
+The flip side: don't use an arrow as an object method. It would take `this` from outside the object.
+
+## call, apply and bind
+
+These set `this` by hand. `call` and `apply` run the function straight away; `bind` returns a new function with `this` locked in.
+
+```js
+function introduce(greeting, punctuation) {
+  return `${greeting}, I'm ${this.name}${punctuation}`
+}
+
+const ana = { name: 'Ana' }
+
+introduce.call(ana, 'Hi', '!')    // "Hi, I'm Ana!"
+introduce.apply(ana, ['Hi', '!']) // "Hi, I'm Ana!": arguments as an array
+const anaIntro = introduce.bind(ana)
+anaIntro('Hello', '.')            // "Hello, I'm Ana."
+```
+
+Memory aid: **a**pply takes an **a**rray. Today, spread (`fn.call(obj, ...args)`) covers most uses of `apply`, and arrows cover most uses of `bind`.
+
+## `this` in event listeners
+
+With a regular function, the browser sets `this` to the element the listener is attached to. With an arrow, you get the outer `this` instead, so use `event.currentTarget`, which works either way.
+
+```js
+for (const item of document.querySelectorAll('li')) {
+  item.addEventListener('click', (event) => {
+    const counter = event.currentTarget.querySelector('span')
+    counter.textContent = Number(counter.textContent) + 1
+  })
+}
+```
+
+Each `li` counts its own clicks, because `currentTarget` is the one that was clicked.
+
+## Common mistakes
+
+- **Pulling a method off its object**: `const roll = dice.roll; roll()` loses `this`. Call it on the object, or `bind` it.
+- **Arrow functions as methods**: `{ sides: 6, roll: () => this.sides }` gives `undefined`.
+- **Using `var` in a loop with callbacks**: every callback sees the last value. `let` gives each loop pass its own variable.
+- **Mixing up scope and context**: a variable you can't reach is a scope problem; a wrong `this` is a context problem.
+
+## Try it
+
+1. Write `makeTab()` that returns an `add(price)` function. Each call adds to a private total and returns it.
+2. Make `const cup = { size: 'large', describe() { return this.size } }` and break it by passing `cup.describe` to `setTimeout`. Fix it two ways: with an arrow, then with `bind`.
+3. Predict the output of `for (var i = 0; i < 3; i++) setTimeout(() => console.log(i))`, then switch to `let` and compare.
 
 ## Related
-- [[docs/javascript/javascript-functions|JavaScript Functions]]
-- [[docs/javascript/javascript-decorators|JavaScript - Common Patterns]]
+
 - [[docs/javascript/javascript-variables|JavaScript - Variables]]
+- [[docs/javascript/javascript-functions|JavaScript - Functions]]
+- [[docs/javascript/javascript-patterns|JavaScript - Common Patterns]]
+- [[docs/javascript/javascript-object-oriented|JavaScript - Classes]]

@@ -2,178 +2,195 @@
 title: "Swift - Functions"
 type: doc
 created: 2016-11-04
-updated: 2016-11-04
+updated: 2026-10-07
+aliases: ["Swift - Closures", "Swift - Scratch"]
 tags: [swift]
 ---
 # Swift - Functions
 
+A function is a recipe with a name: write it once, run it whenever you like. Swift functions look like TypeScript ones with one twist you'll notice straight away: **argument labels**. Calls read like sentences, `makeCoffee(size: "large", withMilk: true)`, and that's on purpose. The second half of this lesson covers closures, Swift's arrow functions, which SwiftUI uses everywhere.
 
-swift allows for same name functions as long as they take on different parameters
+## Declaring and calling
 
-## Functions
+`func`, a name, parameters with types, and `->` for the return type.
 
 ```swift
-func calculateArea() {
-    let length = 10
-    let width = 12
+func area(length: Int, width: Int) -> Int {
+    return length * width
+}
 
-    let area = length * width
+area(length: 12, width: 10) // 120
+```
+
+If the body is a single expression, you can leave out `return`.
+
+```swift
+func area(length: Int, width: Int) -> Int {
+    length * width
 }
 ```
 
-## Parameters
+In TypeScript this is `function area(length: number, width: number): number`. A function with no `->` returns `Void`, Swift's `void`.
+
+## Argument labels
+
+Each parameter has a **label** (used by the caller) and a **name** (used inside). By default they're the same. Write two words to split them, or `_` to drop the label.
 
 ```swift
-func calculateArea(length: Int, width: Int) {
-    let area = length * width
-
-    print(area)
-}
-```
-
-## Arguments
-```swift
-calculateArea(length: 12, width: 10) // 120
-```
-
-## Return Types
-```swift
-func calculateArea(length: Int, width: Int) -> Int {
-    let area = length * width
-
-    return area
-}
-```
-
-a function that doesn't return anything is of type `Void` or `()`
-
-## Name Parameters
-Parameters can have `local` names and `external` names
-
-```swift
-func getRemainder(value a: Int, divisor b: Int) -> Int {
-    // local names
-    return a % b
+func send(_ message: String, to friend: String) -> String {
+    "Sent '\(message)' to \(friend)"
 }
 
-// external names
-getRemainder(value: 3, divisor: 2)
+send("Coffee?", to: "Ana") // "Sent 'Coffee?' to Ana"
 ```
 
-## Default Values
+The rule of thumb from Apple's API guidelines: the call site should read as an English phrase. `send("Coffee?", to: "Ana")` beats `send(message: "Coffee?", friend: "Ana")`.
 
+TypeScript has no labels; the closest habit is passing an options object, `send({ message, to })`.
+
+## Default values
+
+Give a parameter a default and callers can skip it.
 
 ```swift
-func carpetCostCalculator(area: Int, carpetColor: String = "grey") -> Int {
-    var price: Int
-
-    switch carpetColor {
-        case "grey": price = 1
-        case "tan": price = 2
-        case "blue": price = 4
-        default: price = 0
+func carpetCost(area: Int, colour: String = "grey") -> Int {
+    let pricePerMetre = switch colour {
+    case "grey": 1
+    case "tan": 2
+    case "blue": 4
+    default: 0
     }
-
-    let total = area * price
-
-    return total
+    return area * pricePerMetre
 }
 
-carpetCostCalculator(area: areaOfRoom1)
+carpetCost(area: 20)                 // 20
+carpetCost(area: 20, colour: "blue") // 80
 ```
 
-## Returning Complex Values
-construct known as a tuple
+Because labels are part of a function's identity, Swift lets two functions share a name if their labels or types differ (overloading). In TypeScript, overloads are only extra signatures on one implementation.
+
+## Returning several values with a tuple
+
+A tuple is a small, unnamed group of values. Under the hood it's a struct without a name. Use it to return two or three things without declaring a type.
 
 ```swift
-func carpetCostCalculator(area: Int, carpetColor: String = "grey") -> (price: Int, carpetColor: Int) {
-    var price: Int
-
-    switch carpetColor {
-        case "grey": price = 1
-        case "tan": price = 2
-        case "blue": price = 4
-        default: price = 0
-    }
-
-    let total = area * price
-
-    return total
+func split(bill: Double, between people: Int) -> (each: Double, tip: Double) {
+    let tip = bill * 0.1
+    return ((bill + tip) / Double(people), tip)
 }
 
-let result = carpetCostCalculator(area: areaOfRoom1)
+let result = split(bill: 40, between: 4)
+result.each // 11.0
+result.tip  // 4.0
 
-result.0
-result.price
+let (each, tip) = split(bill: 40, between: 4) // destructure, like TS
 ```
 
-## Function Scope
+If a tuple travels further than one call, make it a struct instead.
+
+## typealias
+
+`typealias` gives an existing type a friendlier name. It doesn't create a new type.
 
 ```swift
-var greeting = "hello"
+typealias Choice = (title: String, page: Int)
+let next: Choice = (title: "Open the door", page: 12)
+```
+
+In TypeScript this is `type Choice = { title: string; page: number }`.
+
+## Scope
+
+A name declared inside a function only exists inside it, and can shadow one outside.
+
+```swift
+let greeting = "hello"
 
 func greet() {
-    // only available inside this function scope
     let greeting = "yo"
-
     print(greeting)
 }
 
-greet() // yo
+greet()          // yo
+print(greeting)  // hello
+```
 
-print(greeting) // hello
-````
+## Closures
 
-
-## Structure
+A closure is a function without a name, written in braces. Parameters and return type go before `in`.
 
 ```swift
-let coordinate1: (x: Int, y: Int) = (0,0)
+let double = { (number: Int) -> Int in
+    number * 2
+}
+double(4) // 8
+```
 
-coordinate1.x
+In TypeScript this is `const double = (number: number): number => number * 2`.
 
+When Swift can infer the types, you can shorten a closure step by step. All of these are the same:
 
-struct Point {
-    let x: Int
-    let y: Int
+```swift
+let prices = [3, 2, 5]
+
+prices.map({ (price: Int) -> Int in return price * 2 })
+prices.map({ price in price * 2 })
+prices.map { price in price * 2 } // trailing closure
+prices.map { $0 * 2 }             // shorthand argument
+// [6, 4, 10]
+```
+
+**Trailing closure syntax**: when the last argument is a closure, it goes after the parentheses (and if it's the only argument, the parentheses go too). This is why SwiftUI code looks like `Button("Order") { placeOrder() }`.
+
+Use `$0` for one-liners. Name the parameter once the closure is longer than a line.
+
+## Functions as values
+
+Functions are values: store them, pass them, return them. A function's type is written `(Int) -> Int`.
+
+```swift
+func applyDiscount(to price: Double, using rule: (Double) -> Double) -> Double {
+    rule(price)
 }
 
-// instance of a struct
-let p1 = Point(x:1, y:2)
+applyDiscount(to: 10) { $0 * 0.8 } // 8.0
+```
 
-p1.x
-````
+## Closures capture
 
-## Methods
-
+A closure remembers the variables around it, even after the surrounding function has returned.
 
 ```swift
-struct Point {
-    let x: Int
-    let y: Int
-
-    func surroundingPoints(withRange range: Int = 1) -> [Point] {
-        var results: [Point] = []
-
-
-        for xCoord in (x-range)...(x+range) {
-            for yCoord in (y-range)...(y+range) {
-                let coordinatePoint = Point(x:xCoord, y:yCoord)
-
-                results.append(coordinatePoint)
-            }
-        }
-
-        return results
+func makeCounter() -> () -> Int {
+    var count = 0
+    return {
+        count += 1
+        return count
     }
 }
 
-let coordinatePoint = Point(x:0, y:0)
-
-// Method
-coordinatePoint.surroundingPoints()
+let nextTicket = makeCounter()
+nextTicket() // 1
+nextTicket() // 2
 ```
 
+Same as a JavaScript closure. One Swift-only gotcha: a closure stored on a class that refers to `self` keeps that object alive. The fix, `[weak self]`, is in [[docs/swift/swift-structs-and-classes|Structs and Classes]].
+
+## Common mistakes
+
+- Calling with the wrong label, or none. The compiler tells you: "missing argument label 'to:' in call".
+- Using `$0` and `$1` in a closure that's three lines long. Name them.
+- Reaching for a tuple when the data has a meaning of its own. Make a struct.
+
+## Try it
+
+1. Write `greet(_ name: String, at time: String)` so the call reads `greet("Ana", at: "9am")`.
+2. Write a function that returns the min and max of an `[Int]` as a named tuple.
+3. Use `filter` with a trailing closure to keep only names longer than three letters.
+
 ## Related
+- [[docs/swift/swift|Swift - Basics]]
+- [[docs/swift/swift-collections|Swift - Collections]]
 - [[docs/swift/swift-errors|Swift - Error Handling]]
-- [[docs/swift/swift-scratch|Swift - Scratch]]
+- [[docs/swift/swift-swiftui|Swift - SwiftUI Basics]]
+- [[docs/javascript/javascript-functions|JavaScript - Functions]]

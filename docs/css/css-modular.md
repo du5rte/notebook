@@ -2,124 +2,142 @@
 title: "CSS - Modular CSS"
 type: doc
 created: 2015-11-01
-updated: 2016-04-11
+updated: 2026-10-07
 tags: [css]
-status: outdated
 ---
 # CSS - Modular CSS
 
-Resources:
-- [The BEM Methodology](http://bem.info/method/)
-- [SMACSS](https://smacss.com)
-- [Media Object](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/)
-- [Nesting Components](http://simurai.com/blog/2015/05/11/nesting-components/)
-- [Color Name Generator](http://chir.ag/projects/name-that-color/#6195ED "chir.ag ")
-- [A New Front-End Methodology: BEM](http://www.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/)
-- [MindBEMding – getting your head ’round BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
-- [&-suffix Naming Conventions](http://teamtreehouse.com/library/advanced-sass/advanced-variables-mixins-functions-and-placeholders/suffix-naming-conventions)
+CSS is global: every rule can touch every element on every page. On a small site that's fine. On a big one, changing a margin in one place breaks something three pages away. Modular CSS is a set of habits for naming and structuring styles so each piece is self-contained, like LEGO bricks you can move around without the rest falling apart. These ideas still matter even if you never write BEM by hand: they're the same thinking behind components and utility classes.
 
-## Modular CSS
-The goal with modular css is to write code that does not depend on it's nesting
+## The goal: styles that don't depend on where they live
 
-Bad Example
 ```css
-/* if `nav` is moved out of header context it loses it's margins */
+/* ❌ tied to its location: move the nav out of the header and it loses its margins */
 header nav {
-  margin-top: 125em;
-  margin-bottom: 1.875em;
+  margin-top: 2rem;
+}
+
+/* ✅ tied to a name: the nav looks the same wherever you put it */
+.site-nav {
+  margin-top: 2rem;
 }
 ```
 
-## SMACSS
-Scalable and Modular Architecture for CSS
+Rule of thumb: **style by class, not by position**. Keep selectors short and flat.
 
-### Rules
-1. `Base` define what elements look like by default
-2. `Layout` define layout styles for major section of a page
-3. `Module` where styles are written for each module as stand-alone reusable components
-4. `State`
-5. `Theme` define different colors and images to give project a different theme
+## BEM: Block, Element, Modifier
 
-## BEM
-Block/Base Element Modifier is a clearer naming methodology for bigger on projects.
+BEM is a naming convention that makes the HTML explain the CSS.
 
-The base of an component
-```css
-.block {}
-```
+- **Block**: a stand-alone component. `.card`
+- **Element**: a part of a block, joined with `__`. `.card__title`
+- **Modifier**: a variation, joined with `--`. `.card--featured`, `.card__title--small`
 
-A descent of the Component
-```css
-.block__element {}
-```
-
-A different state or version of the component or it's child
-```scss
-.block--modifier {}
-.block__element--modifier {}
-```
-
-Example
 ```html
-<form class="site-search  site-search--container">
-    <input type="text" class="site-search__field">
-    <input type="Submit" value ="Search" class="site-search__button">
+<form class="search search--compact">
+  <input class="search__field" type="text">
+  <button class="search__button">Search</button>
 </form>
 ```
 
-## MOOCSS Pattern
-Media Object Oriented CSS methodology is that in web design composed are media layers `media blocks`
-
-```html
-<div class="media">
-    <img src="logo.png" class="img-rev">
-    <div class="body">
-        <h3>Welcome to my website</h3>
-        <p>My website is the best, seriously!</p>
-    </div>
-</div>
+```css
+.search { display: flex; gap: 0.5rem; }
+.search__field { flex: 1; }
+.search--compact .search__button { padding: 0.25rem 0.5rem; }
 ```
 
-The media object would now read:
-```html
-<div class="media">
-    <img src="logo.png" class="media__img--rev">
-    <div class="media__body">
-        <h3>Welcome to Foo Corp</h3>
-        <p>Foo Corp is the best, seriously!</p>
-    </div>
-</div>
-```
+Every selector is a single class, so specificity stays low and equal. You can read `search__button` and know exactly which file and block it belongs to.
 
 ## To BEM or not to BEM?
-The trick with BEM is knowing when something falls into a relevant category. Just because something happens to live inside a block it doesn’t always mean is is actually a BEM element.
 
-In the case of our site logo it lives in the .header purely coincidentally; it could just as easily be in our `sidebar` or `footer`. An element’s scope can start in any context, so you need to make sure you only apply BEM as far as you need to.
-```css
-.header {}
-.header__logo {}
+Just because something sits inside a block doesn't make it an element of that block. Ask: "is it styled this way **because** it's in here?"
+
+```html
+<!-- the logo happens to be in the header, but could live in the footer too -->
+<header class="header">
+  <a class="logo" href="/">Café</a>   <!-- ✅ its own block -->
+</header>
 ```
 
-Here we might be able to just call the second class `.headline`; it depends on if it is styled that way because it’s in `.content`, or whether it just happens to live in `.content`. If it is the latter then we do not need BEM.
+If it's both a thing of its own and adjusted by its context, give it both classes:
+
 ```html
 <div class="content">
-    <h1 class="content__headline">Lorem ipsum dolor...</h1>
+  <h1 class="headline content__headline">Today's specials</h1>
 </div>
 ```
 
-If It's both then we do
+And a themed variation is a modifier:
+
+```css
+.site-logo { }
+.site-logo--xmas { } /* the festive version */
+```
+
+## The media object: spot the pattern
+
+The "media object" is a famous example of OOCSS (Object-Oriented CSS): an image on one side, text on the other. Once you see it, it's everywhere: comments, tweets, order summaries, contact cards. Build it once, reuse it.
+
 ```html
-<div class="content">
-    <h1 class="headline content__headline">Lorem ipsum dolor...</h1>
+<div class="media">
+  <img class="media__img" src="avatar.png" alt="">
+  <div class="media__body">
+    <h3>Ana</h3>
+    <p>One flat white, please.</p>
+  </div>
 </div>
 ```
 
-Imagine that we want to have a festive version of the logo for our Christmassy site design. We could have:
 ```css
-.site-logo {}
-.site-logo--xmas {}
+.media { display: flex; gap: 1rem; align-items: flex-start; }
+.media__body { flex: 1; }
 ```
+
+The lesson isn't the class names: it's **separating structure from skin**. The layout is one object; colours and borders are added on top.
+
+## SMACSS: sorting rules into layers
+
+SMACSS (Scalable and Modular Architecture for CSS) sorts styles into categories:
+
+1. **Base**: element defaults (`body`, `a`, `h1`).
+2. **Layout**: the big page regions.
+3. **Module**: reusable components (cards, buttons).
+4. **State**: temporary changes (`.is-open`, `.is-active`).
+5. **Theme**: alternative colours and images.
+
+Native CSS can now enforce that order with cascade layers, so a later layer always wins regardless of specificity:
+
+```css
+@layer base, layout, components, states;
+```
+
+## How this looks today
+
+The same ideas, different tools:
+
+| Idea | 2015 | Today |
+| --- | --- | --- |
+| One self-contained piece | a BEM block | a React component |
+| No naming collisions | BEM prefixes | CSS Modules, or utility classes |
+| Predictable order | SMACSS by convention | `@layer` |
+| Reusable patterns | the media object | a component, styled with utilities |
+
+With [[docs/css/css-tailwind|Tailwind]] you mostly stop naming classes at all: the component **is** the module. When you write plain CSS, BEM is still a clear, boring, good choice.
+
+## Common mistakes
+
+- Styling by location (`.sidebar .button`) instead of making a modifier (`.button--small`).
+- Elements of elements: `.card__body__title`. Keep it to one level: `.card__title`.
+- Using IDs for styling. They outrank classes and break the flat specificity.
+- Mixing naming systems in one project.
+
+## Try it
+
+1. Rewrite `header nav ul li a` as BEM classes.
+2. Build a media object for an order summary: product photo on the left, name and price on the right.
+3. Add a `--sold-out` modifier that greys out the price.
 
 ## Related
 - [[docs/css/css-selectors|CSS - Selectors]]
-- [[archive/sass|Sass]]
+- [[docs/css/css|CSS - Basics]]
+- [[docs/css/css-tailwind|CSS - Tailwind]]

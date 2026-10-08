@@ -2,372 +2,194 @@
 title: "CSS - Selectors"
 type: doc
 created: 2015-11-01
-updated: 2016-04-11
+updated: 2026-10-07
 tags: [css]
 ---
 # CSS - Selectors
 
+A selector is how a rule picks which elements to style. Learning selectors is like learning to give directions: "every paragraph", "the first item in the list", "any link that opens a PDF". The better your directions, the less HTML you need to change.
 
-## Universal Selector
-Selects every element on the page at once
-
-```css
-* {}
-```
-
-## Type/Element Selectors
-Targets the element type `html` tag(s)
+## The basic four
 
 ```css
-body {}
+* { }         /* universal: every element */
+p { }         /* type: every <p> */
+.card { }     /* class: every element with class="card" */
+#top { }      /* id: the one element with id="top" */
 ```
 
-## Descendant Selectors
-Targets a selector that is inside another selector
-
-```css
-h1 span {}
-```
-
-## Class Selector
-Targets selectors based on class attribute, classes can be repeated throughout the page
+Classes can repeat on a page, IDs must be unique. Style with classes. Keep IDs for things that need a unique handle, like in-page anchors:
 
 ```html
-<div class="myclass"></div>
-```
-```css
-.myclass {}
+<a href="#top">Back to top</a> <!-- jumps to the element with id="top" -->
 ```
 
-## ID Selector
-An element can only have one ID and a page can only have one element with the same ID name.
-```html
-<div id="myid"></div>
-```
-```css
-#myid {}
-```
+## Grouping
 
-IDs have browser functionality, They can be used as identifiers, to create landmarks or  anchors in the page.
-```html
-<!--
-  Will focus the window view to element with id="top",
-  commonly applied to a navbar
--->
-<a href="#top">Back to top</a>
-```
-
-## Selector Groups
-Rules containing various selector separated by commas
+A comma means "and also". The declarations apply to each selector in the list.
 
 ```css
 .square,
-.circle,
-.ellipse {
-  display: inline-block;
+.circle {
   width: 200px;
   height: 200px;
 }
 ```
 
-## Child Selector
-Target the direct (only) children of a element using the `>` Child Combinator
+## Combinators: family relations
 
-```css
-main > a {}
-```
+Combinators describe how elements relate in the HTML tree.
 
-## Adjacent Sibling Selector
-Targets elements next sibling on the page using the `+` Plus-sign Combinator
-
-```css
-h2 + p {}
-```
-```html
-<p>Paragraph 0</p>
-<h2>Header</h2>
-<p>Paragraph 1</p> <!-- selected -->
-<p>Paragraph 2</p>
-```
-
-## General Sibling Selector
-Targets all selected elements sibling on the page after the element, using the `~` General Sibling Combinator
-
-```css
-h2 ~ p {}
-```
-```html
-<p>Paragraph 0</p>
-<h2>Header</h2>
-<p>Paragraph 1</p> <!-- selected -->
-<p>Paragraph 2</p> <!-- selected -->
-```
-
-## Attribute Selectors
-Target elements based on given attribute or value
-
-Targets any given `element` that has a class
-```css
-[class] {}
-```
-
-Targets any `<a>` given element that has a class
-```css
-a[class] {}
-```
-
-
-Targets any text input element
-```css
-input[type="text"] {}
-```
-
-Targets any `<a>` that open in a new tab (external links)
-```html
-<a href="#" targets="_blank"></a>
-```
-```css
-a[target="_blank"] {}
-```
-
-## Substring Matching Attribute Selectors
-Targets specifics attributer values
-
-#### Begins With Selector
-targets attribute begining with selected value
-```html
-<a href="http://foo.com"></a>
-```
-```css
-a[href^="http://"] {}
-```
-
-#### Ends With Selector
-targets attribute ending with selected value
-```html
-<a href="file.pdf"></a>
-```
-```css
-a[href$=".pdf"] {}
-```
-
-#### Contains Selector
-targets attribute containing value
-```html
-<img src="images/sky_thumbnail.jpg" alt="sky" />
-```
-```css
-img[src*="thumb"] {}
-```
-
-
-## Pseudo Classes
-Targets only element on certain conditions, Sudo elements can be use with single `:` or double `::`
-
-Targets elemement if it has a `href` attribute
-```css
-a:link{}
-```
-
-Targets elemement if it has been visited
-```css
-a:visited{}
-```
-
-Targets elemement while it's clicked
-```css
-a:active{}
-```
-
-Targets elemement while it's hovered
-```css
-div:hover{}
-```
-
-Targets elemement while `form` element is active
-```css
-input:focus {}
-```
-
-
-## Structural Pseudo Classes
-Target elements based on their position on the `html` document
-
-#### Child Selector
-the very first child of a element
-```css
-li:first-child {}
-```
-
-the very last child of a element
-```css
-li:last-child {}
-```
-
-targets a element only if it's the only element inside a parent
-```css
-span:only-child {}
-```
-
-#### Only of Type Selector
-Targets a element only if it's the only kind of it's type inside a parent
-
-```css
-p:only-of-type {}
-```
-
-#### nth Child Selector
-Target child or combination of child elements using a Expression Syntax `nth-child(an+b)` - [codepen :Nth-child() guide](http://codepen.io/yoksel/pen/iLxud)
-
-Expression syntax:
-- `b` first item selected
-- `an` cycle of elements to be selected after the first one has been selected
-
-```css
-li:nth-child() {}
-  /* Works the opposite way */
-li:nth-last-child() {}
-```
-
-#### nth of type Selector
-Target a specific child or combination of child elements
-
-```css
-div:nth-of-type() {}
-div:nth-last-of-type() {}
-```
-
-#### Root Selector
-Targets the element that is the root of the document `html`, *`:root` has more specificity than `html`*
-
-```css
-:root {}
-```
-
-#### Target Selector
-Target elements that elements ID matches the # in the url
+| Combinator | Example | Matches |
+| --- | --- | --- |
+| space (descendant) | `nav a` | any `a` inside `nav`, at any depth |
+| `>` (child) | `nav > a` | `a` that is a direct child of `nav` |
+| `+` (next sibling) | `h2 + p` | the `p` right after an `h2` |
+| `~` (later siblings) | `h2 ~ p` | every `p` after an `h2`, same parent |
 
 ```html
-<a herf="#section1">Section 1</a>
-```
-```css
-:target {}
-```
-
-#### Empty Selector
-Targets empty elements
-
-```html
-<a herf="#section1">Section 1</a>
-```
-```css
-div:empty {}
+<p>Intro</p>
+<h2>Menu</h2>
+<p>Coffee</p>  <!-- h2 + p and h2 ~ p -->
+<p>Tea</p>     <!-- h2 ~ p only -->
 ```
 
-#### Not Selector
-Targets everything but what we select, e.g. `div:not(:empty) {}` targets all `<div>` expect the empty one
+## Attribute selectors
 
-```html
-<a herf="#section1">Section 1</a>
-```
-```css
-div:not() {}
-```
-
-## UI Elements States Pseudo-Class Selectors
-Targets element based on certain interactions
-
-#### Enabled Selector
-Targets UI elements that are on a enabled state
-
-```html
-<input type="text" name="name" placeholder="name" disable>
-```
-```css
-input[type="text"]:enabled {}
-```
-
-#### Disabled Selector
-Targets UI elements that are disabled state (that can not be clicked)
-
-```html
-<input type="text" name="email" placeholder="email" disable>
-```
-```css
-:disabled {}
-```
-
-##### Checked Selector
-Targets UI elements that are in a checked state
+Match elements by their attributes.
 
 ```css
-input[type="radio"]:checked {}
-
-/* Example: Targets the radio button and it's sibling label */
-input[type="radio"]:checked + label {}
+input[type="email"] { }   /* exact value */
+a[target="_blank"] { }    /* links that open a new tab */
+a[href^="https://"] { }   /* starts with */
+a[href$=".pdf"] { }       /* ends with */
+img[src*="thumb"] { }     /* contains */
 ```
 
-## Sudo Element Selectors
-Targets virtual elements that are not defined or the markup or source code
+`a[href$=".pdf"]` is a nice trick: style every PDF link without adding a class.
 
-#### First Line Selector
-Targets the first line of text
+## Pseudo-classes: state and position
+
+A pseudo-class (one colon) matches an element when it is in a certain state.
+
 ```css
-p:first-line {}
+a:hover { }          /* pointer is over it */
+a:visited { }        /* already visited */
+button:focus-visible { } /* focused from the keyboard */
+input:disabled { }
+input:checked + label { } /* the label right after a ticked checkbox */
 ```
 
-#### First letter Selector
-Targets the first letter of text (like drop caps)
+Use `:focus-visible` for focus rings. It shows them to keyboard users without flashing them on every mouse click.
+
+## Structural pseudo-classes
+
+Pick elements by their position among siblings.
+
 ```css
-p:first-letter {}
+li:first-child { }
+li:last-child { }
+li:nth-child(2) { }      /* the second */
+li:nth-child(odd) { }    /* 1st, 3rd, 5th... zebra stripes */
+li:nth-child(3n) { }     /* every third */
+li:nth-child(n + 4) { }  /* from the 4th onwards */
+p:first-of-type { }      /* first <p> among its siblings */
+div:empty { }            /* no children, no text */
 ```
 
-#### Before Pseudo-Elements
-Allow us to add generated content on a page, Pseudo elements are actually inserded as child elements
+`nth-child(an + b)` reads as "every `a`th item, starting at `b`". `:nth-child` counts all siblings, `:nth-of-type` only counts siblings of the same tag.
+
+## :not(), :is() and :where()
+
+These take a list of selectors.
+
 ```css
-div:before {
-  content: "";
+li:not(:last-child) { border-bottom: 1px solid #ddd; } /* a divider between items */
+:is(h1, h2, h3) a { color: inherit; } /* shorter than three selectors */
+:where(ul, ol) { padding-left: 1rem; } /* same, but zero specificity */
+```
+
+`:is()` takes the specificity of its strongest selector. `:where()` always has zero, which makes it perfect for defaults that are easy to override.
+
+## :has(): the parent selector
+
+For years CSS could only look down the tree. `:has()` lets an element match based on what it contains.
+
+```css
+.card:has(img) { padding-top: 0; }           /* cards with a picture */
+form:has(input:invalid) button { opacity: .5; } /* dim submit while the form is invalid */
+label:has(+ input:required)::after { content: " *"; }
+```
+
+Before `:has()`, all of these needed JavaScript.
+
+## Pseudo-elements
+
+A pseudo-element (two colons) styles a part of an element, or adds content that is not in the HTML.
+
+```css
+p::first-line { font-weight: bold; }
+p::first-letter { font-size: 3em; } /* drop caps */
+li::marker { color: tomato; }      /* the bullet */
+::placeholder { color: gray; }
+```
+
+`::before` and `::after` insert a child at the start or end. They need a `content` property, even an empty one.
+
+```css
+.phone::before { content: "\2706 "; } /* a phone symbol before the number */
+a[href$=".pdf"]::after { content: " (PDF)"; }
+.download::after { content: " " attr(href); } /* show the link's address */
+```
+
+Old code writes `:before` with one colon. Browsers still accept it, but `::` is the modern form.
+
+## Native nesting
+
+Nesting used to be the main reason to reach for Sass. Now it is plain CSS, and every current browser supports it. `&` stands for the parent selector.
+
+```css
+.card {
+  padding: 1rem;
+
+  & h2 { margin-top: 0; }                 /* .card h2 */
+  & > img { width: 100%; }                /* .card > img */
+  &:hover { background: #f5f5f5; }        /* .card:hover */
+  &.is-featured { border: 2px solid gold; } /* .card.is-featured */
+
+  @media (width >= 40rem) {
+    padding: 2rem;                        /* .card on wider screens */
+  }
 }
 ```
 
-e.g. placing a special character phone unicon before the number
-```html
-<p class="phone">555-867-5309</p>
-```
+Keeping the media query inside the rule means everything about `.card` lives in one place.
+
+One Sass habit does not carry over: `&` cannot glue on a suffix to build a new class name.
+
 ```css
-.phone:before {
-  content: "\2706";
-}
+/* ❌ worked in Sass, does not mean .card__title in CSS */
+.card { &__title { font-weight: bold; } }
+
+/* ✅ write the full class */
+.card__title { font-weight: bold; }
 ```
 
-e.g. placing a pdf image before any `<a>` with a `.pdf` link
-```html
-<a class="dload" href="examples.pdf" title="- PDF">Download File</a>
-```
-```css
-a[href$=".pdf"]:before {
-  content: url(../img/pdf.png);
-}
-```
+Nest one or two levels at most. Deep nesting creates long, specific selectors that are hard to override.
 
-#### After Pseudo-Elements
-Works the same way, only it adds after
-```css
-div:after {
-  content: "";
-}
-```
+## Common mistakes
 
-e.g. placing a href link in front of the `<a>`
-```html
-<a class="download" href="examples.pdf" title="- PDF">Download File</a>
-```
-```css
-.download:after {
-  content: attr(href);
-}
-```
+- `h2 + p` vs `h2 ~ p`: `+` is only the very next sibling.
+- `:nth-child(2)` on a `p` is "the second child, if it is a `p`", not "the second `p`". Use `:nth-of-type` for that.
+- Forgetting `content` on `::before`/`::after`. Nothing renders.
+- Nesting four levels deep, or long chains like `body main .list ul li a`. They break when the HTML moves. See [[docs/css/css-modular|CSS - Modular CSS]].
+
+## Try it
+
+1. Make every other row of a list `whitesmoke` with one selector.
+2. Add " (PDF)" after every link to a `.pdf` file without touching the HTML.
+3. Give a `.card` a gold border only when it contains a `<button>`.
 
 ## Related
+- [[docs/css/css|CSS - Basics]]
 - [[docs/css/css-modular|CSS - Modular CSS]]
-- [[archive/sass|Sass]]

@@ -2,201 +2,187 @@
 title: "CSS - Values and Units"
 type: doc
 created: 2020-04-11
-updated: 2020-04-11
+updated: 2026-10-07
 tags: [css]
 ---
 # CSS - Values and Units
 
-## Absolute Length Units
+Every declaration needs a value: a length, a colour, a keyword. Choosing the right unit is what makes a design scale gracefully, from a phone to a big monitor, and for people who bump up their browser's font size. This lesson covers the units you actually use, colours, custom properties and the maths functions.
 
-### Centimeters
+## px: the absolute unit
+
+`px` is fixed. Good for things that should never scale, like a `1px` border.
+
 ```css
-width: 21.16cm;
+.card { border: 1px solid #ddd; }
 ```
 
-### Milimeters
-```css
-width: 211.6mm;
-```
+CSS also has `cm`, `mm`, `in` and `pt`. They are for print stylesheets; on screens, ignore them.
 
-### Inches
-```css
-width: 8.33in;
-```
+## em and rem
 
-### Picas
-```css
-width: 50pc;
-```
+Both are relative to a font size. The browser default is `16px`.
 
-### Points
-```css
-width: 600pt;
-```
-
-### Pixels
-```css
-width: 800px;
-```
-
-## Relative Length Units
-
-### Ex Units
-High of the `x` character `1ex = 16` pixels by default. Scales acording to it's parent value.
+- `rem` is relative to the **root** (`<html>`) font size. Predictable everywhere.
+- `em` is relative to the **current element's** font size (for `font-size` itself, the parent's).
 
 ```css
-font-size: 3ex;
-```
+html { font-size: 100%; }  /* 16px, respects the user's setting */
+h1 { font-size: 2rem; }    /* 32px */
 
-### Em Unit 
-1em = 16 pixels by default. Scales acording to it's inherit value
-
-```css
-font-size: 0.75em; /* 12pixels */
-```
-
-### rem Unit 
-Rem stands for Root Em. Relates back to the scale of the root html element
-
-```css
-font-size: 1.2em; /* 19.2px */
-```
-
-## View Port Relative Units
-Scale based on the viewport size.
-	
-### vw
-`vw` stands for Viewport Width `1vw = 1%` of the viewport width
-
-```css
-width: 15vw;
-```
-
-### vw
-`vw` stands for Viewport Height `1vw = 1%` of the viewport height
-
-```css
-width: 80vh;
-```
-
-### vmin
-`1vmin = 1%` of the mininum height/width
-
-```css
-width: 80vmin;
-```
-
-## Textual Data Types
-
-## Auto Value
-Calculate the margins automaticly for each side
-
-```css
-margin: auto;
-```
-
-## Inherit Value
-Inherits the value from it's parent (good use for `<a>` elements)
-```css
-color: inherit;
-```
-
-## Initial Value
-Reverts back to its unstyled state. Not support by i9 and moz needs prefix.
-
-```css
-color: -moz-inherit;
-color: initial;
-```
-
-## Strings
-Passes a string either inside `""` or `''`. To pass quote inside a string we need to add backslashes. (e.g.`\"Text\"`). To add back slashes to a string they also need backslashes `"This is a black slashe \\"`
-
-```css
-div:after {
-    content: "A string with \"escape\" double quotes";
+.button {
+  font-size: 1.25rem;      /* 20px */
+  padding: 0.5em 1em;      /* 10px 20px: grows with the button's text */
 }
 ```
 
-## URLs
-A value can also be a url reference, it can be quotes with `""` or `''` and have white space after or before. e.g. `url( "img/avatar.png" );`
+A good rule: `rem` for font sizes and layout spacing, `em` for padding that should scale with its own text.
+
+**The em trap**: em compounds when you nest.
 
 ```css
-div {
-    background-image: url('img/bg.jpg');
+li { font-size: 1.2em; }
+/* a list inside a list: 1.2 x 1.2 = 1.44 times the base */
+```
+
+## Percentages
+
+Relative to the parent. For `width`, the parent's width.
+
+```css
+.sidebar { width: 25%; }
+```
+
+## Viewport units
+
+Relative to the browser window.
+
+```css
+.hero {
+  min-height: 100dvh; /* full height of the visible screen */
+  padding: 5vw;       /* 5% of the viewport width */
 }
 ```
 
-## Integers and Numeric Values
+`vw`/`vh` are 1% of the viewport width/height. On phones, `100vh` can be taller than the visible area because of the browser's toolbars. `dvh` (dynamic) follows the toolbars as they show and hide; `svh` and `lvh` are the small and large versions.
 
-### Negative Values
-```css
-margin-top: -5em;
-```
-
-### Integerns
-```css
-margin-top: 3.5em;
-```
-
-### Percentages
-```css
-width: 50%;
-```
-
-## Color Values
-
-### Color Keywords
-One of the 16 predefined keywords, (e.g. `red`, `green`, `blue`).
+## Colours
 
 ```css
-color: blue;
+color: tomato;               /* named colour */
+color: #ff0033;              /* hex: red, green, blue */
+color: #f03;                 /* short hex, same colour */
+color: rgb(255 0 51);        /* 0 to 255 per channel */
+color: rgb(255 0 51 / 0.3);  /* with 30% opacity */
+color: hsl(348 100% 50%);    /* hue, saturation, lightness */
+color: hsl(348 100% 50% / 0.7);
 ```
 
-### Extended Color Keywords
-Use with the predefined keywords, (e.g. `lightblue`, `tomato`, `sandybrown`). Complete list on http://www.w3.org/TR/css3-color/#svg-color
+Modern syntax separates values with spaces and puts the alpha after a `/`. The older comma form (`rgba(255, 0, 51, .3)`) still works.
+
+`hsl` is easier to reason about: keep the hue, change the lightness, and you get a lighter or darker shade of the same colour. Newer spaces like `oklch()` do this even more evenly; MDN covers them.
+
+## Custom properties (CSS variables)
+
+Name a value once, reuse it everywhere. A custom property starts with `--` and is read with `var()`.
 
 ```css
-color: lightblue;
+:root {
+  --brand: #e85d3f;
+  --space: 1rem;
+}
+
+.button {
+  background: var(--brand);
+  padding: var(--space);
+  color: var(--text, black); /* fallback if --text is not set */
+}
 ```
 
-### Hexadecimal Value
-A combination of RGB values using values of `0-9` `a-f` (e.g. `#ff0033` or `#f03` = R=255 G=0 Blue=51)
+They replace what we used Sass variables for, and do more, because they live in the browser:
+
+| | Sass `$brand` | CSS `--brand` |
+| --- | --- | --- |
+| Needs a build step | ✅ yes | ❌ no |
+| Inherits down the tree | ❌ | ✅ |
+| Change in a media query or on a class | ❌ | ✅ |
+| Read or set from JavaScript | ❌ | ✅ |
 
 ```css
-color: #ff0033;
+.theme-dark { --brand: #ff8a65; } /* everything inside picks up the new colour */
 ```
 
-### RGB Method
-Uses a functional to pass the values of Red Green and Blue from `0` to `255`
+## color-mix(): shades without a preprocessor
+
+Sass had `lighten()` and `darken()`. CSS now has `color-mix()`: mix two colours by a percentage.
 
 ```css
-color: rgb(255, 0, 51);
+:root { --brand: #e85d3f; }
+
+.button:hover {
+  background: color-mix(in oklch, var(--brand), black 15%); /* 15% darker */
+}
+.badge {
+  background: color-mix(in oklch, var(--brand), transparent 80%); /* a soft tint */
+}
 ```
 
-### RGBa Method
-Similar to above but allows a alpha value (transperancy)
+`in oklch` is the colour space the mix happens in. `oklch` gives even, natural-looking steps; `srgb` also works.
+
+## calc(), min(), max() and clamp()
+
+CSS can do maths, and it can mix units.
 
 ```css
-color: rgb(255, 0, 51, .3);
+.main { width: calc(100% - 2rem); }
+.card { width: min(100%, 30rem); } /* the smaller of the two */
 ```
 
-### HSL Method
-Stands for Hue Saturation and Lightness. Hue is a value of the 360 color wheel, saturation and lighness are measured in percentages
+`clamp(min, preferred, max)` picks the preferred value but keeps it between a floor and a ceiling. It gives fluid type without media queries:
 
 ```css
-color: hsl(348, 100%, 50%);
+h1 {
+  font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
+  /* grows with the window, never below 1.75rem or above 3rem */
+}
 ```
 
-### HSLa Method
-Just like RGBa it allows a alpha value (transperancy)
+## Keywords that work everywhere
 
 ```css
-color: hsl(348, 100%, 50%, .7);
+a { color: inherit; } /* take the parent's value */
+p { color: initial; } /* the spec's default */
+p { color: unset; }   /* inherit if inheritable, else initial */
+p { color: revert; }  /* back to the browser's default style */
 ```
+
+And `auto`, which means "let the browser work it out" (`margin: 0 auto` centres a block).
+
+## Strings and URLs
+
+Strings go in quotes. Escape a quote of the same kind with a backslash.
+
+```css
+.quote::before { content: "\201C"; }        /* a curly opening quote */
+.note::after   { content: "Say \"hi\""; }
+.hero          { background-image: url("img/bg.jpg"); }
+```
+
+## Common mistakes
+
+- Using `px` for font sizes. Users who set a bigger default font get ignored. Use `rem`.
+- Nesting `em` font sizes and wondering why text keeps growing.
+- `100vh` on mobile hiding content behind the toolbar. Use `100dvh`.
+- `var(--Brand)` vs `--brand`: custom property names are case-sensitive.
+
+## Try it
+
+1. Set a `--brand` colour on `:root` and use it on a button and a link. Change it once and watch both update.
+2. Make an `h1` that grows with the window but stays between `2rem` and `4rem`.
+3. Write the same colour as a hex, `rgb()` and `hsl()`, then make a 50% transparent version.
 
 ## Related
-- [[docs/css/css-fonts|CSS - Fonts]]
-- [[docs/css/css-box-model|CSS - Box model]]
-- [[docs/css/css-others|CSS - Other Features]]
 - [[docs/css/css|CSS - Basics]]
+- [[docs/css/css-box-model|CSS - Box Model]]
+- [[docs/css/css-fonts|CSS - Fonts]]
+- [[docs/css/css-visual-effects|CSS - Visual Effects]]

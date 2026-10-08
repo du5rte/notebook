@@ -1,133 +1,167 @@
 ---
-title: "JavaScript Numbers"
+title: "JavaScript - Numbers"
 type: doc
 created: 2015-10-14
-updated: 2015-10-14
+updated: 2026-10-07
+aliases: ["JavaScript Numbers"]
 tags: [javascript]
 ---
-# JavaScript Numbers
+# JavaScript - Numbers
 
-### Numbers
-Used for making calculations: adding, subtracting, computing total costs, keeping track of a game score, etc. Unlike strings, numbers don't need quotes.
+Numbers are for anything you count or calculate: a price, a score, a cart total. Unlike strings they don't need quotes. JavaScript has one main number type for whole numbers and decimals alike, which keeps things simple but brings a couple of gotchas you'll want to know before you handle money.
 
-### Integers
-Whole numbers e.g. `5` `0` `-100` `9999`
+## One type for all numbers
 
-```js
-var score = 0;
-```
-
-### Floating Point Numbers
-Decimal numbers e.g. `3.14` `-9.888888` `.000009`
+Whole numbers and decimals are both just `number`.
 
 ```js
-var pi = 3.14159265359;
+const cups = 3
+const price = 3.5
+const tiny = 9e-6         // 0.000009, scientific notation
+const big = 1_000_000     // underscores are only there to help you read it
+
+typeof cups  // 'number'
+typeof price // 'number'
 ```
 
-### Scientifc Notation
-Very large numbers or very small numbers, e.g. `9e-6` (.000009), `9e+6` (900000)
-```js
-var numberOfAtomsonEarth = 1.33e+105; // 1,329,999,999,999,999,744,856,320,232,896,408,568,208,984,680,600,256,608,968,528,800,792,688,048,688,776,152,064,608,064,832,992,376,472,832
-```
-
-## Doing Maths
-
-```js
-// Addiction
-2 + 7
-// Substraction
-4 - 3
-// Multiplication
-10 * 9
-// Division
-// divides the left by the right
-6 / 3
-```
-With variables
-```js
-var damage = 30;
-var score = 100 - damage;
-```
-
-With same variables shorthands
-```js
-var score = 30;
-score = score + 10; // 40;
-
-// Addiction
-score += 10;
-// Substraction
-score -= 20;
-// Multiplication
-score *= 5;
-// Division
-score /= 2;
-```
-
-Increament and decrement
-```js
-score ++; // score += 1; score = score + 1;
-score --; // score -= 1; score = score - 1;
-```
-
-### Parse Integer
-Sometimes returned inputs by prompt or forms come as a string, `parseInt(  )` Converts a string to a Integer.
+## Doing maths
 
 ```js
-var age = prompt("How old are you?");
-console.log(age); // "21"; age + age = "2121" Not 42
-console.log(parseInt(age)); // 21; parseInt(age) + parseInt(age) = 42
-
-// If the number is not on the beginning of the string it will return `NaN` (Not a Number)
-parseInt("That's so 2014!"); // NaN
-
-// It will also cut decimal numbers
-parseInt('1.89 light years away'); // 1
+2 + 7    // 9
+10 - 4   // 6
+3 * 3.5  // 10.5
+10 / 4   // 2.5
+10 % 3   // 1, the remainder
+2 ** 3   // 8, two to the power of three
 ```
 
-### Parse Float
-`parseInt(  )` converts a string to a Float (decimal number)
+The remainder operator `%` is handy for "every other" and "is it even" questions: `n % 2 === 0`.
+
+## Updating a number
+
+There are shortcuts for "take the current value and change it". They need a `let`.
 
 ```js
-parseInt('1.89 light years away'); // 1.89
+let score = 30
+score += 10 // 40
+score -= 5  // 35
+score *= 2  // 70
+score /= 7  // 10
+score++     // 11
+score--     // 10
 ```
 
-### The Math Object
-`Math` is a `Native JavaScript Object` with methods we can use. [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
+## Decimals are not exact
 
-`Math.round( )`
+Computers store decimals in binary, and some simple decimals can't be stored exactly.
+
 ```js
-// Rounds to the nearest integer
-Math.round(2.2) // 2
-Math.round(4.9) // 5
+0.1 + 0.2          // 0.30000000000000004
+0.1 + 0.2 === 0.3  // false
 ```
 
-`Math.floor( )`
+For money, ❌ don't add euros as decimals. ✅ Work in whole cents and only divide when you show the result.
+
 ```js
-// Rounds to the smallest integer
-Math.floor(1.2) // 1
-Math.floor(0.00012) // 0
-Math.floor(2) // 2
+const latte = 350 // cents
+const muffin = 275
+const total = latte + muffin       // 625
+const display = (total / 100).toFixed(2) // '6.25'
 ```
 
-`Math.ceil( )`
+## Rounding
+
 ```js
-// Rounds to the biggest integer
-Math.ceil(1.2) // 2
-Math.ceil(0.00012) // 1
-Math.ceil(5.028) // 6
+Math.round(4.5)  // 5, nearest whole number
+Math.floor(4.9)  // 4, always down
+Math.ceil(4.1)   // 5, always up
+Math.trunc(-4.7) // -4, just drops the decimals
+
+const pi = 3.14159
+pi.toFixed(2)    // '3.14', note: a string
 ```
 
-`Math.random(  )` -  [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
+`toFixed()` is for display. It gives back a string, so don't keep doing maths with it.
+
+## Strings into numbers
+
+Values from forms, URLs and `prompt()` arrive as strings. Adding them joins text instead of adding numbers.
+
 ```js
-// Generates a floating, pseudo-random number between 0~1, including 0 but not including 1
-Math.random(); // 0.5876477009151131
-// Can be scaled to our desired range
-Math.random()*6 // 0 ~ 5
-Math.floor( Math.random()*6 ) + 1; // 1 ~ 6
+const age = '21'
+age + age                 // '2121'
+Number(age) + Number(age) // 42
 ```
+
+`Number()` vs `parseInt()` / `parseFloat()`:
+
+| | `Number()` | `parseInt(x, 10)` | `parseFloat()` |
+| --- | --- | --- | --- |
+| `'42'` | `42` | `42` | `42` |
+| `'1.89'` | `1.89` | `1` | `1.89` |
+| `'12px'` | `NaN` | `12` | `12` |
+| `''` | `0` ⚠️ | `NaN` | `NaN` |
+
+✅ Use `Number()` when the whole string should be a number. Use `parseInt(x, 10)` or `parseFloat()` when you want the number at the start of some text, like `'12px'`. Always pass `10` to `parseInt` so it reads base ten.
+
+## NaN and Infinity
+
+`NaN` means "Not a Number": the result of maths that makes no sense. It is, confusingly, of type `number`, and it isn't equal to anything, not even itself.
+
+```js
+Number('three')    // NaN
+NaN === NaN        // false
+Number.isNaN(NaN)  // true, the reliable check
+
+10 / 0             // Infinity
+```
+
+## Random numbers
+
+`Math.random()` gives a decimal from 0 up to, but not including, 1. Scale it and round down to get a whole number in a range.
+
+```js
+Math.random() // e.g. 0.5876477009151131
+
+// roll a dice: 1 to 6
+Math.floor(Math.random() * 6) + 1 // e.g. 4
+```
+
+## Formatting for people
+
+`toLocaleString()` adds thousands separators and currency in the reader's style. The `Intl.NumberFormat` docs on MDN cover every option.
+
+```js
+const visitors = 1234567.891
+visitors.toLocaleString('en-GB') // '1,234,567.891'
+
+const total = 6.25
+total.toLocaleString('en-GB', { style: 'currency', currency: 'EUR' }) // '€6.25'
+```
+
+## Very big whole numbers
+
+Above `Number.MAX_SAFE_INTEGER` (2 ** 53 - 1) whole numbers lose precision. For bigger ones, like some database IDs, there's `BigInt`, written with an `n` on the end. You rarely need it, but it's good to know why a huge ID can come back slightly wrong.
+
+```js
+9007199254740993   // 9007199254740992, off by one
+9007199254740993n  // 9007199254740993n
+```
+
+## Common mistakes
+
+- Adding form values without converting them: `'5' + 1` is `'51'`.
+- Checking `x === NaN`. It's always `false`; use `Number.isNaN(x)`.
+- Comparing decimals with `===` after doing maths on them.
+- Doing more maths on the string that `toFixed()` returns.
+
+## Try it
+
+1. Write `addTip(billInCents, percent)` that returns the total in cents, rounded to a whole cent.
+2. Convert `'12.5kg'` into the number `12.5`.
+3. Write `rollDice(sides)` that returns a whole number from 1 to `sides`.
 
 ## Related
-- [[docs/javascript/javascript-strings|JavaScript Strings]]
+- [[docs/javascript/javascript-strings|JavaScript - Strings]]
 - [[docs/javascript/javascript-booleans|JavaScript - Booleans]]
-- [[docs/javascript/javascript-arrays|JavaScript Arrays]]
+- [[docs/javascript/javascript-arrays|JavaScript - Arrays]]

@@ -7,7 +7,7 @@ Duarte's programming documentation and learning notes. One Obsidian vault, plain
 ```
 raw/       source material (articles, videos, papers). Never edited after it lands.
 wiki/      agent-maintained knowledge: sources/ entities/ concepts/ synthesis/, plus index.md and log.md
-docs/      legacy notebook, human-written: <name>.md, or <name>/<note>.md for a language or tool with several notes (css/, node/, git/...), plus index.md
+docs/      lessons on the tech I use, written to teach from: <name>.md, or <name>/<note>.md for a language or tool with several notes (css/, node/, git/...), plus index.md
 archive/   tools I no longer use, same layout as docs/, plus index.md. Out of the main index, still searchable.
 stack/     everything I have used (languages, frameworks, libraries, services, tools): one file each with status, plus index.md
 saved/     bookmarks I haven't used yet: ui-kits.md, icons.md, fonts.md, design-resources.md. One table per file, no file per item, same columns everywhere: Name | Kind | Tags | Price | Link | Library | Notes, sorted A-Z.
@@ -23,6 +23,16 @@ Old notes: if I still use the tool but the note is written for an old version, k
 - an archived technique of a language I still use goes in that language's folder: `archive/javascript/ajax.md`
 
 Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. Diagrams are Mermaid in the note, or `.svg` beside it.
+
+## Lessons (docs/)
+
+`docs/` notes are lessons: something I could teach a class from. Voice and tone are in `VOICE.md`.
+
+- Open with one short paragraph: what it is and why you'd reach for it. An everyday analogy when one helps.
+- One `##` per idea, taught in order: a plain sentence or two, then a small example with the result in a comment (`// 'done'`).
+- Explain the why, not every option. Full API lists are what MDN and an AI are for; keep the mental model, the contrast (X vs Y) and the gotchas.
+- End with `## Common mistakes` when there are real ones, `## Try it` (one to three small exercises), then `## Related`.
+- Modern syntax and current defaults. No vendor prefixes, `var`, or dead tools unless the note is about why they changed.
 
 ## Rules
 

@@ -1,164 +1,168 @@
 ---
-title: "JavaScript - Maps"
+title: "JavaScript - Map and Set"
 type: doc
 created: 2016-03-18
-updated: 2016-03-18
+updated: 2026-10-07
+aliases: ["JavaScript - Maps"]
 tags: [javascript]
 ---
-# JavaScript - Maps
+# JavaScript - Map and Set
 
-## Resources
+`Map` and `Set` are two built-in collections for jobs plain objects and arrays do badly. A `Map` is a dictionary where **any** value can be a key, even an object. A `Set` is a list where every value appears only once, like a guest list that ignores duplicates. You'll still use objects and arrays most days; reach for these when you hit the problems below.
 
+## TLDR;
 
-### Maps
-Are a `key`/`value` structure. Any value may be used as either a key or a value, and objects are not converted to strings
+| You need | Use |
+| --- | --- |
+| A fixed shape: `{ name, age }` | Object |
+| A lookup table built at runtime, with lots of adds and removes | `Map` |
+| Keys that aren't strings (objects, numbers kept as numbers) | `Map` |
+| An ordered list, duplicates allowed | Array |
+| Unique values, fast "is it in there?" | `Set` |
+
+## The problem with objects as dictionaries
+
+Object keys are always strings. Use an object as a key and JavaScript turns it into the string `'[object Object]'`, so every user ends up in the same slot.
 
 ```js
-let user1 = { name: 'John'}
-let user2 = { name: 'Smith'}
+const ana = { name: 'Ana' }
+const ben = { name: 'Ben' }
 
-let totalReplies = {}
+const replies = {}
+replies[ana] = 5
+replies[ben] = 42
 
-totalReplies[user1] = 5
-totalReplies[user2] = 42
-
-console.log(totalReplies) // {"[object Object]":42}
+replies // { '[object Object]': 42 } 🤔 Ana's count is gone
 ```
 
-uses `get()` and `set()` to access values in maps
+## Map
+
+A `Map` keeps keys as they are. Use `set`, `get`, `has` and `delete`, and `size` to count.
+
 ```js
-let totalReplies = new Map()
+const replies = new Map()
 
-totalReplies.set( user1, 5 )
-totalReplies.set( user2, 42 )
+replies.set(ana, 5)
+replies.set(ben, 42)
 
-console.log(totalReplies) // [[{"name":"John"},5],[{"name":"Smith"},42]]
-console.log(totalReplies.get(user1)) // 5
+replies.get(ana)   // 5
+replies.has(ben)   // true
+replies.size       // 2
+replies.delete(ben)
+replies.size       // 1
 ```
 
+You can also start a `Map` from a list of `[key, value]` pairs.
 
-examples
 ```js
-// let recentPosts = {}
-let recentPosts = new Map()
-
-createPost(newPost, (data) => {
-  // recentPosts[data.author] = data.title
-  // Keys unknown until runtime so... Maps!
-  recentPosts.set( data.author, data.message )
-})
-
-socket.on('new post', (data) => {
-  recentPosts.set( data.author, data.message )
-})
+const prices = new Map([
+  ['latte', 3.5],
+  ['tea', 2],
+])
+prices.get('tea') // 2
 ```
 
+## Looping over a Map
 
-looping maps
+A `Map` is iterable and remembers the order you added things. Each round gives you a `[key, value]` pair.
 
 ```js
-
-let mapSettings = new Map()
-
-mapSettings.set("user", "Sam")
-mapSettings.set("topic", "ES2015")
-mapSettings.set("replies", ["Can't wait!", "So Cool"])
-
-for(let [key, value] of mapSettings) {
-  console.log(`${key} = ${value}`)
+for (const [drink, price] of prices) {
+  console.log(`${drink}: ${price}`)
 }
+// latte: 3.5
+// tea: 2
 
+[...prices.keys()] // ['latte', 'tea']
 ```
 
-.get()
-.has()
-.delete()
+## Map vs object
 
+| | Object | `Map` |
+| --- | --- | --- |
+| Key types | strings (and symbols) | ✅ anything |
+| Count items | `Object.keys(o).length` | ✅ `map.size` |
+| Loop directly | ❌ needs `Object.entries` | ✅ `for...of` |
+| Frequent add and remove | ⚠️ fine for small ones | ✅ built for it |
+| Turns into JSON | ✅ `JSON.stringify` | ❌ convert first |
+| Fixed shape like `{ name, age }` | ✅ | ❌ |
 
-### Weak Maps
-A more memory efficient type of `Map` that only stores objects and cannot be iterable, `strings`, `numbers` and `booleans` are not allowed.
-
-
-```JS
-let user = {}
-let comment = {}
-
-let mapSettings = new WeakMap()
-
-mapSettings.set(user, "user")
-mapSettings.set(user, "comment")
-
-console.log( mapSettings.get(user) ) // "comment"
-
-mapSettings.set("title", "ES2015") // Invalid value used as weak map key
-```
-
-### Set
-Work much like arrays but only store unique values of any type, they are iterable and can also be deconstructed
+Converting between them:
 
 ```js
-let tags = new Set()
-
-tags.add('JavaScript')
-tags.add('Programming')
-tags.add({version: 2015})
-tags.add('Programming') // ignored
-
-console.log(tags.size) // 3
-
-for (let tag of tags) {
-  console.log(tag)
-}
-
-let [a,b,c] = tags
-
-console.log(a,b,c)
+const stock = { latte: 12, tea: 5 }
+const stockMap = new Map(Object.entries(stock))
+const backAgain = Object.fromEntries(stockMap) // { latte: 12, tea: 5 }
 ```
 
-### WeakSet
-A more memory efficient type of Set that only stores objects and cannot be iterable
+## Set
+
+A `Set` holds each value once. Adding a duplicate is simply ignored.
 
 ```js
-let weakTag = new WeakSet()
+const tags = new Set()
+
+tags.add('javascript')
+tags.add('css')
+tags.add('javascript') // ignored
+
+tags.size              // 2
+tags.has('css')        // true
+tags.delete('css')
 ```
 
+## Removing duplicates from an array
 
-example if we wanted to toggled a class of `isRead` on a forum post, traditionally we would have to modify the original post.
+The everyday use of `Set`: pass an array in, spread it back out.
 
 ```js
-let post { ... }
+const signups = ['ana@mail.com', 'ben@mail.com', 'ana@mail.com']
 
-postList.addEventListener('click', (e) => {
-  // mutating the post object
-  post.isRead = true
-})
-
-// ... rendering list of post
-for(let post of postArray) {
-  // check mutation
-  if(!post.isRead) {
-    __addNewPostClass(post.element)
-  }
-}
+const unique = [...new Set(signups)]
+// ['ana@mail.com', 'ben@mail.com']
 ```
+
+## Set vs array
+
+`set.has(x)` stays fast however big the set gets, while `array.includes(x)` checks items one by one. If you keep asking "is this in the list?", a `Set` is the better tool.
 
 ```js
-let readPosts = new WeakSet()
-
-postList.addEventListener('click', (e) => {
-  // adds post to list of readPosts
-  readPosts.add(post)
-})
-
-// ... rendering list of post
-for(let post of postArray) {
-  // checks if post if in readPosts list
-  if(!readPosts.has(post)) {
-    __addNewPostClass(post.element)
-  }
-}
+const vips = new Set(['Ana', 'Cleo'])
+vips.has('Ana') // true
 ```
+
+Newer runtimes also give sets `union()`, `intersection()` and `difference()`. Check MDN for support before relying on them.
+
+## WeakMap and WeakSet
+
+Weak versions only accept objects as keys, can't be looped over, and don't stop the garbage collector from cleaning up an object nobody else uses. They're for attaching extra data to objects you don't own, without changing them.
+
+```js
+// ❌ marks the post itself, changing data that isn't ours
+post.isRead = true
+
+// ✅ remember it on the side
+const readPosts = new WeakSet()
+readPosts.add(post)
+readPosts.has(post) // true
+```
+
+When the post object goes away, its entry in `readPosts` goes with it. You'll rarely write these, but they explain some library code.
+
+## Common mistakes
+
+- Using `map[key] = value` on a `Map`. That sets a plain property; use `map.set(key, value)`.
+- Expecting two lookalike objects to be the same key. `Map` and `Set` compare objects by reference, like `===`.
+- `JSON.stringify(new Map(...))` gives `'{}'`. Convert with `Object.fromEntries` first.
+
+## Try it
+
+1. Count how many times each word appears in `['tea', 'latte', 'tea', 'mocha', 'tea']` using a `Map`.
+2. Remove duplicate tags from `['js', 'css', 'js', 'html', 'css']`.
+3. Given two arrays of guest names, list the names that appear in both.
 
 ## Related
-- [[docs/javascript/javascript-objects|JavaScript Objects]]
+- [[docs/javascript/javascript-objects|JavaScript - Objects]]
+- [[docs/javascript/javascript-arrays|JavaScript - Arrays]]
+- [[docs/javascript/javascript-loops|JavaScript - Loops]]
 - [[docs/javascript/javascript-object-oriented|JavaScript - Classes]]

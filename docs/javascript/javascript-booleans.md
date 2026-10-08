@@ -2,157 +2,167 @@
 title: "JavaScript - Booleans"
 type: doc
 created: 2015-10-14
-updated: 2015-10-14
+updated: 2026-10-07
 tags: [javascript]
 ---
 # JavaScript - Booleans
 
-## Booleans
-Like `booleans` are a type of value like strings and numbers, a `boolean` value can only be `true` or `false`
+A boolean is a yes or no: `true` or `false`. Is the shop open? Is the cart empty? Did the login work? Every `if` in your code comes down to one of these. This lesson covers how JavaScript gets to `true` or `false`, the "truthy" values that act like them, and the two kinds of "nothing", `null` and `undefined`.
+
+## true and false
 
 ```js
-var imHuman = true;
-var imRobot = false;
+const isOpen = true
+const isSoldOut = false
+
+typeof isOpen // 'boolean'
 ```
 
-## Truthy and Falsey
-JavaScript is a loosely typed language, it meaning often tries to coerce to one type of data. Some other values can be `true` and `false`
+Name booleans like a question: `isOpen`, `hasPaid`, `canEdit`. Then `if (isOpen)` reads like English.
 
-#### Truthy Values
-- `true`
-- Any `String` - `"string"`, even `"False"` or `"0"`
-- Any `Object` - `{}`, even if empty
-- Any `Array` - `[]`, even if empty
-- `new Date()`
-- Any `Floating Value` - `100`, `2.0`, etc..
-
-#### Falsey  Values
-- `false`
-- Negative Values - `0`, `0.0`
-- `null`
-- `undefined`
-- `NaN`
-- Empty String - `""`
-
-## Undefined
-The value given to a variable if it is **without a value**.
+## Comparisons give booleans
 
 ```js
-var message;
-console.log(message); // undefined
-console.log(typeof message); // "undefined"
+5 > 3        // true
+5 >= 5       // true
+2 < 1        // false
+'tea' === 'tea' // true
+'tea' !== 'coffee' // true
 ```
 
-Assigning a functions that don't return a value to a variable will give it a value of `undefined`, although it will do it's job.
-```js
-function printToDom(text) {
-   document.write(text);
-}
-var captureMessage = printToDom("hello"); // undefined
-```
+## === vs ==
 
-## Null
-Unlike undefined, is a literal. Null can be used in places where a value is expected to be returned, but is not. It return a empty `object`
+`===` checks that the value **and** the type are the same. `==` converts types first, then compares, with rules that surprise everyone.
 
 ```js
-function add(x, y) {
-  return x + y;
-}
-console.log(add(2, null)); // 2
+3 === '3'  // false
+3 == '3'   // true
+'' == 0    // true 🤔
+null == undefined // true
 ```
 
-Null returns a empty `object`
-```js
-var nothingHere = null;
-console.log(typeof nothingHere); // "object"
-```
+✅ Always use `===` and `!==`. If you want to compare a string to a number, convert it yourself first.
 
-## NaN
-The value given to a value when it can not be coerced to a number or a mathematical operation fails.
+## Objects compare by reference
+
+Two arrays or objects are only `===` when they are the **same** one, not when they look the same.
 
 ```js
-parseInt("three") // NaN
-```
-NaN is a `number`
-```js
-var notaNumber = NaN; // NaN
-console.log(typeof notaNumber); // "number"
+const order = { drink: 'latte' }
+const lookalike = { drink: 'latte' }
+const sameOrder = order
+
+order === lookalike // false, two different objects
+order === sameOrder // true, one object with two names
 ```
 
-## Comparison Operators
-Used to compares values to determine a boolean value
-
-- `>` Greater than
-- `>=` Greater than or Equal to
-- `<` Less than
-- `<=` Less than Or Equal to
-- `==` Equal to
-- `===` Strict Equal to
-- `!=` Not Equal To
-- `!==` Strict Not Equal to
-- `&&` And
-- `||` Or
-- `!` Not
+## And, or, not
 
 ```js
-2 > 2 // false
-2 >= 2 // true
-1 < 7 // true
-1 <= 36 // true
-3 == "3" // true
-'dog' !== 'dog' // false
-3 === 7 || 'cat' === 'cat' // true
+const age = 34
+age > 30 && age < 40   // true, both must be true
+age < 18 || age > 65   // false, at least one must be true
+!true                  // false
 ```
 
-#### Comparing Strings
-The first letter of the first string is compared to the first letter of the second string, and if equal, the letter after it.
-```js
-'lion' > 'zebra' // false ; `l` comes before `z` in the alphabet
-```
+## Truthy and falsy
 
-#### Equality Operators
-Determines if 2 values are the same, it can compare different values. Equality Operator often coerces values. So it's not good pratice to use it.
-```js
-3 == "3" // true
-'' == 0 // true
-```
+`if` and `&&`/`||` don't need a real boolean. JavaScript treats every value as "truthy" or "falsy". There are only a handful of falsy values; learn them and everything else is truthy.
 
-#### Strict Comparison operator
-Compare the value as well as the `typeof` two type of data
-```js
-3 == "3" // false
-'' == 0 // false
-```
-
-
-#### And Operator
-Compares multipe comparisons, all comparisons need to be `true` otherwise the whole comparison turn `false`
+| Falsy | Truthy (surprising ones) |
+| --- | --- |
+| `false` | `'false'` |
+| `0`, `-0`, `0n` | `'0'` |
+| `''` (empty string) | `' '` (a space) |
+| `null` | `[]` (empty array) |
+| `undefined` | `{}` (empty object) |
+| `NaN` | |
 
 ```js
-var age = 34;
-age > 30 && age < 40 // true
+if ('') console.log('never runs')
+if ([]) console.log('runs, even though it is empty')
+
+Boolean('')   // false
+!!'hello'     // true, double "not" turns any value into a boolean
 ```
 
-#### Or Operator
-Compares multiple comparisons, take only one comparisons need to be `true`.
+To check an empty array, ❌ `if (cart)` is always true. ✅ `if (cart.length > 0)`.
+
+## && and || return values
+
+`&&` and `||` stop as soon as they know the answer, and give back the value they stopped on, not just `true` or `false`.
 
 ```js
-var age = 49;
-var netWorth = '9450800';
-age < 30 || netWorth > 1e6 // true
+'Ana' || 'Guest'   // 'Ana'
+'' || 'Guest'      // 'Guest'
+user && user.name  // user.name, or user if it's falsy
 ```
 
-#### Not operator
-Using a `!` inverts a boolean value, `!true = not true`
+## null vs undefined
+
+Both mean "nothing here", but with a different story behind them.
+
+- `undefined`: no value has been given yet. A variable with nothing in it, a missing property, a function with no `return`.
+- `null`: someone deliberately set it to "empty".
 
 ```js
-console.log(!true); // false
-console.log(!false); // true
+let winner
+winner // undefined
+
+const order = { drink: 'latte' }
+order.size // undefined, the property doesn't exist
+
+const selectedTable = null // we chose "no table yet"
+
+typeof undefined // 'undefined'
+typeof null      // 'object', an old bug kept for compatibility
 ```
+
+## ?? for defaults
+
+`??` (nullish coalescing) gives a fallback only when the left side is `null` or `undefined`. `||` falls back on **any** falsy value, which bites when `0` or `''` are real answers.
+
+```js
+const sugars = 0
+
+sugars || 2  // 2 ❌ we lose the real answer, 0
+sugars ?? 2  // 0 ✅
+
+const nickname = null
+nickname ?? 'Guest' // 'Guest'
+```
+
+## ?. for things that might not be there
+
+Optional chaining `?.` stops and gives `undefined` if the thing before it is `null` or `undefined`, instead of throwing an error.
+
+```js
+const user = { name: 'Ana', address: null }
+
+user.address.city    // TypeError: Cannot read properties of null
+user.address?.city   // undefined
+user.address?.city ?? 'Unknown' // 'Unknown'
+
+user.greet?.()       // undefined, only calls greet if it exists
+```
+
+Use it where something is genuinely optional. Sprinkling it everywhere hides real bugs.
+
+## Common mistakes
+
+- Using `==` and getting caught by `'' == 0`.
+- Treating an empty array or object as falsy.
+- Using `||` for defaults when `0`, `''` or `false` are valid values. Use `??`.
+- Writing `if (x = 5)`: a single `=` assigns, it doesn't compare.
+
+## Try it
+
+1. Predict, then check in the console: `!!'0'`, `!![]`, `!!NaN`, `null ?? 'x'`, `0 || 'x'`.
+2. Write `displayName(user)` that returns `user.nickname`, or `user.name` if there's no nickname, or `'Guest'` if there's no user at all.
+3. Explain in one sentence why `[1] === [1]` is `false`.
 
 ## Related
-- [[docs/javascript/javascript-strings|JavaScript Strings]]
-- [[docs/javascript/javascript-numbers|JavaScript Numbers]]
-- [[docs/javascript/javascript-arrays|JavaScript Arrays]]
 - [[docs/javascript/javascript-conditionals|JavaScript - Conditionals]]
-- [[docs/javascript/javascript-loops|JavaScript - Loops]]
+- [[docs/javascript/javascript-strings|JavaScript - Strings]]
+- [[docs/javascript/javascript-numbers|JavaScript - Numbers]]
+- [[docs/javascript/javascript-objects|JavaScript - Objects]]

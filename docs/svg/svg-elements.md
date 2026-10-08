@@ -2,298 +2,204 @@
 title: "SVG - Elements"
 type: doc
 created: 2017-02-24
-updated: 2017-02-24
+updated: 2026-10-07
 tags: [svg]
 ---
 # SVG - Elements
 
-References:
-- [polynom.co](http://polynom.co/)
-- [SVG Path Builder](https://codepen.io/anthonydugois/pen/mewdyZ)
-- [A Closer Look at SVG Path Data](https://www.sitepoint.com/closer-look-svg-path-data/)
-- [The SVG `path` Syntax: An Illustrated Guide](https://css-tricks.com/svg-path-syntax-illustrated-guide/)
+Every SVG drawing is built from a handful of shapes: rectangles, circles, lines, polygons, text and paths. Learn these and you can read any SVG file, tweak an icon by hand, or draw a simple badge without opening a design tool. In this lesson we build an "SVG" badge: a circle, a triangle, a line, some text and a few repeated decorations.
 
-## SVG
-Acts like the Viewport (canvas) and while viewBox acts like the Base Coordinate System for our assets. It needs a `width` and `height` or a `viewBox` with Origin and Size `x y width height`.
+## Fill and stroke
+
+Every shape has two paint jobs. `fill` is the inside, `stroke` is the outline.
 
 ```html
-<svg
-  /* Sets the size of the canvas */
-  height="268"
-  width="268"
+<circle cx="50" cy="50" r="40" fill="gold" stroke="black" stroke-width="4" />
+```
 
-  /* Specifies its version */
-  xmlns="http://www.w3.org/2000/svg"
-  version="1.1"
+- `fill="none"` gives you only the outline.
+- The stroke is centred on the edge: half sits inside the shape, half outside.
+- These attributes can also be set in CSS (`fill: gold;`), and CSS wins over the attribute.
 
-  /* viewBox Origin and Size */
-  viewBox="0 0 268 268"
->
-  <rect height="80" width="100" />
+## Rectangles
+
+`x` and `y` set the top left corner, `width` and `height` the size. `rx` and `ry` round the corners.
+
+```html
+<svg viewBox="0 0 100 110" width="100">
+  <!-- a phone: body, screen and a button -->
+  <rect x="5" y="5" width="70" height="100" rx="10" fill="white" stroke="#ff2626" stroke-width="10" />
+  <rect x="15" y="15" width="50" height="70" fill="#ddd" />
+  <circle cx="40" cy="95" r="3" fill="#ff2626" />
 </svg>
 ```
 
+Shapes are painted in order: later shapes sit on top of earlier ones. There is no `z-index` in SVG.
 
+## Circles vs ellipses
 
-## Rectangle
+A circle has a centre (`cx`, `cy`) and one radius `r`. An ellipse has two radii: `rx` across and `ry` down.
 
 ```html
-<rect height="80" width="100" />
-
-<rect height="50" width="80" x="" y="" fill="red" stroke="blue" stroke-width="10 "/>
+<circle cx="50" cy="50" r="40" />
+<ellipse cx="50" cy="50" rx="40" ry="20" />
 ```
 
+## Lines
 
-### iMac
+A line goes from point `(x1, y1)` to point `(x2, y2)`. It has no inside, so it needs a `stroke` to be visible.
+
 ```html
-<svg
-  height="100"
-  width="100"
-  xmlns="http://www.w3.org/2000/svg"
-  version="1.1"
->
-  <rect height="80" width="100" />
-  <rect height="50" width="80" x="10" y="10" fill="white" />
-  <rect height="10" width="40" x="30" y="90" />
-</svg>
+<line x1="47" y1="198" x2="221" y2="198" stroke="black" stroke-width="5" />
 ```
 
-## Circles
-horizontal center `cx` and vertical center `cy` and radius `r`
-```html
-<circle cx="50" cy="50" r="100" />
-```
+## Polygons and polylines
 
-## Ellipses
-Unlike circles ellipses have two different radius horizontal radius `rx` and vertical radius `ry`
-```html
-<ellipse cx="50" cy="50" rx="50" ry="100" />
-```
-```html
-<svg
-  height="200"
-  width="100"
-  xmlns="http://www.w3.org/2000/svg"
-  version="1.1"
->
-  <rect
-        height="100"
-        width="70"
-        x="5"
-        y="5"
-        fill="white"
-        stroke="#FF2626"
-        stroke-width="10"
-
-        /* Rounds Corners */
-        rx="10"
-        ry="25"
-   />
-  <circle cx="40" cy="105" r="3" fill="white"/>
-</svg>
-```
-
-## Line
-To draw a line it needs two `x,y` points
+`polygon` joins a list of `x,y` points and closes the shape back to the first point. `polyline` does the same but leaves it open.
 
 ```html
-<svg height="268" width="268">
-  <line
-    x1="47" y1="198" x2="221" y2="198"
-    stroke="black"
-    stroke-width="5px"
-  />
-</svg>
+<!-- a triangle -->
+<polygon points="52,190 134,30 216,190" fill="#008b6f" stroke="black" stroke-width="2" />
+
+<!-- a zig-zag -->
+<polyline points="0,10 10,0 20,10 30,0" fill="none" stroke="black" />
 ```
 
 ## Text
-for text to appear we need to specify the anchor points and font size
+
+`<text>` places text at `x, y`. By default that point is the left end of the text's baseline. `text-anchor="middle"` centres it on that point instead.
+
 ```html
-<text
-  x="134" y="142"
-  font-size="60"
-  text-anchor="middle"
-  font-family="Helvetica Neue"
-  font-weight="900"
-  stroke="#000"
-  stroke-width="3"
-  fill="#F6F7F3"
->SVG</text>
+<text x="134" y="142" text-anchor="middle" font-size="60" font-weight="900" fill="#f6f7f3" stroke="black" stroke-width="3">SVG</text>
 ```
 
-## polygon
-Connects the `x,y` points to draw the shape and connects the last point to the first point.
+Text in an SVG stays real text: searchable, selectable and readable by screen readers.
+
+## Groups and transforms
+
+`<g>` groups shapes so you can style or move them together. Children inherit the group's `fill`, `stroke` and so on.
+
+`transform` moves, turns and resizes:
+
+- `translate(x, y)`: move.
+- `rotate(degrees, cx, cy)`: turn around the point `(cx, cy)`. Without it, around `(0, 0)`.
+- `scale(amount)`: resize.
 
 ```html
-<polygon
-  points="52,190 134,30 216,190"
-  fill="#008B6F"
-  stroke="black"
-  stroke-width="2px"
-/>
+<g fill="#59bfc6" stroke="black" transform="translate(45, 67) rotate(10, 12.5, 12.5)">
+  <!-- these points are now measured from the group's new origin -->
+  <polygon points="7,10 12,0 17,10" />
+  <polygon points="0,25 5,15 10,25" />
+  <polygon points="15,25 20,15 25,25" />
+</g>
 ```
 
-## Groups
-Groups allows to style or transform a groups of elements. Transform allows us to do use multiple things like `translate`, `rotate` and `scale`.
+Transforms apply from right to left: here the group is rotated first, then moved.
+
+## Reuse with symbol and use
+
+`<symbol>` defines a drawing without showing it. `<use>` stamps a copy wherever you need it. Draw once, use many times.
 
 ```html
-<polygon points="7,10 12,0 17,10" fill="#59BFC6" stroke-width="1px" />
-<polygon points="0,25 5,15 10,25" fill="#59BFC6" stroke-width="1px" />
-<polygon points="15,25 20,15 25,25" fill="#59BFC6" stroke-width="1px" />
-```
-
-translate(`x move`, `y move`)
-rotate(`degrees`, `x origin`, `y origin`)
-scale(`amount`)
-```html
-<g
-   fill="#59BFC6"
-   stroke="black"
-   stroke-width="1px"
-   transform="translate(45, 67) rotate(10 12.5 12.5) scale(0.8)"
->
-    <!-- this points now start from the group origin -->
-    <polygon points="7,10 12,0 17,10" />
-    <polygon points="0,25 5,15 10,25" />
-    <polygon points="15,25 20,15 25,25" />
-  </g>
-```
-
-## Symbol
-Stores elements for later use
-
-```html
-<symbol id="triangles">
-  <g
-    fill="#59BFC6"
-    stroke="black"
-    stroke-width="3"
-    transform="translate(3, 3)"
-  >
-    <polygon points="7,10 12,0 17,10" />
-    <polygon points="0,25 5,15 10,25" />
-    <polygon points="15,25 20,15 25,25" />
-  </g>
+<symbol id="triangles" viewBox="0 0 25 25">
+  <polygon points="7,10 12,0 17,10" />
+  <polygon points="0,25 5,15 10,25" />
+  <polygon points="15,25 20,15 25,25" />
 </symbol>
 
-<use xlink:href="#triangles" transform="translate(45, 67) rotate(10 12.5 12.5)" />
-<use xlink:href="#triangles" transform="translate(198, 67) rotate(-10 12.5 12.5)" />
-<use xlink:href="#triangles" transform="translate(121.5, 211) scale(0.6)" />
+<use href="#triangles" x="45" y="67" width="25" height="25" fill="#59bfc6" />
+<use href="#triangles" x="198" y="67" width="25" height="25" fill="#59bfc6" />
 ```
+
+```html
+<!-- ❌ old: needs the xlink namespace -->
+<use xlink:href="#triangles" />
+<!-- ✅ now: plain href works in all current browsers -->
+<use href="#triangles" />
+```
+
+This is also how icon sprites work: one hidden SVG full of `<symbol>`s, and a `<use>` for each icon on the page.
 
 ## Paths
-A very powerful to creating complicated SVG but they are better suited for creation by software. [A Closer Look at SVG Path Data](https://www.sitepoint.com/closer-look-svg-path-data/), [The SVG `path` Syntax: An Illustrated Guide](https://css-tricks.com/svg-path-syntax-illustrated-guide/).
 
-These attributes exist to style the path:
-- stroke
-- stroke-width
-- stroke-linecap: Shape of lineCap (e.g. butt, square, round)
-- stroke-linejoin: Shape of lineJoin (e.g. miter, round, bevel)
-- stroke-dasharray: Length of dashes for the stroke
-- stroke-dashoffset: Offset for when the stroke begins
+`<path>` can draw anything. Every other shape is a shortcut for a path. The `d` attribute is a list of commands, each a letter followed by numbers.
 
-### Straight paths
-Draw straight lines using the `MLZ` properties
-```
-M[x,y L[x,y]] Z
-```
+| Command | Meaning |
+|---------|---------|
+| `M x y` | move the pen to a point without drawing |
+| `L x y` | draw a straight line to a point |
+| `H x` / `V y` | horizontal / vertical line |
+| `Q cx cy x y` | quadratic curve with one control point |
+| `C c1x c1y c2x c2y x y` | cubic curve with two control points |
+| `A …` | an arc (part of an ellipse) |
+| `Z` | close the shape back to the start |
 
-`M` start Path `L` draw line between points `Z` close path
+Capital letters use absolute coordinates; lowercase ones are relative to where the pen is.
+
 ```html
-<polygon points="52,190 134,30 216,190" />
-<!-- same as -->
-<path d="M52,190 L52,190 L134,30 L216,190 Z" />
+<!-- the same triangle as the polygon above -->
+<path d="M52,190 L134,30 L216,190 Z" />
+
+<!-- a smile -->
+<path d="M100,200 Q200,300 300,200" fill="none" stroke="black" stroke-width="8" stroke-linecap="round" />
 ```
 
-### Cubic Bézier Paths
-Draw a Cubic Bézier lines using the `C` property
+Don't try to write complex paths by hand. Draw them in a design tool and export. What you need is to *read* them well enough to tweak a point or a colour.
 
-```
-M[x,y C[ x,y x,y] x,y]
-```
-```html
-<path d="M 100 300 C 0 150 250 -100 250 50" />
-```
+Strokes on paths have a few extra settings worth knowing:
 
-### Quadratic Bézier Curve
-Draws a Quadratic Bézier Curve using the `Q` property
-```html
-<path d="M100 200 Q200 0 300 200" />
-```
-
-### Elliptical Arc Curve
-Draw a Elliptical Arc Curve using the `A` property
-```html
-<path d="M350 300 A50 50 0 1 0 150 300 C150 400 350 300 350 400 A50 50 0 1 1 150 400" />
-```
-
+- `stroke-linecap`: the ends of a line (`butt`, `round`, `square`).
+- `stroke-linejoin`: the corners (`miter`, `round`, `bevel`).
+- `stroke-dasharray` and `stroke-dashoffset`: dashes, and the classic "drawing" animation in [[docs/svg/svg-animations|SVG - Animations]].
 
 ## Accessibility
 
-```html
-<!-- Label for the asset -->
-<title>Schuffle Phone Icon</title>
-<!-- A detailed description of what the asset looks like -->
-<desc>
-  A phone with a large red border with rounded
-  corners, a white screen, and a white round
-  button centered bellow the screen.
-</desc>
-```
+An inline SVG that means something needs a name. The simplest way: `role="img"` plus `aria-label`.
 
 ```html
-<svg viewBox="0 0 268 268">
-  <symbol id="triangles">
-    <!-- Label for the asset -->
-    <title>Triangles</title>
-    <!-- A detailed description of what the asset looks like -->
-    <desc>
-      A group of 3 triangles
-    </desc>
-    <g
-      fill="#59BFC6"
-      stroke="black"
-      stroke-width="3"
-      transform="translate(3, 3)"
-    >
-      <polygon points="7,10 12,0 17,10" />
-      <polygon points="0,25 5,15 10,25" />
-      <polygon points="15,25 20,15 25,25" />
-    </g>
-  </symbol>
-  <circle
-    r="130" cx="134" cy="134"
-    fill="none"
-    stroke="#008b6f"
-    stroke-width="7px"
-  />
-  <line
-    x1="47" y1="198" x2="221" y2="198"
-    stroke="black"
-    stroke-width="5px"
-  />
-  <polygon
-    points="52,190 134,30 216,190"
-           fill="#008B6F"
-           stroke="black"
-           stroke-width="4"
-  />
-  <text
-    x="134" y="142"
-    font-size="60"
-    text-anchor="middle"
-    font-family="Helvetica Neue"
-    font-weight="900"
-    stroke="#000"
-    stroke-width="3"
-    fill="#F6F7F3"
-  >SVG</text>
-  <use xlink:href="#triangles" transform="translate(45, 67) rotate(10 12.5 12.5)" />
-  <use xlink:href="#triangles" transform="translate(198, 67) rotate(-10 12.5 12.5)" />
-  <use xlink:href="#triangles" transform="translate(121.5, 211) scale(0.6)" />
+<svg viewBox="0 0 268 268" role="img" aria-label="SVG badge: a green triangle in a circle">
+  …
 </svg>
 ```
 
+You can also put a `<title>` (the short name) and a `<desc>` (a longer description) as the first children of the `<svg>`. A purely decorative SVG should get `aria-hidden="true"` instead, so screen readers skip it.
+
+## Putting it together
+
+```html
+<svg viewBox="0 0 268 268" width="268" role="img" aria-label="SVG badge">
+  <symbol id="triangles" viewBox="0 0 25 25">
+    <polygon points="7,10 12,0 17,10" />
+    <polygon points="0,25 5,15 10,25" />
+    <polygon points="15,25 20,15 25,25" />
+  </symbol>
+
+  <circle cx="134" cy="134" r="130" fill="none" stroke="#008b6f" stroke-width="7" />
+  <line x1="47" y1="198" x2="221" y2="198" stroke="black" stroke-width="5" />
+  <polygon points="52,190 134,30 216,190" fill="#008b6f" stroke="black" stroke-width="4" />
+  <text x="134" y="142" text-anchor="middle" font-size="60" font-weight="900" fill="#f6f7f3" stroke="black" stroke-width="3">SVG</text>
+
+  <use href="#triangles" x="45" y="67" width="25" height="25" fill="#59bfc6" />
+  <use href="#triangles" x="198" y="67" width="25" height="25" fill="#59bfc6" />
+  <use href="#triangles" x="121" y="211" width="15" height="15" fill="#59bfc6" />
+</svg>
+```
+
+## Common mistakes
+
+- A `line` or `polyline` with no `stroke`, so nothing shows.
+- Expecting `rotate(45)` to spin around the shape's centre. Pass the centre point, or see `transform-box` in [[docs/svg/svg-animations|SVG - Animations]].
+- Expecting `z-index` to work. Reorder the elements instead.
+- Using `xlink:href` in new code.
+
+## Try it
+
+1. Draw a traffic light: one rounded `rect` and three circles.
+2. Turn one circle into a `<symbol>` and stamp it three times with `<use>`, each a different `fill`.
+3. Rewrite your `polygon` triangle as a `path`, then change one point to make it lopsided.
+
 ## Related
+
 - [[docs/svg/svg|SVG - Basics]]
-- [[docs/html/html-objects|HTML - Objects]]
+- [[docs/svg/svg-animations|SVG - Animations]]
+- [[docs/html/html-media|HTML - Images and Media]]

@@ -2,15 +2,16 @@
 title: "Swift - Protocols"
 type: doc
 created: 2016-11-04
-updated: 2017-02-24
+updated: 2026-10-07
 tags: [swift]
 ---
 # Swift - Protocols
 
-## Protocols
-A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality. Also know as `interface` in other programing languages it enforce an expectation of behaviors without using inheritance.
+A protocol is a contract: a list of properties and methods a type promises to have. "Anything that can be blended" or "anything with a full name". Structs, classes and enums can all sign the contract, and code can then work with any of them without caring which. Swift leans on protocols far more than on inheritance, and SwiftUI is built on them: every view you write conforms to the `View` protocol.
 
-`User` and `Friend` both differ in their implementation but both conform to `FullyNameable`
+## Declaring and conforming
+
+List the requirements, then add the protocol after the type's name.
 
 ```swift
 protocol FullyNameable {
@@ -18,585 +19,183 @@ protocol FullyNameable {
 }
 
 struct User: FullyNameable {
-    // assigns a value to fullName on init
-    var fullName: String
+    var fullName: String // stored
 }
-
-let user = User(fullName: "John Smith")
-user.fullName // "John Smith"
 
 struct Friend: FullyNameable {
-    // does not assign a value to fullName on init
     let firstName: String
-    let middleName: String
     let lastName: String
 
-    // instead creates a computed property base on inited values
-    var fullName: String {
-        return "\(firstName) \(middleName) \(lastName)"
-    }
+    var fullName: String { "\(firstName) \(lastName)" } // computed
 }
 
-let friend = Friend(firstName: "Taylor", middleName: "Alison", lastName: "Swift")
-friend.fullName // "Taylor Alison Swift"
+Friend(firstName: "Taylor", lastName: "Swift").fullName // "Taylor Swift"
 ```
 
+`{ get }` means "readable". The type decides how: a stored property or a computed one both count.
 
-## Modeling Behavior with Protocols
-In the case that we have different `Employee`s and we want them to be `Payable`, adding a pay
+In TypeScript this is an `interface`. One big difference: TypeScript checks shape (anything with a `fullName` fits), Swift checks the declaration (the type must say `: FullyNameable`).
 
-```swift
-class Employee {
-    // ...
+## Protocols as types
 
-    // A extendable pay method sounds like a logic solution, but if we forget to override than on it will still work and pay the employee `0`
-    func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
-        return (0, 0, 0, 0)
-    }
-}
-
-class HourlyEmployee: Employee {
-    var hourlyWage: Double = 15.00
-    var hoursWorked: Double = 0
-    let availableVacation = 0
-
-    // it works but it's a bad pratice
-    override func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
-        return (hourlyWage * hoursWorked, 0, 0, availableVacation)
-    }
-}
-
-func payEmployee (employee: Employee) {
-    employee.pay()
-}
-```
-
-This a good example where protocols are useful to model class behaviors to ensure that the code behavior don't go wrong, so it helps you to avoid some errors based on human error, In this case it helps you showing you an error if you forgot to override the superclass method (pay method)
-```swift
-protocol Payable {
-    func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int)
-}
-
-class Employee {
-    // ...
-
-    // No longer needs a default method
-    // func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
-    //     return (0, 0, 0, 0)
-    // }
-}
-
-// extends on `Employee` and `Payable`
-class HourlyEmployee: Employee, Payable {
-    var hourlyWage: Double = 15.00
-    var hoursWorked: Double = 0
-    let availableVacation = 0
-
-    // no longer needs to override
-    func pay() -> (basePay: Double, benefits: Double, deductions: Double, vacationTime: Int) {
-        return (hourlyWage * hoursWorked, 0, 0, availableVacation)
-    }
-}
-
-// on type of `Payable`
-func payEmployee (employee: Payable) {
-    employee.pay()
-}
-```
-
-
-## Protocols as Types
-Also useful to conform loosely related objects, protocols can be use as a type, as a parameter type or return type in a function, method or initializer, as the type of a constant, variable or property, or as the type of items in a array, dictionary or any other container.
-
+Use a protocol wherever a type goes: parameters, arrays, properties. Mixed types can share one array as long as they all conform.
 
 ```swift
 protocol Blendable {
-    func blend()
+    func blend() -> String
 }
 
-class Fruit: Blendable {
-    var name: String
-
-    init(name: String) {
-        self.name = name
-    }
-
-    func blend() {
-        print("I'm mush")
-    }
-}
-
-// not every Dairy ingredient is good for a smoothly
-class Dairy {
-    var name: String
-
-    init(name: String) {
-        self.name = name
-    }
-}
-
-class Cheese: Dairy {}
-
-class Milk: Dairy, Blendable {
-
-    func blend() {
-        print("I'm milkshake")
-    }
-}
-```
-
-Because all of them conform to the blendable protocol we are sure they will have the blend method
-```swift
-func makeSmoothie(ingredients: [Blendable]) {
-    for ingredient in ingredients {
-        ingredient.blend()
-    }
-}
-
-let strawberry = Fruit(name: "Strawberry")
-let cheddar = Cheese(name: "Cheddar")
-let chocolateMilk = Milk(name: "Chocolate")
-
-//let ingredients = [strawberry, chocolateMilk] // Error add explicit type annotation [Any]
-//let ingredients: [Blendable] = [strawberry, cheddar] // Error 'Cheese' does not conform
-let ingredients: [Blendable] = [strawberry, chocolateMilk]
-
-makeSmoothie(ingredients: ingredients)
-```
-
-## IS-A vs HAS-A
-If a model want to use the same features and maybe expand on them `inheritance` is the best option on the flip side is a model has common features with another model `composition` is a better option.
-
-### IS-A
-`Jetplane` is a `Airplane`
-```swift
-class Airplane {}
-
-// inherits and maybe expands on Airplane
-class Jetplane: Airplane {}
-```
-
-### HAS-A
-`Bird` has a `Fly` feature
-```swift
-// Extract Fly feature into a protocol
-protocol Fly {}
-
-// both share a common relationship with Fly protocol
-class Airplane: Fly {}
-
-struct Bird: Fly {}
-```
-
-## Protocol Inheritance
-protocol can be inherit other protocols
-
-```swift
-protocol Printable {
-    func description() -> String
-}
-
-// extends on `Printable`
-protocol PrettyPrintable: Printable {
-    func prettyDescription() -> String
-}
-
-// User now conforms with PrettyPrintable which in turn conforms to Printable
-struct User: PrettyPrintable {
+struct Fruit: Blendable {
     let name: String
-    let age: Int
-    let address: String
-
-    func description() -> String {
-        return "\(name). \(age). \(address)"
-    }
-
-    func prettyDescription() -> String {
-        return "name: \(name) age: \(age) address: \(address)"
-    }
+    func blend() -> String { "\(name) mush" }
 }
 
-let user = User(name: "jane", age: 25, address: "sesame street")
+struct Milk: Blendable {
+    func blend() -> String { "milkshake" }
+}
 
-user.description()
-user.prettyDescription()
+struct Cheese {} // not Blendable
+
+func makeSmoothie(_ ingredients: [any Blendable]) -> [String] {
+    ingredients.map { $0.blend() }
+}
+
+makeSmoothie([Fruit(name: "Strawberry"), Milk()]) // ["Strawberry mush", "milkshake"]
+makeSmoothie([Cheese()]) // ❌ error: Cheese doesn't conform to Blendable
 ```
 
+`any Blendable` reads as "a box holding any type that conforms". It's the modern spelling; older code writes `[Blendable]`.
 
-## Swift's Standard Library Protocols
-Swift has 55 Swift Standard Library Protocols, mostly grouped into 3 categories. [What the 55 Swift Standard Library Protocols Taught Me](https://www.skilled.io/gregheo/what-the-55-swift-standard-library-protocols-taught-me).
+## some vs any
 
-- `Can do` (-able) .eg Equatable, FullyNameable
-- `Is a` (-Type) .eg IntType
-- `Can be` (-Convertible) .eg FloatLiteralConvertible, NilLiteralConvertable
+You'll see `some` all over SwiftUI, so it's worth the contrast now.
 
-
-## Protocol Oriented Programming
-Carefully defining the defining of objects
-
-## Protocol Conformance Using Extensions
-One of the most useful aspects of extensions is that we can add protocol conformance to any existing types
+- `any Blendable`: could be a different conforming type each time. Flexible; you can mix types in one array.
+- `some Blendable`: one specific conforming type that the compiler knows but doesn't make you write out. Faster, and the type can't change.
 
 ```swift
-import UIKit
-import GameKit
-
-protocol UniqueType {
-    var id: Int { get }
-}
-
-extension UIView: UniqueType {
-    var id: Int {
-        return Int(arc4random_uniform(1000) + 1)
-    }
+func favourite() -> some Blendable {
+    Fruit(name: "Mango") // always a Fruit, the caller just sees "some Blendable"
 }
 ```
+
+That's exactly `var body: some View` in [[docs/swift/swift-swiftui|SwiftUI]]: the body is one concrete (and very long) view type you never have to spell. Rule of thumb: ✅ `some` by default, `any` when you really need to mix types.
+
+## Default behaviour with protocol extensions
+
+Extend a protocol to give every conforming type a free implementation. A type can still write its own.
+
+```swift
+protocol Greeter {
+    var name: String { get }
+}
+
+extension Greeter {
+    func greeting() -> String { "Hi, \(name)" }
+}
+
+struct Barista: Greeter {
+    let name: String
+}
+
+Barista(name: "Ana").greeting() // "Hi, Ana"
+```
+
+This is how Swift shares behaviour without a base class, sometimes called protocol-oriented programming.
+
+## Adding conformance with an extension
+
+You can make an existing type conform after the fact, even a type you didn't write. It also keeps each conformance in its own tidy block.
 
 ```swift
 protocol PrettyPrintable {
     var prettyDescription: String { get }
 }
 
-struct User {
+struct Customer {
     let name: String
-    let ID: Int
+    let id: Int
 }
 
-// Enter your code below
-
-extension User: PrettyPrintable {
-    var prettyDescription: String {
-        return "name: \(self.name) id: \(self.ID)"
-    }
+extension Customer: PrettyPrintable {
+    var prettyDescription: String { "name: \(name) id: \(id)" }
 }
 ```
 
-## Protocol Extensions
-extends protocols themselves to provide default implementations
+## Protocols you'll use every day
+
+The standard library comes with protocols that unlock features. For many, Swift writes the code for you if all your properties already conform.
+
+| Protocol | Unlocks | Written for you? |
+|---|---|---|
+| `Equatable` | `==` | ✅ structs and enums |
+| `Hashable` | use in a `Set` or as a dictionary key | ✅ |
+| `Comparable` | `<`, `sorted()` | ⚠️ simple enums only, otherwise you write `<` |
+| `Identifiable` | an `id`, so SwiftUI `List` can track rows | needs an `id` property |
+| `Codable` | JSON encoding and decoding | ✅ |
 
 ```swift
-import Foundation
-import UIKit
-
-protocol UniqueType {
-    var id: Int { get }
+struct Drink: Identifiable, Hashable, Codable {
+    var id = UUID()
+    let name: String
 }
-
-extension UniqueType {
-  // we extend a protocol we can make calculated properties & methods
-    var id: Int {
-        return Int(arc4random_uniform(1000) + 1)
-    }
-}
-
-extension UIView: UniqueType {
-    // protocols extensions work as defaults and can be override
-   var id: Int {
-       return 1
-   }
-}
-
-let view = UIView()
-view.id
 ```
 
+Notice the naming: most protocols say what a type **can do** (`-able`).
 
-## Method Dispatch in a Protocol Extension
+## Inheritance vs composition
+
+Inheritance says a thing **is a** something (`Jetplane` is an `Airplane`). Protocols say it **has a** capability (`Bird` and `Airplane` can both `Fly`). A bird isn't a plane, but both can fly, so a protocol fits where a base class wouldn't. A type can conform to many protocols but inherit from only one class.
 
 ```swift
-protocol PersonType {
+protocol Flyer { func fly() -> String }
 
-    var firstName: String { get }
-    var middleName: String? { get }
-    var lastName: String { get }
-
-    func fullName() -> String
-}
-
-
-extension PersonType {
-    // default implementations
-    func  fullName() -> String {
-        return "\(firstName) \(middleName ?? "") \(lastName)"
-    }
-
-    func greeting() -> String {
-        return "Hi, " + fullName()
-    }
-}
-
-struct User: PersonType {
-
-    let firstName: String
-    let middleName: String?
-    let lastName: String
-
-    // defined implemation for greeting()
-    func greeting() -> String{
-        return "Hey there, " + fullName()
-    }
-
-    func fullName() -> String {
-        return "\(lastName), \(firstName)"
-    }
-}
-
-let someUser = User(firstName: "Pasan", middleName: nil, lastName: "Premaratne")
-// conforms to PersonType again
-let anotherUser: PersonType = User(firstName: "Gabriel", middleName: nil, lastName: "Nadel")
-
-// uses `greeting()` from the struct
-someUser.greeting() // "Hey there, Premaratne, Pasan"
-// uses `greeting()` from the protocol
-anotherUser.greeting() // "Hi, Nadel, Gabriel"
-
-
-struct Friend: PersonType {
-    let firstName: String
-    let middleName: String?
-    let lastName: String
-
-    func greeting() -> String {
-        return "Hello, " + fullName()
-    }
-}
-
-let someFriend = Friend(firstName: "Ben", middleName: nil, lastName: "Jakuben")
-
-let people = [someUser, anotherUser, someFriend]
-
-// uses the default implementation
-for person in people {
-    print (person.greeting())
-}
+struct Bird: Flyer { func fly() -> String { "Flap flap" } }
+class Airplane: Flyer { func fly() -> String { "Whoosh" } }
 ```
+
+Protocols can also build on each other: `protocol PrettyPrintable: CustomStringConvertible { ... }` requires both.
 
 ## Delegates
 
-### Design Patterns
-A design pattern is a general, reusable solution to a commonly occurring problem within a given context, regardless of the particular domain.
-
-commonly they try to solve:
-- Avoiding inflexible objects
-- maintaining loose relationships
-- avoid tight coupling
-
-### Delegate Pattern
-Also known as Decorator Pattern.
-
-We have a bunch of tightly coupled objects and there are some severe limitations to this design, we want a way to track all the races but all the tracker data lives inside the Race Objects.
-```swift
-import Foundation
-
-// Participants
-
-struct Horse {
-    func giddyUp() {}
-}
-
-struct Car {
-    func vroomVroom() {}
-}
-
-struct RaceCar {
-    func readySetGo() {}
-}
-
-// Tracker
-
-class Tracker {
-    var laps: Int = 0
-    var startTime: Date?
-    var lapFirst: Horse?
-    var winner: Horse?
-}
-
-// Races
-
-class Race {
-    var laps: Int = 0
-    // Trackers are confined within the Races Object
-    let raceTracker: Tracker = Tracker()
-
-    func start() {
-        // Some set up
-    }
-
-    func updateProgress() {
-
-    }
-
-    func end() {
-        // Some tear down
-    }
-}
-
-class HorseRace: Race {
-
-    let participants: [Horse]
-
-    init(laps: Int, horses: [Horse]) {
-        self.participants = horses
-        super.init()
-        self.laps = laps
-    }
-
-    override func start() {
-        print("Starting Race!")
-        raceTracker.startTime = Date()
-        for horse in participants {
-            horse.giddyUp()
-        }
-    }
-
-    override func updateProgress() {
-        raceTracker.laps += 1
-        raceTracker.lapFirst = participants.first
-        print("Progress updated!")
-    }
-    override func end() {
-        print("And the winner is...\(participants.first)")
-        raceTracker.winner = participants.first
-    }
-}
-
-
-// Usage
-
-let horse1 = Horse()
-let horse2 = Horse()
-let horse3 = Horse()
-
-let race = HorseRace(laps: 4, horses: [horse1, horse2, horse3])
-race.start()
-race.updateProgress()
-race.end()
-```
-
-We create a delegate protocol first that defines the properties and methods that we require our delegates to implement. We add a property to our class that specifies the type of the protocol that we just declared. To this property, we can assign any object that conforms to the protocol to act as our delegate.
+A delegate is an object that another object reports to. "The race calls its tracker when a lap ends." Define the messages as a protocol, keep a `weak var delegate`, and any conforming object can listen.
 
 ```swift
-import Foundation
-
-// Protocol
-
-protocol RaceDelegate {
-    func raceDidStart()
-    func raceStatus(lapNumber: Int, first: Any)
-    func raceDidEnd(winner: Any)
+protocol RaceDelegate: AnyObject {
+    func raceDidEnd(winner: String)
 }
-
-// Participants
-
-struct Horse {
-    func giddyUp() {}
-}
-
-struct Car {
-    func vroomVroom() {}
-}
-
-struct RaceCar {
-    func readySetGo() {}
-}
-
-// Races
 
 class Race {
-    var laps: Int = 0
-    // needs to be a variable as it only be implemented after initiation
-    var delegate: RaceDelegate?
-
-    func start() {
-        // Some set up
-    }
-
-    func updateProgress() {
-
-    }
-
-    func end() {
-        // Some tear down
-    }
+    weak var delegate: RaceDelegate?
+    func end() { delegate?.raceDidEnd(winner: "Horse 3") }
 }
 
-class HorseRace: Race {
-    let participants: [Horse]
-
-    init(laps: Int, horses: [Horse]) {
-        self.participants = horses
-        super.init()
-        self.laps = laps
-    }
-
-    override func start() {
-        delegate?.raceDidStart()
-    }
-
-    override func updateProgress() {
-        laps += 1
-        delegate?.raceStatus(lapNumber: laps, first: Horse())
-    }
-
-    override func end() {
-        delegate?.raceDidEnd(winner: Horse())
-    }
+class Scoreboard: RaceDelegate {
+    func raceDidEnd(winner: String) { print("Winner: \(winner)") }
 }
 
-// Tracker
-
-// tracker needs to conform to the RaceDelegate Protocol
-class Tracker: RaceDelegate {
-    func raceDidStart() {
-        print("Tracker notified that the race has started!")
-    }
-
-    func raceStatus(lapNumber: Int, first: Any) {
-        print("Tracker nofified that race status has been updated! Current lap \(lapNumber) with first place: \(first)")
-    }
-
-    func raceDidEnd(winner: Any) {
-        print("Tracker notified that the race ended! The winner is \(winner)")
-    }
-}
-
-class Broadcast: RaceDelegate {
-    func raceDidStart() {
-        print("Hey everyone! The race stated!")
-    }
-
-    func raceStatus(lapNumber: Int, first: Any) {
-        print("Woot woot! Another lap finished! \(first) is on the lead")
-    }
-
-    func raceDidEnd(winner: Any) {
-        print("Yayy the race ended! The winner is: \(winner)")
-    }
-}
-
-
-
-// Usage
-
-let participatens: [Horse] = [Horse(), Horse(), Horse()]
-let race = HorseRace(laps: 4, horses: participatens)
-
-// Tracker exists outside the race and multiple races can use it
-let tracker = Tracker()
-let broadcast = Broadcast()
-
-// both tracker
-race.delegate = tracker
-
-race.start()
-
-// and broadcast can be used as they conforms to RaceDelegate
-race.delegate = broadcast
-
-race.end()
+let race = Race()
+let scoreboard = Scoreboard()
+race.delegate = scoreboard
+race.end() // Winner: Horse 3
 ```
+
+`AnyObject` limits the protocol to classes, so the reference can be `weak` (see [[docs/swift/swift-structs-and-classes|Structs and Classes]]). In TypeScript you'd pass a callback or an event listener; you'll still meet delegates across Apple's frameworks, while SwiftUI mostly uses closures and bindings instead.
+
+## Common mistakes
+
+- **The extension dispatch trap.** A method that's only in a protocol extension (not listed in the protocol itself) is picked by the variable's declared type. If `Barista` writes its own `greeting()`, `Barista(...).greeting()` uses the barista's, but `(barista as any Greeter).greeting()` uses the extension's. Fix: list the method in the protocol.
+- Building a deep class hierarchy for shared behaviour. A protocol plus an extension is usually lighter.
+- A strong `delegate` property. It creates a reference cycle. Make it `weak`.
+
+## Try it
+
+1. Write a `Priceable` protocol with `var price: Double { get }`, conform a `Coffee` and a `Cake` struct, and total an `[any Priceable]`.
+2. Give `Priceable` a default `formattedPrice` with a protocol extension.
+3. Make a struct `Equatable` and `Hashable`, then put a few in a `Set`.
 
 ## Related
-- [[docs/swift/swift-object-oriented|Swift - Objects]]
+- [[docs/swift/swift-structs-and-classes|Swift - Structs and Classes]]
 - [[docs/swift/swift-enums|Swift - Enums]]
-- [[docs/swift/swift-memory-management|Swift - Memory Management]]
+- [[docs/swift/swift-swiftui|Swift - SwiftUI Basics]]
+- [[docs/typescript/typescript|TypeScript - Basics]]

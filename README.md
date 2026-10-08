@@ -2,7 +2,7 @@
 
 My development notebook, set up as an [Obsidian](https://obsidian.md) vault.
 
-- [docs/](docs/index.md): reference notes on web, JavaScript, Node, systems, languages, ML and tools
+- [docs/](docs/index.md): lessons on the tech I use, written to teach from
 - [wiki/](wiki/index.md): knowledge distilled from sources in `raw/`
 - [archive/](archive/index.md): tools I no longer use
 - [stack/](stack/index.md): everything I have used, with status: using, trying, watching, legacy or dropped
@@ -14,4 +14,4 @@ My development notebook, set up as an [Obsidian](https://obsidian.md) vault.
 2. **Add a source:** drop an article, transcript or paper into `raw/` (or paste a URL to Claude), then run `/ingest` in Claude Code. It writes the wiki pages, index and log.
 3. **Check health:** `/lint` reports broken links, orphans, stale pages and missing frontmatter.
 
-Conventions (layout, naming, frontmatter) are in [CLAUDE.md](CLAUDE.md). Pending work is in [TODO.md](TODO.md).
+Conventions (layout, naming, frontmatter) are in [CLAUDE.md](CLAUDE.md). How I write and work, for me and for AI tools, is in [VOICE.md](VOICE.md). Pending work is in [TODO.md](TODO.md).

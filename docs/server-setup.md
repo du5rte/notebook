@@ -1,167 +1,155 @@
 ---
-title: "Ubuntu"
+title: "DevOps - Server Setup"
 type: doc
 created: 2016-01-20
-updated: 2018-06-18
+updated: 2026-10-07
+aliases: ["Ubuntu", "Server Setup"]
 tags: [devops]
 ---
-# Ubuntu
+# DevOps - Server Setup
 
-Resources:
-- [Initial Server Setup with Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
-- [How To Add and Delete Users](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
-- [Creating user without passowrd](http://unix.stackexchange.com/questions/56765/creating-an-user-without-a-password)
-- [adduser](http://www.unix.com/man-page/Linux/8/adduser/)
-- [Installing Node 6.x on Ubuntu](https://github.com/nodesource/distributions)
-- [fixing npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
-- [7 Security Measures](https://www.digitalocean.com/community/tutorials/7-security-measures-to-protect-your-servers?utm_source=Customerio&utm_medium=Email_Internal&utm_campaign=Email_UbuntuDistroNginxWelcome)
-- [How To Set Up a Firewall with UFW on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server)
-- [How to Install MongoDB on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04)
-- [How To Install and Configure Postfix on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-on-ubuntu-16-04)
+A fresh server from a cloud provider is a blank Ubuntu machine with a public IP and a root login, and bots will start knocking on it within minutes. Before you deploy anything, spend ten minutes on the basics: a normal user, SSH keys only, a firewall and automatic security updates. You'll do it the same way every time, so this lesson is a checklist as much as an explanation.
 
+Before you start, ask yourself honestly: do I need a server? A managed platform or a container service handles all of this for you. A server is great for learning and for full control, but you're now the one who patches it.
 
-## Setup SSH
+## The plan
 
-Some servers like Digital Ocean already already set it up so it can be skipped
+1. Log in as root and update everything.
+2. Create your own user with `sudo`.
+3. Give that user your SSH key.
+4. Turn off root login and passwords.
+5. Turn on the firewall.
+6. Keep security updates automatic.
+
+## 1. Log in and update
+
+Most providers let you add your SSH public key when you create the server. Do it, then:
+
 ```sh
-local$ ssh-keygen -t rsa
-local$ ssh-copy-id root@<Server-IP>
+ssh root@203.0.113.10
+
+apt update && apt upgrade -y
+# if it says "System restart required":
+reboot
 ```
 
-Same as
-```
-local$ cat ~/.ssh/id_rsa.pub | pbcopy
-root$ ssh root@<Server-IP>
-root$ mkdir .ssh
-root$ nano .ssh/authorized_keys # paste and save
-root$ service ssh restart
-```
-Make sure your .ssh directory has 700 and your files are 700 permissions (rwx------).
+`apt update` refreshes the list of packages; `apt upgrade` installs the new versions. You need both.
 
+## 2. Create your own user
 
-SSH into root
+Working as root means one typo can wipe the machine. Make a normal user and borrow root powers only when needed with `sudo`.
+
 ```sh
-# e.g. <user>@<domain/IP> root@example.com root@12.32.122.23
-$ ssh root@example.com
+adduser ana                # asks for a password: you'll use it for sudo
+usermod -aG sudo ana       # add ana to the sudo group
 ```
 
-Copy the `.ssh` folder into `/etc/skel/` so each new created user will be given a copy of the `authorized_keys`
+`-aG` means **append** to a group. Without `-a`, you'd remove ana from all her other groups. More on users and groups in [[docs/linux/linux-users|Shell - Users]] and [[docs/linux/linux-permissions|Shell - Permissions]].
+
+## 3. Give your user your SSH key
+
+Copy root's authorised keys to the new user, with the right owner:
+
 ```sh
-$ cp -r .ssh /etc/skel/
+rsync --archive --chown=ana:ana ~/.ssh /home/ana
 ```
 
-Edit `sshd_config`
+Now, **in a second terminal**, check it works before going further:
+
 ```sh
-$ nano /etc/ssh/sshd_config
+ssh ana@203.0.113.10
+sudo whoami
+# root
 ```
 
-Disable `PasswordAuthentication` and `PermitRootLogin` for tighter security
+If you didn't add a key when creating the server, use `ssh-copy-id` from your laptop instead. See [[docs/ssh|DevOps - SSH]].
+
+## 4. Lock down SSH
+
+Edit the SSH server config:
+
+```sh
+sudo nano /etc/ssh/sshd_config
 ```
-PasswordAuthentication no
+
+```
 PermitRootLogin no
-```
-Restart `SSH`
-```sh
-$ service ssh restart
+PasswordAuthentication no
 ```
 
-## Sudo Powers
-Setup the admin group in `visudo` to not require password with sudo commando
+Gotcha: Ubuntu also reads files in `/etc/ssh/sshd_config.d/`, and the **first** value SSH finds wins. A cloud image may ship one there that turns passwords back on. Check what SSH will really use, then restart:
 
 ```sh
-$ sudo visudo
+sudo sshd -t                                   # test the config
+sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'
+# permitrootlogin no
+# passwordauthentication no
+sudo systemctl restart ssh
 ```
 
-Create a user or group to have `sudo` privileges without password
-```sh
-%admin  ALL=(ALL) NOPASSWD:ALL
-# or
-server ALL=(ALL) NOPASSWD:ALL
-```
+Keep your current session open and log in from a new terminal. Only close the old one once that works.
 
-## Add User
-Now users can be given a sudo access **with** or **without** password
+## 5. Turn on the firewall
 
-```sh
-$ adduser --disabled-password --gecos "" mike
-```
-
-Sudo access **WITH PASSWORD**
-```sh
-adduser mike sudo
-```
-
-Sudo access **WITHOUT PASSWORD**
-```sh
-adduser mike admin
-```
-
-## Server Setup
+`ufw` (Uncomplicated Firewall) ships with Ubuntu. Block everything coming in, allow everything going out, then open only what you need.
 
 ```sh
-# Create a server user www, server or pm2
-# Switch user to user
-$ su - server
-
-# Update then upgrade
-$ sudo apt-get -y update
-$ sudo apt-get -y upgrade
-
-# *** System restart required ***
-$ sudo reboot
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow OpenSSH          # ⚠️ before enabling, or you lock yourself out
+sudo ufw enable
+sudo ufw status
+# OpenSSH   ALLOW   Anywhere
 ```
+
+Once you install [[docs/nginx|Nginx]], open the web ports with its profile:
 
 ```sh
-# Install curl git
-$ sudo apt-get install -y build-essential curl git
-
-# Config git
-$ git config --global user.name "Name Surname"
-$ git config --global user.email "name@example.com"
-
-# Install Nginx
-$ sudo add-apt-repository -y ppa:nginx/stable
-$ sudo apt-get update
-$ sudo apt-get install -y nginx
-
-# Install Let's Encrypt
-$ sudo apt-get install -y letsencrypt
-
-# Install PostFix
-$ sudo apt-get install -y postfix # Choose `Internet Site`
-
-# Install Node v5.x
-$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-$ sudo apt-get install -y nodejs
-
-# Install PM2
-$ sudo npm install -g pm2
-# Set it to start on reboot within user server
-$ pm2 startup ubuntu -u server
-
-# Install MongoDB
-$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-$ sudo apt-get install -y --allow-unauthenticated mongodb-org
-# Follow instructions on How to Install MongoDB on Ubuntu
+sudo ufw allow 'Nginx Full'    # ports 80 and 443
 ```
 
-## Setup Firewall
+Your app on port `3000` stays closed to the outside: only Nginx talks to it.
+
+## 6. Automatic security updates
+
+Ubuntu Server comes with `unattended-upgrades`, which installs security updates on its own. Check it's on:
 
 ```sh
-$ sudo ufw default deny incoming
-$ sudo ufw default allow outgoing
-$ sudo ufw allow ssh
-$ sudo ufw allow 'Nginx Full'
-# $ sudo ufw allow mail
-
-# when all set
-$ sudo ufw enable
+sudo dpkg-reconfigure --priority=low unattended-upgrades
 ```
+
+## Then install what your app needs
+
+A typical web server from here:
+
+- **Nginx** in front: `sudo apt install nginx`.
+- **HTTPS** with Certbot: see [[docs/ssl|Networking - HTTPS and TLS]].
+- **Your runtime**: install Node from nodejs.org's recommended packages or a version manager, rather than an old version from the default package list. Or skip it and run the app in [[docs/docker|Docker]].
+- **Something to keep the app running** and restart it after a reboot: a systemd service, PM2, or Docker's restart policy.
+- **DNS**: point an `A` record at the server's IP. See [[docs/dns|Networking - DNS]].
+
+Pick a managed database over installing one on the same box, unless it's a toy. Backups and upgrades are their job then, not yours.
+
+## Common mistakes
+
+- **Enabling `ufw` before allowing SSH.** Instant lockout. Most providers have a web console to rescue you.
+- **Closing your only session** while changing SSH settings.
+- **Passwordless sudo for everything** (`NOPASSWD` in `visudo`). Convenient, but anyone who gets your user gets root.
+- **Never updating.** Unpatched servers are how most break-ins happen.
+- **Opening database ports to the world.** Keep them on `localhost` and use an SSH tunnel to reach them.
+
+## Try it
+
+1. Create a small server and work through the six steps. Then try `ssh root@your-ip` and confirm it's refused.
+2. Run `sudo ufw status numbered` and explain each rule.
+3. Write the steps as a shell script you could run on the next server. Which steps can't be automated safely?
 
 ## Related
-- [[docs/ssl|SSL]]
-- [[docs/nginx|Nginx]]
+
+- [[docs/ssh|DevOps - SSH]]
+- [[docs/nginx|DevOps - Nginx]]
+- [[docs/docker|DevOps - Docker]]
+- [[docs/ssl|Networking - HTTPS and TLS]]
 - [[docs/dns|Networking - DNS]]
-- [[docs/ssh|SSH]]
+- [[docs/linux/linux-users|Shell - Users]]
 - [[docs/aws|AWS]]
-- [[docs/docker|Docker Basics]]

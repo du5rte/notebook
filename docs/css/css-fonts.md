@@ -2,304 +2,168 @@
 title: "CSS - Fonts"
 type: doc
 created: 2020-04-11
-updated: 2020-04-11
+updated: 2026-10-07
 tags: [css]
-status: outdated
 ---
 # CSS - Fonts
 
-## Font
+Most of a website is text, so typography does most of the design work. This lesson covers choosing a font, loading web fonts, sizing and spacing text, and the handful of text properties you'll use every week. Think of it like setting a menu at a coffee shop: one or two typefaces, readable sizes, plenty of room between lines.
 
-The convinent shorthand property for setting all of the properties we just learned in one declaration
+## font-family and font stacks
 
-- The `font-size` and the `font-family` have to be specified
-- Style Varient and Weight have to be put before the Size
-- Any value omitted will be set to it's initial value, not inherit value
-- font family has to be the last value defined
+`font-family` takes a list. The browser uses the first font it has, so end with a generic family as a safety net.
 
 ```css
-	h1 {
-		font: italic small-caps bold 1.5em Georgia, "Times New Roman", Times, serif:
-	}
+body {
+  font-family: "Inter", system-ui, sans-serif;
+}
+code {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+}
 ```
 
-### Font Family
+Quote names with spaces in them. The generic families:
 
-Specifies a typeface for the text in an element. Ideally it's good to set up a Font Stack so if one is not available css will use the next on on the list. If a font is made of more than one words it needs to be quoted `""`, `''`. [www.w3.org/Style/Examples/007/fonts.en.html](https://www.w3.org/Style/Examples/007/fonts.en.html).
+- `serif`: little finishing strokes (Georgia, Times).
+- `sans-serif`: plain stroke endings (Helvetica, Arial).
+- `monospace`: every character the same width. For code.
+- `system-ui`: the operating system's own font. Fast, because nothing loads.
 
-```css
-	p {
-		font-family: Georgia, "Times New Roman", Times, serif:
-	}
-```
+## Web fonts with @font-face
 
-### Serif fonts
-
-have finishing strokes, e.g. `Times`, `Georgia`, `serif`.
-
-### San-serif Fonts -
-
-fonts have plain stroke endings, e.g. `Helvetica`, `Verdana`, `Arial`, `san-serif`.
-
-### Monospace Fonts
-
-all letters and characters have the same fixed width and each occupy the same amount of horizontal space. E.g. `courier`, `"lucida console"`, `monospace`.
-
-### Font Weight
-
-Specifies the weight style in the font, it sets how thick or thin the characters are displayed. Values: `100`, `800` or `lighter`, `normal` (`400`) and bold(`700`).
-
-```css
-font-weight: 600;
-```
-
-### Font Size
-
-Specifies the size of a font by using keywords or units. Values: `small`, `medium` or `larger`, `16px` `1em`, `50%`.
-
-```css
-font-size: 2.5em;
-```
-
-### Font Style
-
-Specifies the fonts style for the text. Values `normal`, `italic`, `oblique`.
-
-```css
-font-style: italic;
-```
-
-### Font Style
-
-Specifies whether text should be displayed in small caps font.
-
-```css
-font-style: small-caps;
-```
-
-### Web Fonts
-
-We can import fonts by adding a meta link on the html head
-
-```html
-<link
-  href="http://fonts.googleapis.com/css?family=Open+Sans:400,700"
-  rel="stylesheet"
-  type="text/css"
-/>
-```
-
-Or we can import it through our css using `@import`
-
-```css
-@import url(http://fonts.googleapis.com/css?family=Open + Sans:400, 700);
-```
-
-We can import the webkit files using `@font-face`. When using `@font-face` we can name it anything we want.
-
-- `.eot`: ie format
-- `.eot`: ie6-8 format
-- `.woff`: Best most supported formate
-- `.ttf`: for safary, android and iOS displays
-- `svg`: legagy versions of iOS
+You can ship your own font files. Today you only need **WOFF2**: every current browser supports it, and it's the smallest.
 
 ```css
 @font-face {
-  font-family: "OpenSans";
-  src: url("fonts/OpenSans-Regular-webfont.eot");
-  src: url("fonts/OpenSans-Regular-webfont.eot?iefix") format("eot"), url("fonts/OpenSans-Regular-webfont.woff")
-      format("woff"),
-    url("fonts/OpenSans-Regular-webfont.ttf") format("truetype"), url("fonts/OpenSans-Regular-webfont.svg#webfont")
-      format("svg");
-  font-weight: bold;
-  font-style: normal;
+  font-family: "Inter";
+  src: url("/fonts/inter.woff2") format("woff2");
+  font-weight: 100 900;   /* a variable font: every weight in one file */
+  font-display: swap;     /* show a fallback font until this one loads */
 }
 ```
 
-## Text
+`font-display: swap` stops the "invisible text" flash while the font downloads. Old tutorials list `.eot`, `.ttf` and `.svg` formats too: those were for browsers that no longer exist.
 
-### Line Height
+Services like Google Fonts give you a `<link>` tag to paste instead. Self-hosting is often faster and avoids a request to another server.
 
-Specifies the vertical spacing between lines of text. A line `height = font-size + leading`. Values normal, `1.5`, `1.5em`, `150%`.
+## font-size
+
+Use `rem` so text respects the user's browser setting. See [[docs/css/css-values|CSS - Values and Units]].
 
 ```css
-line-height: 1.5;
+html { font-size: 100%; }  /* 16px by default */
+body { font-size: 1rem; }
+h1   { font-size: clamp(2rem, 5vw, 3.5rem); } /* fluid heading */
 ```
 
-### Text Align
-
-Specifies the horizontal alignment of text. Values `left`, `right`, `center`, `justify`.
+## font-weight and font-style
 
 ```css
-text-align: center;
+strong { font-weight: 700; }  /* bold. 400 is normal */
+.light { font-weight: 300; }
+em     { font-style: italic; }
+.label { font-variant: small-caps; }
 ```
 
-### Text Decoration
+A weight only looks right if the font has it. With a variable font any number between its range works; with static files the browser fakes missing weights, badly.
 
-Specifies the line decoration of text. Values `none`, `underline`, `overline`, `line-through`.
+## line-height
+
+The space between lines. Use a number with no unit: it scales with the font size of each element.
 
 ```css
-text-decoration: none;
+body { line-height: 1.5; }  /* comfortable for paragraphs */
+h1   { line-height: 1.1; }  /* headings need less */
 ```
 
-### Text Indent
-
-Specifies the first line of text indent. Values `24px`, `-24px`, `1.5em`, `150%`.
-
 ```css
-text-indent: 24px;
+/* ❌ with a unit, children inherit the computed px value */
+body { font-size: 1rem; line-height: 24px; }
+h1   { font-size: 3rem; } /* 48px text on 24px lines: overlapping */
+
+/* ✅ unitless, recalculated for every element */
+body { line-height: 1.5; }
 ```
 
-### Text Transform
+## The font shorthand
 
-Specifies the case of text. Values `lowercase` and `capitalize`.
+Sets several properties at once. Size and family are required, family comes last, and anything left out is reset.
 
 ```css
-text-transform: uppercase;
+h1 { font: italic 700 2rem/1.1 Georgia, serif; }
+/*         style weight size/line-height family */
 ```
 
-### White Space
+Handy, but easy to get wrong. Separate properties are clearer while learning.
 
-Specifies how the white-space in an (html) element is displayed.
-
-Values:
-
-- `normal`: Ignore multiple spaces and linebreaks
-- `nowrap`: Forces text into one line
-- `pre`: Honors all spaces, indentation and breaklines
-- `pre-line`: Honor line breaks but not multiple spaces
-- `pre-wrap`: Honors double spaces and line breaks
+## Text properties you'll use
 
 ```css
-white-space: nowrap;
+p      { text-align: left; }            /* left, right, center, justify */
+a      { text-decoration: none; }       /* remove the underline */
+.label { text-transform: uppercase; letter-spacing: 0.05em; }
+h1     { text-wrap: balance; }          /* even line lengths in headings */
+p      { max-width: 65ch; }             /* about 65 characters per line: easy to read */
+.url   { overflow-wrap: anywhere; }     /* break long links instead of overflowing */
 ```
 
-### Text Shadow
-
-Specifies the shadow used to create drop shadows for text. Format `text-shadow: h-offset, v-offset, blur(optional), color;`
+`text-shadow` takes `x y blur colour`:
 
 ```css
-text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+.hero h1 { text-shadow: 0 2px 4px rgb(0 0 0 / 0.4); }
 ```
 
-Can take multiple entries seperated by comma
+## Truncating with an ellipsis
+
+`text-overflow` only works with its two friends:
 
 ```css
-h1 {
-  text-shadow: 0 -1px #767676, 0 -2px #262626, 0 0 8px rgb(62, 106, 168);
+.title {
+  white-space: nowrap;      /* keep it on one line */
+  overflow: hidden;         /* clip what doesn't fit */
+  text-overflow: ellipsis;  /* show … at the cut */
 }
 ```
 
-### Text Overflow
+## white-space
 
-Specifies what should happen when text overflow its containing element. Values: `clip`, `hidden`, `ellipsis`.
+How spaces and line breaks in the HTML are treated.
 
-```css
-text-overflow: ellipsis;
-```
-
-### Word Wrap
-
-Gives us a simple way of wrapping text within a single world. Good use for long links. Values `normal`, `break-word`.
-
-```css
-word-wrap: break-word;
-```
+- `normal`: collapse spaces, wrap lines. The default.
+- `nowrap`: collapse spaces, never wrap.
+- `pre`: keep every space and line break, like `<pre>`.
+- `pre-wrap`: keep them, but still wrap long lines.
 
 ## Lists
 
-### List Style
-
-Shorthand property that defines all the list properties in one declaration. Format can take any of the 3 properties in any order.
-
 ```css
-list-style: circle inside;
-```
-
-### List Style Type
-
-Specifies the style of `ul` or `ol` lists. Values: `disc`, `circle`, `square`, `lower-roman`, `decimal-leading-zero`, etc. See more on: [developer.mozilla.org/en-US/docs/CSS/list-style](https://developer.mozilla.org/en-US/docs/CSS/list-style)
-
-```css
-list-style-type: square;
-```
-
-### List Style Position
-
-Specifies if the list market is inside or outsite the list item. Values: `outsite`, `inside`.
-
-```css
-list-style-position: inside;
-```
-
-**Browsers by defaults add margin on the left older**, iE uses padding. It's good pratice to use both when wanting to remove list indentation.
-
-```css
-li {
-  margin-left: 0;
-  padding-left: 0;
+.menu {
+  list-style: none;  /* remove bullets */
+  margin: 0;
+  padding: 0;        /* browsers indent lists with padding */
 }
+li::marker { color: tomato; } /* style the bullet itself */
+ol { list-style-type: lower-roman; }
 ```
 
-### List Style Image
+## Icons: fonts vs SVG
 
-Allows to use a image as a market in place of a bullet.
+Icon fonts (Font Awesome, IcoMoon) put icons inside a font and show them with `content` in a pseudo-element. You'll still see them in older projects. Inline SVG icons are the better choice today: sharp at any size, colourable with `currentColor`, and readable by screen readers when you add a title.
 
-```css
-list-style-image: url("img/marker.png");
-```
+## Common mistakes
 
-**If icons are a little make sure to use a `no-repeat`**
+- No generic family at the end of the stack.
+- `line-height` in `px`, causing overlapping lines on large headings.
+- Loading six weights of a font and using two.
+- `text-overflow: ellipsis` without `overflow: hidden` and `white-space: nowrap`.
 
-```css
-ul {
-  list-style-type: none;
-  background: url("img/market.png") no-repeat 0 2px;
-}
-```
+## Try it
 
-## Unicode
-
-Using `content` css can be used to display unicode
-
-```css
-p:after {
-  content: "\00A0"; /* Non-breaking Space */
-}
-```
-
-font-awesome icon
-
-```css
-p:after {
-  family-font: FontAwesome;
-  content: "\f00d";
-}
-```
-
-## Icon Fonts
-
-A fast way to have icons in our website, They load up to x14 faster than images and are 90% smaller than `svgs`.
-
-```css
-@font-face {
-  font-family: "icomoon";
-  src: url("fonts/icomoon.eot");
-  src: url("fonts/icomoon.eot?iefix") format("eot"), url("fonts/icomoon.woff")
-      format("woff"), url("fonts/icomoon.ttf") format("truetype"), url("fonts/icomoon.svg#webfont")
-      format("svg");
-}
-```
-
-We can then include icons using pseudo classes
-
-```css
-.title::before {
-  content: "\e000";
-  font-family: "icomoon";
-}
-```
+1. Self-host a WOFF2 font with `@font-face` and `font-display: swap`, with `system-ui` as the fallback.
+2. Set body text to `1rem` with a `1.5` line height and a `65ch` max width. Compare readability before and after.
+3. Truncate a long product name to one line with an ellipsis.
 
 ## Related
 - [[docs/css/css-values|CSS - Values and Units]]
-- [[docs/css/css-box-model|CSS - Box model]]
+- [[docs/css/css-box-model|CSS - Box Model]]
+- [[docs/css/css-selectors|CSS - Selectors]]

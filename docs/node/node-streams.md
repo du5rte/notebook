@@ -1,296 +1,207 @@
 ---
-title: "Node.js - Streams"
+title: "Node - Streams"
+aliases: ["Node.js - Streams"]
 type: doc
 created: 2018-06-18
-updated: 2018-06-18
+updated: 2026-10-07
 tags: [node]
 ---
-# Node.js - Streams
+# Node - Streams
 
+A stream moves data piece by piece instead of all at once. Think of drinking through a straw versus waiting for someone to pour the whole jug into your mouth. With streams you start working on the first chunk as soon as it arrives, and a 4 GB video never has to sit in memory. You've already used them: an HTTP request, an HTTP response, `process.stdin` and `process.stdout` are all streams.
 
-## Streams
-Node uses streams to handles and transfers data chunk by chunk, so we can start our processing Immediately as the data arrived and keep it from being held in memory all at once
-Streams Are like channels where data can follow through, they can readable, writeable or both.
+## Four kinds of stream
 
-e.g. request is a readable stream, and response a writable stream
+| Kind | Data flows | Examples |
+|---|---|---|
+| Readable | out of it | `fs.createReadStream`, an incoming `req`, `process.stdin` |
+| Writable | into it | `fs.createWriteStream`, the outgoing `res`, `process.stdout` |
+| Duplex | both ways | a network socket |
+| Transform | in, changed, out | gzip, encryption, "uppercase everything" |
 
+Under the hood they're all [[docs/node/node-events|EventEmitters]]: a readable fires `'data'` for each chunk and `'end'` when it's finished.
 
-```js
-http.createServer(function(request, response) {
-	response.writeHead(200);
-	response.write("<p>Stream is Running.</p>");
+## Reading chunk by chunk
 
-	setTimeout(function() { // As we have close response the stream is still open
-		response.write("<p>Stream is done.</p>");
-		response.end();
-	}, 5000);
-
-}).listen(8080);
-```
-
-
-## How to read from the Request?
-The Request object is inherit form the event emitter, which means we can make other object fire through the request event
+The easiest way to read a stream is `for await`. Each chunk is a `Buffer` (raw bytes) unless you set an encoding.
 
 ```js
-EventEmitter (Readable Stream) >> emit >> readable / end
-```
+import { createReadStream } from 'node:fs'
 
-## readable
-Fired when data is ready to be consumed
+const file = createReadStream('menu.txt', { encoding: 'utf8' })
 
-```js
-request.on('end', function() { })
-```
-
-## end
-Fired when the client is done sending it
-
-```js
-request.on('readable', function() { })
-```
-
-## Printing the Request
-When all we need to do is writing from a writable string soon as you read from a readable string, like we are doing here:
-
-```js
-http.createServer(function(request, response) {
-  response.writeHead(200)
-
-  request.on('readable', function() {
-    let chunk = null
-
-    while (null !== (chunk = request.read())) {
-    	// We have to convert to string as the chunks will be buffers (binary data).
-			// console.log(chunk.toString())
-
-      // Echos back what the the client request,
-			// .write handles converting to a string
-      response.write(chunk)
-    }
-  })
-
-  request.on('end', function() {
-    response.end()
-  })
-})
-.listen(8080)
-```
-```sh
-$ curl -d 'hello' http://localhost:8080
-hello
-```
-
-## pipe
-Node offers a method to pipe `.on('readable', () => {})` and `.on('end', () => {})` handling the event listening and chunk reading behind the scenes.
-
-Same as previous code example.
-```js
-http.createServer((request, response) => {
-	response.writeHead(200)
-	request.pipe(response)
-}).listen(8080)
-```
-
-## Reading and Writing a file
-Here's we're basically making a copy of a file
-
-```js
-const fs = require('fs')
-
-const file = fs.createReadStream("readme.md")
-const newfile = fs.createWriteStream("readme_copy.md")
-
-file.pipe(newFile)
-```
-
-gulpjs is a good example of a system built on top of streams
-
-
-## Uploading a file
-Steams chuckes of the file into NodeJS which Reads and writes it on the storage as it comes in, not at one point the entire file is being hold on memory all at once and also non-blocking
-
-
-```js
-http.createServer(function(request, response) {
-  const newFile = fs.createWriteStream('readme_copy.md')
-  request.pipe(newFile)
-
-  request.on('end', function() {
-    response.end('uploaded!')
-  })
-})
-.listen(8080)
-```
-
-```sh
-$ curl --upload-file readme.md http://localhost:8080
-$ ls
-
-index.js
-readme.md
-readme_copy.md
-```
-
-
-## File Uploading Progress
-One of the reasons NodeJS was to read file uploads
-
-```js
-const http = require('http')
-const fs = require('fs')
-
-http.createServer(function(request, response) {
-  const newFile = fs.createWriteStream('readme_copy.md')
-
-  // first we need to know the file size
-  const fileBytes = request.headers['content-length']
-
-  // and track how much bytes have been uploaded
-  var uploadedBytes = 0
-
-  // then listening to the readable request will loop through and read each chunk uploaded from the request
-  request.on('readable', function() {
-    var chunk = null
-    while (null !== (chunk = request.read())) {
-      // we increment 'uploadedBytes' with each 'chunk'
-      uploadedBytes += chunk.length
-      // we calculate progress
-      var progress = uploadedBytes / fileBytes * 100
-      // we use parseInt to round up the integer
-      response.write('progress: ' + parseInt(progress, 10) + '%\n')
-    }
-  })
-
-  // Pipe is still taking care of the 'on readable'
-	// the only reason we use readable is to track the progress
-  request.pipe(newFile)
-})
-.listen(8080)
-```
-
-```sh
-$ curl --upload-file file.jpg http://localhost:8080
-
-progress: 3%
-progress: 12%
-progress: 24%
-...
-```
-
-## Composing Streams
-Node.js has a handy interface for shuffling data around called streams. With streams:
-- we can compose streaming abstractions
-- we can operate on data chunk by chunk
-
-Lets us pick apart chunk by chunk instead of dealing with the whole object at once (e.g. large video files)
-
-we can pipe abstraction together with stream using `.pipe()`
-```js
-fs.createReadStream('mobydick.txt.gz')
-  .pipe(zlib.createGunzip())
-  .pipe(reaplce(/\s+/g, '\n'))
-  .pipe(filter(/whale/i))
-  pipe(linecount(console.log))
-```
-
-## Chunk by Chunk
-With streams, we can operate on data chunk by chunk, without buffering everything into memory.
-
-This means we can write programs that operate on very large files or lazily evaluate network data as it arrives
-
-It also means we can have hundreds or thousands of concurrent streams without using much memory.
-
-```js
-const fs = require('fs')
-
-fs.createReadStream('greetz.txt')
-  .pipe(process.stdout)
-```
-
-```js
-const fs = require('fs')
-
-fs.createReadStream(process.argv[2])
-  .pipe(process.stdout)
-```
-streams the content of the file to the console
-```sh
-$ node print.js print.js
-```
-
-## Stream Transform
-
-You can chain `.pipe()` calls together just like the `|` operator in bash:
-
-```js
-const fs = require('fs')
-
-// first part is read the stream
-fs.createReadStream(process.argv[2])
-  // anything in between
-  .pipe(toUpper())
-  // final destination
-  .pipe(process.stdout)
-```
-
-```js
-// const through = require('through2')
-// 
-// function toUpper() {
-//   return through((buf, enc, next) => {
-//     next(null, buf.toString().toUpperCase())
-//   })
-// }
-
-const { Transform } = require('stream')
-
-function toUpper() {
-  return new Transform({
-    transform(chunk, encoding, callback) {
-      callback(null, chunk.toString().toUpperCase());
-    }
-  });
+for await (const chunk of file) {
+  console.log('got', chunk.length, 'characters')
 }
+// got 65536 characters
+// got 65536 characters
+// got 1024 characters
 ```
 
-Because streams handle data in a standard way it can handle various inputs the same way, doesn't have to be a file read
+## A response is a stream too
 
-Here we use `process.stdin` to repat back in uppercase what we write to the console.
+A writable stays open until you call `.end()`. That means a server can send part of a page now and the rest later.
 
 ```js
-const fs = require('fs')
-const { Transform } = require('stream')
+import http from 'node:http'
 
-process.stdin
-  .pipe(toUpper())
-  .pipe(process.stdout)
+http.createServer((req, res) => {
+  res.write('Order received...\n')
+  setTimeout(() => res.end('Your coffee is ready ☕\n'), 3000)
+}).listen(3000)
+```
 
-function toUpper() {
-  return new Transform({
+```sh
+curl localhost:3000
+# Order received...
+# (three seconds later)
+# Your coffee is ready ☕
+```
+
+## pipeline: connecting streams
+
+Connecting a readable to a writable is the most common thing you'll do. Use `pipeline` from `node:stream/promises`. It moves the data, handles back-pressure (pausing a fast reader when the writer can't keep up), cleans up, and rejects if any step fails.
+
+Copying a file:
+
+```js
+import { createReadStream, createWriteStream } from 'node:fs'
+import { pipeline } from 'node:stream/promises'
+
+await pipeline(
+  createReadStream('readme.md'),
+  createWriteStream('readme-copy.md'),
+)
+```
+
+It works like `|` in the shell (see [[docs/linux/linux-pipe|Shell - Pipes and Redirection]]): add as many steps in the middle as you like.
+
+```js
+import { createGzip } from 'node:zlib'
+
+await pipeline(
+  createReadStream('orders.csv'),
+  createGzip(),
+  createWriteStream('orders.csv.gz'),
+)
+```
+
+## pipe vs pipeline
+
+You'll see `.pipe()` in older code and tutorials.
+
+```js
+// ❌ an error in any step is not passed on, and streams can leak
+createReadStream('a.txt').pipe(createWriteStream('b.txt'))
+
+// ✅ errors reject the promise, and everything is closed
+await pipeline(createReadStream('a.txt'), createWriteStream('b.txt'))
+```
+
+`.pipe()` is fine for a quick experiment. In real code, use `pipeline`.
+
+## Writing a transform
+
+A transform takes chunks in and pushes changed chunks out. Here's one that shouts:
+
+```js
+import { Transform } from 'node:stream'
+import { pipeline } from 'node:stream/promises'
+
+const toUpper = () =>
+  new Transform({
     transform(chunk, encoding, callback) {
       callback(null, chunk.toString().toUpperCase())
-    }
+    },
   })
-}
+
+await pipeline(process.stdin, toUpper(), process.stdout)
 ```
 
-## Concat-Stream
-Buffers up all the data in the stream.
-```
-npm install concat-stream
+```sh
+echo 'one flat white please' | node shout.js
+# ONE FLAT WHITE PLEASE
 ```
 
-You can only write to a `concat-stream`, You can't read from a `concat-stream`. Keep in mind that all the data will be in memory.
+Because streams share one interface, the same transform works on a file, a network request or the keyboard.
 
-Now if we write to the console then hit `CTRL` + `D` it will log the data length.
+## Uploading a file
+
+`req` is a readable, so a server can stream an upload straight to disk. The whole file is never in memory at once.
+
 ```js
-const concat = require('concat-stream')
+import http from 'node:http'
+import { createWriteStream } from 'node:fs'
+import { pipeline } from 'node:stream/promises'
 
-process.stdin
-  .pipe(concat((body) => {
-    console.log(body.length)
-  }))
+http.createServer(async (req, res) => {
+  try {
+    await pipeline(req, createWriteStream('upload.bin'))
+    res.end('uploaded!\n')
+  } catch {
+    res.statusCode = 500
+    res.end('upload failed\n')
+  }
+}).listen(3000)
 ```
+
+```sh
+curl --upload-file photo.jpg localhost:3000   # uploaded!
+```
+
+## Tracking progress
+
+To report progress, count bytes as they pass through. The `Content-Length` header tells us the total.
+
+```js
+http.createServer(async (req, res) => {
+  const total = Number(req.headers['content-length'])
+  let received = 0
+
+  req.on('data', (chunk) => {
+    received += chunk.length
+    res.write(`progress: ${Math.floor((received / total) * 100)}%\n`)
+  })
+
+  await pipeline(req, createWriteStream('upload.bin'))
+  res.end('done\n')
+}).listen(3000)
+```
+
+```sh
+curl --upload-file photo.jpg localhost:3000
+# progress: 3%
+# progress: 12%
+# ...
+# done
+```
+
+## Collecting a whole stream
+
+Sometimes you do want everything, for example a small JSON body. `node:stream/consumers` reads a stream to the end for you. Only do this when you know the data is small.
+
+```js
+import { json, text } from 'node:stream/consumers'
+
+const order = await json(req)          // parse a request body
+const input = await text(process.stdin) // everything typed until Ctrl + D
+```
+
+## Common mistakes
+
+- **Reading a big file with `readFile`.** It loads the whole thing into memory. For large files, stream it.
+- **Using `.pipe()` and no error handling.** A failed read leaves the writer open. Use `pipeline`.
+- **Forgetting chunks are Buffers.** Call `.toString()` or set `encoding: 'utf8'` when you want text.
+- **Assuming one chunk is one line.** Chunks are cut by size, not meaning. Use `node:readline` to read line by line.
+
+## Try it
+
+1. Write `cat.js` that streams the file named in `process.argv[2]` to `process.stdout`.
+2. Gzip a file with `pipeline` and `createGzip`, then check the new file is smaller.
+3. Write a transform that replaces every `coffee` with `☕` and run text through it from `stdin`.
 
 ## Related
+- [[docs/node/node-events|Node - Events]]
+- [[docs/node/node-http|Node - HTTP]]
+- [[docs/node/node-process|Node - Process]]
+- [[docs/linux/linux-pipe|Shell - Pipes and Redirection]]

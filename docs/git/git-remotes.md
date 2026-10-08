@@ -1,94 +1,135 @@
 ---
-title: "Git - Remote"
+title: "Git - Remotes"
 type: doc
 created: 2015-08-27
-updated: 2017-08-12
+updated: 2026-10-07
+aliases: ["Git - Remote"]
 tags: [git]
 ---
-# Git - Remote
+# Git - Remotes
 
-## Working With Remote Repositories
-Much like merging history between branches in a single repository we can merge history between different copies of the same repository
+A remote is another copy of the same repository, usually hosted on a site like GitHub. Just as we merge history between branches, we can send and receive history between copies: we **push** our commits up and **pull** other people's commits down. That is how a team shares one project while everyone keeps a full copy locally.
 
-In git this is done by pushing or pulling changes from a remote repository to our local copy
+## Cloning a repository
 
-### Cloning Repositories
-When working with other developers they will need access to their own workstation, for that create a copy of the repository on their own computer
+`git clone` downloads a repository, with its whole history, into a new folder.
 
-### git clone
-Create a new repository that is a clone of a remote repository
-
-```bash
-git clone ~/my_really_cool_project
-# optionally we can name our copy
-git clone ~/my_really_cool_project our_cloned_project
-# Can also use external files
-git clone git://mygithosting.com/git_basics/cool_stuff.git
+```sh
+git clone https://github.com/username/coffee-shop.git
+git clone https://github.com/username/coffee-shop.git my-shop   # pick the folder name
 ```
 
-### git remote
-List all remote repositories associated with the current repository
+You can clone over HTTPS (works everywhere, asks for a token) or SSH (uses your SSH key, no prompts once set up):
 
-```bash
-git remote
+```sh
+git clone git@github.com:username/coffee-shop.git
 ```
 
-By default cloned projects are linked to the original but the original is not linked to every clone
+A clone also works from another folder on your own machine (`git clone ~/coffee-shop`), which is handy for practising.
 
-```
-~our_cloned_project $ git remote
-origin
-~my_really_cool_project $ git remote
-(none)
-```
+## origin and git remote
 
-### git remote add
-Add a new remote repository to the current repository
+A clone remembers where it came from, under the name `origin`. The original doesn't know about its clones.
 
-```bash
-git remote add our_clone ~/our_clone_project/
-```
-
-```
-~my_really_cool_project $ git remote
-our_clone
-```
-
-Can also use external files
-
-```bash
-git remote add tommy http://tommysgitstuff.com/git_basics/cool_stuff.git
-```
-
-### git push
-Push your latest changes to a remote repository
-
-```bash
-git push origin new_feature
-# we can push back the changes on master to our_clone
-git push our_clone
-```
-
-### git pull
-Pull the latest changes from a remote repository to your repository
-
-```bash
-git pull origin master
-git pull origin new_feature
-```
-
-### GitHub
-At the top of your GitHub repository's Quick Setup page, click  to copy the remote repository URL.
-
-```bash
-# Sets the new remote
-git remote add origin https://github.com/username/repo.git
-# Verifies the new remote URL
+```sh
 git remote -v
-# Pushes the changes in your local repository up to the remote repository you specified as the origin
-git push -u origin master
+# origin  https://github.com/username/coffee-shop.git (fetch)
+# origin  https://github.com/username/coffee-shop.git (push)
 ```
+
+`origin` is just a name, a nickname for a URL. You can add others:
+
+```sh
+git remote add upstream https://github.com/someone/coffee-shop.git
+git remote rename upstream original
+git remote remove original
+```
+
+A common setup when contributing to someone else's project: `origin` is your fork, `upstream` is the original.
+
+## Remote-tracking branches
+
+Your clone keeps a read-only record of where the remote's branches were the last time you talked to it. They are named `origin/main`, `origin/add-pastries` and so on.
+
+```text
+local main:   Add menu - Add prices - You: fix typo
+origin/main:  Add menu - Add prices - Teammate: add teas
+```
+
+Here a teammate pushed "add teas" and you committed "fix typo" locally. Your `main` and `origin/main` have grown apart, and you'll need to combine them before you can push.
+
+## fetch vs pull
+
+| Command | What it does |
+| --- | --- |
+| `git fetch` | Downloads new commits and updates `origin/main`. Doesn't touch your branches or files. |
+| `git pull` | `git fetch`, then merges (or rebases) `origin/main` into your current branch. |
+
+`fetch` is the safe look-before-you-leap version. Fetch, look at what came in, then merge:
+
+```sh
+git fetch
+git log --oneline main..origin/main   # commits on the remote you don't have yet
+git merge origin/main
+```
+
+Most of the time `git pull` is fine. See [[docs/git/git-flow|Git - Flow]] for pulling with rebase instead of merge.
+
+## git push
+
+`git push` sends your commits on the current branch to the remote.
+
+```sh
+git push -u origin add-pastries   # first push of a new branch
+git push                          # after that, just this
+```
+
+`-u` (short for `--set-upstream`) links your local branch to the remote one, so later `git push`, `git pull` and `git status` know where to compare.
+
+If the remote has commits you don't have, the push is rejected:
+
+```text
+! [rejected]  main -> main (fetch first)
+```
+
+That's Git protecting your teammate's work. Pull first, resolve any conflicts, then push again.
+
+## Pushing tags
+
+Tags are not pushed with your commits. Send them on purpose:
+
+```sh
+git push origin v1.4.0     # one tag
+git push --tags            # every local tag
+```
+
+Tags are covered in [[docs/git/git-history|Git - History]].
+
+## Putting a new project on GitHub
+
+Create an empty repository on GitHub (no README, so the histories don't clash), copy its URL, then from your local project:
+
+```sh
+git remote add origin https://github.com/username/coffee-shop.git
+git remote -v                # check it
+git push -u origin main
+```
+
+## Common mistakes
+
+- **Thinking `origin/main` is live.** It's a snapshot from your last fetch. Run `git fetch` to update it.
+- **Force-pushing a shared branch.** `git push --force` overwrites the remote's history and can delete teammates' commits. If you must, use `git push --force-with-lease`, which refuses when the remote has changed, and only on your own branches.
+- **Creating the GitHub repo with a README, then pushing an existing project.** The two histories are unrelated and the push is rejected. Start the remote repo empty.
+
+## Try it
+
+1. Clone a repo you own into two different folders, as if you were two people.
+2. Commit and push a change from the first folder. In the second, run `git fetch` and `git log --oneline main..origin/main`, then pull.
+3. Make both folders change the same line, push from one, and pull in the other. Resolve the conflict and push.
 
 ## Related
-- [[docs/git/git-tag|Git - Tag]]
+- [[docs/git/git|Git - Basics]]
+- [[docs/git/git-branching|Git - Branching]]
+- [[docs/git/git-history|Git - History]]
 - [[docs/git/git-flow|Git - Flow]]
+- [[docs/ssh|SSH]]

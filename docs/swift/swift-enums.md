@@ -2,376 +2,179 @@
 title: "Swift - Enums"
 type: doc
 created: 2016-11-04
-updated: 2016-12-10
+updated: 2026-10-07
 tags: [swift]
 ---
 # Swift - Enums
 
+An enum lists every possible value of something: the days of the week, the sizes on a coffee menu, the states a screen can be in. Swift enums go much further than TypeScript's: cases can **carry data**, and enums can have **methods and computed properties**. Paired with `switch`, the compiler checks you've handled every case, which makes enums the best tool for modelling "it's one of these".
 
-## Enumerates
+## Declaring an enum
 
+Name the type in `UpperCamelCase` and each case in `lowerCamelCase`.
 
 ```swift
-enum Direction {
-  case Left, Right, Up, Down
+enum Size {
+    case small, medium, large
 }
+
+var order = Size.medium
+order = .large // the type is known, so `Size.` can be dropped
 ```
+
+In TypeScript this is a string union, `type Size = 'small' | 'medium' | 'large'`.
+
+## switch must cover every case
+
+Switch over an enum and the compiler knows all the cases, so no `default` is needed. Add a case later and every `switch` that forgot it becomes an error. That's the point.
 
 ```swift
 enum Day {
-  case Monday
-  case Tuesday
-  case Wednesday
-  case Thursday
-  case Friday
-  case Saturday
-  case Sunday
+    case monday, tuesday, wednesday, thursday, friday, saturday, sunday
 }
 
-enum DayType {
-  case Weekday
-  case Weekend
+func isWeekend(_ day: Day) -> Bool {
+    switch day {
+    case .saturday, .sunday: true
+    case .monday, .tuesday, .wednesday, .thursday, .friday: false
+    }
 }
 
-func weekdayOrWeekend(day: Day) -> DayType {
-  switch day {
-    case Day.Saturday, Day.Sunday: return DayType.Weekend
+isWeekend(.sunday) // true
+```
 
-    // because Day is mentioned in `switch` it can be omitted
-    // it also knows DayType is returned so i can also be omitted
-    case .Monday, .Tuesday, .Wednesday, .Thursday, .Friday: return .DayType
+✅ List the cases. ❌ Reaching for `default` on your own enums: you lose the "you forgot a case" error.
 
-    // because all options have been covered there's not need for `default:`
-  }
+## Raw values
+
+Give an enum a type (`String`, `Int`, `Double`) and each case gets a fixed **raw value**. Handy for talking to APIs and storage.
+
+```swift
+enum HTTPMethod: String {
+    case get = "GET", post = "POST", put = "PUT", delete = "DELETE"
+}
+
+HTTPMethod.get.rawValue      // "GET"
+HTTPMethod(rawValue: "POST") // Optional(.post)
+HTTPMethod(rawValue: "NOPE") // nil
+```
+
+With `String`, a case's raw value defaults to its own name. With `Int`, they count up from 0.
+
+```swift
+enum Coin: Int {
+    case penny = 1, nickel = 5, dime = 10, quarter = 25 // cents
+}
+
+let wallet: [Coin] = [.penny, .dime, .quarter, .quarter]
+wallet.reduce(0) { $0 + $1.rawValue } // 61
+```
+
+Creating from a raw value returns an optional, because the string might not match a case. See [[docs/swift/swift-optionals|Optionals]].
+
+## Associated values
+
+Each case can carry its own data. This is where Swift enums leave TypeScript's behind.
+
+```swift
+enum Payment {
+    case cash
+    case card(lastFour: String)
+    case voucher(code: String, amount: Double)
+}
+
+let payment = Payment.card(lastFour: "4242")
+
+switch payment {
+case .cash:
+    print("Paid in cash")
+case .card(let lastFour):
+    print("Card ending \(lastFour)")
+case .voucher(let code, let amount):
+    print("Voucher \(code) for £\(amount)")
+}
+// Card ending 4242
+```
+
+In TypeScript this is a **discriminated union**: `{ kind: 'card'; lastFour: string } | { kind: 'cash' }`. Swift's version is shorter and the `switch` is checked for you.
+
+A perfect fit for a screen that loads data:
+
+```swift
+enum LoadState {
+    case loading
+    case loaded([String])
+    case failed(String)
 }
 ```
 
-## Associated Enums
+No more `isLoading`, `data` and `error` flags that can disagree with each other.
+
+## Methods and computed properties
+
+Enums can hold behaviour. Inside, `self` is the current case.
 
 ```swift
-enum MobilePhone {
-    case iPhone(String)
-    case Android(String)
-    case Blackberry(String)
-    case WindowsPhone(String)
-}
+enum Size: String, CaseIterable {
+    case small, medium, large
 
-let iPhone = MobilePhone.iPhone("6S")
-```
-
-
-```swift
-// import CoreGraphics
-import UIKit
-
-// CGFloat Core Graphics Float
-
-enum ColorCompoent {
-    case RGB(CGFloat, CGFloat, CGFloat, CGFloat)
-    case HSB(CGFloat, CGFloat, CGFloat, CGFloat)
-
-    func color() -> UIColor {
+    var millilitres: Int {
         switch self {
-            case .RGB(let red, let green, let blue, let alpha):
-                return UIColor(
-                    red: red/255.0,
-                    green: green/255.0,
-                    blue: blue/255.0,
-                    alpha: alpha
-                )
-            case .HSB(let hue, let saturation, let brightness, let alpha):
-                return UIColor(
-                    hue: hue/360.0,
-                    saturation: saturation/100.0,
-                    brightness: brightness/100.0,
-                    alpha: alpha
-                )
-        }
-
-    }
-}
-
-ColorCompoent.RGB(61.0, 120.0, 198.0, 1.0)
-// RGB(61.0, 120.0, 198.0, 1.0)
-ColorCompoent.RGB(61.0, 120.0, 198.0, 1.0).color()
-// actual color r 0.239 g 0.471 b 0.776 a 1.0
-
-ColorCompoent.HSB(hue: 254, saturation: 50, brightness: 50, alpha: 1).color()
-// actual color r 0.308 g 0.25 b 0.5 a 1.0
-```
-
-## Optionals
-
-Using an `?` wraps its a conditional type of `Int` or `nil` (abscent of data)
-```swift
-// Type `Int` or `nil`
-var someInt: Int?
-```
-
-Using an `!` unwraps it from that condition, it's very unrecommended to use this method
-
-```swift
-struct Person {
-    let firstName: String
-    let middleName: String?
-    let lastName: String
-
-    func getFullName() -> String {
-        if middleName == nil {
-            return firstName + " " + lastName
-        } else {
-            // `!` forces unwrap, highly unrecommended!
-            return firstName + " " + middleName! + " " + lastName
-        }
-
-    }
-}
-
-let me = Person(firstName: "Jane", middleName: nil, lastName: "Doe")
-
-me.getFullName()
-```
-
-## If Let
-
-```swift
-let airportCodes = ["CDG": "Charles de Gaulle"]
-
-// if this optinal value exist execute this code
-if let newYorkAirport = airportCodes["JFK"] {
-    // automatically unwraps the optional value
-    print(newYorkAirport)
-} else {
-    print("Whoops that key does not exist")
-}
-```
-
-## The Optimal Pyramid of Doom
-It can quickly lead to a pyramid of code, there's better way to do this in swift 2
-
-
-```swift
-if let dailyWeather = weatherDictionary["daily"] {
-    if let highTemperature = dailyWeather["temperature"] {
-        print(highTemperature)
-    }
-}
-
-if the previous was true
-if let dailyWeather = weatherDictionary["daily"], let highTemperature = dailyWeather["temperature"] {
-  print(highTemperature)
-}
-```
-
-```swift
-struct Friend {
-    let name: String
-    let age: String
-    let address: String?
-}
-```
-
-
-Even is address is non existing it will jump into else statement
-```swift
-func createFriend(dict: [String: String]) -> Friend? {
-    if let name = dict["name"], let age = dict["age"], let address = dict["address"] {
-        return Friend(name: name, age: age, address: address)
-    } else {
-        return nil
-    }
-
-}
-```
-
-
-This way we check for name and age and address can be optional
-```swift
-func createFriend(dict: [String: String]) -> Friend? {
-    if let name = dict["name"], let age = dict["age"] {
-        let address = dict["address"]
-
-        return Friend(name: name, age: age, address: address)
-    } else {
-        return nil
-    }
-}
-```
-
-## Guard
-This is the safer and cleaner way to write optionals as `guard` forces to write the worst case scenario up front
-```swift
-func createFriend(dict: [String: String]) -> Friend? {
-    guard let name = dict["name"], let age = dict["age"] else {
-        return nil
-    }
-
-    let address = dict["address"]
-
-    return Friend(name: name, age: age, address: address)
-}
-```
-
-
-## Raw Values
-default values raw values can only be `String`, `Int`, `Float` or `Double`
-
-```swift
-enum Coin: Double {
-    case Penny =  0.01
-    case Nickel = 0.05
-    case Dime = 0.10
-    case Quarter = 0.25
-}
-
-func totalValue(coins: [Coin]) -> Double {
-    var total: Double = 0
-
-    for coin in coins {
-        total += coin.rawValue
-    }
-
-    return total
-}
-
-let coins: [Coin] = [.Penny, .Nickel, .Dime, .Dime, .Quarter, .Quarter, .Quarter]
-totalValue(coins: coins)
-```
-
-
-```swift
-enum HTTPMethod: Sring {
-    case POST, GET, PUT, DELETE
-}
-
-HTTPMethod.GET.rawValue // "GET"
-```
-
-## Optional Chaining
-
-```swift
-class Address {
-    // classes require a init() method but when dealing with optionals it's not required
-    var streetName: String?
-    var buildingNumber: String?
-    var apartmentNumber: String?
-}
-
-class Residence {
-    var address: Address?
-}
-
-class Person {
-    var residence: Residence?
-}
-
-let susan = Person()
-let address = Address()
-let residence = Residence()
-
-address.streetName = "Sesame Street"
-address.buildingNumber = "123"
-address.apartmentNumber = "69"
-
-residence.address = address
-
-susan.residence = residence
-```
-
-When we have this many level it takes a lot of work to check just get the apartmenet number
-```swift
-if
-    let home = susan.residence,
-    let postalAddress = home.address,
-    let apartmentNumber = postalAddress.apartmentNumber,
-    let convertedNumber = Int(apartmentNumber)
-{
-    print(convertedNumber)
-}
-```
-A more elegant way is to use optional chaining
-```swift
-let apartmentNumber = susan.residence?.address?.apartmentNumber
-```
-
-```swift
-if let apartmentNumber = susan.residence?.address?.apartmentNumber {
-    print(apartmentNumber)
-}
-```
-
-## Pattern Matching With Enums
-
-Instead of looping through each case in wallet and matching again a case
-```swift
-for coin in wallet {
-    switch coin {
-        case .Quarter: count += 1
-        default: continue
-    }
-}
-```
-There's a more elegant way to do this in swift 2
-```swift
-for case .Quarter in wallet {
-    count += 1
-}
-```
-
-```swift
-for coin in wallet {
-    if case .Nickel = coin {
-        print("Not so much money!")
-    } else if case .Dime = coin {
-        print("Eh I guess it's some money")
-    }
-}
-```
-
-
-## Nil Coalescing Operator
-
-```swift
-let firstName: String? = "Jane"
-let userName = "jane"
-
-var displayName: String
-```
-With the ternary conditional operator we have to use bang operator which is unrecommended
-
-```swift
-displayName = firstName != nil ? firstName! : userName
-```
-
-Using Nil Coalescing Operator that's not necessary
-```swift
-displayName = firstName ?? userName
-```
-
-## Computed Properties
-Instead of using a function we can just user computed Properties
-
-```swift
-let UIFontTextStyleHeadline = "UIFontTextStyleHeadline"
-let UIFontTextStyleBody = "UIFontTextStyleBody"
-let UIFontTextStyleFootnote = "UIFontTextStyleFootnote"
-
-enum Text: String {
-    case Headline
-    case Body
-    case Footnote
-
-    var style: String {
-        switch self {
-            case .Headline: return UIFontTextStyleHeadline
-            case .Body: return UIFontTextStyleBody
-            case .Footnote: return UIFontTextStyleFootnote
+        case .small: 240
+        case .medium: 350
+        case .large: 470
         }
     }
+
+    func label() -> String {
+        "\(rawValue.capitalized) (\(millilitres)ml)"
+    }
+}
+
+Size.large.millilitres // 470
+Size.small.label()     // "Small (240ml)"
+```
+
+`CaseIterable` gives you `allCases`, perfect for building a picker:
+
+```swift
+Size.allCases.map { $0.rawValue } // ["small", "medium", "large"]
+```
+
+## Matching one case: if case and for case
+
+When you only care about one case, a full `switch` is overkill.
+
+```swift
+if case .card(let lastFour) = payment {
+    print("Card ending \(lastFour)")
+}
+
+let quarters = wallet.filter { $0 == .quarter }.count // 2
+
+for case .quarter in wallet {
+    print("Found a quarter")
 }
 ```
+
+`if case` reads backwards at first (pattern on the left, value on the right). That's normal.
+
+## Common mistakes
+
+- Using `default` in a `switch` over your own enum. You lose the compiler's help when a case is added.
+- Modelling state with several booleans (`isLoading`, `hasError`) instead of one enum.
+- Forgetting that `Enum(rawValue:)` is optional.
+- `UpperCamelCase` cases (`.Monday`). That was Swift 2 style; cases are `lowerCamelCase` now.
+
+## Try it
+
+1. Make a `TrafficLight` enum with a `next` computed property that cycles red, green, amber.
+2. Make an enum `Drink` with `case coffee(shots: Int)` and `case tea`, and a function that prices each.
+3. Model a login screen with an enum: idle, submitting, success with a username, failure with a message.
 
 ## Related
-- [[docs/swift/swift-object-oriented|Swift - Objects]]
+- [[docs/swift/swift-control-flow|Swift - Control Flow]]
+- [[docs/swift/swift-optionals|Swift - Optionals]]
+- [[docs/swift/swift-structs-and-classes|Swift - Structs and Classes]]
+- [[docs/swift/swift-errors|Swift - Error Handling]]
 - [[docs/swift/swift-protocols|Swift - Protocols]]
-- [[docs/swift/swift-memory-management|Swift - Memory Management]]

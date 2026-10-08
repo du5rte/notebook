@@ -2,289 +2,156 @@
 title: "JavaScript - Basics"
 type: doc
 created: 2015-10-14
-updated: 2016-03-18
+updated: 2026-10-07
 tags: [javascript]
 ---
 # JavaScript - Basics
 
-Resources:
-- [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [State of the art JavaScript 2016](https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b#.7suptki37)
-- [ES6 Features](https://github.com/lukehoban/es6features)
-- [Babel Documentation](https://babeljs.io/docs/learn-es2015/)
-- [Javascript ES6 Cheatsheet - LearnCode.academy](https://www.youtube.com/watch?v=AfWYO8t7ed4)
-- [ES6 and ES7 the future of Javascript](https://youtu.be/6AytbSdWBKg)
+JavaScript is the language of the web. HTML says what is on the page, CSS says how it looks, and JavaScript says what it does: open a menu, check a form, fetch new messages. The same language also runs outside the browser with Node.js, so one language can power the page and the server behind it. This is the first lesson: where to type code, how a program is read, and the one big idea that shapes everything else.
 
-## Syntax
-A programming language's commands, special words and punctuation.
+## Your first line of code: the browser console
 
-## Statements
-Each new line is a `statement`, which usually ends with a semicolon `;`. Javascript run each statement one at the time, and can only read the next once one is finished.
+Every browser ships with developer tools, and the console is a place to type JavaScript and see the answer right away. In Chrome open it with `Cmd + Option + J` on a Mac or `Ctrl + Shift + J` on Windows and Linux.
+
 ```js
-var animal = 'dog';
-function() {
-  return 'bad ' + animal;
-}
-```
-In `ES6` semicolons are no longer required
-```js
-var animal = 'dog'
-function() {
-  return `bad ${animal}`
-}
+console.log('Hello, world') // Hello, world
+2 + 3                      // 5
+'coffee'.toUpperCase()     // 'COFFEE'
 ```
 
-## Spaces, tabs and new lines
-JavaScript like css and html doesn't care about spaces
+`console.log()` prints a value. In the console you can also just type an expression and it shows the result. Use it as a scratchpad while you learn.
+
+## Running JavaScript with Node.js
+
+Node.js runs JavaScript in your terminal, no browser needed. Type `node` on its own for an interactive prompt like the console, or save code in a file and run the file.
+
 ```js
-var daysInWeek = 7;
-```
-```js
-var
-          daysInWeek
-                            =
-                                      7
-                                                  ;
+// hello.js
+const name = 'Ana'
+console.log(`Hi ${name}`)
 ```
 
-## Comments
-Allows us to document or add comments to code
+```bash
+node hello.js
+# Hi Ana
 ```
-// This is a single-line comment
+
+## Adding JavaScript to a web page
+
+On a real page, JavaScript lives in a `.js` file that the HTML loads with a `<script>` tag.
+
+```html
+<head>
+  <script src="app.js" defer></script>
+</head>
+```
+
+`defer` tells the browser to download the file while it reads the HTML, and run it once the page is ready. Without it, a script in the `<head>` runs before the elements it wants to use exist. `<script type="module">` is deferred automatically and lets you use `import` and `export`.
+
+## Statements, semicolons and comments
+
+A program is a list of statements, read from top to bottom, one at a time.
+
+```js
+const coffee = 'flat white'
+const price = 3.5
+console.log(`${coffee}: ${price}`) // flat white: 3.5
+```
+
+Semicolons at the end of a statement are optional: JavaScript inserts them for you. Pick a style and let a formatter keep it consistent. One catch without them: a line that starts with `(`, `[` or a backtick gets glued onto the line before, so start such lines with a `;` or use semicolons throughout. JavaScript also ignores extra spaces and new lines, so layout is for humans.
+
+Comments are notes for people. JavaScript skips them.
+
+```js
+// A single-line comment
+
 /*
-  This is a multiple-line comment.
-  Everything here is ignored.
+  A comment that
+  spans several lines
 */
 ```
 
-## Run or Execute
-When a browser follows the instructions in a program, it "runs" or "executes" that program.
+## Values and types
 
-## Event-Driven Environment
-JavaScript run on events, it stays in memory doing nothing just listening for event triggers.
-
-## Object Oriented
-JavaScript is a object oriented language everything is powered by `objects`. `variables` and `functions` are no exceptions. When we define a variable we're really saying "attach an key value in the `global name space`" which in the browser is `window` or in node is `global`
+Everything you work with is a value, and every value has a type. Each type gets its own lesson.
 
 ```js
-var name = "john"
-
-function sayName() {
-  console.log(name)
-}
-```
-```js
-window: {
-  ..
-  name: "john",
-  sayName: function() {
-    console.log(name)
-  }
-  ..
-}
+typeof 'Ana'          // 'string'
+typeof 42             // 'number'
+typeof true           // 'boolean'
+typeof undefined      // 'undefined'
+typeof { name: 'Ana' } // 'object'
+typeof ['a', 'b']     // 'object' (arrays are objects too)
 ```
 
-## Native Objects
-These objects are native to javascript and will be available everywhere.
-[Native Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
+## The big idea: JavaScript waits for events
 
-```
-String, Array, Date, Math, etc.
-```
-
-## Host Objects
-Available depending where JavaScript is running, its called the `host environment`. e.g. In the `Browser` or in `Node.js`
-[Host Objects](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
-
-Browser Host Objects
-```
-Window, Document, History, XMLHttpRequest, etc.
-```
-
-Node.js Environment
-```
-http, https, fs, url, etc
-```
-
-## Custom Objects
-Anything you create or import
-
-Custom
-```js
-var myModule = {
-  do: function() { /**/ }
-};
-
-myModule.do();
-```
-jQuery
-```js
-// use
-$('div').click(function() {
-  /**/
-});
-```
-
-## Global Name Space
-When working with bigger scale project a lot of libraries we risk colliding variables so it's important to name them accordantly
+JavaScript in the browser is event-driven. It runs your code once, then sits and waits. When something happens (a click, a key press, a reply from a server) it runs the function you asked it to run for that event.
 
 ```js
-function greet(val) {
-  console.log(vale)
-}
-// window.greet = function greet(val) { console.log(vale) }
+const button = document.querySelector('button')
 
+button.addEventListener('click', () => {
+  console.log('Order placed')
+})
 
-var greet = 'Hello'
-// overwrites the function `greet()`
-// window.greet = "greet"
+console.log('Waiting for a click...')
+// Waiting for a click...
+// (later, on each click) Order placed
 ```
 
-
-## Adding JavaScript
-Inserting a JavaScript file to a webpage:
-```hmtl
-<script src="name-of-file.js"></script>
-```
-
-Insert JavaScript directly into a web page:
-```html
-<body>
-  <!-- Adding script files before <body> allows the html to load first -->
-  <script>
-    alert("Hello there.");
-  </script>
-  <!-- libaries should be load first -->
-  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="app.js"></script>
-</body>
-```
-
-## Development Tools
-A testing area for Javascript, Open with `CMD` + `OPTION` + `J` on Chrome Mac OS.
-
-##### `console.log( )`
-Outputs a message to the console
-```js
-console.log('check 1 2 3');
-```
-
-##### `console.dir( )`
-Outputs an interactive list of the properties of the object, useful for debugging, checking responses headers, checking .json files, etc.
-```js
-console.dir(object);
-```
-
-##### `console.error( )`
-Outputs an error message console
-```js
-console.error(errorMessage);
-```
-
-##### `clear( )`
-Clears the console
-```js
-clear();
-```
-
-##### `alert( )`
-pops up an alert with a message
-```js
-alert('hi there!');
-```
-
-##### `prompt( )`
-pops up an enquiry with a message
-```js
-alert('how are you?');
-```
-
-
-## Strict
-A statement that causes JavaScript to run in a `strict mode`, when it strict mode JavaScript is extra picky and throw errors to common syntax bad pratices.
+Notice the order: the last line prints first, because the click function only runs when the click happens. Timers work the same way.
 
 ```js
-"use strict";
+setTimeout(() => console.log('Coffee is ready'), 2000)
+console.log('Brewing...')
+// Brewing...
+// (two seconds later) Coffee is ready
 ```
 
-#### Variables
-Creating a variable without `var` sets it on the `Global Scope`.
+This "do this later, when X happens" pattern is everywhere in JavaScript. [[docs/javascript/javascript-async|JavaScript - Asynchronous Programming]] builds on it.
+
+## Built-in objects vs host objects
+
+Some tools come with the language and work everywhere. Others come from where the code runs, called the host environment.
+
+| Comes from | Examples | Available in |
+| --- | --- | --- |
+| The language | `Math`, `JSON`, `Date`, `Array`, `Map` | Everywhere |
+| The browser | `document`, `window`, `localStorage`, `fetch` | Browser |
+| Node.js | `fs`, `http`, `process` | Node |
+
+So `Math.round(2.6)` works in both, but `document` does not exist in Node, and `fs` does not exist in the browser. `globalThis` points at the global object in either one. The full list of built-ins is on MDN.
+
+## Strict mode
+
+Strict mode makes JavaScript throw errors for sloppy code it would otherwise let slide, like assigning to a variable you never declared. Modules (`type="module"` or `import`/`export`) and classes are strict automatically. In an old-style script, turn it on with a line at the top.
+
 ```js
-// var badVariable;
-badVariable = 'bad';
-var goodVariable = 'good';
+'use strict'
+
+total = 10 // ReferenceError: total is not defined
 ```
 
-#### Function
-Not much of problem with variables but with functions can be dangerous
-```js
-var goodVariable = 'innocent';
+Without strict mode that line would silently create a global variable called `total`.
 
-function goodFunction() {
-  var goodVariable = 'good';
-}
-goodVariable; // 'innocent'
+## Common mistakes
 
-// var badVariable;
-function badFunction() {
-  badVariable = 'bad';
-  goodVariable = 'bad';
-}
-goodVariable; // 'bad'
-```
+- Loading a script in the `<head>` without `defer`, then wondering why `document.querySelector()` returns `null`.
+- Using `document` in Node, or `require('fs')` in the browser. Check which host you are in.
+- Expecting code inside an event listener or `setTimeout` to run straight away.
 
-#### Duplicated Objects Keys
-In non-strict mode, duplicated `object.keys` overwrite each other good objects should not have duplicated keys
-```js
-var badObject = {
-    name: 'Joan',
-    job: 'Desk Assistant',
-    hobby: 'Surfing',
-    job: 'Free Spirit'
-};
-var goodObject = {
-    name: 'Joan',
-    job: 'Desk Assistant',
-    hobby: 'Surfing',
-    newLifePerspective: 'Free Spirit'
-};
-```
+## Try it
 
-#### Duplicated Parameters
-In non-strict mode, duplicated `parameters` overwrite each other, good functions should not have duplicated parameter
-```js
-function badFunction(a,b,c,a) {
-  return a + b + c;
-};
-
-badFunction(1, 2, 3, 4); // 4 + 2 + 3 ; 9
-```
-#### Non-Writable Objects or Globals
-In non-strict mode, writing on Non-Writable JavaScript properties will have no effect. But we should try do it anyway
-```js
-NaN.foobar = true;
-```
-
-#### Delete
-In non-strict mode, deleting Non-Writable JavaScript properties will have no effect. But we should try do it anyway.
-```js
-delete Object.prototype;
-```
-
-In strict mode it can't delete plane variables, only properties of objects
-```js
-var innocentVariable = 'no, don\'t delete me!!!';
-delete innocentVariable // error!
-
-var obj = {
-    notSoInnocentVariable: 'no, don\'t delete me!!!'
-}
-delete anObjectWithProps.someProperty // OK
-```
+1. Open the console and use `console.log()` to print your name, then your name in capitals.
+2. Save a file `hello.js` that logs today's coffee order and run it with `node`.
+3. Make a page with a button that logs `'Clicked!'` every time you press it. Add a log after the listener and check which prints first.
 
 ## Related
-- [[docs/browser/browser|DOM - Basics]]
-- [[docs/browser/browser-storage|Storage]]
-- [[docs/node/node|Node.js - Basics]]
-- [[docs/node/node-npm|npm]]
+- [[docs/javascript/javascript-variables|JavaScript - Variables]]
+- [[docs/javascript/javascript-async|JavaScript - Asynchronous Programming]]
+- [[docs/browser/browser|Browser - DOM]]
+- [[docs/browser/browser-storage|Browser - Storage]]
+- [[docs/node/node|Node - Basics]]
+- [[docs/node/node-npm|Node - npm and pnpm]]
 - [[docs/node/node-modules|Node - Modules]]

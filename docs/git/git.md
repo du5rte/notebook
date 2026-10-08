@@ -2,108 +2,160 @@
 title: "Git - Basics"
 type: doc
 created: 2016-05-08
-updated: 2016-05-08
+updated: 2026-10-07
+aliases: ["Git - Stage Area"]
 tags: [git]
 ---
 # Git - Basics
 
+Git is a version control system: it remembers every saved version of a project, who made each change and why. Think of it as an unlimited "undo" history for a whole folder, one that several people can share without overwriting each other's work. Linus Torvalds wrote it to manage the Linux kernel, a project with thousands of contributors, and today it is the default for almost every software project.
+
 Resources:
-- [Getting Started About Version Control](http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
-- [Git](http://git-scm.com/)
-- [Linux Kernel Development Numbers](http://royal.pingdom.com/2012/04/16/linux-kernel-development-numbers/)
+- [Getting Started - About Version Control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)
+- [Git](https://git-scm.com/)
 
-## Git
-Invented by the father of Linux OS 'Linus Torvalds', which still mantains the 'Linux Kernel' the software at the heart of every Linux system.
+## Repositories
 
-## The Linux Kernel
-Git was originally invented to manage all of the work maintaining Linux Kernel.
+A repository (or "repo") is a project folder plus its full history: every version, in order, with a message and an author for each change. Git keeps that history in a hidden `.git` folder at the root of the project.
 
-- Over 15 million lines of code
-- About 3,500 new lines of code are added every day
-- Every new kernel released involves approximately 1,000 developers
+Git is distributed: there is no single central copy. Everyone who works on the project has the whole history on their own machine. Sites like GitHub host a shared copy so people can swap changes, review them and discuss them, but your local repo works fine offline.
 
-## Version control System
-VCS allows developers to works together without stepping on each others toes
+## The mental model
 
-## Github
-The most popular site for sharing code and managing software projects, like a social network for sharing repositories, publicly with the world or privately with friends or collaborators, other people can view, comments and submit commits to make the project better
+Your work moves through three places. Once this clicks, most Git commands make sense.
 
-## Repository
-A collection of all the versions of the project, along with the order and description of each change, and additional info, like who's responsible for each change
+```mermaid
+flowchart LR
+  A[Working tree<br/>files you edit] -- git add --> B[Staging area<br/>the next snapshot]
+  B -- git commit --> C[Repository<br/>saved snapshots]
+  C -- git restore --> A
+```
 
-## Hidden Files
-In UNIX-based systems, hidden files and folders are indicated by having their name prefixed with a '.' - so a file named repository isn't hidden, but a file named .repository would be
+- **Working tree**: the files on disk, as you see them in your editor.
+- **Staging area** (also called the index): a draft of the next commit. You choose what goes in.
+- **Repository**: the commits. Each commit is a snapshot of the whole project at that moment, not a list of edits.
 
-## Commits
-The act of telling the VCS that a version is finished, so it commits the changes to the repository and stores a new version.
+A good analogy is packing a parcel: you edit things on your desk (working tree), put the finished ones in the box (staging area), then seal and label the box (commit).
 
-## Review
-Provides a set of tools to review your project history, or even switch what version the project displays.
+## Installing and first setup
 
-## Distributed Version Control
-There's no central repository, everyone that works on the project has their own repository
-
-## Plumbing vs Porcelain
-Originally Git has not going to be a CVS but a collection of tools and commands to build a VCS (The plumbing of a good version control system). Over Time Git gain some porcelain commands of it's own, and has evolved into a fully functional VCS. But we still have access to the internal (plumbings) which allows to do really advanced and powerful things with Git
-
-## Installing
-Git comes installed in back by defaults
+On macOS, Git comes with the Xcode command line tools, or you can install it with Homebrew. On Debian or Ubuntu, use apt.
 
 ```sh
-sudo apt-get install git
-git --version
+brew install git          # macOS
+sudo apt install git      # Debian / Ubuntu
+git --version             # git version 2.x
+```
+
+Tell Git who you are. Every commit records this name and email.
+
+```sh
+git config --global user.name "Ana Silva"
+git config --global user.email "ana@example.com"
+git config --global init.defaultBranch main
+```
+
+`--global` saves the setting for every repo on your machine. The last line makes new repos start on a branch called `main`, which is what GitHub and most teams use.
+
+If you prefer a simpler editor than Vim for commit messages:
+
+```sh
+git config --global core.editor nano
 ```
 
 ## git init
-Initializes a new repository on the current directory.
+
+`git init` turns the current folder into a repository.
 
 ```sh
-git init
-# If project_name is provided, it creates a new project directory with that name.
-git init my_repository
-# The files will be hidden
-ls -a my_repository # .git
-# Unless the folder is removed keep will keep tracking changes
-# to avoid endless prompts (and force recursively) do from the project folder:
-rm -rf .git
+mkdir coffee-shop && cd coffee-shop
+git init        # Initialized empty Git repository in .../coffee-shop/.git/
+ls -a           # .  ..  .git
 ```
 
-## git add
-Adds files to the repository so that Git knows to track their changes.
+Files starting with a dot are hidden on Unix systems, so you need `ls -a` to see `.git`. Deleting that folder (`rm -rf .git`) deletes the history and turns the folder back into a plain folder. Your files stay.
+
+## git status
+
+`git status` is the command you will run most. It tells you which branch you are on and what is in each of the three places.
 
 ```sh
-# Git VCS doesn't automatically tracks everything in the directory, this is useful to allows us to keep some files outside the VCS
-git add README
-# Add all filed
-git add -A
-#or
-git .
+echo "Espresso 1.50" > menu.txt
+git status
+# On branch main
+# Untracked files:
+#   menu.txt
 ```
 
-## git commit
-Commits all added files to the repository as a change.
+Untracked means Git sees the file but is not watching it yet. Git never tracks files on its own, which lets you keep things like secrets or build output out of history.
+
+## git add: staging changes
+
+`git add` puts changes into the staging area. It does two jobs: it starts tracking a new file, and it stages the current version of a file you changed.
 
 ```sh
-# to use git with nano
-export EDITOR=nano
-# Commits all added files to the repository as a change
-# It's good pratice to include short and meaningful message
-git commit
-# -a flag, commits all changes to all tracked files
-# -m flag, allows you to specify a commit message directly on the command line instead of in your default editor.
-git commit -a -m "Added a new awesome line."
+git add menu.txt      # stage one file
+git add .             # stage every change in this folder and below
+git status
+# Changes to be committed:
+#   new file:   menu.txt
 ```
 
-## git config
-Allow us to make configuration changes to Git
+Staging is what gives you precise control. If you fixed a bug and also tidied an unrelated file, you can stage and commit them separately so each commit tells one story.
+
+To take something back out of the staging area without losing your edits:
 
 ```sh
-git config
-# --global flag, makes these changes available across your entire system
-git config --global user.name "My Name"
-git config --global user.email "myemail@gmail.com"
+git restore --staged menu.txt
 ```
+
+## git commit: saving a snapshot
+
+`git commit` saves everything in the staging area as a new snapshot.
+
+```sh
+git commit -m "Add menu with espresso price"
+# [main (root-commit) 3f2a1c9] Add menu with espresso price
+#  1 file changed, 1 insertion(+)
+```
+
+Without `-m`, Git opens your editor so you can write a longer message. A good message is a short summary in the imperative ("Add menu", "Fix latte price"), then a blank line and the why, if it isn't obvious. Team conventions and hooks that check messages are in [[docs/commits|Engineering - Commits]].
+
+`-a` stages every change to files Git already tracks and commits in one step. It skips new, untracked files.
+
+```sh
+git commit -am "Raise espresso to 1.60"
+```
+
+## Ignoring files
+
+A `.gitignore` file at the root lists files Git should never track.
+
+```text
+node_modules/
+.env
+*.log
+.DS_Store
+```
+
+Add it early. Once a file is committed, ignoring it later doesn't remove it from history.
+
+## Common mistakes
+
+- **Committing without checking.** Run `git status` (and `git diff --staged`) before every commit so you know what is going in.
+- **Expecting `git commit -a` to include new files.** It only picks up files Git already tracks. Use `git add` first.
+- **Committing secrets.** An `.env` file in history stays in history, even after you delete it. Ignore it before the first commit.
+- **Giant "update stuff" commits.** Small commits with clear messages make history useful later.
+
+## Try it
+
+1. Create a folder called `guest-list`, run `git init`, and commit a `guests.txt` file with three names.
+2. Add a fourth name and also create `notes.txt`. Stage and commit only `guests.txt`. Check with `git status` that `notes.txt` is still untracked.
+3. Add a `.gitignore` that ignores `notes.txt`, commit it, and run `git status` again.
 
 ## Related
-- [[docs/git/git-stage|Git - Stage Area]]
 - [[docs/git/git-history|Git - History]]
+- [[docs/git/git-branching|Git - Branching]]
+- [[docs/git/git-remotes|Git - Remotes]]
+- [[docs/commits|Engineering - Commits]]
+- [[docs/linux/linux|Shell - Basics]]

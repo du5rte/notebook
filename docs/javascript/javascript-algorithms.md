@@ -2,250 +2,188 @@
 title: "JavaScript - Algorithms"
 type: doc
 created: 2020-04-11
-updated: 2020-04-11
+updated: 2026-10-07
 tags: [javascript]
 ---
 # JavaScript - Algorithms
 
-
+An algorithm is a step-by-step recipe for solving a problem. In day-to-day work you'll mostly call built-ins like `sort` and `includes`, but knowing a few classic algorithms teaches you two things that come up everywhere: thinking recursively, and asking "how slow does this get when the list is huge?". We'll start with recursion, use it to divide and conquer, then compare searching and sorting approaches.
 
 ## Recursion
-when a function calls itself. A Recursion should have at least one base case and one recursion case, otherwise it can spin into a infinite loop.
-```
-// function counter() {
-//     for (let n = 0; n <= 10; n++) {
-//         console.log(n) // 0,1,2,3,4,5,6,7,8,9,10
-//     }
-// }
 
-function counter(n=0) {
-    console.log(n) // 0,1,2,3,4,5,6,7,8,9,10
-    
-    if (n === 10) {
-        return
-    }
-    
-    return counter(n + 1)
-}
-
-counter()
-```
-
-This function `findSix` works but it's not very dynamic, what if there's multiple levels of nesting?
-```
-const items = [[1,2,3],[4,5,6]]
-
-function findSix(i){
-    let hasSix="no!"
-    i.forEach(a => {
-        a.forEach(l => {
-            if(l === 6){
-                hasSix = "yes!"
-            }
-        })
-    })
-    return hasSix // yes
-}
-```
-
-Using a recursion function we can deal with infinite levels of nesting
-```
-const items = [[1,2,3],[4,5,[6]]]
-
-function findSix(a){
-    let hasSix="no!"
-    a.forEach(i => {
-        if (i === 6) {
-            hasSix = "yes"
-        }
-        if (Array.isArray(i)) {
-            hasSix = findSix(i)
-        }
-    })
-    return hasSix
-}
-
-console.log(findSix(items)) // yes
-```
-
-### Divide and Conquer
-Are recursive algorithms, they're not a algorithm you can apply to a problem but rather a way to think about a problem, by break it down and divide to it's simplest forms.
+A recursive function calls itself. It needs two parts: a **base case** that stops, and a **recursive case** that moves closer to the base case. Without a base case it never ends.
 
 ```js
-function sum(arr) {
-  let total = 0;
-
-  for (let i of arr) {
-    total += i;
-  }
-
-  return total;
+function countdown(n) {
+  if (n === 0) return 'Lift off!' // base case
+  console.log(n)
+  return countdown(n - 1)        // recursive case
 }
 
-console.log(sum([1,2,3,4,5]))
+countdown(3) // logs 3, 2, 1, returns 'Lift off!'
 ```
 
-Recursion is nice because it keeps returning our new state after each function.
+Any loop can be written as recursion, and the other way round. Recursion earns its place when the data itself is nested.
+
+## When recursion shines: nested data
+
+Loops handle a known depth. This only checks two levels:
+
 ```js
-function sum(arr) {
-  if (arrr.length === 0) {
-    return 0
-  }
+const boxes = [[1, 2, 3], [4, 5, 6]]
 
-  return arr[0] + sum(arr.slice(1))
-}
-
-// 1 + sum([2,3,4,5]) // 3
-// 3 + sum([3,4,5]) // 6
-// 6 + sum([4,5]) // 10
-// 10 + sum([5]) // 15
-
-console.log(sum([1,2,3,4,5]))
+boxes.some((box) => box.includes(6)) // true
 ```
 
-### ~~Selection Sorting~~
-
-- Function that loops through array for largest number
-- Function that loops through list calling ^^, removing largest from list
+Add a box inside a box and it breaks. Recursion handles any depth: if an item is an array, search inside it the same way.
 
 ```js
-const itemsToSort = [3, 2, 4, 1, 6]
-
-function findLargestValue(list) {
-  let largest = list[0]
-  let indexOfLargest = 0
-
-  for (let i = 0; i <= list.length; i++) {
-    if (largest < list[0]) {
-      largest = list[i]
-      indexOfLargest = i
-    }
-  }
-
-  return indexOfLargest
+function contains(items, target) {
+  return items.some((item) =>
+    Array.isArray(item) ? contains(item, target) : item === target,
+  )
 }
 
-function selectionSort(list) {
-  let newList = []
-  // let indexOfLargest
-
-  while (list.length) {
-    let indexOfLargest = findLargestValue(list)
-    newList.push(list[indexOfLargest])
-    list.splice(indexOfLargest, 1)
-  }
-
-  return newList
-}
-
-console.log(selectionSort(itemsToSort))
-```
-### Quick Sorting
-Is a sorting algorithm that is much faster than selection sort
-// The three fundamental components of quick sort is working with an array that holds the elements less than the chosen pivot element. The pivot element and then the array of elements that holds the elements greater than the pivot element.
-
-D&C algorithm that uses recursion:
-1. less than array
-2. pivot
-3. greater than array
-
-```js
-function quickSort(array) {
-  // if the arary is 1 or empty there's nothing to sort
-  if (array.length <= 1) {
-    return array
-  }
-
-  // we find the middle
-  let pivotIndex = Math.floor(array.length / 2)
-  let pivot = array[pivotIndex]
-
-  // split the less and greater values from the middle
-  let less = []
-  let greater = []
-
-  for (let i in array) {
-    if (i != pivotIndex) {
-      if (array[i] > pivot) {
-        greater.push(array[i])
-      } else {
-        less.push(array[i])
-      }
-    }
-  }
-
-  // repeat this process as necessary
-  return [
-    ...quickSort(less),
-    pivot,
-    ...quickSort(greater)
-  ]
-
-  return array
-}
-
-console.log(quickSort(itemsToSort))
+contains([[1, 2, 3], [4, 5, [6]]], 6) // true
+contains([[1, [2, [3]]]], 7)          // false
 ```
 
-### ~~Linear Search~~
-This is relatively fast, with just a small sample size. What if our list had 1,000 items, or 10,000, or even a million? The worst case scenario is, our program would take one million loops until it found our item. This has some real performance issues as it grows larger.
+File trees, menus with submenus and comment threads all have this shape. (For arrays specifically, `items.flat(Infinity).includes(6)` does the same job.)
 
-> O = Once (Operation) for each element in the array
+## Divide and conquer
 
-> The big `O` notation is `O(n)`, which represents linear time. Big O represents the worst case scenario. 
+Divide and conquer isn't one algorithm but a way of thinking: solve the smallest version of the problem, then express the bigger problem in terms of a smaller one.
 
 ```js
-const items = [1,5,2,7,3,12,6,10]
-
-function search(list, item) {
-  let hasItem = null
-  let counter = 0
-
-  for (let i of list) {
-    counter++
-
-    if (i === item) {
-
-    }
-  }
+function sum(numbers) {
+  if (numbers.length === 0) return 0     // smallest version
+  const [first, ...rest] = numbers
+  return first + sum(rest)               // a smaller problem
 }
+
+sum([1, 2, 3, 4, 5]) // 15
+// 1 + sum([2, 3, 4, 5])
+// 1 + 2 + sum([3, 4, 5])
+// ... down to 1 + 2 + 3 + 4 + 5 + 0
 ```
 
-### Binary Search
-Binary search is an algorithm that accepts a sorted list and returns a search element from the list. With our current search function, because the number 12 was towards the end of the array, it took us six iterations until we found the number. 
+In real code you'd write `numbers.reduce((total, n) => total + n, 0)`. The point is the way of thinking, which quick sort below relies on.
+
+## Big O: how does it scale?
+
+Big O describes how the work grows as the input grows, in the worst case. It ignores the exact time and keeps only the shape.
+
+| Big O | Name | Example | 1,000 items → steps |
+|---|---|---|---|
+| `O(1)` | constant | read `list[0]` | 1 |
+| `O(log n)` | logarithmic | binary search | about 10 |
+| `O(n)` | linear | linear search | 1,000 |
+| `O(n log n)` | | quick sort (on average) | about 10,000 |
+| `O(n²)` | quadratic | selection sort | 1,000,000 |
+
+## Linear search vs binary search
+
+**Linear search** checks every item, one by one. Simple, works on any list, but on a million items the worst case is a million checks: `O(n)`.
 
 ```js
-function search(list, item) {
+function linearSearch(list, target) {
+  for (const [index, item] of list.entries()) {
+    if (item === target) return index
+  }
+  return -1
+}
+
+linearSearch([1, 5, 2, 7, 3, 12], 12) // 5, after six checks
+```
+
+That's what `indexOf` and `includes` do for you.
+
+**Binary search** only works on a **sorted** list. Like looking up a name in a phone book: open the middle, decide which half it's in, throw the other half away, repeat. Each guess halves the list: `O(log n)`.
+
+```js
+function binarySearch(sortedList, target) {
   let low = 0
-  let high = list.length
-  let counter = 0
+  let high = sortedList.length - 1
 
-  while(low <= high) {
-    counter++
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2)
+    const guess = sortedList[mid]
 
-    // we jump right to the middle and try guess it
-    let mid = Math.floor((low + high) / 2)
-    let guess = list[mid]
-
-    if (guess === item) {
-      return true
-    } 
-    // if the guess is too big we ignore everything after
-    if (guess > item) {
-      
-      high = mid - 1
-    } 
-    // if the value too low we ignore everything before
-    else {
-      low = mid + 1
-    }
+    if (guess === target) return mid
+    if (guess > target) high = mid - 1 // too big: drop the top half
+    else low = mid + 1                 // too small: drop the bottom half
   }
 
-  console.log(counter)
-
-  return null
+  return -1
 }
+
+binarySearch([1, 2, 3, 5, 7, 12], 12) // 5, after three checks
 ```
+
+## Selection sort vs quick sort
+
+**Selection sort** finds the smallest item, moves it to a new list, and repeats. Easy to understand, but each pass scans the whole remaining list: `O(n²)`.
+
+```js
+function selectionSort(list) {
+  const remaining = [...list] // don't mutate the input
+  const sorted = []
+
+  while (remaining.length) {
+    const smallest = Math.min(...remaining)
+    sorted.push(smallest)
+    remaining.splice(remaining.indexOf(smallest), 1)
+  }
+
+  return sorted
+}
+
+selectionSort([3, 2, 4, 1, 6]) // [1, 2, 3, 4, 6]
+```
+
+**Quick sort** divides and conquers. Pick a pivot, split the rest into "less than" and "greater than", sort each side the same way, and join them: `less + pivot + greater`. On average `O(n log n)`.
+
+```js
+function quickSort(list) {
+  if (list.length <= 1) return list // base case: nothing to sort
+
+  const [pivot, ...rest] = list
+  const less = rest.filter((n) => n <= pivot)
+  const greater = rest.filter((n) => n > pivot)
+
+  return [...quickSort(less), pivot, ...quickSort(greater)]
+}
+
+quickSort([3, 2, 4, 1, 6]) // [1, 2, 3, 4, 6]
+```
+
+## In real code: use the built-ins
+
+```js
+const prices = [10, 9, 100, 1]
+
+prices.sort()                // [1, 10, 100, 9]: compares as strings!
+prices.toSorted((a, b) => a - b) // [1, 9, 10, 100]: new array, original untouched
+```
+
+`sort` changes the array in place and, without a compare function, sorts as text. `toSorted` returns a sorted copy.
+
+## Common mistakes
+
+- **No base case**, or one the recursion never reaches: "Maximum call stack size exceeded".
+- **Binary search on an unsorted list**: it returns wrong answers without any error.
+- **`high = list.length`** instead of `length - 1`: reads one past the end.
+- **`sort()` on numbers without a compare function**: `[10, 9, 1].sort()` gives `[1, 10, 9]`.
+
+## Try it
+
+1. Write a recursive `factorial(n)`, where `factorial(5) // 120`.
+2. Write `countFiles(folder)` for a nested object like `{ name: 'docs', children: [{ name: 'a.md' }, { name: 'img', children: [...] }] }`.
+3. Count how many guesses `binarySearch` makes on a sorted array of 1,000 numbers, and compare with `linearSearch`.
 
 ## Related
+
+- [[docs/javascript/javascript-arrays|JavaScript - Arrays]]
+- [[docs/javascript/javascript-functions|JavaScript - Functions]]
+- [[docs/javascript/javascript-loops|JavaScript - Loops]]
 - [[docs/javascript/javascript-unit-testing|JavaScript - Unit Testing]]

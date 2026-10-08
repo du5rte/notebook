@@ -2,393 +2,224 @@
 title: "Node - Server"
 type: doc
 created: 2016-03-18
-updated: 2016-05-08
+updated: 2026-10-07
+aliases: [Express]
 tags: [node]
 ---
 # Node - Server
 
-resources:
-- [Express](http://expressjs.com/)
-- [Connect](https://github.com/senchalabs/connect/)
-- [HTTP Wiki](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
-- [HTTP Status Codes Wiki](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+Node on its own is low level: in [[docs/node/node-http|Node - HTTP]] you saw that every route is an `if` on `req.url`, and you read the body chunk by chunk. **Express** is a small framework on top of `node:http` that does that plumbing for you: routes, URL parameters, JSON bodies, static files. It's been the default Node server framework for years, and most others borrow its ideas, so it's the right one to learn first.
 
-## Creating a Server
-A server will listen to any request from port 3000 and respond `'Hello World'`, it will stay in memory waiting for request until the process is exited with `CTRL+C` Twice or killed e.g. `$ kill -9 479`
-
-*Open browser on `http://localhost:3000` or `$curl http://localhost:3000`*
-
-```js
-var http = require('http')
-
-http.createServer(function (request, response) {
-	response.writeHead(200, {
-    'Content-Type': 'text/plain'
-  });
-	response.write('Hello World\n')
-	response.end()
-}).listen(3000)
-```
-
-## Framework
-NodeJS it self is not a framework, it's very low level for designing server we might want to create a framework on top of it or use someone elses like express
-
-## Express
-A small framework inspired by `Sinatra` with a lot `methods` inherited from node's `http` ready out the box to start building Web Apps.
-
-Is a small framework that sits on top of NodeJS, with a lot of code ready out the box to start building big Web Apps
-
-> "Sinatra inspired web development framework for NodeJS, insanely fast, flexible and simple"
-
-- Easy route URLs to callbacks
-- Middleware (from Connect)
-- Environment based configuration
-- Redirection helpers
-- File Uploads
-
-```js
-app.get('/', function(req, res) {
-  res.send('Hello World')
-})
-```
-Source code
-```js
-http.ServerResponse(request, response) {
-  if(request.url == "/") {
-    response.writeHead(200, {
-      'Content-type': 'text/html'
-    })
-    response.write('Hello World')
-    response.end()
-  }
-})
-```
-
-## Installing
+## Setting up
 
 ```sh
-$ npm install --save express
-# or it's generator
-$ npm install -g express-generator
-$ express # appName (optional)
+npm init -y
+npm install express
 ```
 
-By using `--save` not only it installs express it also adds to our dependency
-
-## Useful Dependencies
-`express-generator` will create the scaffolds for our application. Or we can give a few more properties like hogan (mustache templating) and sass with compass
-
-```sh
-$ express sandbox --hogan -c compass
-```
-
-The generator won't download all the dependencies instead will put them in `package.json` we just need to run install
-
-```sh
-$ npm install
-```
-
-Restarting node everytime we make a change can get annoying, 'There's an App for that', monitors node files
-
-```sh
-$ npm install -g nodemon
-# We need to let to watch for changes
-$ nodemon
-```
-
-## Getting Started
-Calling `express()` creates an application instance, giving us access to it's methods one of which `listen()` creates a connection
+Add `"type": "module"` to `package.json` (see [[docs/node/node-modules|Node - Modules]]), then:
 
 ```js
-var express = require('express')
-var app = express()
-
-// no routes configured yet, will send a `Cannot GET /` error
-
-app.listen(3000)
-```
-
-It can take a `callback` as 2nd parameter, which runs when it's ready
-```js
-app.listen(3000, function() {
-  console.log('Server is running on port 3000')
-})
-```
-
-## Middleware
-Connections are passed from one `middleware` to the next until it reaches an endpoint. `use()` allows us to mount middleware with an optional path that matches the beginning of the url e.g. `/users`
-
-```js
-app.use(function(req, res, next) {
-  // middleware 1
-  next();
-})
-
-app.use(function(req, res, next) {
-  // middleware 2.1
-  next();
-}, function(req, res, next) {
-  // middleware 2.2
-  next();
-})
-
-app.use('/', function(req, res) {
-  // middleware 3 ends with a message
-  res.send('Hello World')
-})
-```
-
-## Routing
-Uses http methods `get`, `post`, `all` to match `requests`. see more on [routing guide](http://expressjs.com/en/guide/routing.html)
-
-```js
-app.all('/old_api', function(req, res) {
-  res.redirect(301, 'api')
-})
-
-app.get('/api', function(req, res) {
-  res.json({data: ''})
-})
-```
-
-## Responding
-Terminate a connection with a [response method](http://expressjs.com/en/guide/routing.html#response-methods), e.g. `send`, `render`, `json`, if no response is given or `next()` is called the user will be left hanging.
-
-```js
-app.get('/', function(req, res) {
-  res.sendFile(`${__dirname}/public/index.html`)
-})
-```
-
-Our first end point, if someone doesn't submit a request (just `'/'`), we're going to give them `index.html`. `__dirname` = current directory
-
-```js
-// We need to require express in our app
-var express = require('express');
-// We create a instance of express by evoking express
-var app = express();
-
-app.get('/', function(request, response) {
-	response.sendFile(__dirname + "/index.html");
-});
-app.listen(8080);
-```
-
-
-## Static Server
-Serves files found on the given `path`
-
-```js
-app.use(express.static(__dirname + '/public'))
-// <img src="img-01">
-app.use('/static', express.static(__dirname + '/public'))
-// <img src="static/img-01">
-```
-
-
-## View Engine
-Uses [templating languages](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/) to template views used in `responde.render()`
-
-```js
-app.set('view engine', 'jade');
-// by default looks for views in ./views
-// app.set('views', path.join(__dirname, 'views'))
-```
-
-
-## User Parameters
-Uses [router paths](http://expressjs.com/en/guide/routing.html#route-paths) to create dynamic routes e.g. `/posts/cake-recipe`.
-
-```js
-var posts = require('posts.json')
-
-app.get('/posts', function(req, res) {
-  res.json( posts ) // sends all posts
-})
-
-app.get('/posts:title', function(req, res) {
-  res.json( posts[req.params.title] ) // send specific post
-})
-```
-the `?` at the end of a route parameter indicates that it is optional
-```js
-app.get('/posts:title?', function(req, res) {
-  if (req.params.title) {
-    res.json( posts[req.params.title] )
-  } else {
-    res.json( posts )
-  }
-})
-```
-
-Query parameters are available in the `req.query` object `someurl.com?raw=true`
-```js
-app.get('/posts', function(req, res) {
-  if (req.query.raw) {
-    res.sendFile(posts)
-  } else {
-    res.json(posts)
-  }
-})
-```
-Create custom Parameters
-```js
-app.param('title', function(req, res, next) {
-  var title = req.params.title
-  var block = title[0].toUpperCase() + title.slice(1).toLowerCase()
-  // blockTitle will be available to other middleware
-  req.blockTitle - block
-  next()
-})
-app.get('/posts:title', function(req, res) {
-  res.json( posts[req.blockTitle] )
-})
-```
-
-## Example Blog App
-
-```js
+// server.js
 import express from 'express'
-import posts from './posts.json'
 
 const app = express()
 
-app.set('view engine', 'jade')
-app.set('views', `${__dirname}/templates`)
-app.use(express.static(`${__dirname}/public`))
-
-app.get('/', function(req, res) {
-  res.render('index'. { posts })
+app.get('/', (req, res) => {
+  res.send('Welcome to the coffee shop ☕')
 })
 
-app.get('/blog/:title?', function(req, res) {
-  let title = req.params.title
-  if (title === undefined) {
-    res.status(404) // Service Unavailable
-    res.send("This page is under construction!")
-  } else if (req.params.title) {
-    res.render('post', { post: posts[title] })
-  } else {
-    res.render('post', { post: posts })
-  }
-})
-
-app.listen(3000, function() {
-  console.log('Blog is running on port 3000!')
-})
+app.listen(3000, () => console.log('Listening on http://localhost:3000'))
 ```
-
-## Multiple Servers
-We can direct server APIs to another server using `request`
-
-```js
-var request = require('request').defaullts({
-	json: true
-})
-
-app.get('/anotherserver', (req, res) => {
-	request({uri: 'http://localhost:3001'}, (err, res, body) {
-		if (!err && response.statusCode === 200) {
-			res.json(body)
-		} else {
-			res.send(response.statusCode)
-		}
-	})
-})
-```
-
-## Twitter Callout
-We want to create a endpoint where we can submit an username and display their latest 10 tweets
 
 ```sh
-$ curl -s http://localhost:8080/tweets/eallam
+node --watch server.js
+curl localhost:3000   # Welcome to the coffee shop ☕
+```
+
+Compare that to the plain Node version: no `writeHead`, no `Content-Type`, no `res.end()`. `res.send` works it out.
+
+## Routing
+
+A route is a method plus a path plus a handler. Express has a method for each HTTP verb.
+
+```js
+const menu = [
+  { id: 'espresso', name: 'Espresso', price: 2 },
+  { id: 'flat-white', name: 'Flat white', price: 3 },
+]
+
+app.get('/menu', (req, res) => {
+  res.json(menu)
+})
+
+app.post('/orders', (req, res) => {
+  res.status(201).json({ ok: true })
+})
+
+app.get('/old-menu', (req, res) => {
+  res.redirect(301, '/menu')
+})
+```
+
+If nothing matches, Express answers `404 Cannot GET /whatever` for you.
+
+## Route and query parameters
+
+A `:name` in the path captures that part of the URL into `req.params`. Anything after `?` lands in `req.query`.
+
+```js
+app.get('/menu/:id', (req, res) => {
+  const item = menu.find((drink) => drink.id === req.params.id)
+  if (!item) return res.status(404).json({ error: 'Not on the menu' })
+  res.json(item)
+})
+
+app.get('/search', (req, res) => {
+  const term = (req.query.q ?? '').toLowerCase()
+  res.json(menu.filter((drink) => drink.name.toLowerCase().includes(term)))
+})
+```
+
+```sh
+curl localhost:3000/menu/espresso   # {"id":"espresso","name":"Espresso","price":2}
+curl "localhost:3000/search?q=flat" # [{"id":"flat-white",...}]
+```
+
+| | Route params | Query params |
+|---|---|---|
+| URL | `/menu/espresso` | `/search?q=flat` |
+| Read with | `req.params.id` | `req.query.q` |
+| Use for | which thing | how to filter, sort or page it |
+
+## Responding
+
+Every request must get exactly one response. The ones you'll use most:
+
+| Method | Sends |
+|---|---|
+| `res.send(text)` | text or HTML |
+| `res.json(data)` | JSON, with the right header |
+| `res.status(code)` | sets the status, chain it: `res.status(404).json(...)` |
+| `res.redirect(url)` | a redirect |
+| `res.sendFile(path)` | a file from disk |
+
+The full list is in the Express docs.
+
+## Middleware
+
+Middleware is the key idea in Express. A request passes through a line of functions, like an order moving down a coffee bar: take the order, check the payment, make the drink, hand it over. Each function gets `req`, `res` and `next`. It can change `req`, end the request with a response, or call `next()` to pass it on.
+
+```mermaid
+flowchart LR
+  R[Request] --> L[logger] --> J[express.json] --> H[route handler] --> S[Response]
 ```
 
 ```js
-var express = require('express');
-var app = express();
-var request = require('request');
-var url = require('url');
-
-//tweets is the route definition, the colon means we have a dynamic username
-app.get('/tweets/:username', function(request, response) {
-  //here's we take the username from the request parameters
-  var username = req.params.username;
-
-  //connecting to twitter's API and getting the 10 tweets from his timeline
-  options = {
-    protocol: "http:",
-    host: 'api.twitter.com',
-    pathname: '/1/statuses/user_timeline.json',
-    query: {
-      screen_name: username,
-      count: 10
-    }
-  }
-  //we call our request with url.
-  var twitterUrl = url.format(options);
-  // the request will come back and we'll pipe it into the response
-  request(twitterUrl).pipe(response);
-});
+// runs for every request
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`)
+  next()
+})
 ```
 
-## Parsing Data
-The data won't be very pretty, so there's some work that needs to be done
+Order matters: middleware runs in the order you `app.use` it, so register it above the routes it should affect.
 
-```sh
-$ npm install prettyjson -g # will gives an executable
-$ curl -s http://localhost:8080/tweets/eallam | prettyjson
-```
-
-Now we want to pass that data into our browser for that we'll need a templating library. ejs = Embedded JavaScript, by default it will look for templates on views directory
-
-```sh
-$ npm install --save ejs
-```
-
-Back in our application instead of using pipe we're gonna give it a callback function so we can have access to the error, response and body
+Express ships with a body parser. Without it, `req.body` is `undefined`.
 
 ```js
-app.get('/tweets/:username', function(request, response) {
-  //here's we take the username from the request parameters
-  var username = req.params.username;
+app.use(express.json())
 
-  //connecting to twitter's API and getting the 10 tweets from his timeline
-  options = {
-    protocol: "http:",
-    host: 'api.twitter.com',
-    pathname: '/1/statuses/user_timeline.json',
-    query: {
-      screen_name: username,
-      count: 10
-    }
+app.post('/orders', (req, res) => {
+  const { drink, name } = req.body
+  res.status(201).json({ message: `${drink} for ${name}, coming up` })
+})
+```
+
+```sh
+curl -X POST localhost:3000/orders \
+  -H 'Content-Type: application/json' \
+  -d '{"drink":"latte","name":"Ana"}'
+# {"message":"latte for Ana, coming up"}
+```
+
+Pass a path to `app.use` and the middleware only runs for URLs that start with it:
+
+```js
+app.use('/admin', (req, res, next) => {
+  if (req.get('x-api-key') !== process.env.ADMIN_KEY) {
+    return res.status(401).send('Nope')
   }
-  //we call our request with url.
-  var twitterUrl = url.format(options);
-  //callback function so we can have access to the error, response and body
-  request(twitterUrl, function(error, response, body){
-    //parsing our data and storing it in tweets
-    var tweets = JSON.parse(body);
-    //we need to choose what we want to go into our template by setting a locals property
-    response.locals = {tweets: tweets, name: username};
-    //lastly we tell it which template we want it to render out
-    response.render('tweets.ejs');
-  });
-});
+  next()
+})
 ```
 
-In `/views/tweets.ejs`
+## Static files
 
-```html
-<h1>Tweets for @<%= name %></h1>
-<ul>
-	<%= tweets.forEach(function(tweet){ %>
-		<li><%= tweet.text %></li>
-	<% }); %>
-</ul>
+`express.static` serves a folder as-is: HTML, CSS, images. Great for a small site or a built front end.
+
+```js
+app.use(express.static('public'))
+// public/logo.png  →  http://localhost:3000/logo.png
+
+app.use('/assets', express.static('public'))
+// public/logo.png  →  http://localhost:3000/assets/logo.png
 ```
+
+The path is relative to where you run `node`. To make it relative to the file instead, use `import.meta.dirname`:
+
+```js
+import path from 'node:path'
+
+app.use(express.static(path.join(import.meta.dirname, 'public')))
+```
+
+## Errors
+
+Middleware with **four** arguments is an error handler. Put it last. Anything that calls `next(error)`, or throws inside a handler, ends up here.
+
+```js
+app.get('/menu/:id', async (req, res) => {
+  const item = await loadFromDatabase(req.params.id) // if this throws...
+  res.json(item)
+})
+
+app.use((error, req, res, next) => {
+  console.error(error)
+  res.status(500).json({ error: 'Something went wrong' }) // ...we answer here
+})
+```
+
+## Calling another server
+
+A route can fetch from another API and pass the result on. Use the built-in `fetch` (see [[docs/node/node-http|Node - HTTP]]).
+
+```js
+app.get('/weather', async (req, res) => {
+  const upstream = await fetch('http://localhost:3001/today')
+  if (!upstream.ok) return res.status(502).json({ error: 'Weather service is down' })
+  res.json(await upstream.json())
+})
+```
+
+`502 Bad Gateway` is the honest status when the problem is the other server, not yours.
+
+## Common mistakes
+
+- **Sending two responses.** `res.json(...)` followed by `res.send(...)` throws "Cannot set headers after they are sent". Use `return res.status(404)...` in early exits.
+- **Never responding or calling `next()`.** The request hangs.
+- **`req.body` is `undefined`.** You forgot `app.use(express.json())`, or registered it after the route.
+- **Error handler with three arguments.** Express only treats it as an error handler when it has all four, even if you don't use `next`.
+
+## Try it
+
+1. Build `GET /menu` and `GET /menu/:id` with a proper `404` for unknown drinks.
+2. Add `POST /orders` that rejects a body without a `drink` with a `400`.
+3. Write a middleware that adds `req.startedAt = Date.now()` and logs how long each request took.
 
 ## Related
 - [[docs/node/node-http|Node - HTTP]]
+- [[docs/node/node-npm|Node - npm and pnpm]]
+- [[docs/node/node-process|Node - Process]]
 - [[docs/http|Networking - HTTP]]
-- [[docs/node/node-socket-io|Node - Socket.io]]
+- [[docs/curl|Networking - Curl]]
