@@ -682,7 +682,7 @@ mongodump --uri="mongodb+srv://username:password@cluster0.example.mongodb.net/ol
 ```
 
 ## Related
-- [[stack/mongodb|MongoDB]]
+- [[stack/backend/mongodb|MongoDB]]
 - [[docs/databases|Databases]]
 - [[docs/redis|Redis]]
 - [[docs/elasticsearch|Elastic Search]]

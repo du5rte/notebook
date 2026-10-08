@@ -320,6 +320,6 @@ async function() {
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-scope|JavaScript - Scope]]
 - [[docs/javascript/javascript-decorators|JavaScript - Common Patterns]]

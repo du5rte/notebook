@@ -95,6 +95,6 @@ Organises data into named values and lists of values in a `.plist` file
 Extensible Markup Language is a set of rules for encoding documents in both machines and human readable format.
 
 ## Related
-- [[stack/swift|Swift]]
+- [[stack/mobile/swift|Swift]]
 - [[docs/swift/swift-variables|Swift - Variables]]
 - [[docs/swift/swift-xcode|Xcode]]

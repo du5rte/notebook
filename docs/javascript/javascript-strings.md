@@ -133,7 +133,7 @@ nospaces`
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-numbers|JavaScript Numbers]]
 - [[docs/javascript/javascript-booleans|JavaScript - Booleans]]
 - [[docs/javascript/javascript-arrays|JavaScript Arrays]]

@@ -160,6 +160,6 @@ for(let post of postArray) {
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-objects|JavaScript Objects]]
 - [[docs/javascript/javascript-object-oriented|JavaScript - Classes]]

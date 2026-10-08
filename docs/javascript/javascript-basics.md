@@ -283,7 +283,7 @@ delete anObjectWithProps.someProperty // OK
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/browser/browser-basics|DOM]]
 - [[docs/browser/browser-storage|Storage]]
 - [[docs/node/node-basics|Node.js]]

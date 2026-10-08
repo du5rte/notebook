@@ -79,6 +79,6 @@ repeat {
 ```
 
 ## Related
-- [[stack/swift|Swift]]
+- [[stack/mobile/swift|Swift]]
 - [[docs/swift/swift-conditionals|Swift - Conditionals]]
 - [[docs/swift/swift-collections|Swift - Collections and Control Flow]]

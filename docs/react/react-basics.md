@@ -262,4 +262,4 @@ class Parent extends React.Component {
 ```
 
 ## Related
-- [[stack/react|React]]
+- [[stack/web/react|React]]

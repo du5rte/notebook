@@ -16,4 +16,4 @@ Resources:
 - [react-motion](https://github.com/chenglou/react-motion)
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]

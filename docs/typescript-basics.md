@@ -181,5 +181,5 @@ playlist.renderInElement(document.getElementById("playlist"))
 ```
 
 ## Related
-- [[stack/typescript|TypeScript]]
+- [[stack/web/typescript|TypeScript]]
 - [[docs/javascript/javascript-basics|JavaScript]]

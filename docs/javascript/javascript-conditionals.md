@@ -98,6 +98,6 @@ function counter(state = 0, action) {
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-loops|JavaScript - Loops]]
 - [[docs/javascript/javascript-booleans|JavaScript - Booleans]]

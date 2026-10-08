@@ -128,7 +128,7 @@ Math.floor( Math.random()*6 ) + 1; // 1 ~ 6
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-strings|JavaScript Strings]]
 - [[docs/javascript/javascript-booleans|JavaScript - Booleans]]
 - [[docs/javascript/javascript-arrays|JavaScript Arrays]]

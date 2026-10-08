@@ -151,7 +151,7 @@ console.log(!false); // true
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-strings|JavaScript Strings]]
 - [[docs/javascript/javascript-numbers|JavaScript Numbers]]
 - [[docs/javascript/javascript-arrays|JavaScript Arrays]]

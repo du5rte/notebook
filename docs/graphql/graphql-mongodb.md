@@ -68,4 +68,4 @@ export const customers = {
 ```
 
 ## Related
-- [[stack/graphql|GraphQL]]
+- [[stack/backend/graphql|GraphQL]]

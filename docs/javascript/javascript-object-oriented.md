@@ -258,6 +258,6 @@ class myMethods {
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-objects|JavaScript Objects]]
 - [[docs/javascript/javascript-maps|JavaScript - Maps]]

@@ -15,4 +15,4 @@ Resources:
 - [Apollo - Deep-dive into Meteor's future stack with GraphQL, Relay and Galaxy](https://transmission.simplecast.fm/7)
 
 ## Related
-- [[stack/apollo|Apollo]]
+- [[stack/backend/apollo|Apollo]]

@@ -9,7 +9,7 @@ raw/       source material (articles, videos, papers). Never edited after it lan
 wiki/      agent-maintained knowledge: sources/ entities/ concepts/ synthesis/, plus index.md and log.md
 docs/      legacy notebook, human-written: <name>.md, or <name>/<note>.md for a language or tool with several notes (css/, node/, git/...), plus index.md
 archive/   tools I no longer use, same layout as docs/, plus index.md. Out of the main index, still searchable.
-stack/     everything I have used (languages, frameworks, libraries, services, tools): one file each with status, plus index.md
+stack/     everything I have used (languages, frameworks, libraries, services, tools): one file each with status, in an area folder (design, web, mobile, backend, devops, ai), plus index.md
 saved/     bookmarks I haven't used yet: ui-kits.md, icons.md, fonts.md, design-resources.md. One table per file, no file per item, same columns everywhere: Name | Kind | Tags | Price | Link | Library | Notes, sorted A-Z.
 ```
 

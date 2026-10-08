@@ -76,7 +76,7 @@ Optional Type
 A value that can contain of two values, if it doesn't contain it returns nil otherwise it will return the value
 
 ## Related
-- [[stack/swift|Swift]]
+- [[stack/mobile/swift|Swift]]
 - [[docs/swift/swift-strings|Swift - Strings]]
 - [[docs/swift/swift-numbers|Swift - Numbers]]
 - [[docs/swift/swift-booleans|Swift - Booleans]]

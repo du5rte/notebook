@@ -195,4 +195,4 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 ## Related
-- [[stack/redux|Redux]]
+- [[stack/web/redux|Redux]]

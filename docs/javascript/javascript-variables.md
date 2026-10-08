@@ -114,5 +114,5 @@ fruits[1] = 'pineapple' // OK
 ```
 
 ## Related
-- [[stack/javascript|JavaScript]]
+- [[stack/web/javascript|JavaScript]]
 - [[docs/javascript/javascript-scope|JavaScript - Scope]]

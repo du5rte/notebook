@@ -175,6 +175,6 @@ coordinatePoint.surroundingPoints()
 ```
 
 ## Related
-- [[stack/swift|Swift]]
+- [[stack/mobile/swift|Swift]]
 - [[docs/swift/swift-errors|Swift - Error Handling]]
 - [[docs/swift/swift-scratch|Swift - Scratch]]

@@ -69,4 +69,4 @@ export default class Hello extends React.Component {
 ```
 
 ## Related
-- [[stack/apollo|Apollo]]
+- [[stack/backend/apollo|Apollo]]

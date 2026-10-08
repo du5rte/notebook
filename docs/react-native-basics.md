@@ -36,4 +36,4 @@ import { View, Text, StyleSheet } from 'react-native';
 ```
 
 ## Related
-- [[stack/react-native|React Native]]
+- [[stack/mobile/react-native|React Native]]

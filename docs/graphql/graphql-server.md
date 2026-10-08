@@ -118,5 +118,5 @@ export const hello = {
 ```
 
 ## Related
-- [[stack/graphql|GraphQL]]
+- [[stack/backend/graphql|GraphQL]]
 - [[docs/graphql/graphql-graphiql|GraphQL - GraphiQL]]
