@@ -69,4 +69,4 @@ export default class Hello extends React.Component {
 ```
 
 ## Related
-- [[docs/graphql/graphql|GraphQL]]
+- [[stack/apollo|Apollo]]

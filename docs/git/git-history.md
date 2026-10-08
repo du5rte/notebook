@@ -46,5 +46,5 @@ git diff 7e5e3
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-stage|Git - Stage Area]]

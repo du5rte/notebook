@@ -121,5 +121,6 @@ class str(object)
 ...
 
 ## Related
-- [[docs/ml/ml|Machine Learning]]
+- [[stack/python|Python]]
+- [[docs/ml/ml-basics|Machine Learning]]
 - [[docs/ml/ml-data-analysis|Data Analysis]]

@@ -301,6 +301,6 @@ We can then include icons using pseudo classes
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-values|CSS - Values and Units]]
 - [[docs/css/css-box-model|CSS - Box model]]

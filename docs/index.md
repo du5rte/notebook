@@ -10,7 +10,7 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 ## Web
 
 ### css
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-animations|CSS - Animations]]
 - [[docs/css/css-box-model|CSS - Box model]]
 - [[docs/css/css-flexbox|CSS - Flexbox]]
@@ -23,7 +23,7 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/css/css-values|CSS - Values and Units]]
 
 ### html
-- [[docs/html/html|HTML]]
+- [[docs/html/html-basics|HTML]]
 - [[docs/html/html-forms|HTML - Forms]]
 - [[docs/html/html-objects|HTML - Objects]]
 - [[docs/html/html-tables|HTML Tables]]
@@ -31,26 +31,26 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/html/html-video-and-audio|Video and Audio]]
 
 ### browser
-- [[docs/browser/browser|DOM]]
+- [[docs/browser/browser-basics|DOM]]
 - [[docs/browser/browser-geolocation|JavaScript - Geolocation]]
 - [[docs/browser/browser-storage|Storage]] *(draft)*
 
 ### svg
-- [[docs/svg/svg|SVG]]
+- [[docs/svg/svg-basics|SVG]]
 - [[docs/svg/svg-animations|SVG - Animations]]
 - [[docs/svg/svg-elements|SVG - Elements]]
 
 ## JavaScript
 
-- [[docs/react-native|React Native]] *(outdated)*
-- [[docs/redux|React - Redux]] *(outdated)*
+- [[docs/react-native-basics|React Native]] *(outdated)*
+- [[docs/redux-basics|React - Redux]] *(outdated)*
 
 ### apollo
 - [[docs/apollo/apollo-client|React - Apollo Client]] *(outdated)*
 - [[docs/apollo/apollo-server|GraphQL - Apollo Server]] *(outdated)*
 
 ### javascript
-- [[docs/javascript/javascript|JavaScript]]
+- [[docs/javascript/javascript-basics|JavaScript]]
 - [[docs/javascript/javascript-algorithms|JavaScript - Algorithms]]
 - [[docs/javascript/javascript-animations|JavaScript - Animations]] *(outdated)*
 - [[docs/javascript/javascript-arrays|JavaScript Arrays]]
@@ -67,16 +67,16 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/javascript/javascript-objects|JavaScript Objects]]
 - [[docs/javascript/javascript-scope|JavaScript - Scope]]
 - [[docs/javascript/javascript-strings|JavaScript Strings]]
-- [[docs/typescript|TypeScript]] *(outdated)*
+- [[docs/typescript-basics|TypeScript]] *(outdated)*
 - [[docs/javascript/javascript-unit-testing|JavaScript - Unit Testing]]
 - [[docs/javascript/javascript-variables|JavaScript - Variables]]
 
 ### react
-- [[docs/react/react|React]] *(outdated)*
+- [[docs/react/react-basics|React]] *(outdated)*
 - [[docs/react/react-style|React - Style]] *(outdated)*
 
 ### node
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/node/node-cli|Node - CLI]] *(draft)*
 - [[docs/node/node-events|Node - Events]] *(draft)*
 - [[docs/node/node-http|Node - HTTP]] *(draft)*
@@ -88,7 +88,7 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/node/node-streams|Node.js - Streams]]
 
 ### graphql
-- [[docs/graphql/graphql|GraphQL]]
+- [[docs/graphql/graphql-basics|GraphQL]]
 - [[docs/graphql/graphql-graphiql|GraphQL - GraphiQL]]
 - [[docs/graphql/graphql-mongodb|GraphQL - MongoDB]] *(outdated)*
 - [[docs/graphql/graphql-server|GraphQL - Server]]
@@ -104,7 +104,7 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/elasticsearch|Elastic Search]]
 - [[docs/http|Networking - HTTP]]
 - [[docs/jwt|JWT]]
-- [[docs/mongodb|MongoDB]]
+- [[docs/mongodb-basics|MongoDB]]
 - [[docs/networking|Networking]]
 - [[docs/nginx|Nginx]]
 - [[docs/oauth2|OAuth]]
@@ -116,7 +116,7 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/ssl|SSL]]
 
 ### git
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-branching|Git - Branching]]
 - [[docs/git/git-flow|Git - Flow]]
 - [[docs/git/git-history|Git - History]]
@@ -127,7 +127,7 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/git/git-tag|Git - Tag]]
 
 ### linux
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/linux/linux-applications|Console - Applications]]
 - [[docs/linux/linux-environment|Console - Environment]]
 - [[docs/linux/linux-files|Console - Files and Directories]]
@@ -139,10 +139,10 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 
 ## Languages
 
-- [[docs/python|Python]] *(draft)*
+- [[docs/python-basics|Python]] *(draft)*
 
 ### swift
-- [[docs/swift/swift|Swift]]
+- [[docs/swift/swift-basics|Swift]]
 - [[docs/swift/swift-booleans|Swift - Booleans]]
 - [[docs/swift/swift-collections|Swift - Collections and Control Flow]]
 - [[docs/swift/swift-conditionals|Swift - Conditionals]]
@@ -162,11 +162,11 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 ## Machine Learning
 
 ### ml
-- [[docs/ml/ml|Machine Learning]] *(draft)*
+- [[docs/ml/ml-basics|Machine Learning]] *(draft)*
 - [[docs/ml/ml-data-analysis|Data Analysis]] *(draft)*
 
 ## Tools
 
 - [[docs/markdown|Markdown]]
 - [[docs/regex|Regex]] *(draft)*
-- [[docs/webpack|Webpack]] *(outdated)*
+- [[docs/webpack-basics|Webpack]] *(outdated)*

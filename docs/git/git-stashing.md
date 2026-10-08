@@ -43,6 +43,6 @@ git stash apply stash@{1}
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-stage|Git - Stage Area]]
 - [[docs/git/git-branching|Git - Branching]]

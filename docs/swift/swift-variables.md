@@ -45,5 +45,5 @@ language = "Objective-C" // Error
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-xcode|Xcode]]

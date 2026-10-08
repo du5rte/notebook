@@ -253,3 +253,6 @@ bundle(function(fileExports) { // <= browser sends request here
   // fileExports can be used
 });
 ```
+
+## Related
+- [[stack/webpack|Webpack]]

@@ -15,9 +15,9 @@ verified: false
 ---
 # TypeScript
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Platforms: [[stack/react|Web]], [[stack/react-native|React Native]], [[docs/node/node-basics|Node]]
 
-Notes: [[docs/typescript]]
+Notes: [[docs/typescript-basics]]
 
 ## Why I picked it
 

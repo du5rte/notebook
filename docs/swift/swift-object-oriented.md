@@ -763,7 +763,7 @@ extension String {
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-protocols|Swift - Protocols]]
 - [[docs/swift/swift-enums|Swift - Enums]]
 - [[docs/swift/swift-memory-management|Swift - Memory Management]]

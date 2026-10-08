@@ -12,7 +12,7 @@ verified: false
 ---
 # React Handyhooks
 
-Platforms: [[docs/react/react|Web]]
+Platforms: [[stack/react|React]]
 
 ## Why I picked it
 

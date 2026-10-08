@@ -188,6 +188,6 @@ Renders a radio input they must share the same `name` attribute.
 ```
 
 ## Related
-- [[docs/html/html|HTML]]
+- [[docs/html/html-basics|HTML]]
 - [[docs/html/html-tables|HTML Tables]]
 - [[docs/html/html-text|HTML - Text]]

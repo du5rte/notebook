@@ -14,7 +14,7 @@ verified: false
 ---
 # daisyUI
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 ## Why I picked it

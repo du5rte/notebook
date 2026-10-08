@@ -47,5 +47,5 @@ $ deluser --remove-home john
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/linux/linux-permissions|Console - Permissions]]

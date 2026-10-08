@@ -179,7 +179,7 @@ $('#opendiv').on('click', function() {
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/javascript/javascript-functions|JavaScript Functions]]
 - [[docs/javascript/javascript-decorators|JavaScript - Common Patterns]]
 - [[docs/javascript/javascript-variables|JavaScript - Variables]]

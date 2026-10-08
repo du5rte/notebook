@@ -107,7 +107,7 @@ class Apartment {
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-object-oriented|Swift - Objects]]
 - [[docs/swift/swift-protocols|Swift - Protocols]]
 - [[docs/swift/swift-enums|Swift - Enums]]

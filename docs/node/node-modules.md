@@ -176,5 +176,5 @@ myMod.bar();
 
 ## Related
 - [[docs/node/node-npm|npm]]
-- [[docs/node/node|Node.js]]
-- [[docs/javascript/javascript|JavaScript]]
+- [[docs/node/node-basics|Node.js]]
+- [[docs/javascript/javascript-basics|JavaScript]]

@@ -57,7 +57,7 @@ Embed video
 ```
 
 ## Related
-- [[docs/html/html|HTML]]
-- [[docs/svg/svg|SVG]]
+- [[docs/html/html-basics|HTML]]
+- [[docs/svg/svg-basics|SVG]]
 - [[docs/svg/svg-elements|SVG - Elements]]
 - [[docs/html/html-video-and-audio|Video and Audio]]

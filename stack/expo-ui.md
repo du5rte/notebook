@@ -13,7 +13,7 @@ verified: false
 ---
 # Expo UI
 
-Platforms: [[docs/react-native|React Native]]
+Platforms: [[stack/react-native|React Native]], [[stack/expo|Expo]]
 
 ## Why I picked it
 

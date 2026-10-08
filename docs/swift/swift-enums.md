@@ -372,7 +372,7 @@ enum Text: String {
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-object-oriented|Swift - Objects]]
 - [[docs/swift/swift-protocols|Swift - Protocols]]
 - [[docs/swift/swift-memory-management|Swift - Memory Management]]

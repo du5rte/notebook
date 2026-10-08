@@ -10,5 +10,5 @@ status: draft
 # Data Analysis
 
 ## Related
-- [[docs/ml/ml|Machine Learning]]
-- [[docs/python|Python]]
+- [[docs/ml/ml-basics|Machine Learning]]
+- [[docs/python-basics|Python]]

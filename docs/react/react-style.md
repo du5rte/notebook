@@ -90,4 +90,4 @@ class Button extends React.Component {
 ```
 
 ## Related
-- [[docs/react/react|React]]
+- [[stack/react|React]]

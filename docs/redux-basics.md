@@ -193,3 +193,6 @@ function App() {
 
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
+
+## Related
+- [[stack/redux|Redux]]

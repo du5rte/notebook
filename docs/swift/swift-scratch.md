@@ -47,6 +47,6 @@ extension Page {
 A list that has a reference to the next item in the list `singly link list`. A linked list that has both references to the next and previous item is a `doubly link list`
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-functions|Swift - Functions]]
 - [[docs/swift/swift-errors|Swift - Error Handling]]

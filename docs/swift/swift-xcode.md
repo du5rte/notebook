@@ -30,5 +30,5 @@ In `Interface Builder` Select `ViewController` go to `Editor > Embed In > Naviga
 show or push
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-variables|Swift - Variables]]

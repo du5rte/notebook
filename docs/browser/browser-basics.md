@@ -159,6 +159,6 @@ newInput.value // true
 ```	
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[docs/javascript/javascript-basics|JavaScript]]
 - [[docs/browser/browser-storage|Storage]]
 - [[docs/browser/browser-geolocation|JavaScript - Geolocation]]

@@ -15,7 +15,7 @@ verified: false
 ---
 # BrowserSync
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/browsersync]]

@@ -34,7 +34,7 @@ npm link
 ```
 
 ## Related
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/node/node-process|Process]]
 - [[docs/linux/linux-processes|Console - Processes]]
 - [[docs/linux/linux-environment|Console - Environment]]

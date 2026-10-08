@@ -13,7 +13,7 @@ verified: false
 ---
 # SendGrid
 
-Platforms: [[docs/node/node|Node]]
+Platforms: node
 
 ## Why I picked it
 

@@ -15,7 +15,7 @@ verified: false
 ---
 # Flightplan
 
-Platforms: [[docs/node/node|Node]]
+Platforms: node
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/flightplan]]

@@ -173,7 +173,7 @@ console.log(y)
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/javascript/javascript-strings|JavaScript Strings]]
 - [[docs/javascript/javascript-numbers|JavaScript Numbers]]
 - [[docs/javascript/javascript-booleans|JavaScript - Booleans]]

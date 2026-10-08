@@ -8,14 +8,14 @@ tags: [library, tooling]
 categories: [tooling]
 platforms: [node]
 status: dropped
-replaced_by: "[[stack/lefthook]]"
+replaced_by: lefthook
 url: https://typicode.github.io/husky
 repo: https://github.com/typicode/husky
 verified: false
 ---
 # Husky
 
-Platforms: [[docs/node/node|Node]]
+Platforms: node
 Language: [[stack/javascript|JavaScript]]
 
 ## Why I picked it

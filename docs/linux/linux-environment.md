@@ -59,7 +59,7 @@ export PATH=/home/treehouse/bin:$PATH
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/node/node-process|Process]]
 - [[docs/node/node-cli|Node - CLI]]
 - [[docs/linux/linux-processes|Console - Processes]]

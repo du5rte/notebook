@@ -14,7 +14,7 @@ verified: false
 ---
 # Clerk
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Platforms: web, react-native
 Language: [[stack/typescript|TypeScript]]
 
 ## Why I picked it

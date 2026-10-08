@@ -597,7 +597,7 @@ race.end()
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-object-oriented|Swift - Objects]]
 - [[docs/swift/swift-enums|Swift - Enums]]
 - [[docs/swift/swift-memory-management|Swift - Memory Management]]

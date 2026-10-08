@@ -15,9 +15,9 @@ verified: false
 ---
 # Python
 
-Platforms: [[docs/node/node|Node]]
+Platforms: [[docs/node/node-basics|Node]]
 
-Notes: [[docs/python]], [[docs/ml/ml]]
+Notes: [[docs/python-basics]], [[docs/ml/ml-basics]]
 
 ## Why I picked it
 

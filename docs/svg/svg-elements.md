@@ -295,5 +295,5 @@ Draw a Elliptical Arc Curve using the `A` property
 ```
 
 ## Related
-- [[docs/svg/svg|SVG]]
+- [[docs/svg/svg-basics|SVG]]
 - [[docs/html/html-objects|HTML - Objects]]

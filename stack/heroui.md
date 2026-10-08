@@ -14,8 +14,7 @@ verified: false
 ---
 # HeroUI
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
-Language: [[stack/typescript|TypeScript]]
+Platforms: [[stack/react|React]], [[stack/react-native|React Native]]
 
 ## Why I picked it
 

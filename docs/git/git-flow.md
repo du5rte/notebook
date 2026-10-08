@@ -54,7 +54,7 @@ git flow hotfix start oh_no_not_a_bug
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-branching|Git - Branching]]
 - [[docs/git/git-merging|Git - Merging]]
 - [[docs/git/git-remotes|Git - Remote]]

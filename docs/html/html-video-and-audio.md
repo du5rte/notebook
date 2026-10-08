@@ -139,5 +139,5 @@ http://mediaelementjs.com/
 ```
 
 ## Related
-- [[docs/html/html|HTML]]
+- [[docs/html/html-basics|HTML]]
 - [[docs/html/html-objects|HTML - Objects]]

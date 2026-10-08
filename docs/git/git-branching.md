@@ -53,7 +53,7 @@ git branch -D some_branch
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-merging|Git - Merging]]
 - [[docs/git/git-flow|Git - Flow]]
 - [[docs/git/git-stashing|Git - Stashing]]

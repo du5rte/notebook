@@ -465,5 +465,5 @@ movies/_search?q=+year:>2010+title:trek
 
 ## Related
 - [[docs/databases|Databases]]
-- [[docs/mongodb|MongoDB]]
+- [[docs/mongodb-basics|MongoDB]]
 - [[docs/redis|Redis]]

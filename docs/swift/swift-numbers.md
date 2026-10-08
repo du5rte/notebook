@@ -74,7 +74,7 @@ levelScore -= 2 // 0
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-strings|Swift - Strings]]
 - [[docs/swift/swift-booleans|Swift - Booleans]]
 - [[docs/swift/swift-collections|Swift - Collections and Control Flow]]

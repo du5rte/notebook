@@ -9,14 +9,14 @@ categories: [tooling]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[stack/webpack]]"
+replaced_by: webpack
 url: https://gulpjs.com
 repo: https://github.com/gulpjs/gulp
 verified: false
 ---
 # Gulp
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/gulp]]

@@ -16,5 +16,5 @@ $ npm install --save socket.io
 ```
 
 ## Related
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/node/node-server|Node - Server]]

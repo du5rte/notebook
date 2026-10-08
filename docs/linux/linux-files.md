@@ -115,5 +115,5 @@ $ find documents bin -name "hello.txt"
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/linux/linux-pipe|Console - Pipes and Redirection]]

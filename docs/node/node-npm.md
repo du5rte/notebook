@@ -158,5 +158,5 @@ $ npm publish
 
 ## Related
 - [[docs/node/node-modules|Node - Modules]]
-- [[docs/node/node|Node.js]]
-- [[docs/javascript/javascript|JavaScript]]
+- [[docs/node/node-basics|Node.js]]
+- [[docs/javascript/javascript-basics|JavaScript]]

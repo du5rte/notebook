@@ -204,6 +204,6 @@ Unicode can be displayed in a few way with [charref](https://dev.w3.org/html5/ht
 ```
 
 ## Related
-- [[docs/html/html|HTML]]
+- [[docs/html/html-basics|HTML]]
 - [[docs/html/html-forms|HTML - Forms]]
 - [[docs/html/html-tables|HTML Tables]]

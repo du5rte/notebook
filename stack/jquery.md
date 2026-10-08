@@ -10,14 +10,14 @@ platforms: [web]
 status: dropped
 since: 2015
 until: 2016
-replaced_by: "[[stack/react]]"
+replaced_by: react
 url: https://jquery.com
 repo: https://github.com/jquery/jquery
 verified: false
 ---
 # jQuery
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/jquery/basics]], [[archive/jquery/ajax]], [[archive/jquery/plugins]]

@@ -265,6 +265,6 @@ transition-timing-function: cubic-bezier(0.5, -0.5, 0.3, 1.3);
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-animations|CSS - Animations]]
 - [[docs/svg/svg-animations|SVG - Animations]]

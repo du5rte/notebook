@@ -58,6 +58,6 @@ var length = path.getTotalLength(); // 420.27581787109375
 ```
 
 ## Related
-- [[docs/svg/svg|SVG]]
+- [[docs/svg/svg-basics|SVG]]
 - [[docs/css/css-animations|CSS - Animations]]
 - [[docs/css/css-transform-transitions|CSS - Transitions and Transforms]]

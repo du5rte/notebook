@@ -9,16 +9,16 @@ categories: [language]
 platforms: [ios]
 status: dropped
 since: 2016
-replaced_by: "[[stack/react-native]]"
+replaced_by: react-native
 url: https://www.swift.org
 repo: https://github.com/swiftlang/swift
 verified: false
 ---
 # Swift
 
-Platforms: [[docs/swift/swift|iOS]]
+Platforms: [[stack/swift|iOS]]
 
-Notes: [[docs/swift/swift]]
+Notes: [[docs/swift/swift-basics]]
 
 ## Why I picked it
 

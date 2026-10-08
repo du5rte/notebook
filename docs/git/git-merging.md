@@ -66,6 +66,6 @@ Git automatically knows you're resolving a merge and writes the merge commit mes
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-branching|Git - Branching]]
 - [[docs/git/git-flow|Git - Flow]]

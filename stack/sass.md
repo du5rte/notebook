@@ -15,7 +15,7 @@ verified: false
 ---
 # Sass
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 
 Notes: [[archive/sass]]
 

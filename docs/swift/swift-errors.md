@@ -183,6 +183,6 @@ do {
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-functions|Swift - Functions]]
 - [[docs/swift/swift-scratch|Swift - Scratch]]

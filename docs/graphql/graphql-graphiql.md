@@ -125,5 +125,5 @@ mutation {
 ```
 
 ## Related
-- [[docs/graphql/graphql|GraphQL]]
+- [[stack/graphql|GraphQL]]
 - [[docs/graphql/graphql-server|GraphQL - Server]]

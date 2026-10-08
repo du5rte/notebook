@@ -50,5 +50,5 @@ var data = JSON.parse(result)
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/browser/browser-storage|Storage]]

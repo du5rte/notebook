@@ -121,6 +121,6 @@ Imagine that we want to have a festive version of the logo for our Christmassy s
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-selectors|CSS - Selectors]]
 - [[archive/sass|Sass]]

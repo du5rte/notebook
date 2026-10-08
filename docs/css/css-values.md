@@ -199,4 +199,4 @@ color: hsl(348, 100%, 50%, .7);
 - [[docs/css/css-fonts|CSS - Fonts]]
 - [[docs/css/css-box-model|CSS - Box model]]
 - [[docs/css/css-others|CSS - Other Features]]
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]

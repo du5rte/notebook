@@ -14,10 +14,10 @@ verified: true
 ---
 # Lucide
 
-Platforms: [[docs/react-native|React Native]], [[docs/react/react|Web]]
+Platforms: web, react-native
 Language: [[stack/typescript|TypeScript]]
 
-Replaces [[stack/feather|Feather]]. Animated version: [lucide-animated](https://lucide-animated.com/).
+Replaces Feather. Animated version: [lucide-animated](https://lucide-animated.com/).
 
 ## Why I picked it
 

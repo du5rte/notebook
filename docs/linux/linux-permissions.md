@@ -89,5 +89,5 @@ chmod 640 hello.txt # rw-r-----
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/linux/linux-users|Console - Users]]

@@ -356,5 +356,5 @@ padding: 210px 0 0 120px;
 	
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-values|CSS - Values and Units]]

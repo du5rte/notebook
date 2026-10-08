@@ -133,7 +133,7 @@ p {
 ```
 
 ## Related
-- [[docs/html/html|HTML]]
+- [[docs/html/html-basics|HTML]]
 - [[archive/sass|Sass]]
 - [[docs/css/css-others|CSS - Other Features]]
 - [[docs/css/css-values|CSS - Values and Units]]

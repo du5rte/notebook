@@ -128,6 +128,6 @@ chat.emit('message', "Muahahah");
 ```
 
 ## Related
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/javascript/javascript-async|JavaScript - Asynchronous Programming]]
 - [[docs/javascript/javascript-decorators|JavaScript - Common Patterns]]

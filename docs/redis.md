@@ -22,5 +22,5 @@ npm install --save redis
 
 ## Related
 - [[docs/databases|Databases]]
-- [[docs/mongodb|MongoDB]]
+- [[docs/mongodb-basics|MongoDB]]
 - [[docs/elasticsearch|Elastic Search]]

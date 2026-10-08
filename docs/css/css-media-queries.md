@@ -217,6 +217,6 @@ Allows us to define styles for the printed page
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-flexbox|CSS - Flexbox]]
 - [[docs/css/css-box-model|CSS - Box model]]

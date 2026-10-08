@@ -34,3 +34,6 @@ Instead of `div` we have `View`, `p` as `Text`, `img` as `Image`.
 ```js
 import { View, Text, StyleSheet } from 'react-native';
 ```
+
+## Related
+- [[stack/react-native|React Native]]

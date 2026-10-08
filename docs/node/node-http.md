@@ -323,6 +323,6 @@ var makeRequest = function(message) {
 ```
 
 ## Related
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/node/node-server|Node - Server]]
 - [[docs/http|Networking - HTTP]]

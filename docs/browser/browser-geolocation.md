@@ -43,4 +43,4 @@ navigator.geolocation.getCurrentPosition((position) => {
 ```
 
 ## Related
-- [[docs/browser/browser|DOM]]
+- [[docs/browser/browser-basics|DOM]]

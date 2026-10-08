@@ -15,10 +15,10 @@ verified: false
 ---
 # GraphQL
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Platforms: web, react-native, node
 Language: [[stack/typescript|TypeScript]]
 
-Notes: [[docs/graphql/graphql]]
+Notes: [[docs/graphql/graphql-basics]]
 
 ## Why I picked it
 

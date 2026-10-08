@@ -110,7 +110,7 @@ fork('./app')
 ```
 
 ## Related
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/node/node-cli|Node - CLI]]
 - [[docs/linux/linux-processes|Console - Processes]]
 - [[docs/linux/linux-environment|Console - Environment]]

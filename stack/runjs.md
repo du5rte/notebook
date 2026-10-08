@@ -13,7 +13,7 @@ verified: false
 ---
 # RunJS
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 
 ## Why I picked it
 

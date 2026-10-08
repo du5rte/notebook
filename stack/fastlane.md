@@ -14,7 +14,7 @@ verified: false
 ---
 # Fastlane
 
-Platforms: [[docs/react-native|React Native]], [[docs/swift/swift|iOS]]
+Platforms: [[stack/react-native|React Native]]
 
 ## Why I picked it
 

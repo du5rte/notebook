@@ -8,14 +8,14 @@ tags: [library, database]
 categories: [database]
 platforms: [web, react-native]
 status: dropped
-replaced_by: "[[stack/convex]]"
+replaced_by: convex
 url: https://firebase.google.com
 repo: https://github.com/firebase/firebase-js-sdk
 verified: false
 ---
 # Firebase
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Platforms: web, react-native
 Language: [[stack/typescript|TypeScript]]
 
 ## Why I picked it

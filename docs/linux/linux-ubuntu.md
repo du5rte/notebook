@@ -160,7 +160,7 @@ $ sudo ufw enable
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/ssl|SSL]]
 - [[docs/nginx|Nginx]]
 - [[docs/dns|Networking - DNS]]

@@ -14,8 +14,7 @@ verified: false
 ---
 # Recoil
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
-Language: [[stack/javascript|JavaScript]]
+Platforms: [[stack/react|React]], [[stack/react-native|React Native]]
 
 ## Why I picked it
 

@@ -90,6 +90,6 @@ git push -u origin master
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-tag|Git - Tag]]
 - [[docs/git/git-flow|Git - Flow]]

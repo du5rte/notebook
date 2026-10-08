@@ -133,6 +133,6 @@ h1 {
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-box-model|CSS - Box model]]
 - [[docs/css/css-media-queries|CSS - Media Queries]]

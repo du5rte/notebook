@@ -1,6 +1,6 @@
 {
   "collapse-filter": false,
-  "search": "-file:index -path:archive -path:stack -file:TODO",
+  "search": "-file:index -path:archive -path:TODO.md -path:README.md -path:CLAUDE.md -path:wiki/log.md",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": false,
@@ -17,6 +17,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.39102574460292105,
+  "scale": 0.5497866509541381,
   "close": true
 }

@@ -9,17 +9,17 @@ categories: [tooling]
 platforms: [web]
 status: legacy
 since: 2015
-replaced_by: "[[stack/vite]]"
+replaced_by: vite
 url: https://webpack.js.org
 repo: https://github.com/webpack/webpack
 verified: false
 ---
 # Webpack
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
-Notes: [[docs/webpack]]
+Notes: [[docs/webpack-basics]]
 
 ## Why I picked it
 

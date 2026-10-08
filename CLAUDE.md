@@ -13,9 +13,9 @@ stack/     everything I have used (languages, frameworks, libraries, services, t
 saved/     bookmarks I haven't used yet: ui-kits.md, icons.md, fonts.md, design-resources.md. One table per file, no file per item, same columns everywhere: Name | Kind | Tags | Price | Link | Library | Notes, sorted A-Z.
 ```
 
-Saving a UI kit, icon set, font or design link: add a row to the matching `saved/` table. Once I use it in a project it moves to a `stack/` file (dropped ones included, with `replaced_by`), and its `saved/` row links to that file.
+Saving a UI kit, icon set, font or design link: add a row to the matching `saved/` table. Once I use it in a project it moves to a `stack/` file (dropped ones included, with `replaced_by` as the plain stack filename, not a link, so the graph does not join replacements), and its `saved/` row links to that file.
 
-New `docs/` note: a language or tool with several notes gets its own folder (`docs/git/git.md`, `docs/git/git-branching.md`): the intro note is `<topic>.md`, the rest `<topic>-<name>.md`, so names stay unique in Obsidian's graph and tabs. Anything else is a single file (`docs/docker.md`), not grouped into a category folder. List it under its area in `docs/index.md` (in a folder, the `<topic>` note first, then A-Z).
+New `docs/` note: a language or tool with several notes gets its own folder (`docs/git/git-basics.md`, `docs/git/git-branching.md`): the intro note is `<topic>-basics.md`, the rest `<topic>-<name>.md`, so names stay unique in Obsidian's graph and tabs. A single-file note whose name matches a `stack/` record gets `-basics` too (`docs/python-basics.md`). The `stack/<topic>.md` record is the hub: each lesson lists it first under Related. Anything else is a single file (`docs/docker.md`), not grouped into a category folder. List it under its area in `docs/index.md` (in a folder, `<topic>-basics` first, then A-Z).
 
 Old notes: if I still use the tool but the note is written for an old version, keep it in `docs/` with `status: outdated`. Move it to `archive/` only once I no longer use the tool. `archive/` follows the same layout as `docs/`:
 - a tool with several separate notes gets a folder: `archive/jquery/basics.md`, `archive/jquery/ajax.md`

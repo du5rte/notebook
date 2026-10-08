@@ -242,7 +242,7 @@ z-index: 20;
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-fonts|CSS - Fonts]]
 - [[docs/css/css-values|CSS - Values and Units]]
 - [[docs/css/css-flexbox|CSS - Flexbox]]

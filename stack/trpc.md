@@ -14,7 +14,7 @@ verified: false
 ---
 # tRPC
 
-Platforms: [[docs/react/react|Web]], [[docs/node/node|Node]]
+Platforms: web, node
 Language: [[stack/typescript|TypeScript]]
 
 ## Why I picked it

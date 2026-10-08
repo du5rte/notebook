@@ -14,8 +14,7 @@ verified: false
 ---
 # expo-live-activity
 
-Platforms: [[docs/react-native|React Native]], [[docs/swift/swift|iOS]]
-Language: [[stack/typescript|TypeScript]]
+Platforms: [[stack/react-native|React Native]], [[stack/expo|Expo]]
 
 ## Why I picked it
 

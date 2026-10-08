@@ -14,7 +14,7 @@ verified: false
 ---
 # Tailwind CSS
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/typescript|TypeScript]]
 
 ## Why I picked it

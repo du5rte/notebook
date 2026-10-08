@@ -193,6 +193,6 @@ let lastRun = iterator.next() // {value: undefined, done:t rue}
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/javascript/javascript-conditionals|JavaScript - Conditionals]]
 - [[docs/javascript/javascript-booleans|JavaScript - Booleans]]

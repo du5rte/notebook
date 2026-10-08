@@ -211,7 +211,7 @@ p.setName('Jane', 'Lee').sayName().setName('John', 'Smith').sayName()
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/node/node-events|Node - Events]]
 - [[docs/javascript/javascript-async|JavaScript - Asynchronous Programming]]
 - [[docs/javascript/javascript-functions|JavaScript Functions]]

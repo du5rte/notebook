@@ -184,6 +184,6 @@ for (key, value) in world {
 ```
 
 ## Related
-- [[docs/swift/swift|Swift]]
+- [[stack/swift|Swift]]
 - [[docs/swift/swift-loops|Swift - Loops]]
 - [[docs/swift/swift-collections|Swift - Collections and Control Flow]]

@@ -29,7 +29,7 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/react-native-web|React Native for Web]] | framework | web |  |  |
 | [[stack/expo|Expo]] | framework, tooling | react-native |  |  |
 | [[stack/react-native-svg|react-native-svg]] | graphics | react-native |  |  |
-| [[stack/lucide|Lucide]] | icons |  |  | [[stack/feather|Feather]] |
+| Lucide | icons |  |  | Feather |
 | [[stack/javascript|JavaScript]] | language | web, react-native, node | 2015 |  |
 | [[stack/typescript|TypeScript]] | language | web, react-native, node | 2015 | [[stack/coffeescript|CoffeeScript]] |
 | [[stack/react-navigation|React Navigation]] | navigation | react-native |  |  |
@@ -107,7 +107,7 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/pressto|Pressto]] | animation | react-native |
 | [[stack/pulsar|Pulsar]] | animation | react-native, ios |
 | [[stack/sortables|React Native Sortables]] | animation | react-native |
-| [[stack/css-animations|react-native-css-animations]] | animation | react-native |
+| [[stack/react-native-css-animations|react-native-css-animations]] | animation | react-native |
 | [[stack/react-native-ease|react-native-ease]] | animation | react-native |
 | [[stack/reanimated-dnd|react-native-reanimated-dnd]] | animation | react-native |
 | [[stack/screen-transitions|react-native-screen-transitions]] | animation | react-native |
@@ -161,7 +161,7 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/firebase|Firebase]] | database | web, react-native |  | [[stack/convex]] |
 | [[stack/realm|Realm]] | database | react-native |  |  |
 | [[stack/formik|Formik]] | forms | web, react-native |  |  |
-| [[stack/feather|Feather]] | icons |  |  | [[stack/lucide]] |
+| Feather | icons |  |  | [[stack/lucide]] |
 | [[stack/coffeescript|CoffeeScript]] | language | web | 2015 | [[stack/typescript]] |
 | [[stack/swift|Swift]] | language | ios | 2016 | [[stack/react-native]] |
 | [[stack/jotai|Jotai]] | state | web, react-native |  |  |

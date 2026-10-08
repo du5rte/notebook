@@ -14,8 +14,7 @@ verified: false
 ---
 # React Bits
 
-Platforms: [[docs/react/react|Web]]
-Language: [[stack/javascript|JavaScript]]
+Platforms: [[stack/react|React]]
 
 ## Why I picked it
 

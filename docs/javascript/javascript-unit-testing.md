@@ -68,5 +68,5 @@ app.use((ctx) => {
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/javascript/javascript-algorithms|JavaScript - Algorithms]]

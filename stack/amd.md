@@ -9,14 +9,14 @@ categories: [tooling]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[stack/webpack]]"
+replaced_by: webpack
 url: https://requirejs.org
 repo: https://github.com/requirejs/requirejs
 verified: false
 ---
 # AMD (RequireJS)
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/javascript/amd]]

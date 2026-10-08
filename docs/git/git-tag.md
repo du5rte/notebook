@@ -56,6 +56,6 @@ git tag -d v1.3
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-remotes|Git - Remote]]
 - [[docs/git/git-flow|Git - Flow]]

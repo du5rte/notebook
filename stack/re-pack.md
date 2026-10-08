@@ -14,8 +14,7 @@ verified: false
 ---
 # Re.Pack
 
-Platforms: [[docs/react-native|React Native]]
-Language: [[stack/typescript|TypeScript]]
+Platforms: [[stack/react-native|React Native]]
 
 ## Why I picked it
 

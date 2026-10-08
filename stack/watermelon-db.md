@@ -14,8 +14,7 @@ verified: false
 ---
 # WatermelonDB
 
-Platforms: [[docs/react-native|React Native]]
-Language: [[stack/javascript|JavaScript]]
+Platforms: [[stack/react-native|React Native]]
 
 ## Why I picked it
 

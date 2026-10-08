@@ -8,14 +8,14 @@ tags: [library, tooling]
 categories: [tooling]
 platforms: [node]
 status: dropped
-replaced_by: "[[stack/lefthook]]"
+replaced_by: lefthook
 url: https://github.com/toplenboren/simple-git-hooks
 repo: https://github.com/toplenboren/simple-git-hooks
 verified: false
 ---
 # simple-git-hooks
 
-Platforms: [[docs/node/node|Node]]
+Platforms: node
 Language: [[stack/javascript|JavaScript]]
 
 ## Why I picked it

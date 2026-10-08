@@ -14,7 +14,7 @@ verified: false
 ---
 # QuickPush
 
-Platforms: [[docs/react-native|React Native]]
+Platforms: [[stack/react-native|React Native]]
 
 ## Why I picked it
 

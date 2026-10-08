@@ -9,14 +9,14 @@ categories: [data]
 platforms: [web]
 status: dropped
 since: 2016
-replaced_by: "[[stack/apollo]]"
+replaced_by: apollo
 url: https://relay.dev
 repo: https://github.com/facebook/relay
 verified: false
 ---
 # Relay
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 
 Notes: [[archive/relay]]
 

@@ -369,6 +369,6 @@ e.g. placing a href link in front of the `<a>`
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[docs/css/css-modular|CSS - Modular CSS]]
 - [[archive/sass|Sass]]

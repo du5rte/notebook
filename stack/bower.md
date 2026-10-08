@@ -9,14 +9,14 @@ categories: [tooling]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[stack/npm]]"
+replaced_by: npm
 url: https://bower.io
 repo: https://github.com/bower/bower
 verified: false
 ---
 # Bower
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/bower]]

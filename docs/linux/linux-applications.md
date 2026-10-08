@@ -70,5 +70,5 @@ $ which sqilte3
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/linux/linux-environment|Console - Environment]]

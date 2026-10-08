@@ -125,6 +125,6 @@ let newMergedNumbers = {...mergedNumbers, 4: 'cuatro', 5: 'go'}
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/javascript/javascript-object-oriented|JavaScript - Classes]]
 - [[docs/javascript/javascript-maps|JavaScript - Maps]]

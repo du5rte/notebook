@@ -13,7 +13,7 @@ verified: false
 ---
 # BrowserStack
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Platforms: web, react-native
 
 ## Why I picked it
 

@@ -14,8 +14,7 @@ verified: false
 ---
 # shadcn/ui
 
-Platforms: [[docs/react/react|Web]]
-Language: [[stack/typescript|TypeScript]]
+Platforms: [[stack/react|React]]
 
 ## Why I picked it
 

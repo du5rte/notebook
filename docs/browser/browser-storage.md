@@ -23,6 +23,6 @@ sessionStorage.clickcount = 1
 https://developer.mozilla.org/en-US/docs/Web/API/Window/open
 
 ## Related
-- [[docs/browser/browser|DOM]]
-- [[docs/javascript/javascript|JavaScript]]
+- [[docs/browser/browser-basics|DOM]]
+- [[docs/javascript/javascript-basics|JavaScript]]
 - [[docs/javascript/javascript-json|JavaScript - JSON]]

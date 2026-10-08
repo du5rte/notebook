@@ -80,4 +80,4 @@ In a classification problem, we are instead trying to predict results in a discr
 
 ## Related
 - [[docs/ml/ml-data-analysis|Data Analysis]]
-- [[docs/python|Python]]
+- [[docs/python-basics|Python]]

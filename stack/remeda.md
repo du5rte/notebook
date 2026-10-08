@@ -14,7 +14,7 @@ verified: false
 ---
 # Remeda
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Platforms: web, react-native, node
 
 ## Why I picked it
 

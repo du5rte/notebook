@@ -9,16 +9,16 @@ categories: [database]
 platforms: [node]
 status: legacy
 since: 2016
-replaced_by: "[[stack/convex]]"
+replaced_by: convex
 url: https://www.mongodb.com
 repo: https://github.com/mongodb/mongo
 verified: false
 ---
 # MongoDB
 
-Platforms: [[docs/node/node|Node]]
+Platforms: node
 
-Notes: [[docs/mongodb]], [[docs/graphql/graphql-mongodb]]
+Notes: [[docs/mongodb-basics]], [[docs/graphql/graphql-mongodb]]
 
 ## Why I picked it
 

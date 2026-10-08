@@ -248,5 +248,5 @@ function search(list, item) {
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/javascript/javascript-unit-testing|JavaScript - Unit Testing]]

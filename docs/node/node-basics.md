@@ -98,4 +98,4 @@ $ node --debug app.js # runs a debugger on 58585
 ## Related
 - [[docs/node/node-npm|npm]]
 - [[docs/node/node-modules|Node - Modules]]
-- [[docs/javascript/javascript|JavaScript]]
+- [[docs/javascript/javascript-basics|JavaScript]]

@@ -113,5 +113,5 @@ Allows us to write comments
 ```
 
 ## Related
-- [[docs/css/css|CSS]]
+- [[docs/css/css-basics|CSS]]
 - [[archive/sass|Sass]]

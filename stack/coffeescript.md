@@ -9,14 +9,14 @@ categories: [language]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[stack/typescript]]"
+replaced_by: typescript
 url: https://coffeescript.org
 repo: https://github.com/jashkenas/coffeescript
 verified: false
 ---
 # CoffeeScript
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 
 Notes: [[archive/coffeescript]]
 

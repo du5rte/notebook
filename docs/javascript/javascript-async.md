@@ -54,6 +54,6 @@ function add(first, second, callback) {
 ```
 
 ## Related
-- [[docs/javascript/javascript|JavaScript]]
+- [[stack/javascript|JavaScript]]
 - [[docs/node/node-events|Node - Events]]
 - [[docs/javascript/javascript-decorators|JavaScript - Common Patterns]]

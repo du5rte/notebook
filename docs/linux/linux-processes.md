@@ -60,7 +60,7 @@ $ whoami
 ```
 
 ## Related
-- [[docs/linux/linux|Console]]
+- [[docs/linux/linux-basics|Console]]
 - [[docs/node/node-process|Process]]
 - [[docs/node/node-cli|Node - CLI]]
 - [[docs/linux/linux-environment|Console - Environment]]

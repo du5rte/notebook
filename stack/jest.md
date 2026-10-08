@@ -14,7 +14,7 @@ verified: false
 ---
 # Jest
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Platforms: web, react-native, node
 Language: [[stack/typescript|TypeScript]]
 
 ## Why I picked it

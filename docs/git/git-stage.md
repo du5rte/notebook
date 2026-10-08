@@ -32,7 +32,7 @@ git commit -m "changed file1"
 ```
 
 ## Related
-- [[docs/git/git|Git]]
+- [[docs/git/git-basics|Git]]
 - [[docs/git/git-history|Git - History]]
 - [[docs/git/git-stashing|Git - Stashing]]
 - [[docs/git/git-branching|Git - Branching]]

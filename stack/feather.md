@@ -8,18 +8,18 @@ tags: [library, icons]
 categories: [icons]
 platforms: [web, react-native]
 status: dropped
-replaced_by: "[[stack/lucide]]"
+replaced_by: lucide
 url: https://feathericons.com
 repo: https://github.com/feathericons/feather
 verified: true
 ---
 # Feather
 
-Platforms: [[docs/react-native|React Native]], [[docs/react/react|Web]]
+Platforms: web, react-native
 Language: [[stack/javascript|JavaScript]]
 
 ## Why I picked it
 
 ## Why I dropped it
 
-Replaced by [[stack/lucide|Lucide]], a superset of Feather: 1,452 icons against Feather's 287.
+Replaced by Lucide, a superset of Feather: 1,452 icons against Feather's 287.

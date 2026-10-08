@@ -15,7 +15,7 @@ verified: false
 ---
 # npm
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Platforms: web, react-native, node
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[docs/node/node-npm]]

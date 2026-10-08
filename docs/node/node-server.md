@@ -389,7 +389,7 @@ In `/views/tweets.ejs`
 ```
 
 ## Related
-- [[docs/node/node|Node.js]]
+- [[docs/node/node-basics|Node.js]]
 - [[docs/node/node-http|Node - HTTP]]
 - [[docs/http|Networking - HTTP]]
 - [[docs/node/node-socket-io|Node - Socket.io]]

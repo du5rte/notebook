@@ -14,7 +14,9 @@ verified: false
 ---
 # Apollo
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Platforms: [[stack/react|React]], [[stack/react-native|React Native]], [[docs/node/node-basics|Node]]
+Language: [[stack/typescript|TypeScript]]
+Built on: [[stack/graphql|GraphQL]]
 
 Client: https://github.com/apollographql/apollo-client
 Server: https://github.com/apollographql/apollo-server

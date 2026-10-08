@@ -9,17 +9,17 @@ categories: [state]
 platforms: [web, react-native]
 status: legacy
 since: 2016
-replaced_by: "[[stack/zustand]]"
+replaced_by: zustand
 url: https://redux.js.org
 repo: https://github.com/reduxjs/redux
 verified: false
 ---
 # Redux
 
-Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Platforms: web, react-native
 Language: [[stack/typescript|TypeScript]]
 
-Notes: [[docs/redux]]
+Notes: [[docs/redux-basics]]
 
 ## Why I picked it
 

@@ -13,7 +13,7 @@ verified: false
 ---
 # CodeSandbox
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 
 ## Why I picked it
 

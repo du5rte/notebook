@@ -8,15 +8,14 @@ tags: [library, ui]
 categories: [ui]
 platforms: [web]
 status: dropped
-replaced_by: "[[stack/react-aria]]"
+replaced_by: react-aria
 url: https://www.radix-ui.com
 repo: https://github.com/radix-ui/primitives
 verified: false
 ---
 # Radix UI
 
-Platforms: [[docs/react/react|Web]]
-Language: [[stack/typescript|TypeScript]]
+Platforms: [[stack/react|React]]
 
 ## Why I picked it
 

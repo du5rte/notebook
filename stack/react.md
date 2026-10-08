@@ -15,10 +15,10 @@ verified: false
 ---
 # React
 
-Platforms: [[docs/react/react|Web]]
+Platforms: [[stack/react|Web]]
 Language: [[stack/javascript|JavaScript]]
 
-Notes: [[docs/react/react]]
+Notes: [[docs/react/react-basics]]
 
 ## Why I picked it
 

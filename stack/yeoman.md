@@ -15,7 +15,7 @@ verified: false
 ---
 # Yeoman
 
-Platforms: [[docs/react/react|Web]]
+Platforms: web
 Language: [[stack/javascript|JavaScript]]
 
 Notes: [[archive/yeoman]]
