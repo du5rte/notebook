@@ -4,6 +4,7 @@ type: doc
 created: 2015-11-01
 updated: 2016-04-11
 tags: [css]
+status: outdated
 ---
 # CSS - Modular CSS
 
@@ -121,4 +122,4 @@ Imagine that we want to have a festive version of the logo for our Christmassy s
 
 ## Related
 - [[docs/css/selectors|CSS - Selectors]]
-- [[docs/sass/extends|Sass - Extends]]
+- [[archive/sass|Sass]]

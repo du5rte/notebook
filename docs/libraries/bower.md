@@ -16,7 +16,7 @@ verified: false
 ---
 # Bower
 
-Notes: [[archive/tools/bower]]
+Notes: [[archive/bower]]
 
 ## Why I picked it
 

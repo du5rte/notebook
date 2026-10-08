@@ -15,7 +15,7 @@ verified: false
 ---
 # Flightplan
 
-Notes: [[archive/tools/flightplan]]
+Notes: [[archive/flightplan]]
 
 ## Why I picked it
 

@@ -127,7 +127,7 @@ struct Person {
     }
 }
 
-let me = Person(firstName: "Duarte", middleName: nil, lastName: "Monteiro")
+let me = Person(firstName: "Jane", middleName: nil, lastName: "Doe")
 
 me.getFullName()
 ```
@@ -332,8 +332,8 @@ for coin in wallet {
 ## Nil Coalescing Operator
 
 ```swift
-let firstName: String? = "Duarte"
-let userName = "du5rte"
+let firstName: String? = "Jane"
+let userName = "jane"
 
 var displayName: String
 ```

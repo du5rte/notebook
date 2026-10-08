@@ -7,7 +7,7 @@ tags: [library, index]
 ---
 # Libraries
 
-One file per library. `status` is one of `using`, `trying`, `watching` or `dropped`; `verified: false` means the status is a guess from old notes and has not been confirmed. The Dropped table at the bottom is the retrospective: filter it by platform for web, backend or mobile.
+One file per library. `status` is one of `using`, `trying`, `watching`, `legacy` (replaced by something better, but I still use it) or `dropped`; `verified: false` means the status is a guess from old notes and has not been confirmed. The Dropped table at the bottom is the retrospective: filter it by platform for web, backend or mobile.
 
 Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`, `forms`, `framework`, `graphics`, `language`, `navigation`, `services`, `state`, `styling`, `testing`, `tooling`, `ui`, `utils`.
 
@@ -17,8 +17,7 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 |---|---|---|---|---|
 | [[docs/libraries/gesture-handler|Gesture Handler]] | animation | react-native |  |  |
 | [[docs/libraries/reanimated|Reanimated]] | animation | react-native |  | [[docs/libraries/react-motion|React Motion]] |
-| [[docs/libraries/apollo-client|Apollo Client]] | data | web, react-native | 2016 | [[docs/libraries/relay|Relay]] |
-| [[docs/libraries/apollo-server|Apollo Server]] | data | node | 2016 |  |
+| [[docs/libraries/apollo|Apollo]] | data | web, react-native, node | 2016 | [[docs/libraries/relay|Relay]] |
 | [[docs/libraries/graphql|GraphQL]] | data | web, react-native, node | 2016 |  |
 | [[docs/libraries/convex|Convex]] | database, data | web, react-native |  | [[docs/libraries/firebase|Firebase]], [[docs/libraries/mongodb|MongoDB]] |
 | [[docs/libraries/react|React]] | framework | web | 2016 | [[docs/libraries/jquery|jQuery]] |
@@ -52,6 +51,14 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/nanoid|Nano ID]] | utils | web, react-native, node |  |  |
 | [[docs/libraries/remeda|Remeda]] | utils | web, react-native, node |  | [[docs/libraries/lodash|Lodash]] |
 | [[docs/libraries/tinycolor|TinyColor]] | utils | web, react-native |  |  |
+
+## Legacy
+
+| Library | Categories | Platforms | Using since | Replaced by |
+|---|---|---|---|---|
+| [[docs/libraries/mongodb|MongoDB]] | database | node | 2016 | [[docs/libraries/convex]] |
+| [[docs/libraries/redux|Redux]] | state | web, react-native | 2016 | [[docs/libraries/zustand]] |
+| [[docs/libraries/webpack|Webpack]] | tooling | web | 2015 | [[docs/libraries/vite]] |
 
 ## Trying
 
@@ -145,16 +152,14 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | Library | Categories | Platforms | Used | Replaced by |
 |---|---|---|---|---|
 | [[docs/libraries/react-motion|React Motion]] | animation | web | 2016 | [[docs/libraries/reanimated]] |
-| [[docs/libraries/relay|Relay]] | data | web | 2016 | [[docs/libraries/apollo-client]] |
+| [[docs/libraries/relay|Relay]] | data | web | 2016 | [[docs/libraries/apollo]] |
 | [[docs/libraries/firebase|Firebase]] | database | web, react-native |  | [[docs/libraries/convex]] |
-| [[docs/libraries/mongodb|MongoDB]] | database | node | 2016 | [[docs/libraries/convex]] |
 | [[docs/libraries/realm|Realm]] | database | react-native |  |  |
 | [[docs/libraries/formik|Formik]] | forms | web, react-native |  |  |
 | [[docs/libraries/coffeescript|CoffeeScript]] | language | web | 2015 | [[docs/libraries/typescript]] |
 | [[docs/libraries/swift|Swift]] | language | ios | 2016 | [[docs/libraries/react-native]] |
 | [[docs/libraries/jotai|Jotai]] | state | web, react-native |  |  |
 | [[docs/libraries/recoil|Recoil]] | state | web, react-native |  |  |
-| [[docs/libraries/redux|Redux]] | state | web, react-native | 2016 | [[docs/libraries/zustand]] |
 | [[docs/libraries/sass|Sass]] | styling | web | 2015 |  |
 | [[docs/libraries/amd|AMD (RequireJS)]] | tooling | web | 2015 | [[docs/libraries/webpack]] |
 | [[docs/libraries/appcenter|App Center]] | tooling | react-native |  |  |
@@ -165,7 +170,6 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/gulp|Gulp]] | tooling | web | 2015 | [[docs/libraries/webpack]] |
 | [[docs/libraries/husky|Husky]] | tooling | node |  | [[docs/libraries/lefthook]] |
 | [[docs/libraries/simple-git-hooks|simple-git-hooks]] | tooling | node |  | [[docs/libraries/lefthook]] |
-| [[docs/libraries/webpack|Webpack]] | tooling | web | 2015 | [[docs/libraries/vite]] |
 | [[docs/libraries/yeoman|Yeoman]] | tooling | web | 2015 |  |
 | [[docs/libraries/bootstrap|Bootstrap]] | ui | web |  |  |
 | [[docs/libraries/jquery|jQuery]] | ui | web | 2015–2016 | [[docs/libraries/react]] |

@@ -390,5 +390,5 @@ In `/views/tweets.ejs`
 
 ## Related
 - [[docs/node/http|Node - HTTP]]
-- [[docs/network/http|Networking - HTTP]]
+- [[docs/http|Networking - HTTP]]
 - [[docs/node/socket-io|Node - Socket.io]]

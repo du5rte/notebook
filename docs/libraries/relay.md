@@ -9,14 +9,14 @@ categories: [data]
 platforms: [web]
 status: dropped
 since: 2016
-replaced_by: "[[docs/libraries/apollo-client]]"
+replaced_by: "[[docs/libraries/apollo]]"
 url: https://relay.dev
 repo: https://github.com/facebook/relay
 verified: false
 ---
 # Relay
 
-Notes: [[archive/react/relay]], [[archive/graphql/relay]]
+Notes: [[archive/relay]]
 
 ## Why I picked it
 

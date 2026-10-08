@@ -7,7 +7,7 @@ aliases: []
 tags: [library, database]
 categories: [database]
 platforms: [node]
-status: dropped
+status: legacy
 since: 2016
 replaced_by: "[[docs/libraries/convex]]"
 url: https://www.mongodb.com
@@ -16,8 +16,8 @@ verified: false
 ---
 # MongoDB
 
-Notes: [[docs/databases/mongodb]], [[archive/graphql/mongodb]]
+Notes: [[docs/mongodb]], [[docs/graphql/mongodb]]
 
 ## Why I picked it
 
-## Why I dropped it
+## Why I would drop it

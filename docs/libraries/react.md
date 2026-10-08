@@ -15,7 +15,7 @@ verified: false
 ---
 # React
 
-Notes: [[archive/react/basics]]
+Notes: [[docs/react/basics]]
 
 ## Why I picked it
 

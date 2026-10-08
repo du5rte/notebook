@@ -5,19 +5,21 @@ tags: [index]
 ---
 # Archive
 
-Superseded tools, libraries and API versions. Kept for reference, out of the main index.
+Tools and libraries I no longer use, out of the main index. Same layout as `docs/`: a tool with several notes gets a folder (`jquery/`), anything else is a single file (`coffeescript`, `sass`). Notes on an archived technique of a language I still use go in that language's folder (`javascript/ajax`). Notes on things I still use, but written for an old version, stay in `docs/` with `status: outdated`.
 
-### graphql
-- [[archive/graphql/apollo|GraphQL - Apollo Server]]
-- [[archive/graphql/mongodb|GraphQL - MongoDB]]
-- [[archive/graphql/relay|GraphQL - Relay]]
+- [[archive/bower|Bower]]
+- [[archive/browsersync|BrowserSync]]
+- [[archive/coffeescript|CoffeeScript]]
+- [[archive/flightplan|Flightplan]] *(draft)*
+- [[archive/gulp|Gulp]]
+- [[archive/relay|Relay]]
+- [[archive/sass|Sass]]
+- [[archive/todo|TODO]]
+- [[archive/yeoman|YEOMAN]]
 
 ### javascript
 - [[archive/javascript/ajax|JavaScript - AJAX]]
 - [[archive/javascript/amd|Javascript - AMD]]
-- [[archive/javascript/animations|JavaScript - Animations]]
-- [[archive/javascript/coffeescript|CoffeeScript]]
-- [[archive/javascript/typescript|JavaScript - TypeScript]]
 
 ### jquery
 - [[archive/jquery/basics|jQuery - Basics]]
@@ -25,19 +27,4 @@ Superseded tools, libraries and API versions. Kept for reference, out of the mai
 - [[archive/jquery/plugins|jQuery - Plugins]]
 
 ### react
-- [[archive/react/basics|React - Basics]]
-- [[archive/react/apollo|React - Apollo Client]]
 - [[archive/react/motion|React - Motion]]
-- [[archive/react/react-native|React Native]]
-- [[archive/react/redux|React - Redux]]
-- [[archive/react/relay|React - Relay]]
-- [[archive/react/style|React - Style]]
-
-### tools
-- [[archive/tools/bower|Bower]]
-- [[archive/tools/browsersync|BrowserSync]]
-- [[archive/tools/flightplan|Flightplan]] *(draft)*
-- [[archive/tools/gulp|Gulp]]
-- [[archive/tools/todo|TODO]]
-- [[archive/tools/webpack|Webpack]]
-- [[archive/tools/yeoman|YEOMAN]]

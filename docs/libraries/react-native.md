@@ -15,7 +15,7 @@ verified: false
 ---
 # React Native
 
-Notes: [[archive/react/react-native]]
+Notes: [[docs/react-native]]
 
 ## Why I picked it
 

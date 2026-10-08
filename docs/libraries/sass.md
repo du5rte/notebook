@@ -15,7 +15,7 @@ verified: false
 ---
 # Sass
 
-Notes: [[docs/sass/basics]]
+Notes: [[archive/sass]]
 
 ## Why I picked it
 

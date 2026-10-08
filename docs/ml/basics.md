@@ -4,6 +4,7 @@ type: doc
 created: 2018-06-18
 updated: 2020-04-11
 tags: [ml]
+status: draft
 ---
 # Machine Learning
 Giving a computer the ability to write its own rules and learn about new things, on its own.
@@ -79,4 +80,4 @@ In a classification problem, we are instead trying to predict results in a discr
 
 ## Related
 - [[docs/ml/data-analysis|Data Analysis]]
-- [[docs/python/basics|Python Basics]]
+- [[docs/python|Python Basics]]

@@ -7,13 +7,16 @@ Duarte's programming documentation and learning notes. One Obsidian vault, plain
 ```
 raw/       source material (articles, videos, papers). Never edited after it lands.
 wiki/      agent-maintained knowledge: sources/ entities/ concepts/ synthesis/, plus index.md and log.md
-docs/      legacy notebook, human-written: <topic>/<note>.md (css/, node/, git/...), plus index.md
-archive/   superseded tools, libraries and API versions: <topic>/<note>.md, plus index.md. Out of the main index, still searchable.
+docs/      legacy notebook, human-written: <name>.md, or <name>/<note>.md for a language or tool with several notes (css/, node/, git/...), plus index.md
+archive/   tools I no longer use, same layout as docs/, plus index.md. Out of the main index, still searchable.
 ```
 
-New `docs/` note: put it in its topic folder and list it under its area in `docs/index.md` (`basics` first, then A-Z). A topic gets its own folder at three notes; before that, use the closest one.
+New `docs/` note: a language or tool with several notes gets its own folder (`docs/git/basics.md`, `docs/git/branching.md`); anything else is a single file (`docs/docker.md`), not grouped into a category folder. List it under its area in `docs/index.md` (in a folder, `basics` first, then A-Z).
 
-Outdated notes: recommend deleting them; git history keeps them. Merge only what's still worth knowing into the current note on that topic first.
+Old notes: if I still use the tool but the note is written for an old version, keep it in `docs/` with `status: outdated`. Move it to `archive/` only once I no longer use the tool. `archive/` follows the same layout as `docs/`:
+- a tool with several separate notes gets a folder: `archive/jquery/basics.md`, `archive/jquery/ajax.md`
+- anything else is a single file: `archive/coffeescript.md`, `archive/sass.md`
+- an archived technique of a language I still use goes in that language's folder: `archive/javascript/ajax.md`
 
 Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. Diagrams are Mermaid in the note, or `.svg` beside it.
 
@@ -41,7 +44,7 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 aliases: []
 tags: []       # two or three, one word, lowercase; propose new ones, don't invent silently
-status: draft  # optional
+status: draft  # optional. draft = incomplete; outdated = written for an old version of something I still use
 ---
 ```
 

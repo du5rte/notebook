@@ -16,7 +16,7 @@ verified: false
 ---
 # CoffeeScript
 
-Notes: [[archive/javascript/coffeescript]]
+Notes: [[archive/coffeescript]]
 
 ## Why I picked it
 

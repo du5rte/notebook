@@ -15,7 +15,7 @@ verified: false
 ---
 # BrowserSync
 
-Notes: [[archive/tools/browsersync]]
+Notes: [[archive/browsersync]]
 
 ## Why I picked it
 

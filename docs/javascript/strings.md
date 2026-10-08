@@ -136,4 +136,4 @@ nospaces`
 - [[docs/javascript/numbers|JavaScript Numbers]]
 - [[docs/javascript/booleans|JavaScript - Booleans]]
 - [[docs/javascript/arrays|JavaScript Arrays]]
-- [[docs/tools/regex|Regex - Basics]]
+- [[docs/regex|Regex - Basics]]

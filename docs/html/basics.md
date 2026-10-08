@@ -114,4 +114,4 @@ Allows us to write comments
 
 ## Related
 - [[docs/css/basics|CSS - Basics]]
-- [[docs/sass/basics|Sass Basics]]
+- [[archive/sass|Sass]]

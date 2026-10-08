@@ -15,7 +15,7 @@ verified: false
 ---
 # Yeoman
 
-Notes: [[archive/tools/yeoman]]
+Notes: [[archive/yeoman]]
 
 ## Why I picked it
 

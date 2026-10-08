@@ -134,6 +134,6 @@ p {
 
 ## Related
 - [[docs/html/basics|HTML Basics]]
-- [[docs/sass/basics|Sass Basics]]
+- [[archive/sass|Sass]]
 - [[docs/css/others|CSS - Other Features]]
 - [[docs/css/values|CSS - Values and Units]]

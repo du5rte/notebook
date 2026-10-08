@@ -7,7 +7,7 @@ aliases: []
 tags: [library, state]
 categories: [state]
 platforms: [web, react-native]
-status: dropped
+status: legacy
 since: 2016
 replaced_by: "[[docs/libraries/zustand]]"
 url: https://redux.js.org
@@ -16,8 +16,8 @@ verified: false
 ---
 # Redux
 
-Notes: [[archive/react/redux]]
+Notes: [[docs/redux]]
 
 ## Why I picked it
 
-## Why I dropped it
+## Why I would drop it

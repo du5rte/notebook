@@ -16,7 +16,7 @@ verified: false
 ---
 # Gulp
 
-Notes: [[archive/tools/gulp]]
+Notes: [[archive/gulp]]
 
 ## Why I picked it
 

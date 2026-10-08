@@ -5,7 +5,7 @@ tags: [index]
 ---
 # Docs Index
 
-Reference notes, one section per area. Superseded tech lives in [[archive/index|archive]].
+Reference notes, one section per area. *(draft)* marks an incomplete note, *(outdated)* one written for an old version of something I still use. Tools I no longer use live in [[archive/index|archive]].
 
 ## Web
 
@@ -14,10 +14,10 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/css/animations|CSS - Animations]]
 - [[docs/css/box-model|CSS - Box model]]
 - [[docs/css/flexbox|CSS - Flexbox]]
-- [[docs/css/fonts|CSS - Fonts]]
+- [[docs/css/fonts|CSS - Fonts]] *(outdated)*
 - [[docs/css/media-queries|CSS - Media Queries]]
-- [[docs/css/modular|CSS - Modular CSS]]
-- [[docs/css/others|CSS - Other Features]]
+- [[docs/css/modular|CSS - Modular CSS]] *(outdated)*
+- [[docs/css/others|CSS - Other Features]] *(outdated)*
 - [[docs/css/selectors|CSS - Selectors]]
 - [[docs/css/transform-transitions|CSS - Transitions and Transforms]]
 - [[docs/css/values|CSS - Values and Units]]
@@ -29,14 +29,6 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/html/tables|HTML Tables]]
 - [[docs/html/text|HTML - Text]]
 - [[docs/html/video-and-audio|Video and Audio]]
-
-### sass
-- [[docs/sass/basics|Sass Basics]]
-- [[docs/sass/directives|Sass - Directives]]
-- [[docs/sass/extends|Sass - Extends]]
-- [[docs/sass/functions|Sass - Functions]]
-- [[docs/sass/maps|Sass - List Maps]]
-- [[docs/sass/mixins|Sass - Mixins]]
 
 ### browser
 - [[docs/browser/basics|DOM - Basics]]
@@ -50,9 +42,17 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 
 ## JavaScript
 
+- [[docs/react-native|React Native]] *(outdated)*
+- [[docs/redux|React - Redux]] *(outdated)*
+
+### apollo
+- [[docs/apollo/client|React - Apollo Client]] *(outdated)*
+- [[docs/apollo/server|GraphQL - Apollo Server]] *(outdated)*
+
 ### javascript
 - [[docs/javascript/basics|JavaScript - Basics]]
 - [[docs/javascript/algorithms|JavaScript - Algorithms]]
+- [[docs/javascript/animations|JavaScript - Animations]] *(outdated)*
 - [[docs/javascript/arrays|JavaScript Arrays]]
 - [[docs/javascript/async|JavaScript - Asynchronous Programming]]
 - [[docs/javascript/booleans|JavaScript - Booleans]]
@@ -67,13 +67,17 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/javascript/objects|JavaScript Objects]]
 - [[docs/javascript/scope|JavaScript - Scope]]
 - [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/javascript/typescript|JavaScript - TypeScript]] *(outdated)*
 - [[docs/javascript/unit-testing|JavaScript - Unit Testing]]
 - [[docs/javascript/variables|JavaScript - Variables]]
+
+### react
+- [[docs/react/basics|React - Basics]] *(outdated)*
+- [[docs/react/style|React - Style]] *(outdated)*
 
 ### node
 - [[docs/node/basics|Node.js - Basics]]
 - [[docs/node/cli|Node - CLI]] *(draft)*
-- [[docs/node/email|Node - Email]] *(draft)*
 - [[docs/node/events|Node - Events]] *(draft)*
 - [[docs/node/http|Node - HTTP]] *(draft)*
 - [[docs/node/modules|Node - Modules]]
@@ -86,9 +90,31 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 ### graphql
 - [[docs/graphql/basics|GraphQL - Basics]]
 - [[docs/graphql/graphiql|GraphQL - GraphiQL]]
+- [[docs/graphql/mongodb|GraphQL - MongoDB]] *(outdated)*
 - [[docs/graphql/server|GraphQL - Server]]
 
 ## Systems
+
+- [[docs/aws|AWS]]
+- [[docs/cryptography|Cryptography]]
+- [[docs/curl|Networking - Curl]]
+- [[docs/databases|Databases]]
+- [[docs/dns|Networking - DNS]]
+- [[docs/docker|Docker Basics]]
+- [[docs/elasticsearch|Elastic Search - Basics]]
+- [[docs/http|Networking - HTTP]]
+- [[docs/jwt|JWT]]
+- [[docs/mongodb|MongoDB - Basics]]
+- [[docs/networking|Networking]]
+- [[docs/nginx|Nginx]]
+- [[docs/oauth2|OAuth]]
+- [[docs/openid|OpenID]] *(draft)*
+- [[docs/redis|Redis - Basics]] *(draft)*
+- [[docs/security|Security]]
+- [[docs/server-setup|Ubuntu]]
+- [[docs/smtp|Networking - SMTP]] *(draft)*
+- [[docs/ssh|SSH]]
+- [[docs/ssl|SSL]]
 
 ### git
 - [[docs/git/basics|Git - Basics]]
@@ -111,38 +137,9 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/linux/processes|Console - Processes]]
 - [[docs/linux/users|Console - Users]]
 
-### network
-- [[docs/network/curl|Networking - Curl]]
-- [[docs/network/dns|Networking - DNS]]
-- [[docs/network/http|Networking - HTTP]]
-- [[docs/network/irc|Networking - IRC]]
-- [[docs/network/networking|Networking]]
-- [[docs/network/postfix|PostFix]]
-- [[docs/network/smtp|Networking - SMTP]]
-- [[docs/network/ssl|SSL]]
-
-### security
-- [[docs/security/cryptography|Cryptography]]
-- [[docs/security/jwt|JWT]]
-- [[docs/security/oauth2|OAuth]]
-- [[docs/security/openid|OpenID]] *(draft)*
-- [[docs/security/passport|Passport]] *(draft)*
-- [[docs/security/security|Security]]
-
-### devops
-- [[docs/devops/aws|AWS]]
-- [[docs/devops/docker|Docker Basics]]
-- [[docs/devops/nginx|Nginx]]
-- [[docs/devops/server-setup|Ubuntu]]
-- [[docs/devops/ssh|SSH]]
-
-### databases
-- [[docs/databases/databases|Databases]]
-- [[docs/databases/elasticsearch|Elastic Search - Basics]]
-- [[docs/databases/mongodb|MongoDB - Basics]]
-- [[docs/databases/redis|Redis - Basics]] *(draft)*
-
 ## Languages
+
+- [[docs/python|Python Basics]] *(draft)*
 
 ### swift
 - [[docs/swift/basics|Swift - Basics]]
@@ -162,26 +159,18 @@ Reference notes, one section per area. Superseded tech lives in [[archive/index|
 - [[docs/swift/variables|Swift - Variables]]
 - [[docs/swift/xcode|Xcode]]
 
-### python
-- [[docs/python/basics|Python Basics]]
-
 ## Machine Learning
 
 ### ml
-- [[docs/ml/basics|Machine Learning]]
-- [[docs/ml/data-analysis|Data Analysis]]
+- [[docs/ml/basics|Machine Learning]] *(draft)*
+- [[docs/ml/data-analysis|Data Analysis]] *(draft)*
 
 ## Libraries
 
-### libraries
 - [[docs/libraries/index|Libraries]]
-- [[docs/comparisons/utilities|Utility libraries]] *(draft)*
-- [[docs/comparisons/git-hooks|Git hook managers]] *(draft)*
-- [[docs/comparisons/databases|Databases and data layers]] *(draft)*
-- [[docs/comparisons/auth|Auth providers]] *(draft)*
 
 ## Tools
 
-### tools
-- [[docs/tools/markdown|Markdown]]
-- [[docs/tools/regex|Regex - Basics]] *(draft)*
+- [[docs/markdown|Markdown]]
+- [[docs/regex|Regex - Basics]] *(draft)*
+- [[docs/webpack|Webpack]] *(outdated)*
