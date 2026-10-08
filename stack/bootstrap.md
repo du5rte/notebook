@@ -14,6 +14,8 @@ verified: false
 ---
 # Bootstrap
 
+Platforms: [[docs/react/react|Web]]
+
 ## Why I picked it
 
 ## Why I dropped it

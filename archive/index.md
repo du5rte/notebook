@@ -22,7 +22,7 @@ Tools and libraries I no longer use, out of the main index. Same layout as `docs
 - [[archive/javascript/amd|Javascript - AMD]]
 
 ### jquery
-- [[archive/jquery/basics|jQuery - Basics]]
+- [[archive/jquery/basics|jQuery]]
 - [[archive/jquery/ajax|jQuery - AJAX]]
 - [[archive/jquery/plugins|jQuery - Plugins]]
 

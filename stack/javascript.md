@@ -14,7 +14,9 @@ verified: false
 ---
 # JavaScript
 
-Notes: [[docs/javascript/basics]]
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+
+Notes: [[docs/javascript/javascript]]
 
 ## Why I picked it
 

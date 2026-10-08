@@ -14,6 +14,9 @@ verified: false
 ---
 # Safe Area Context
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 ## Why I would drop it

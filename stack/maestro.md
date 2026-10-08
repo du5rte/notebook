@@ -14,6 +14,8 @@ verified: false
 ---
 # Maestro
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 ## Why I would drop it

@@ -14,6 +14,8 @@ verified: false
 ---
 # Remeda
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+
 ## Why I picked it
 
 Type-safe, composable, tree-shakable. 

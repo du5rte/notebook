@@ -14,6 +14,9 @@ verified: false
 ---
 # React Aria
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 ## Why I would drop it

@@ -15,7 +15,10 @@ verified: false
 ---
 # npm
 
-Notes: [[docs/node/npm]]
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Language: [[stack/javascript|JavaScript]]
+
+Notes: [[docs/node/node-npm]]
 
 ## Why I picked it
 

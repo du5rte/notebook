@@ -658,5 +658,5 @@ Can auto deploy a new image and task-definition. [octochat example](https://gith
 
 ## Related
 - [[docs/ssh|SSH]]
-- [[docs/server-setup|Ubuntu]]
-- [[docs/docker|Docker Basics]]
+- [[docs/linux/linux-ubuntu|Ubuntu]]
+- [[docs/docker|Docker]]

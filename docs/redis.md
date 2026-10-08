@@ -1,12 +1,12 @@
 ---
-title: "Redis - Basics"
+title: "Redis"
 type: doc
 created: 2016-05-08
 updated: 2020-04-11
 tags: [databases]
 status: draft
 ---
-# Redis - Basics
+# Redis
 
 
 ## Installing
@@ -22,5 +22,5 @@ npm install --save redis
 
 ## Related
 - [[docs/databases|Databases]]
-- [[docs/mongodb|MongoDB - Basics]]
-- [[docs/elasticsearch|Elastic Search - Basics]]
+- [[docs/mongodb|MongoDB]]
+- [[docs/elasticsearch|Elastic Search]]

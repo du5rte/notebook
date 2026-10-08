@@ -1,11 +1,11 @@
 ---
-title: "Docker Basics"
+title: "Docker"
 type: doc
 created: 2020-04-11
 updated: 2020-04-11
 tags: [devops]
 ---
-# Docker Basics
+# Docker
 
 - [Infrastructure as Code](https://martinfowler.com/bliki/InfrastructureAsCode.html)
 - [But it Works on My Machine!](https://www.usenix.org/conference/ures14/technical-sessions/presentation/it-works-my-machine-how-container-technologies)
@@ -216,4 +216,4 @@ docker run -d -p 8080:3000 -e PERSON="Santa Claus" --name container1 test-node-i
 
 ## Related
 - [[docs/aws|AWS]]
-- [[docs/server-setup|Ubuntu]]
+- [[docs/linux/linux-ubuntu|Ubuntu]]

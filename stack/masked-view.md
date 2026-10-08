@@ -14,6 +14,9 @@ verified: false
 ---
 # Masked View
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/javascript|JavaScript]]
+
 ## Why I picked it
 
 ## Why I would drop it

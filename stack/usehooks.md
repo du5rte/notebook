@@ -13,6 +13,8 @@ verified: false
 ---
 # useHooks
 
+Platforms: [[docs/react/react|Web]]
+
 ## Why I picked it
 
 ## Why I would drop it

@@ -14,6 +14,9 @@ verified: false
 ---
 # Jotai
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 ## Why I dropped it

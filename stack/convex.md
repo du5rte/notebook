@@ -14,6 +14,9 @@ verified: false
 ---
 # Convex
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 Reactive queries, schema in client code, no separate server. 

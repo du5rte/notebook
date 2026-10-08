@@ -16,6 +16,9 @@ verified: false
 ---
 # Bower
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
+
 Notes: [[archive/bower]]
 
 ## Why I picked it

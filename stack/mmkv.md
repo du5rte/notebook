@@ -14,6 +14,9 @@ verified: false
 ---
 # MMKV
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 JSI and Nitro instead of the bridge; about 30x faster than AsyncStorage.

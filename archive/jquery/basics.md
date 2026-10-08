@@ -1,11 +1,11 @@
 ---
-title: "jQuery - Basics"
+title: "jQuery"
 type: doc
 created: 2020-04-11
 updated: 2020-04-11
 tags: [jquery]
 ---
-# jQuery - Basics
+# jQuery
 
 jQuery Documentation (What Does it Mean?)
 

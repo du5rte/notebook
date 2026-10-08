@@ -1,12 +1,12 @@
 ---
-title: "Regex - Basics"
+title: "Regex"
 type: doc
 created: 2016-03-18
 updated: 2020-04-11
 tags: [tools]
 status: draft
 ---
-# Regex - Basics
+# Regex
 
 Resources:
 - [Regxr](http://regexr.com/)
@@ -247,5 +247,5 @@ if we try to input number it will prompt `Please match the required format`
 ```
 
 ## Related
-- [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/javascript/javascript-strings|JavaScript Strings]]
 - [[docs/markdown|Markdown]]

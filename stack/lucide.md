@@ -6,12 +6,16 @@ updated: 2026-10-08
 aliases: [Lucide Icons]
 tags: [library, icons]
 categories: [icons]
+platforms: [web, react-native]
 status: using
 url: https://lucide.dev
 repo: https://github.com/lucide-icons/lucide
 verified: true
 ---
 # Lucide
+
+Platforms: [[docs/react-native|React Native]], [[docs/react/react|Web]]
+Language: [[stack/typescript|TypeScript]]
 
 Replaces [[stack/feather|Feather]]. Animated version: [lucide-animated](https://lucide-animated.com/).
 

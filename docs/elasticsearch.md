@@ -1,11 +1,11 @@
 ---
-title: "Elastic Search - Basics"
+title: "Elastic Search"
 type: doc
 created: 2020-04-11
 updated: 2020-04-11
 tags: [databases]
 ---
-# Elastic Search - Basics
+# Elastic Search
 
 References:
 - [MongoDB - How to Perform Fuzzy-Matching with Mongo Connector and Elastic Search](https://www.mongodb.com/blog/post/how-to-perform-fuzzy-matching-with-mongo-connector)
@@ -465,5 +465,5 @@ movies/_search?q=+year:>2010+title:trek
 
 ## Related
 - [[docs/databases|Databases]]
-- [[docs/mongodb|MongoDB - Basics]]
-- [[docs/redis|Redis - Basics]]
+- [[docs/mongodb|MongoDB]]
+- [[docs/redis|Redis]]

@@ -14,6 +14,9 @@ verified: false
 ---
 # Sonner
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 Newer alternative to React Hot Toast; see also burnt.

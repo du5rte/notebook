@@ -13,6 +13,8 @@ verified: false
 ---
 # InstantDB
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 ## Why I would drop it

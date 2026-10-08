@@ -14,6 +14,9 @@ verified: false
 ---
 # just
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+Language: [[stack/javascript|JavaScript]]
+
 ## Why I picked it
 
 One-function packages, tiny and tree-shakable.

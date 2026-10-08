@@ -1,11 +1,11 @@
 ---
-title: "MongoDB - Basics"
+title: "MongoDB"
 type: doc
 created: 2015-12-01
 updated: 2020-04-17
 tags: [databases]
 ---
-# MongoDB - Basics
+# MongoDB
 
 Resouces:
 - [MongoDB Docs](https://docs.mongodb.org/getting-started/node/introduction/)
@@ -683,5 +683,5 @@ mongodump --uri="mongodb+srv://username:password@cluster0.example.mongodb.net/ol
 
 ## Related
 - [[docs/databases|Databases]]
-- [[docs/redis|Redis - Basics]]
-- [[docs/elasticsearch|Elastic Search - Basics]]
+- [[docs/redis|Redis]]
+- [[docs/elasticsearch|Elastic Search]]

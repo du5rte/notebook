@@ -16,6 +16,9 @@ verified: false
 ---
 # Gulp
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
+
 Notes: [[archive/gulp]]
 
 ## Why I picked it

@@ -14,6 +14,8 @@ verified: false
 ---
 # react-native-enriched
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 ## Why I would drop it

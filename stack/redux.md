@@ -16,6 +16,9 @@ verified: false
 ---
 # Redux
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 Notes: [[docs/redux]]
 
 ## Why I picked it

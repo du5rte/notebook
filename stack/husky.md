@@ -15,6 +15,9 @@ verified: false
 ---
 # Husky
 
+Platforms: [[docs/node/node|Node]]
+Language: [[stack/javascript|JavaScript]]
+
 ## Why I picked it
 
 ## Why I dropped it

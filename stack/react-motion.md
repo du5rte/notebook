@@ -16,6 +16,9 @@ verified: false
 ---
 # React Motion
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
+
 Notes: [[archive/react/motion]]
 
 ## Why I picked it

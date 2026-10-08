@@ -14,6 +14,8 @@ verified: false
 ---
 # Lefthook
 
+Platforms: [[docs/node/node|Node]]
+
 ## Why I picked it
 
 Go binary, parallel hooks, one YAML file.

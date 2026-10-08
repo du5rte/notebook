@@ -16,6 +16,8 @@ verified: false
 ---
 # Relay
 
+Platforms: [[docs/react/react|Web]]
+
 Notes: [[archive/relay]]
 
 ## Why I picked it

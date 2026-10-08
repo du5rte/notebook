@@ -6,6 +6,7 @@ updated: 2026-10-08
 aliases: [Feather Icons]
 tags: [library, icons]
 categories: [icons]
+platforms: [web, react-native]
 status: dropped
 replaced_by: "[[stack/lucide]]"
 url: https://feathericons.com
@@ -13,6 +14,9 @@ repo: https://github.com/feathericons/feather
 verified: true
 ---
 # Feather
+
+Platforms: [[docs/react-native|React Native]], [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
 
 ## Why I picked it
 

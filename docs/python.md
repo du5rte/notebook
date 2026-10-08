@@ -1,12 +1,12 @@
 ---
-title: "Python Basics"
+title: "Python"
 type: doc
 created: 2020-04-11
 updated: 2020-04-11
 tags: [python]
 status: draft
 ---
-# Python Basics
+# Python
 
 
 ## REPL
@@ -121,5 +121,5 @@ class str(object)
 ...
 
 ## Related
-- [[docs/ml/basics|Machine Learning]]
-- [[docs/ml/data-analysis|Data Analysis]]
+- [[docs/ml/ml|Machine Learning]]
+- [[docs/ml/ml-data-analysis|Data Analysis]]

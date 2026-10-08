@@ -14,6 +14,9 @@ verified: false
 ---
 # Vector Icons
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 Expo is moving away from @expo/vector-icons.

@@ -14,6 +14,9 @@ verified: false
 ---
 # Reanimated
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 Animations on the native thread. Read .value only in worklets.

@@ -12,6 +12,8 @@ verified: false
 ---
 # React Handyhooks
 
+Platforms: [[docs/react/react|Web]]
+
 ## Why I picked it
 
 ## Why I would drop it

@@ -14,6 +14,9 @@ verified: false
 ---
 # react-native-ease
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 Staggered animations.

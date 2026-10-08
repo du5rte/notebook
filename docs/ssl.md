@@ -30,4 +30,4 @@ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 - [[docs/security|Security]]
 - [[docs/nginx|Nginx]]
 - [[docs/dns|Networking - DNS]]
-- [[docs/server-setup|Ubuntu]]
+- [[docs/linux/linux-ubuntu|Ubuntu]]

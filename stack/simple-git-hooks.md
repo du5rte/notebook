@@ -15,6 +15,9 @@ verified: false
 ---
 # simple-git-hooks
 
+Platforms: [[docs/node/node|Node]]
+Language: [[stack/javascript|JavaScript]]
+
 ## Why I picked it
 
 Maps hooks to commands in package.json with no magic.

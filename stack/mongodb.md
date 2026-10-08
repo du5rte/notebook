@@ -16,7 +16,9 @@ verified: false
 ---
 # MongoDB
 
-Notes: [[docs/mongodb]], [[docs/graphql/mongodb]]
+Platforms: [[docs/node/node|Node]]
+
+Notes: [[docs/mongodb]], [[docs/graphql/graphql-mongodb]]
 
 ## Why I picked it
 

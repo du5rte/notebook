@@ -17,6 +17,9 @@ verified: false
 ---
 # jQuery
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
+
 Notes: [[archive/jquery/basics]], [[archive/jquery/ajax]], [[archive/jquery/plugins]]
 
 ## Why I picked it

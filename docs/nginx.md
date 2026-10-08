@@ -184,4 +184,4 @@ add_header Strict-Transport-Security max-age=15768000;
 ## Related
 - [[docs/ssl|SSL]]
 - [[docs/dns|Networking - DNS]]
-- [[docs/server-setup|Ubuntu]]
+- [[docs/linux/linux-ubuntu|Ubuntu]]

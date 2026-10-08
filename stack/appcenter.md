@@ -13,6 +13,8 @@ verified: false
 ---
 # App Center
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 ## Why I dropped it

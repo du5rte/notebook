@@ -103,5 +103,5 @@ $ ssh-keygen -R awesome.com
 ```
 
 ## Related
-- [[docs/server-setup|Ubuntu]]
+- [[docs/linux/linux-ubuntu|Ubuntu]]
 - [[docs/aws|AWS]]

@@ -16,6 +16,9 @@ verified: false
 ---
 # Webpack
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
+
 Notes: [[docs/webpack]]
 
 ## Why I picked it

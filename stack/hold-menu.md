@@ -14,6 +14,9 @@ verified: false
 ---
 # Hold Menu
 
+Platforms: [[docs/react-native|React Native]]
+Language: [[stack/typescript|TypeScript]]
+
 ## Why I picked it
 
 ## Why I would drop it

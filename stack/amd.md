@@ -16,6 +16,9 @@ verified: false
 ---
 # AMD (RequireJS)
 
+Platforms: [[docs/react/react|Web]]
+Language: [[stack/javascript|JavaScript]]
+
 Notes: [[archive/javascript/amd]]
 
 ## Why I picked it

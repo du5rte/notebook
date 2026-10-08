@@ -14,6 +14,8 @@ verified: false
 ---
 # ffmpeg
 
+Platforms: [[docs/node/node|Node]]
+
 ## Why I picked it
 
 ## Why I would drop it

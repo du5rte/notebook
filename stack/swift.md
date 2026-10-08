@@ -16,7 +16,9 @@ verified: false
 ---
 # Swift
 
-Notes: [[docs/swift/basics]]
+Platforms: [[docs/swift/swift|iOS]]
+
+Notes: [[docs/swift/swift]]
 
 ## Why I picked it
 

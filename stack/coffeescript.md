@@ -16,6 +16,8 @@ verified: false
 ---
 # CoffeeScript
 
+Platforms: [[docs/react/react|Web]]
+
 Notes: [[archive/coffeescript]]
 
 ## Why I picked it

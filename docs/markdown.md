@@ -89,4 +89,4 @@ We start with an '!' enter and `alt` text in the `[ ]`, the link in the `( )`, o
 ```
 
 ## Related
-- [[docs/regex|Regex - Basics]]
+- [[docs/regex|Regex]]

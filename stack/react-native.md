@@ -15,6 +15,8 @@ verified: false
 ---
 # React Native
 
+Platforms: [[docs/react-native|React Native]]
+
 Notes: [[docs/react-native]]
 
 ## Why I picked it

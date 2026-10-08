@@ -14,6 +14,8 @@ verified: false
 ---
 # react-native-nitro-fetch
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 Cronet-based HTTP, prefetching, worklet support.

@@ -14,6 +14,8 @@ verified: false
 ---
 # QuickPush
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 macOS menu bar tool for testing Expo push notifications.

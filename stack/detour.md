@@ -14,6 +14,8 @@ verified: false
 ---
 # detour
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 Deep linking.

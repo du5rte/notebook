@@ -12,6 +12,8 @@ verified: false
 ---
 # Confetti
 
+Platforms: [[docs/react-native|React Native]]
+
 ## Why I picked it
 
 ## Why I would drop it

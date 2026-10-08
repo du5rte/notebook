@@ -14,6 +14,8 @@ verified: false
 ---
 # Solidity
 
+Platforms: [[docs/react/react|Web]]
+
 ## Why I picked it
 
 ## Why I would drop it

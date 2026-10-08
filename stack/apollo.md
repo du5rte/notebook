@@ -14,10 +14,12 @@ verified: false
 ---
 # Apollo
 
+Platforms: [[docs/react/react|Web]], [[docs/react-native|React Native]], [[docs/node/node|Node]]
+
 Client: https://github.com/apollographql/apollo-client
 Server: https://github.com/apollographql/apollo-server
 
-Notes: [[docs/apollo/client]], [[docs/apollo/server]]
+Notes: [[docs/apollo/apollo-client]], [[docs/apollo/apollo-server]]
 
 ## Why I picked it
 
