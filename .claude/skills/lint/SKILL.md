@@ -9,9 +9,9 @@ Report only. Fix nothing unless the user asks afterwards. Conventions are in `CL
 
 ## Checks
 
-Run over `docs/`, `wiki/` and `archive/` (skip `raw/`):
+Run over `docs/`, `wiki/`, `archive/` and `saved/` (skip `raw/`):
 
-1. **Frontmatter**: missing, or missing required fields (`title`, `type`, `tags`). Wiki pages also need `created`/`updated`. `type` must match the folder (`docs/` and `archive/` use `doc`; `wiki/sources/` uses `source`, and so on).
+1. **Frontmatter**: missing, or missing required fields (`title`, `type`, `tags`). Wiki pages also need `created`/`updated`. `type` must match the folder (`docs/`, `archive/` and `saved/` use `doc`; `wiki/sources/` uses `source`, and so on).
 2. **Headings**: exactly one H1, matching `title`. Ignore `#` lines inside code fences.
 3. **Naming**: not lowercase kebab-case, numeric prefixes, `_` prefixes, nesting deeper than `<folder>/<topic>/<note>.md`.
 4. **Links**: broken `[[wikilinks]]`. Ignore `[[...]]` inside code, such as JS arrays. Orphans: notes nothing links to, indexes aside.
