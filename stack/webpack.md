@@ -9,7 +9,7 @@ categories: [tooling]
 platforms: [web]
 status: legacy
 since: 2015
-replaced_by: "[[docs/libraries/vite]]"
+replaced_by: "[[stack/vite]]"
 url: https://webpack.js.org
 repo: https://github.com/webpack/webpack
 verified: false

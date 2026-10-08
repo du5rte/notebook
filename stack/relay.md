@@ -9,7 +9,7 @@ categories: [data]
 platforms: [web]
 status: dropped
 since: 2016
-replaced_by: "[[docs/libraries/apollo]]"
+replaced_by: "[[stack/apollo]]"
 url: https://relay.dev
 repo: https://github.com/facebook/relay
 verified: false

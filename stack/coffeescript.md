@@ -9,7 +9,7 @@ categories: [language]
 platforms: [web]
 status: dropped
 since: 2015
-replaced_by: "[[docs/libraries/typescript]]"
+replaced_by: "[[stack/typescript]]"
 url: https://coffeescript.org
 repo: https://github.com/jashkenas/coffeescript
 verified: false

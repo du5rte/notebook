@@ -10,7 +10,7 @@ platforms: [web]
 status: dropped
 since: 2015
 until: 2016
-replaced_by: "[[docs/libraries/react]]"
+replaced_by: "[[stack/react]]"
 url: https://jquery.com
 repo: https://github.com/jquery/jquery
 verified: false

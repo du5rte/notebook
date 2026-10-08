@@ -9,7 +9,7 @@ tags: [saved, fonts]
 
 Typefaces, foundries and font galleries I've bookmarked. Notes on CSS `@font-face` are in [[docs/css/fonts]].
 
-Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform or style, **Price** free, paid or the price, **Library** the [[docs/libraries/index|library]] file once I've used it.
+Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform or style, **Price** free, paid or the price, **Library** the [[stack/index|library]] file once I've used it.
 
 | Name | Kind | Tags | Price | Link | Library | Notes |
 |---|---|---|---|---|---|---|

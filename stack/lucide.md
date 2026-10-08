@@ -13,7 +13,7 @@ verified: true
 ---
 # Lucide
 
-Replaces [[docs/libraries/feather|Feather]]. Animated version: [lucide-animated](https://lucide-animated.com/).
+Replaces [[stack/feather|Feather]]. Animated version: [lucide-animated](https://lucide-animated.com/).
 
 ## Why I picked it
 

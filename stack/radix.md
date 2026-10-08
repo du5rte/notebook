@@ -8,7 +8,7 @@ tags: [library, ui]
 categories: [ui]
 platforms: [web]
 status: dropped
-replaced_by: "[[docs/libraries/react-aria]]"
+replaced_by: "[[stack/react-aria]]"
 url: https://www.radix-ui.com
 repo: https://github.com/radix-ui/primitives
 verified: false
