@@ -2,10 +2,10 @@
 title: "Nano Icons"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-08
 aliases: []
-tags: [library, graphics]
-categories: [graphics]
+tags: [library, icons]
+categories: [icons]
 platforms: [react-native]
 status: watching
 url: https://github.com/software-mansion-labs/react-native-nano-icons

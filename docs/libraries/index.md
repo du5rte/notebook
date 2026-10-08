@@ -2,14 +2,18 @@
 title: "Libraries"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-08
 tags: [library, index]
 ---
 # Libraries
 
 One file per library. `status` is one of `using`, `trying`, `watching`, `legacy` (replaced by something better, but I still use it) or `dropped`; `verified: false` means the status is a guess from old notes and has not been confirmed. The Dropped table at the bottom is the retrospective: filter it by platform for web, backend or mobile.
 
-Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`, `forms`, `framework`, `graphics`, `language`, `navigation`, `services`, `state`, `styling`, `testing`, `tooling`, `ui`, `utils`.
+Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`, `forms`, `framework`, `graphics`, `icons`, `language`, `navigation`, `services`, `state`, `styling`, `testing`, `tooling`, `ui`, `ui-kit`, `utils`.
+
+`ui-kit` is a set of ready-styled components (shadcn/ui, HeroUI); `ui` is a single component or unstyled primitives (FlashList, React Aria). `icons` is an icon set.
+
+UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/ui-kits|saved/]]. They get a file here once I use them in a project.
 
 ## Using
 
@@ -25,6 +29,7 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/react-native-web|React Native for Web]] | framework | web |  |  |
 | [[docs/libraries/expo|Expo]] | framework, tooling | react-native |  |  |
 | [[docs/libraries/react-native-svg|react-native-svg]] | graphics | react-native |  |  |
+| [[docs/libraries/lucide|Lucide]] | icons |  |  | [[docs/libraries/feather|Feather]] |
 | [[docs/libraries/javascript|JavaScript]] | language | web, react-native, node | 2015 |  |
 | [[docs/libraries/typescript|TypeScript]] | language | web, react-native, node | 2015 | [[docs/libraries/coffeescript|CoffeeScript]] |
 | [[docs/libraries/react-navigation|React Navigation]] | navigation | react-native |  |  |
@@ -66,7 +71,7 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 |---|---|---|---|---|
 | [[docs/libraries/lottie|Lottie]] | animation, graphics | web, react-native |  |  |
 | [[docs/libraries/clerk|Clerk]] | auth | web, react-native |  |  |
-| [[docs/libraries/vector-icons|Vector Icons]] | graphics | react-native |  |  |
+| [[docs/libraries/vector-icons|Vector Icons]] | icons | react-native |  |  |
 | [[docs/libraries/skia|Skia]] | graphics, animation | react-native |  |  |
 | [[docs/libraries/python|Python]] | language | node | 2018 |  |
 | [[docs/libraries/bottom-sheet|Bottom Sheet (gorhom)]] | navigation | react-native |  |  |
@@ -84,9 +89,9 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/reactotron|Reactotron]] | tooling | react-native |  |  |
 | [[docs/libraries/device-info|Device Info]] | ui | react-native |  |  |
 | [[docs/libraries/fast-image|FastImage]] | ui | react-native |  |  |
-| [[docs/libraries/shadcn-ui|shadcn/ui]] | ui | web |  |  |
+| [[docs/libraries/shadcn-ui|shadcn/ui]] | ui-kit | web |  |  |
 | [[docs/libraries/sonner|Sonner]] | ui | web, react-native |  |  |
-| [[docs/libraries/tamagui|Tamagui]] | ui, styling | web, react-native |  |  |
+| [[docs/libraries/tamagui|Tamagui]] | ui-kit, styling | web, react-native |  |  |
 | [[docs/libraries/delay|delay]] | utils | web, react-native, node |  |  |
 | [[docs/libraries/ffmpeg|ffmpeg]] | utils | node |  |  |
 | [[docs/libraries/fuse|Fuse.js]] | utils | web, react-native |  |  |
@@ -114,7 +119,7 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/instantdb|InstantDB]] | database | web, react-native |
 | [[docs/libraries/watermelon-db|WatermelonDB]] | database | react-native |
 | [[docs/libraries/tanstack-form|TanStack Form]] | forms | web |
-| [[docs/libraries/nano-icons|Nano Icons]] | graphics | react-native |
+| [[docs/libraries/nano-icons|Nano Icons]] | icons | react-native |
 | [[docs/libraries/fast-squircle|react-native-fast-squircle]] | graphics | react-native |
 | [[docs/libraries/victory-native|Victory Native]] | graphics | react-native |
 | [[docs/libraries/d3|D3.js]] | graphics, data | web |
@@ -126,19 +131,19 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/unocss|UnoCSS]] | styling | web |
 | [[docs/libraries/radon-ide|Radon IDE]] | tooling | react-native |
 | [[docs/libraries/re-pack|Re.Pack]] | tooling | react-native |
-| [[docs/libraries/animate-ui|Animate UI]] | ui | web |
+| [[docs/libraries/animate-ui|Animate UI]] | ui-kit | web |
 | [[docs/libraries/boneyard|Boneyard]] | ui | web, react-native |
-| [[docs/libraries/daisyui|daisyUI]] | ui | web |
+| [[docs/libraries/daisyui|daisyUI]] | ui-kit | web |
 | [[docs/libraries/expo-ui|Expo UI]] | ui | react-native |
 | [[docs/libraries/expo-live-activity|expo-live-activity]] | ui | react-native, ios |
 | [[docs/libraries/expo-quick-actions|expo-quick-actions]] | ui | react-native |
 | [[docs/libraries/flash-calendar|Flash Calendar]] | ui | react-native |
 | [[docs/libraries/gifted-chat|Gifted Chat]] | ui | react-native |
-| [[docs/libraries/heroui|HeroUI]] | ui | web, react-native |
+| [[docs/libraries/heroui|HeroUI]] | ui-kit | web, react-native |
 | [[docs/libraries/legend-list|Legend List]] | ui | react-native |
-| [[docs/libraries/primer|Primer]] | ui | web |
-| [[docs/libraries/react-bits|React Bits]] | ui | web |
-| [[docs/libraries/react-native-reusables|React Native Reusables]] | ui | react-native |
+| [[docs/libraries/primer|Primer]] | ui-kit | web |
+| [[docs/libraries/react-bits|React Bits]] | ui-kit | web |
+| [[docs/libraries/react-native-reusables|React Native Reusables]] | ui-kit | react-native |
 | [[docs/libraries/coachmark|react-native-coachmark]] | ui | react-native |
 | [[docs/libraries/enriched|react-native-enriched]] | ui | react-native |
 | [[docs/libraries/nitro-device-info|react-native-nitro-device-info]] | ui | react-native |
@@ -156,6 +161,7 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/firebase|Firebase]] | database | web, react-native |  | [[docs/libraries/convex]] |
 | [[docs/libraries/realm|Realm]] | database | react-native |  |  |
 | [[docs/libraries/formik|Formik]] | forms | web, react-native |  |  |
+| [[docs/libraries/feather|Feather]] | icons |  |  | [[docs/libraries/lucide]] |
 | [[docs/libraries/coffeescript|CoffeeScript]] | language | web | 2015 | [[docs/libraries/typescript]] |
 | [[docs/libraries/swift|Swift]] | language | ios | 2016 | [[docs/libraries/react-native]] |
 | [[docs/libraries/jotai|Jotai]] | state | web, react-native |  |  |
@@ -171,13 +177,13 @@ Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`
 | [[docs/libraries/husky|Husky]] | tooling | node |  | [[docs/libraries/lefthook]] |
 | [[docs/libraries/simple-git-hooks|simple-git-hooks]] | tooling | node |  | [[docs/libraries/lefthook]] |
 | [[docs/libraries/yeoman|Yeoman]] | tooling | web | 2015 |  |
-| [[docs/libraries/bootstrap|Bootstrap]] | ui | web |  |  |
+| [[docs/libraries/bootstrap|Bootstrap]] | ui-kit | web |  |  |
 | [[docs/libraries/jquery|jQuery]] | ui | web | 2015–2016 | [[docs/libraries/react]] |
 | [[docs/libraries/radix|Radix UI]] | ui | web |  | [[docs/libraries/react-aria]] |
 | [[docs/libraries/lodash|Lodash]] | utils | web, react-native, node |  | [[docs/libraries/remeda]] |
 
 ## Not libraries
 
-UI galleries and inspiration sites, kept out of the library files: 21st.dev, Uiverse, Codrops, CodyHouse, shadcncraft, Shadcn Studio, Shadcn Space, Vercel Design, Material Design 3, Bit, Watermelon UI, beUI, unlumen UI, FeralUI, Bencho, 02ui Motion, Bklit UI, Evil Charts, KokonutUI, Amicro, Kinetics, Canvas UI, UI root, Layers, 000h, Cobe, ui.camera, Rare UI, Obsidian UI, ArcUI, Libraries.dev, Reactiive demos, React Native Motion.
+UI galleries, component sites and other saved UI kits are in [[saved/ui-kits]].
 
 AI apps (MidJourney, Kling, Perplexity, n8n, Windsurf, Claude and others) are tools, not libraries, and are left for a separate list.
