@@ -7,7 +7,7 @@ tags: [saved, fonts]
 ---
 # Saved Fonts
 
-Typefaces, foundries and font galleries I've bookmarked. Notes on CSS `@font-face` are in [[docs/css/fonts]].
+Typefaces, foundries and font galleries I've bookmarked. Notes on CSS `@font-face` are in [[docs/css/css-fonts]].
 
 Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform or style, **Price** free, paid or the price, **Library** the [[stack/index|library]] file once I've used it.
 

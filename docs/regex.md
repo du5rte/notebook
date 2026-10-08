@@ -247,5 +247,5 @@ if we try to input number it will prompt `Please match the required format`
 ```
 
 ## Related
-- [[docs/javascript/strings|JavaScript Strings]]
+- [[docs/javascript/javascript-strings|JavaScript Strings]]
 - [[docs/markdown|Markdown]]

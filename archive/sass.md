@@ -978,7 +978,7 @@ Extend mixins by defining a point where it can pass a block of CSS rules.
 ```
 
 ## Related
-- [[docs/css/basics|CSS - Basics]]
-- [[docs/html/basics|HTML Basics]]
-- [[docs/css/selectors|CSS - Selectors]]
-- [[docs/css/modular|CSS - Modular CSS]]
+- [[docs/css/css|CSS - Basics]]
+- [[docs/html/html|HTML Basics]]
+- [[docs/css/css-selectors|CSS - Selectors]]
+- [[docs/css/css-modular|CSS - Modular CSS]]

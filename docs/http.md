@@ -82,8 +82,8 @@ ok
 ```
 
 ## Related
-- [[docs/node/http|Node - HTTP]]
-- [[docs/node/server|Node - Server]]
+- [[docs/node/node-http|Node - HTTP]]
+- [[docs/node/node-server|Node - Server]]
 - [[docs/curl|Networking - Curl]]
 - [[docs/networking|Networking]]
 - [[docs/dns|Networking - DNS]]

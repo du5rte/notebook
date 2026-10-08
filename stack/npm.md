@@ -15,7 +15,7 @@ verified: false
 ---
 # npm
 
-Notes: [[docs/node/npm]]
+Notes: [[docs/node/node-npm]]
 
 ## Why I picked it
 

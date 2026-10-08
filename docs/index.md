@@ -10,35 +10,35 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 ## Web
 
 ### css
-- [[docs/css/basics|CSS - Basics]]
-- [[docs/css/animations|CSS - Animations]]
-- [[docs/css/box-model|CSS - Box model]]
-- [[docs/css/flexbox|CSS - Flexbox]]
-- [[docs/css/fonts|CSS - Fonts]] *(outdated)*
-- [[docs/css/media-queries|CSS - Media Queries]]
-- [[docs/css/modular|CSS - Modular CSS]] *(outdated)*
-- [[docs/css/others|CSS - Other Features]] *(outdated)*
-- [[docs/css/selectors|CSS - Selectors]]
-- [[docs/css/transform-transitions|CSS - Transitions and Transforms]]
-- [[docs/css/values|CSS - Values and Units]]
+- [[docs/css/css|CSS - Basics]]
+- [[docs/css/css-animations|CSS - Animations]]
+- [[docs/css/css-box-model|CSS - Box model]]
+- [[docs/css/css-flexbox|CSS - Flexbox]]
+- [[docs/css/css-fonts|CSS - Fonts]] *(outdated)*
+- [[docs/css/css-media-queries|CSS - Media Queries]]
+- [[docs/css/css-modular|CSS - Modular CSS]] *(outdated)*
+- [[docs/css/css-others|CSS - Other Features]] *(outdated)*
+- [[docs/css/css-selectors|CSS - Selectors]]
+- [[docs/css/css-transform-transitions|CSS - Transitions and Transforms]]
+- [[docs/css/css-values|CSS - Values and Units]]
 
 ### html
-- [[docs/html/basics|HTML Basics]]
-- [[docs/html/forms|HTML - Forms]]
-- [[docs/html/objects|HTML - Objects]]
-- [[docs/html/tables|HTML Tables]]
-- [[docs/html/text|HTML - Text]]
-- [[docs/html/video-and-audio|Video and Audio]]
+- [[docs/html/html|HTML Basics]]
+- [[docs/html/html-forms|HTML - Forms]]
+- [[docs/html/html-objects|HTML - Objects]]
+- [[docs/html/html-tables|HTML Tables]]
+- [[docs/html/html-text|HTML - Text]]
+- [[docs/html/html-video-and-audio|Video and Audio]]
 
 ### browser
-- [[docs/browser/basics|DOM - Basics]]
-- [[docs/browser/geolocation|JavaScript - Geolocation]]
-- [[docs/browser/storage|Storage]] *(draft)*
+- [[docs/browser/browser|DOM - Basics]]
+- [[docs/browser/browser-geolocation|JavaScript - Geolocation]]
+- [[docs/browser/browser-storage|Storage]] *(draft)*
 
 ### svg
-- [[docs/svg/basics|SVG - Basics]]
-- [[docs/svg/animations|SVG - Animations]]
-- [[docs/svg/elements|SVG - Elements]]
+- [[docs/svg/svg|SVG - Basics]]
+- [[docs/svg/svg-animations|SVG - Animations]]
+- [[docs/svg/svg-elements|SVG - Elements]]
 
 ## JavaScript
 
@@ -46,52 +46,52 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/redux|React - Redux]] *(outdated)*
 
 ### apollo
-- [[docs/apollo/client|React - Apollo Client]] *(outdated)*
-- [[docs/apollo/server|GraphQL - Apollo Server]] *(outdated)*
+- [[docs/apollo/apollo-client|React - Apollo Client]] *(outdated)*
+- [[docs/apollo/apollo-server|GraphQL - Apollo Server]] *(outdated)*
 
 ### javascript
-- [[docs/javascript/basics|JavaScript - Basics]]
-- [[docs/javascript/algorithms|JavaScript - Algorithms]]
-- [[docs/javascript/animations|JavaScript - Animations]] *(outdated)*
-- [[docs/javascript/arrays|JavaScript Arrays]]
-- [[docs/javascript/async|JavaScript - Asynchronous Programming]]
-- [[docs/javascript/booleans|JavaScript - Booleans]]
-- [[docs/javascript/conditionals|JavaScript - Conditionals]]
-- [[docs/javascript/decorators|JavaScript - Common Patterns]]
-- [[docs/javascript/functions|JavaScript Functions]]
-- [[docs/javascript/json|JavaScript - JSON]]
-- [[docs/javascript/loops|JavaScript - Loops]]
-- [[docs/javascript/maps|JavaScript - Maps]]
-- [[docs/javascript/numbers|JavaScript Numbers]]
-- [[docs/javascript/object-oriented|JavaScript - Classes]]
-- [[docs/javascript/objects|JavaScript Objects]]
-- [[docs/javascript/scope|JavaScript - Scope]]
-- [[docs/javascript/strings|JavaScript Strings]]
-- [[docs/javascript/typescript|JavaScript - TypeScript]] *(outdated)*
-- [[docs/javascript/unit-testing|JavaScript - Unit Testing]]
-- [[docs/javascript/variables|JavaScript - Variables]]
+- [[docs/javascript/javascript|JavaScript - Basics]]
+- [[docs/javascript/javascript-algorithms|JavaScript - Algorithms]]
+- [[docs/javascript/javascript-animations|JavaScript - Animations]] *(outdated)*
+- [[docs/javascript/javascript-arrays|JavaScript Arrays]]
+- [[docs/javascript/javascript-async|JavaScript - Asynchronous Programming]]
+- [[docs/javascript/javascript-booleans|JavaScript - Booleans]]
+- [[docs/javascript/javascript-conditionals|JavaScript - Conditionals]]
+- [[docs/javascript/javascript-decorators|JavaScript - Common Patterns]]
+- [[docs/javascript/javascript-functions|JavaScript Functions]]
+- [[docs/javascript/javascript-json|JavaScript - JSON]]
+- [[docs/javascript/javascript-loops|JavaScript - Loops]]
+- [[docs/javascript/javascript-maps|JavaScript - Maps]]
+- [[docs/javascript/javascript-numbers|JavaScript Numbers]]
+- [[docs/javascript/javascript-object-oriented|JavaScript - Classes]]
+- [[docs/javascript/javascript-objects|JavaScript Objects]]
+- [[docs/javascript/javascript-scope|JavaScript - Scope]]
+- [[docs/javascript/javascript-strings|JavaScript Strings]]
+- [[docs/javascript/javascript-typescript|JavaScript - TypeScript]] *(outdated)*
+- [[docs/javascript/javascript-unit-testing|JavaScript - Unit Testing]]
+- [[docs/javascript/javascript-variables|JavaScript - Variables]]
 
 ### react
-- [[docs/react/basics|React - Basics]] *(outdated)*
-- [[docs/react/style|React - Style]] *(outdated)*
+- [[docs/react/react|React - Basics]] *(outdated)*
+- [[docs/react/react-style|React - Style]] *(outdated)*
 
 ### node
-- [[docs/node/basics|Node.js - Basics]]
-- [[docs/node/cli|Node - CLI]] *(draft)*
-- [[docs/node/events|Node - Events]] *(draft)*
-- [[docs/node/http|Node - HTTP]] *(draft)*
-- [[docs/node/modules|Node - Modules]]
-- [[docs/node/npm|npm]]
-- [[docs/node/process|Process]] *(draft)*
-- [[docs/node/server|Node - Server]]
-- [[docs/node/socket-io|Node - Socket.io]] *(draft)*
-- [[docs/node/streams|Node.js - Streams]]
+- [[docs/node/node|Node.js - Basics]]
+- [[docs/node/node-cli|Node - CLI]] *(draft)*
+- [[docs/node/node-events|Node - Events]] *(draft)*
+- [[docs/node/node-http|Node - HTTP]] *(draft)*
+- [[docs/node/node-modules|Node - Modules]]
+- [[docs/node/node-npm|npm]]
+- [[docs/node/node-process|Process]] *(draft)*
+- [[docs/node/node-server|Node - Server]]
+- [[docs/node/node-socket-io|Node - Socket.io]] *(draft)*
+- [[docs/node/node-streams|Node.js - Streams]]
 
 ### graphql
-- [[docs/graphql/basics|GraphQL - Basics]]
-- [[docs/graphql/graphiql|GraphQL - GraphiQL]]
-- [[docs/graphql/mongodb|GraphQL - MongoDB]] *(outdated)*
-- [[docs/graphql/server|GraphQL - Server]]
+- [[docs/graphql/graphql|GraphQL - Basics]]
+- [[docs/graphql/graphql-graphiql|GraphQL - GraphiQL]]
+- [[docs/graphql/graphql-mongodb|GraphQL - MongoDB]] *(outdated)*
+- [[docs/graphql/graphql-server|GraphQL - Server]]
 
 ## Systems
 
@@ -117,53 +117,53 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 - [[docs/ssl|SSL]]
 
 ### git
-- [[docs/git/basics|Git - Basics]]
-- [[docs/git/branching|Git - Branching]]
-- [[docs/git/flow|Git - Flow]]
-- [[docs/git/history|Git - History]]
-- [[docs/git/merging|Git - Merging]]
-- [[docs/git/remotes|Git - Remote]]
-- [[docs/git/stage|Git - Stage Area]]
-- [[docs/git/stashing|Git - Stashing]]
-- [[docs/git/tag|Git - Tag]]
+- [[docs/git/git|Git - Basics]]
+- [[docs/git/git-branching|Git - Branching]]
+- [[docs/git/git-flow|Git - Flow]]
+- [[docs/git/git-history|Git - History]]
+- [[docs/git/git-merging|Git - Merging]]
+- [[docs/git/git-remotes|Git - Remote]]
+- [[docs/git/git-stage|Git - Stage Area]]
+- [[docs/git/git-stashing|Git - Stashing]]
+- [[docs/git/git-tag|Git - Tag]]
 
 ### linux
-- [[docs/linux/basics|Console - Basics]]
-- [[docs/linux/applications|Console - Applications]]
-- [[docs/linux/environment|Console - Environment]]
-- [[docs/linux/files|Console - Files and Directories]]
-- [[docs/linux/permissions|Console - Permissions]]
-- [[docs/linux/pipe|Console - Pipes and Redirection]]
-- [[docs/linux/processes|Console - Processes]]
-- [[docs/linux/users|Console - Users]]
+- [[docs/linux/linux|Console - Basics]]
+- [[docs/linux/linux-applications|Console - Applications]]
+- [[docs/linux/linux-environment|Console - Environment]]
+- [[docs/linux/linux-files|Console - Files and Directories]]
+- [[docs/linux/linux-permissions|Console - Permissions]]
+- [[docs/linux/linux-pipe|Console - Pipes and Redirection]]
+- [[docs/linux/linux-processes|Console - Processes]]
+- [[docs/linux/linux-users|Console - Users]]
 
 ## Languages
 
 - [[docs/python|Python Basics]] *(draft)*
 
 ### swift
-- [[docs/swift/basics|Swift - Basics]]
-- [[docs/swift/booleans|Swift - Booleans]]
-- [[docs/swift/collections|Swift - Collections and Control Flow]]
-- [[docs/swift/conditionals|Swift - Conditionals]]
-- [[docs/swift/enums|Swift - Enums]]
-- [[docs/swift/errors|Swift - Error Handling]]
-- [[docs/swift/functions|Swift - Functions]]
-- [[docs/swift/loops|Swift - Loops]]
-- [[docs/swift/memory-management|Swift - Memory Management]]
-- [[docs/swift/numbers|Swift - Numbers]]
-- [[docs/swift/object-oriented|Swift - Objects]]
-- [[docs/swift/protocols|Swift - Protocols]]
-- [[docs/swift/scratch|Swift - Scratch]] *(draft)*
-- [[docs/swift/strings|Swift - Strings]]
-- [[docs/swift/variables|Swift - Variables]]
-- [[docs/swift/xcode|Xcode]]
+- [[docs/swift/swift|Swift - Basics]]
+- [[docs/swift/swift-booleans|Swift - Booleans]]
+- [[docs/swift/swift-collections|Swift - Collections and Control Flow]]
+- [[docs/swift/swift-conditionals|Swift - Conditionals]]
+- [[docs/swift/swift-enums|Swift - Enums]]
+- [[docs/swift/swift-errors|Swift - Error Handling]]
+- [[docs/swift/swift-functions|Swift - Functions]]
+- [[docs/swift/swift-loops|Swift - Loops]]
+- [[docs/swift/swift-memory-management|Swift - Memory Management]]
+- [[docs/swift/swift-numbers|Swift - Numbers]]
+- [[docs/swift/swift-object-oriented|Swift - Objects]]
+- [[docs/swift/swift-protocols|Swift - Protocols]]
+- [[docs/swift/swift-scratch|Swift - Scratch]] *(draft)*
+- [[docs/swift/swift-strings|Swift - Strings]]
+- [[docs/swift/swift-variables|Swift - Variables]]
+- [[docs/swift/swift-xcode|Xcode]]
 
 ## Machine Learning
 
 ### ml
-- [[docs/ml/basics|Machine Learning]] *(draft)*
-- [[docs/ml/data-analysis|Data Analysis]] *(draft)*
+- [[docs/ml/ml|Machine Learning]] *(draft)*
+- [[docs/ml/ml-data-analysis|Data Analysis]] *(draft)*
 
 ## Tools
 

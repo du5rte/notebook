@@ -16,7 +16,7 @@ verified: false
 ---
 # Swift
 
-Notes: [[docs/swift/basics]]
+Notes: [[docs/swift/swift]]
 
 ## Why I picked it
 

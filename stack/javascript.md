@@ -14,7 +14,7 @@ verified: false
 ---
 # JavaScript
 
-Notes: [[docs/javascript/basics]]
+Notes: [[docs/javascript/javascript]]
 
 ## Why I picked it
 

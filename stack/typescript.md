@@ -15,7 +15,7 @@ verified: false
 ---
 # TypeScript
 
-Notes: [[docs/javascript/typescript]]
+Notes: [[docs/javascript/javascript-typescript]]
 
 ## Why I picked it
 
