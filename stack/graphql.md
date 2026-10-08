@@ -15,7 +15,7 @@ verified: false
 ---
 # GraphQL
 
-Notes: [[docs/graphql/basics]]
+Notes: [[docs/graphql/graphql]]
 
 ## Why I picked it
 

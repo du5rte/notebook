@@ -1,143 +1,141 @@
 ---
-title: "Cryptography"
+title: "Security - Cryptography"
 type: doc
 created: 2016-05-08
-updated: 2016-05-08
+updated: 2026-10-07
+aliases: ["Cryptography"]
 tags: [security]
 ---
-# Cryptography
+# Security - Cryptography
 
-Resources:
-- [Journey into cryptography](https://www.khanacademy.org/computing/computer-science/cryptography?ref=resume_learning#crypt)
-- [SSCP Cryptography](https://app.pluralsight.com/player?course=sscp2015-cryptography)
-- [tools4noobs](https://www.tools4noobs.com/online_tools/)
+Cryptography is the maths of keeping secrets and proving things haven't been tampered with. You'll never write your own algorithm (please don't), but you use it every day: HTTPS, SSH keys, password storage, signed tokens. This lesson gives you the vocabulary and the mental model, so the rest of the security lessons make sense.
 
-## Terms
+## Encoding vs hashing vs encryption
 
-#### Encryption
-Transform `plaintext` information in a `cipher`
+The three get mixed up all the time. Start here.
 
-#### decryption
-Deconstruct a `cipher` into `plaintext` information
+| | Reversible? | Needs a key? | Use it for |
+|---|---|---|---|
+| Encoding (Base64) | ✅ By anyone | ❌ | Making data safe to send, not secret |
+| Hashing (SHA-256) | ❌ One way | ❌ | Fingerprints, integrity, passwords |
+| Encryption (AES) | ✅ With the key | ✅ | Keeping data secret |
 
-#### Cypher
-Are a form of `locker` for data but instead uses mathematical algorithms
-
-#### Frequency fingerprint
-Each language has distinctive frequency of letters (fingerprint), by analyzing the frequency of the message a cypher can be decrypted. The lighter the fingerprint the stronger the cypher is.
-
-#### Frequency Stability Property
-Human randomness simulation is flawed, as we tend to prefer certain patterns when making guesses resulting in a uneven pattern. A true random sequence will equally like to contain every sequence of any length.
-
-#### Brute Force Search
-Trying every number in a locker
-
-#### Dictionary attack
-Trying a list of commonly used passwords
-
-#### Integrity
-Use to check proof of origin or that data hasn't been tampered with, e.g. email verification
-
-#### Electronic Cookbook Mode (ECM)
-When using the same key and algorithm an attacker can start to build an `ECM` on commonly used messages
-
-#### Digital Signatures
-Commonly used with email S/MIME for integrity proof of origin
-
-#### Non-Repudiation
-A person can not reasonably deny that they are responsible for the action or message. used for logging, auditing and digital signatures
-
-## Common Encryptions
-
-#### MD5
-Message Digest Algorithm 128 bit hash commonly used for non secure applications
-
-#### SHA-1
-Secure Hash Algorithm 160 bit hash commonly used, however considered insecure against well trained attackers
-
-#### SHA-2
-Bits 224, 256, 384, 512 secure but still believed to be vulnerable
-
-#### SHA-3
-The new kid
-
-#### AES
-Advanced Encryption Standards (AES) 128, 192, 256 bit. The gold standard in encryption
-
-#### RC4
-Rivest's Cipher used in SSL and HTTPS
-
-#### RSA
-Rivest, Shamir, Adleman (RSA), Uses larges prime numbers (1024, 2048 bits) to create public and private keys
-
-#### SSL
-Secure Socket Layer
-
-#### TLS
-Transform Layer Security
-
-## Encryption Methods
-
-#### Hashing
-Hashing is good for `integrity` but not `confidentiality`, a hacker can decipher a `hash` by passing it through multiple commonly used hashing algorithms.
-
-#### Salting
-Adding extra characters into a hash to make it more secure
-
-#### Symmetric Encryption
-Uses the same key to `encrypt` and `decrypt` e.g. Caesar cipher. Over time an attacker can figure it out, over time keys need to be changed.
-
-#### Block Encryption
-Encrypts the whole thing as a block
-
-#### Stream Encryption
-Encrypts bit for bit (small blocks)
-
-#### Asymmetric Encryption
-Uses key pairs (`public` and `private`) to `encrypt` and `decrypt` e.g. PKI (Public Key Infrastructure). Slower than symmetric not good for large amounts of data. Often use to initiate a session to exchange symmetric key.
-
-#### Steganography
-Hides a message inside another message, e.g. a message in a picture
-
-#### Elliptic Curve
-Based on logarithm math to determine a point on a elliptic curve. Reduce the overhead of calculation using large prime numbers. Leads to other Wave encryption (Quantum Cryptography)
-
-#### Hybrid Encryption
-Combines both asymmetric and symmetric, the bases of SSL/TLS
-
-## Ciphers
-
-#### Caeser Cipher
-Uses a secret `number` to shift the letters
-
-Secret: `3`
-```
-HELLO WORLD
-IFMMP XPSME
+```ts
+btoa('flat white') // 'ZmxhdCB3aGl0ZQ=='  anyone can decode this
 ```
 
+Base64 is not security. If you can read it with `atob()`, so can everyone else.
 
-#### Polyalphabetic
-Uses a secret `shift word` to shift the letters
+## Ciphers: the old way
 
-Secret: `SNAKE`
+A **cipher** turns readable **plaintext** into scrambled **ciphertext** using a secret. The classic ones are broken, but they teach the ideas.
+
+### Caesar cipher
+
+Shift every letter by a secret number.
+
+```ts
+const caesar = (text: string, shift: number) =>
+  text.replace(/[A-Z]/g, (letter) =>
+    String.fromCharCode(((letter.charCodeAt(0) - 65 + shift) % 26) + 65),
+  )
+
+caesar('HELLO WORLD', 3) // 'KHOOR ZRUOG'
+```
+
+There are only 25 possible shifts, so an attacker just tries them all. That's a **brute force** attack.
+
+### Frequency analysis
+
+Every language has a **fingerprint**: in English, `E` is the most common letter. Count the letters in a Caesar message, and the most common one is probably `E`. The flatter the letter frequencies in the ciphertext, the stronger the cipher.
+
+### Polyalphabetic (Vigenère)
+
+Use a **shift word** instead of one number, so each letter gets a different shift. With the secret `SNAKE` (`S` shifts by 19, `N` by 14, and so on):
+
 ```
 HELLO WORLD
 ASMWT PCSWI
 ```
-It creates a lighter fingerprint but the `shift word` creates a repetitive pattern, the longer the secret word the stronger the cypher.
 
+The fingerprint is flatter, but the word repeats, and repeats are patterns an attacker can find. Longer secret, stronger cipher.
 
-#### One Time Pad
-Uses a sequence of `random numbers` as long as the message to shift the letters. While using `brute force` with the `caeser cipher` there's `26` possibilities, now there's `26*26*26*26*26 = 11881376` possibilities
+### One-time pad
 
-Secret: `14 15 1 23 19`
+Use random shifts as long as the message itself, and never reuse them. For `ALICE` with shifts `14 15 1 23 19`, every 5-letter word is an equally likely answer: there are `26 ** 5` (11,881,376) of them, and nothing to tell the right one apart. It's unbreakable, and also impractical: you need a secret as long as everything you'll ever send.
+
+Modern cryptography is about getting close to that strength with a short key.
+
+## Symmetric encryption
+
+**One key** locks and unlocks. Fast, so it's used for the actual data.
+
 ```
-ALICE
-14 15 1 23 19
+plaintext + key → ciphertext → + same key → plaintext
 ```
+
+✓ **AES** is the standard. The catch: both sides need the same key. How do you share it safely with a server you've never met?
+
+## Asymmetric encryption
+
+**A key pair**: a **public key** you share with everyone and a **private key** you never share.
+
+- Anyone can **encrypt** with your public key; only your private key can decrypt. Like a letterbox: anyone can post, only you can open it.
+- You can **sign** with your private key; anyone can check it with your public key. Like a wax seal.
+
+**RSA** and **elliptic curve** algorithms (like Ed25519) are the common ones. Elliptic curves give the same strength with much smaller keys, which is why `ssh-keygen -t ed25519` is the modern default. Asymmetric crypto is slow, so it's rarely used for big data.
+
+## Hybrid: how HTTPS does it
+
+Put the two together: use asymmetric crypto once to agree on a symmetric key, then use the fast symmetric key for everything else. That's exactly what TLS does in [[docs/ssl|Networking - HTTPS and TLS]].
+
+## Hashing
+
+A **hash** turns any input into a fixed-size fingerprint. Same input, same hash. Change one character and the hash changes completely. You can't go backwards.
+
+```ts
+import { createHash } from 'node:crypto'
+
+createHash('sha256').update('hello').digest('hex')
+// '2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824'
+```
+
+Use hashes to check **integrity**: did this download arrive intact?
+
+| Algorithm | Use it? |
+|---|---|
+| MD5, SHA-1 | ❌ Broken: attackers can make two inputs with the same hash |
+| SHA-256, SHA-3 | ✅ Integrity and signatures |
+| bcrypt, Argon2 | ✅ Passwords only. See [[docs/security|Security - Basics]] |
+
+Fast hashes like SHA-256 are **wrong for passwords**: an attacker can try billions of guesses a second. Password hashes are slow on purpose.
+
+### Salting
+
+A **salt** is random data added to each password before hashing, so two people with the same password get different hashes. It defeats precomputed tables of common passwords (a **dictionary attack** with the work done in advance). bcrypt and Argon2 salt for you.
+
+## Signatures
+
+A **digital signature** is a hash of the message, signed with a private key. Anyone with the public key can check two things: it came from the key's owner, and it wasn't changed. That gives you **integrity** and **non-repudiation**: the sender can't reasonably deny sending it.
+
+You'll meet signatures in signed [[docs/jwt|JWTs]], DKIM email, Git commits and software updates.
+
+## Common mistakes
+
+- **Rolling your own crypto.** Use your platform's library (`node:crypto`, Web Crypto) or a well-known package.
+- **Base64 as "encryption".** It's encoding. Anyone can reverse it.
+- **SHA-256 for passwords.** Too fast. Use Argon2 or bcrypt.
+- **Hard-coding keys** in code or committing them to Git. Keys go in environment variables or a secrets manager.
+
+## Try it
+
+1. Write `decaesar(text, shift)` and decode `'KHOOR ZRUOG'`.
+2. Hash `'hello'` and `'Hello'` with SHA-256. How many characters stay the same?
+3. Run `ssh-keygen -t ed25519 -f /tmp/demo` and look at both files. Which one would you share?
 
 ## Related
-- [[docs/jwt|JWT]]
-- [[docs/ssl|SSL]]
-- [[docs/security|Security]]
+
+- [[docs/security|Security - Basics]]
+- [[docs/jwt|Security - JWT]]
+- [[docs/ssl|Networking - HTTPS and TLS]]
+- [[docs/ssh|DevOps - SSH]]

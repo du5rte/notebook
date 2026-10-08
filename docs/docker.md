@@ -1,219 +1,195 @@
 ---
-title: "Docker Basics"
+title: "DevOps - Docker"
 type: doc
 created: 2020-04-11
-updated: 2020-04-11
+updated: 2026-10-07
+aliases: ["Docker Basics", "Docker"]
 tags: [devops]
 ---
-# Docker Basics
+# DevOps - Docker
 
-- [Infrastructure as Code](https://martinfowler.com/bliki/InfrastructureAsCode.html)
-- [But it Works on My Machine!](https://www.usenix.org/conference/ures14/technical-sessions/presentation/it-works-my-machine-how-container-technologies)
-- [More reasons to use Docker](http://blog.flux7.com/blogs/docker/the-great-debate-should-you-use-docker-or-not)
-- [Top 10 Docker CLI commands you can’t live without](https://medium.com/the-code-review/top-10-docker-commands-you-cant-live-without-54fb6377f481)
-- [A Docker Tutorial for Beginners](https://docker-curriculum.com/)
+Docker packs your app together with everything it needs to run (the right Node version, system libraries, config) into one box called a **container**. That box runs the same on your laptop, a teammate's laptop and a server. It's the cure for "it works on my machine". You'll use it most to run databases locally without installing them, and to ship apps to servers.
 
-## Docker
-Docker bundles app with all the services it depends on in a container so it can be deployed anywhere. Docker standardises how an app is built through a simple configuration file.
-> "It works on my machine" - Developers everywhere
-
-## Image
-A docker bundle
-
-## Container
-A single instance of a Image, Docker is really good for running multiple containers of a single image. A container is also like a VM, but far more lightweight and with the same security and operational isolation from system resources.
-
-## Dockerized App
-An app that has a Dockerfile made for it and can be built into a Docker image and run as a container.
-
-## Continuous Delivery
-When an app is setup so that it’s easily sent through the process of build, test, and deployment. Often referred to as CI or CD (Continuous Integration or Software Delivery Pipelines).
-
-## Docker Client
-
-## Docker Host
-Docker Deamon, Containers, Images
-
-## Docker Registries 
-(e.g. Docker Hub Docker Cloud, Ubuntu Redis nginx) 
-
-```
-
-[
-    {
-        "Id": "sha256:881bd08c0b08234bd19136957f15e4301097f4646c1e700f7fea2
-        ...
-        "Config": {
-            ...
-            "ExposedPorts": {
-                "80/tcp": {}
-            },
-        ...
-    }
-]
-```
-
-`-p` publish port `8080` exposed port `80` 
-`--detach` detach from the terminal, so it runs on the background 
-```sh
-docker run -p 8080:80 --detach nginx
-# prints container ID
-# 4222325951f6461557728aa486228b1fea974d64c2a376b0ec91d8686b9b944c
-```
-
-`ps` process status
-
-by default container connect to bridge
-```
-docker ps
-```
-
-```
-docker stop 4222325951f6
-```
-
-
-```
-docker inspect network bridge
-```
-
-`-it` interactive session, teletype so we can communicate with our terminal
-```
-docker run -d -it --name container1 ubuntu
-```
-
-attach container1 to the terminal shell
-```
-docker attach container1
-```
-
-
-## Docker file
-
-`Dockerfile`
-
-```docker
-# This is a comment
-
-INSTRUCTION argument1 argument2
-INSTRUCTION argument1 argument2
-```
-
-- [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
+Resources:
+- [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 - [Best practices for Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
-- [Example Dockerfile based on the Dockerfile reference from Docker](https://gist.github.com/ju2wheels/3d1a1dfa498977874d03)
 
-```docker
-# Base Image
-# Must be the first command on the docker file, usually an OS
-FROM ubuntu:latest
+## Images vs containers
 
-# User Instructions
-# By the default container run on root user, having full privileges, but you may want to run your app as a different user with fewer privileges.
-# We'll need to create the user and a folder he can use before switching
-RUN useradd treehouse
+The one idea to get right first.
 
-# Working directory
-# Creates the directory and every file copied will be copied to the directory similar to `mkdir app && cd app`
+| | Image | Container |
+|---|---|---|
+| What | A read-only snapshot: files, settings, a start command | A running instance of an image |
+| Like | A recipe | The dish you cooked from it |
+| In code terms | A class | An object |
+| Made with | `docker build` | `docker run` |
+
+One image can run as many containers as you like, each isolated from the others.
+
+## Containers vs virtual machines
+
+| | Container | Virtual machine |
+|---|---|---|
+| Includes | Your app and its libraries | A whole operating system |
+| Starts in | Seconds | Minutes |
+| Size | Megabytes | Gigabytes |
+| Shares | The host's kernel | Nothing |
+
+Containers are lighter because they share the host's kernel. On macOS and Windows, Docker Desktop quietly runs a small Linux VM for them.
+
+## Running your first container
+
+Images come from a **registry**, usually Docker Hub. `docker run` downloads the image if you don't have it, then starts a container.
+
+```sh
+docker run -d -p 8080:80 --name web nginx
+# -d          run in the background (detached)
+# -p 8080:80  your port 8080 → the container's port 80
+# --name web  a name, so you don't need the id
+```
+
+Open `http://localhost:8080` and you get the Nginx welcome page. Read `-p` as **host:container**.
+
+The commands you'll use every day:
+
+```sh
+docker ps                 # running containers (add -a for stopped ones)
+docker logs -f web        # follow its output
+docker exec -it web sh    # open a shell inside it
+docker stop web           # stop it
+docker rm web             # delete the container
+docker images             # images on your machine
+docker rmi nginx          # delete an image
+```
+
+`-it` means interactive with a terminal, so you can type into the shell.
+
+## A Dockerfile
+
+A `Dockerfile` is the recipe for an image: a list of instructions, run top to bottom. Here's one for a Node app.
+
+```dockerfile
+# Start from an official Node image (pick the current LTS)
+FROM node:22-slim
+
+# Every following path is relative to /app
 WORKDIR /app
-RUN chown treehouse /app
 
-# Now we can switch user
-USER treehouse
+# Copy only the dependency files first...
+COPY package*.json ./
+# ...so this slow step is cached until they change
+RUN npm ci --omit=dev
 
-# Sets environment variables that you can use later in your Dockerfile, and they'll also be set within the environment of your running container.
-ENV appDir=/app message="Welcome to your app!"
-# WORKDIR $appDir
-# RUN echo $message > README.txt
-# CMD echo Read ${appDir}/README.text for a friendly greeting!
+# Now copy the rest of the code
+COPY . .
 
-# Commands to run to install dependencies
-# shell form
-RUN apt-get update -y
-# exec form
-# RUN ["apt-get", "update", "-y"]
-RUN apt-get install -y curl 
-RUN apt-get install -y gnupg 
-RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
-RUN apt-get install -y nodejs
+# Don't run as root: the official Node images include a `node` user
+USER node
 
-# Verify installations
-RUN node -v
-RUN npm -v
+# Documents the port the app listens on
+EXPOSE 3000
 
-# Copy apps from the local folder to the Docker container
-COPY package*.json .
-COPY index.js index.js
-
-# Sets an executable to be run each time a container starts
-# ENTRYPOINT ["npm", "run"]
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Make port available
-EXPOSE 8080
-
-# If no ENTRYPOINT has been set, the first argument is treated as the executable to be run
-CMD ["npm", "run", "start"]
-
-# Command to run when the container starts
-# CMD ["start"] # npm start start
-# if we run:
-# docker run -p 8080:3000 my-node-image dev 
-# last argument will overwrite CMD
-# npm run dev
+# The command that runs when the container starts
+CMD ["node", "server.js"]
 ```
 
-`-t` tag name to image plus version `my-node-image:1.0` or by default `my-node-image:latest`
-`ls -R /files`  we can print an folder structure on run by using the command
-```sh
-docker build -t my-node-image .
+And a `.dockerignore` beside it, so you don't copy junk (or secrets) into the image:
+
 ```
+node_modules
+.git
+.env
+```
+
+Build it and run it:
 
 ```sh
-docker run -d -it --name -p 8080:3000 --name=process2 my-node-image
+docker build -t coffee-api .
+docker run -d -p 3000:3000 -e DATABASE_URL="postgres://..." coffee-api
 ```
 
+`-t` names (tags) the image; `coffee-api` means `coffee-api:latest`. `-e` sets an environment variable.
 
-### Remove Container
-```
-docker rm 12d727ca4ea0
-```
+## Layers and caching
 
-Remove all containers
-```
-docker rm $(docker ps -a -q)
-```
+Each instruction makes a **layer**, and Docker reuses layers that haven't changed. That's why the Dockerfile copies `package*.json` and runs `npm ci` **before** copying the code: change one line of `server.js` and only the last steps rebuild. Copy everything first and every build reinstalls all your dependencies.
 
-## Images
+Rule of thumb: things that change rarely at the top, things that change often at the bottom.
 
-### List Images
-```
-docker images
-```
+## RUN vs CMD vs ENTRYPOINT
 
-### Remove Image
-`rmi` remove image
-`--force`
-```
-docker rmi my-node-image
+- `RUN` runs **while building** the image: installing things.
+- `CMD` runs **when the container starts**. Arguments after the image name in `docker run` replace it.
+- `ENTRYPOINT` also runs at start, but arguments are **added** to it instead of replacing it.
+
+```sh
+docker run coffee-api node seed.js   # replaces CMD: runs the seed script instead
 ```
 
-show the container logs, by passing the container `id` or `name`
-```
-docker logs 4222
+Use the exec form (`["node", "server.js"]`) so your app receives stop signals and shuts down cleanly.
+
+## Data: volumes
+
+A container's files disappear when you delete it. For anything that must survive (a database), use a **volume**.
+
+```sh
+docker run -d --name db -e POSTGRES_PASSWORD=dev -v pgdata:/var/lib/postgresql/data postgres
+# pgdata lives on after the container is gone
 ```
 
-```
-docker exec -it mycontainer
+## Docker Compose
+
+Real apps are several containers: an API, a database, maybe Redis. **Compose** describes them in one `compose.yaml` and starts them together.
+
+```yaml
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:dev@db:5432/coffee
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: coffee
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
 ```
 
+```sh
+docker compose up -d     # build if needed and start everything
+docker compose logs -f   # follow all the logs
+docker compose down      # stop and remove the containers (volumes stay)
 ```
-docker run -d -p 8080:3000 -e PERSON="Santa Claus" --name container1 test-node-image
-```
+
+Notice the API reaches the database at `db:5432`: Compose puts the services on one network where each service name works as a hostname.
+
+## Common mistakes
+
+- **`localhost` inside a container** means the container itself. Use the service name (`db`) in Compose.
+- **Copying everything before `npm ci`.** Every build reinstalls dependencies. Copy `package*.json` first.
+- **Secrets baked into the image.** Anyone with the image can read them. Pass them as environment variables at run time.
+- **Data in the container, not a volume.** Delete the container, lose the database.
+- **Using `latest` in production.** It changes under you. Pin a version tag.
+
+## Try it
+
+1. Run Postgres with a named volume, create a table, delete the container, start a new one with the same volume. Is the table still there?
+2. Write a Dockerfile for a small Node app. Change one line of code and rebuild: which steps say `CACHED`?
+3. Write a `compose.yaml` for your app plus Postgres and Redis.
 
 ## Related
+
+- [[docs/server-setup|DevOps - Server Setup]]
+- [[docs/nginx|DevOps - Nginx]]
 - [[docs/aws|AWS]]
-- [[docs/server-setup|Ubuntu]]
+- [[docs/networking|Networking - Basics]]

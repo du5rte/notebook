@@ -17,7 +17,7 @@ verified: false
 Client: https://github.com/apollographql/apollo-client
 Server: https://github.com/apollographql/apollo-server
 
-Notes: [[docs/apollo/client]], [[docs/apollo/server]]
+Notes: [[docs/apollo/apollo-client]], [[docs/apollo/apollo-server]]
 
 ## Why I picked it
 
