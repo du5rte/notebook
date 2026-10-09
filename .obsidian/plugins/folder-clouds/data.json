@@ -6,5 +6,9 @@
   "cross": false,
   "group": false,
   "min": 1,
-  "labels": false
+  "labels": false,
+  "bundleRoot": "stack",
+  "bundleBeta": 0.85,
+  "bundleMode": "circles",
+  "bundleMin": 3
 }
