@@ -2,19 +2,18 @@
 title: "React Navigation"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, navigation]
 categories: [navigation]
 platforms: [react-native]
+built_with: ["[[stack/mobile/react-native|React Native]]"]
 status: using
 url: https://reactnavigation.org
 repo: https://github.com/react-navigation/react-navigation
 verified: false
 ---
 # React Navigation
-
-Platforms: [[stack/mobile/react-native|React Native]]
 
 ## Why I picked it
 

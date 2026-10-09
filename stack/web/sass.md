@@ -2,11 +2,12 @@
 title: "Sass"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, styling]
 categories: [styling]
 platforms: [web]
+built_with: ["[[stack/web/css|CSS]]"]
 status: dropped
 since: 2015
 url: https://sass-lang.com
@@ -14,8 +15,6 @@ repo: https://github.com/sass/dart-sass
 verified: false
 ---
 # Sass
-
-Platforms: web
 
 Notes: [[archive/sass]]
 

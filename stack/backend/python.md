@@ -2,7 +2,7 @@
 title: "Python"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, language]
 categories: [language]
@@ -14,8 +14,6 @@ repo: https://github.com/python/cpython
 verified: false
 ---
 # Python
-
-Platforms: [[docs/node/node-basics|Node]]
 
 Notes: [[docs/python-basics]], [[docs/ml/ml-basics]]
 

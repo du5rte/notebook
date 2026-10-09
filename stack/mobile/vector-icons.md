@@ -2,19 +2,18 @@
 title: "Vector Icons"
 type: doc
 created: 2026-10-07
-updated: 2026-10-08
+updated: 2026-10-09
 aliases: []
 tags: [library, icons]
 categories: [icons]
 platforms: [react-native]
+built_with: ["[[stack/mobile/react-native|React Native]]"]
 status: trying
 url: https://github.com/oblador/react-native-vector-icons
 repo: https://github.com/oblador/react-native-vector-icons
 verified: false
 ---
 # Vector Icons
-
-Platforms: [[stack/mobile/react-native|React Native]]
 
 ## Why I picked it
 

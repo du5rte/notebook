@@ -255,4 +255,4 @@ bundle(function(fileExports) { // <= browser sends request here
 ```
 
 ## Related
-- [[stack/devops/webpack|Webpack]]
+- [[stack/tooling/webpack|Webpack]]

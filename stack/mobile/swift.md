@@ -2,11 +2,12 @@
 title: "Swift"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, language]
 categories: [language]
 platforms: [ios]
+built_with: ["[[stack/mobile/ios|iOS]]"]
 status: dropped
 since: 2016
 replaced_by: react-native
@@ -15,8 +16,6 @@ repo: https://github.com/swiftlang/swift
 verified: false
 ---
 # Swift
-
-Platforms: [[stack/mobile/swift|iOS]]
 
 Notes: [[docs/swift/swift-basics]]
 

@@ -28,6 +28,6 @@ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 - [[docs/cryptography|Cryptography]]
 - [[docs/jwt|JWT]]
 - [[docs/security|Security]]
-- [[docs/nginx|Nginx]]
+- [[docs/nginx-basics|Nginx]]
 - [[docs/dns|Networking - DNS]]
 - [[docs/linux/linux-ubuntu|Ubuntu]]

@@ -2,20 +2,18 @@
 title: "TanStack Form"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, forms]
 categories: [forms]
 platforms: [web]
+built_with: ["[[stack/web/typescript|TypeScript]]"]
 status: watching
 url: https://tanstack.com/form
 repo: https://github.com/TanStack/form
 verified: false
 ---
 # TanStack Form
-
-Platforms: web
-Language: [[stack/web/typescript|TypeScript]]
 
 ## Why I picked it
 

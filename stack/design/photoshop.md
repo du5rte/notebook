@@ -6,6 +6,7 @@ updated: 2026-10-09
 aliases: [Adobe Photoshop]
 tags: [tool, graphics]
 categories: [graphics]
+works_with: ["[[stack/design/adobe-creative-cloud|Adobe Creative Cloud]]"]
 url: https://www.adobe.com/products/photoshop.html
 ---
 # Photoshop

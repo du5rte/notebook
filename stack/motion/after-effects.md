@@ -6,6 +6,7 @@ updated: 2026-10-09
 aliases: [Adobe After Effects]
 tags: [tool, animation]
 categories: [animation]
+works_with: ["[[stack/design/adobe-creative-cloud|Adobe Creative Cloud]]"]
 url: https://www.adobe.com/products/aftereffects.html
 ---
 # After Effects

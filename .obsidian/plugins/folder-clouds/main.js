@@ -846,8 +846,8 @@ class BundleView extends ItemView {
     this.frame = 0;
   }
 
-  // Notes under the root folder, grouped by the folder below it: stack/web/react.md is in "web". Links on a
-  // "Works with:" line are loose: a tool used with something, not built with it; chains stop at them.
+  // Notes under the root folder, grouped by the folder below it: stack/web/react.md is in "web". Links in
+  // the works_with property are loose: a tool used with something, not built with it; chains stop at them.
   async data() {
     const root = this.plugin.settings.bundleRoot.replace(/^\/+|\/+$/g, '');
     const prefix = root ? root + '/' : '';
@@ -875,10 +875,8 @@ class BundleView extends ItemView {
     for (const g of list) {
       for (const n of g.notes) {
         const cache = this.app.metadataCache.getFileCache(n.file);
-        if (!cache || !cache.links) continue;
-        const lines = (await this.app.vault.cachedRead(n.file)).split('\n');
-        for (const l of cache.links) {
-          if (!/^Works with:/.test(lines[l.position.start.line] || '')) continue;
+        for (const l of (cache && cache.frontmatterLinks) || []) {
+          if (!l.key.startsWith('works_with')) continue;
           const target = this.app.metadataCache.getFirstLinkpathDest(l.link, n.path);
           if (target) loose.add(`${n.path}\n${target.path}`);
         }

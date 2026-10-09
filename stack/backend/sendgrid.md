@@ -2,18 +2,17 @@
 title: "SendGrid"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, services]
 categories: [services]
 platforms: [node]
+works_with: ["[[stack/backend/node|Node.js]]"]
 status: watching
 url: https://sendgrid.com
 verified: false
 ---
 # SendGrid
-
-Platforms: node
 
 ## Why I picked it
 

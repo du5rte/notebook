@@ -2,20 +2,18 @@
 title: "Tailwind CSS"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, styling]
 categories: [styling]
 platforms: [web]
+built_with: ["[[stack/web/css|CSS]]"]
 status: trying
 url: https://tailwindcss.com
 repo: https://github.com/tailwindlabs/tailwindcss
 verified: false
 ---
 # Tailwind CSS
-
-Platforms: web
-Language: [[stack/web/typescript|TypeScript]]
 
 ## Why I picked it
 

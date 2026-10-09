@@ -684,5 +684,5 @@ mongodump --uri="mongodb+srv://username:password@cluster0.example.mongodb.net/ol
 ## Related
 - [[stack/backend/mongodb|MongoDB]]
 - [[docs/databases|Databases]]
-- [[docs/redis|Redis]]
-- [[docs/elasticsearch|Elastic Search]]
+- [[docs/redis-basics|Redis]]
+- [[docs/elasticsearch-basics|Elastic Search]]

@@ -108,5 +108,5 @@ Here each person is an `Collection` and each account is part of it's `holder`
 
 ## Related
 - [[docs/mongodb-basics|MongoDB]]
-- [[docs/redis|Redis]]
-- [[docs/elasticsearch|Elastic Search]]
+- [[docs/redis-basics|Redis]]
+- [[docs/elasticsearch-basics|Elastic Search]]

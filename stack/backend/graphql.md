@@ -2,7 +2,7 @@
 title: "GraphQL"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, data]
 categories: [data]
@@ -15,8 +15,8 @@ verified: false
 ---
 # GraphQL
 
-Platforms: web, react-native, node
-Language: [[stack/web/typescript|TypeScript]]
+Kind: query language and spec
+Reference implementation: graphql-js, in [[stack/web/typescript|TypeScript]]
 
 Notes: [[docs/graphql/graphql-basics]]
 

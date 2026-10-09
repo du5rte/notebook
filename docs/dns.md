@@ -121,7 +121,7 @@ The first entry in the DNS zone file. The SOA indicates that this DNS name serve
 
 ## Related
 - [[docs/ssl|SSL]]
-- [[docs/nginx|Nginx]]
+- [[docs/nginx-basics|Nginx]]
 - [[docs/linux/linux-ubuntu|Ubuntu]]
 - [[docs/networking|Networking]]
 - [[docs/http|Networking - HTTP]]

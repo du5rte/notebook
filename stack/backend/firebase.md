@@ -2,11 +2,12 @@
 title: "Firebase"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, database]
 categories: [database]
 platforms: [web, react-native]
+built_with: ["[[stack/web/typescript|TypeScript]]"]
 status: dropped
 replaced_by: convex
 url: https://firebase.google.com
@@ -14,9 +15,6 @@ repo: https://github.com/firebase/firebase-js-sdk
 verified: false
 ---
 # Firebase
-
-Platforms: web, react-native
-Language: [[stack/web/typescript|TypeScript]]
 
 ## Why I picked it
 

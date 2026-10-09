@@ -2,20 +2,18 @@
 title: "just"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, utils]
 categories: [utils]
 platforms: [web, react-native, node]
+built_with: ["[[stack/web/javascript|JavaScript]]"]
 status: watching
 url: https://anguscroll.com/just
 repo: https://github.com/angus-c/just
 verified: false
 ---
 # just
-
-Platforms: web, react-native, node
-Language: [[stack/web/javascript|JavaScript]]
 
 ## Why I picked it
 

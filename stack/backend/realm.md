@@ -2,19 +2,18 @@
 title: "Realm"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, database]
 categories: [database]
 platforms: [react-native]
+works_with: ["[[stack/mobile/react-native|React Native]]", "[[stack/backend/mongodb|MongoDB]]"]
 status: dropped
 url: https://realm.io
 repo: https://github.com/realm/realm-js
 verified: false
 ---
 # Realm
-
-Platforms: [[stack/mobile/react-native|React Native]]
 
 ## Why I picked it
 

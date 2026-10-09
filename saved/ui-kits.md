@@ -2,7 +2,7 @@
 title: "Saved UI Kits"
 type: doc
 created: 2026-10-08
-updated: 2026-10-08
+updated: 2026-10-09
 tags: [saved, ui]
 ---
 # Saved UI Kits
@@ -29,7 +29,7 @@ Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform
 | Cobe | 3d |  |  | [cobe.vercel.app](https://cobe.vercel.app/) |  | ~5KB WebGL interactive 3D globe with markers |
 | Codrops | demos | react |  | [tympanus.net/codrops](http://tympanus.net/codrops/) |  |  |
 | CodyHouse | kit | javascript |  | [codyhouse.co](https://codyhouse.co) |  |  |
-| daisyUI | kit | react |  | [daisyui.com](https://daisyui.com/) | [[stack/web/daisyui]] |  |
+| daisyUI | kit | react |  | [daisyui.com](https://daisyui.com/) | | was watching |
 | Design Spells | gallery |  |  | [designspells.com](https://designspells.com) |  |  |
 | Evil Charts | charts |  |  | [evilcharts.com](https://evilcharts.com/) |  |  |
 | F**king Good Libraries | list |  |  | [LinkedIn post](https://lnkd.in/p/dJvW9c9a) |  | Prototyping interactions: canvas effects, WebGPU shaders, dither |
@@ -43,11 +43,11 @@ Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform
 | Magic UI | kit |  |  | [magicui.design](https://magicui.design) |  |  |
 | Material Design 3 | kit | react |  | [material.io/components](https://material.io/components) |  |  |
 | Obsidian UI | kit |  |  | [obsidianui.dev](https://www.obsidianui.dev/) |  |  |
-| Primer | kit | react |  | [primer.style](https://primer.style/) | [[stack/web/primer]] |  |
+| Primer | kit | react |  | [primer.style](https://primer.style/) | | was watching |
 | Rare UI | kit |  |  | [rareui.com](https://www.rareui.com/) |  | Animated React components |
-| React Bits | kit | react |  | [reactbits.dev](https://reactbits.dev/) | [[stack/web/react-bits]] | Animated components, effects and microinteractions; tweak live and copy the code |
+| React Bits | kit | react |  | [reactbits.dev](https://reactbits.dev/) | | Animated components, effects and microinteractions; tweak live and copy the code; was watching |
 | React Native Motion | kit | react-native |  | [rnmotion.dev](https://rnmotion.dev/) |  |  |
-| React Native Reusables | kit | react-native |  | [reactnativereusables.com](https://reactnativereusables.com/) | [[stack/mobile/react-native-reusables]] |  |
+| React Native Reusables | kit | react-native |  | [reactnativereusables.com](https://reactnativereusables.com/) | | was watching |
 | Reactiive demos | demos | react-native |  | [reactiive.io/demos](https://reactiive.io/demos) |  |  |
 | Scrolltide | templates |  |  | [scrolltide.co](https://www.scrolltide.co/) |  | Cinematic website prompts and templates |
 | Shadcn Space | kit | react |  | [shadcnspace.com](https://shadcnspace.com/) |  |  |

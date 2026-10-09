@@ -162,8 +162,8 @@ $ sudo ufw enable
 ## Related
 - [[docs/linux/linux-basics|Console]]
 - [[docs/ssl|SSL]]
-- [[docs/nginx|Nginx]]
+- [[docs/nginx-basics|Nginx]]
 - [[docs/dns|Networking - DNS]]
 - [[docs/ssh|SSH]]
-- [[docs/aws|AWS]]
-- [[docs/docker|Docker]]
+- [[docs/aws-basics|AWS]]
+- [[docs/docker-basics|Docker]]

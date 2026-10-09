@@ -2,11 +2,12 @@
 title: "jQuery"
 type: doc
 created: 2026-10-07
-updated: 2026-10-07
+updated: 2026-10-09
 aliases: []
 tags: [library, ui]
 categories: [ui]
 platforms: [web]
+built_with: ["[[stack/web/javascript|JavaScript]]"]
 status: dropped
 since: 2015
 until: 2016
@@ -16,9 +17,6 @@ repo: https://github.com/jquery/jquery
 verified: false
 ---
 # jQuery
-
-Platforms: web
-Language: [[stack/web/javascript|JavaScript]]
 
 Notes: [[archive/jquery/basics]], [[archive/jquery/ajax]], [[archive/jquery/plugins]]
 

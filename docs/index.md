@@ -95,21 +95,21 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 
 ## Systems
 
-- [[docs/aws|AWS]]
+- [[docs/aws-basics|AWS]]
 - [[docs/cryptography|Cryptography]]
 - [[docs/curl|Networking - Curl]]
 - [[docs/databases|Databases]]
 - [[docs/dns|Networking - DNS]]
-- [[docs/docker|Docker]]
-- [[docs/elasticsearch|Elastic Search]]
+- [[docs/docker-basics|Docker]]
+- [[docs/elasticsearch-basics|Elastic Search]]
 - [[docs/http|Networking - HTTP]]
 - [[docs/jwt|JWT]]
 - [[docs/mongodb-basics|MongoDB]]
 - [[docs/networking|Networking]]
-- [[docs/nginx|Nginx]]
+- [[docs/nginx-basics|Nginx]]
 - [[docs/oauth2|OAuth]]
 - [[docs/openid|OpenID]] *(draft)*
-- [[docs/redis|Redis]] *(draft)*
+- [[docs/redis-basics|Redis]] *(draft)*
 - [[docs/security|Security]]
 - [[docs/smtp|Networking - SMTP]] *(draft)*
 - [[docs/ssh|SSH]]
@@ -167,6 +167,6 @@ Reference notes, one section per area. *(draft)* marks an incomplete note, *(out
 
 ## Tools
 
-- [[docs/markdown|Markdown]]
+- [[docs/markdown-basics|Markdown]]
 - [[docs/regex|Regex]] *(draft)*
 - [[docs/webpack-basics|Webpack]] *(outdated)*
