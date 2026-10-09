@@ -16,7 +16,8 @@
     "ring": 0.5
   },
   "bundlePanel": false,
-  "bundleMiddle": 1,
+  "bundleMiddle": 0.35,
   "bundleRun": 50,
-  "bundleHold": 0
+  "bundleHold": 0,
+  "bundleStyle": "smooth"
 }

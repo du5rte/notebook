@@ -2,7 +2,7 @@
 // Every folder a cloud around a hidden centre.
 const { Plugin, PluginSettingTab, Setting, Notice, ItemView, setIcon } = require('obsidian');
 
-const DEFAULTS = { enabled: true, depth: 2, centre: 1, inside: true, cross: false, group: false, min: 2, labels: false, bundleRoot: 'stack', bundleBeta: 0.85, bundleMode: 'wheel', bundleMin: 3, bundlePhysics: true, bundleForces: {}, bundlePanel: false, bundleMiddle: 1, bundleRun: 50, bundleHold: 0 };
+const DEFAULTS = { enabled: true, depth: 2, centre: 1, inside: true, cross: false, group: false, min: 2, labels: false, bundleRoot: 'stack', bundleBeta: 0.85, bundleMode: 'wheel', bundleMin: 3, bundlePhysics: true, bundleForces: {}, bundlePanel: false, bundleMiddle: 0.35, bundleRun: 50, bundleHold: 0, bundleStyle: 'smooth' };
 
 // Nodes without a folder of their own.
 const FOLLOWERS = new Set(['tag', 'unresolved', 'attachment']);
@@ -287,8 +287,20 @@ function facingOrder(notes, centre, centres, groupOf, links, middle = [0, 0]) {
   // other half. Each block stays together, so with physics the notes without links can slide up against
   // whichever block is bigger without passing anyone.
   const rel = (path, centre) => turnBetween(centre, angleOf.get(path));
-  const outBlock = linked.map((note) => note.path).sort((p, q) => rel(p, turn) - rel(q, turn));
-  const inBlock = inward.map((note) => note.path).sort((p, q) => rel(p, turn + Math.PI) - rel(q, turn + Math.PI));
+  // Within each block, what I use most sits in the middle and what I dropped at the ends: notes rank
+  // by status, then by how many links they have, and fill the block from the middle out.
+  const score = (note) => {
+    const p = pull.get(note.path);
+    return (STATUS_RANK[note.status] ?? STATUS_RANK.unknown) * 1000 + p.links + p.inner;
+  };
+  const middleOut = (block, centre) => {
+    const ranked = [...block].sort((a, b) => score(b) - score(a) || rel(a.path, centre) - rel(b.path, centre));
+    const row = [];
+    ranked.forEach((note, i) => (i % 2 ? row.push(note.path) : row.unshift(note.path)));
+    return row;
+  };
+  const outBlock = middleOut(linked, turn);
+  const inBlock = middleOut(inward, turn + Math.PI);
   const loose = notes.filter((note) => !angleOf.has(note.path)).map((note) => note.path);
   const half = Math.ceil(loose.length / 2);
   // With the inside block bigger, the loose notes hug it; otherwise they hug the block with links out.
@@ -301,6 +313,9 @@ function facingOrder(notes, centre, centres, groupOf, links, middle = [0, 0]) {
   sequence.forEach((path, i) => angleOf.set(path, start + i * step));
   return { angleOf, turn, spins: true };
 }
+
+// How actively a note is used, from its status: higher sits nearer the middle of its group.
+const STATUS_RANK = { using: 4, trying: 3, watching: 2, legacy: 2, unknown: 2, dropped: 0 };
 
 // Circles: a circle per folder of at least `min` notes, a short column for smaller ones.
 // Links inside a folder bundle through its centre. Links between folders leave the outer end of a
@@ -571,18 +586,53 @@ function place(model) {
     const [x, y] = polar(a, r + 6 + len + 2 + beyond);
     return [cx + x, cy + y];
   };
-  // A link between circles leaves the outer end of a name in a straight line `run` long, then heads for
-  // the circle's gate, as a link inside heads for the circle's centre, and on through the middle.
-  const route = (s, t, gs, gt, len = () => 0, pull = 1, run = 0) => {
+  // A link between circles leaves the outer end of a name in a straight line `run` long, then curves to
+  // the other name, bent toward the middle of the chart by `pull`. With `gate` it also heads for the
+  // circle's gate first, so the links leaving one circle bundle together; at 0 it skips the gate.
+  const route = (s, t, gs, gt, len = () => 0, pull = 1, run = 0, gate = 0) => {
     if (gs === gt) {
       const b = model.bodies.get(gs);
       return [[leaves.get(s).x, leaves.get(s).y], [b.x, b.y], [leaves.get(t).x, leaves.get(t).y]];
     }
-    const across = [gates.get(gs), between(gates.get(gs), gates.get(gt), middle, pull), gates.get(gt)];
+    const from = outer(s, len(s), run);
+    const to = outer(t, len(t), run);
+    const toward = (a, g) => [a[0] + (g[0] - a[0]) * gate, a[1] + (g[1] - a[1]) * gate];
+    const across = [toward(from, gates.get(gs)), between(from, to, middle, pull), toward(to, gates.get(gt))];
     if (!run) return [outer(s, len(s)), ...across, outer(t, len(t))];
-    return [outer(s, len(s)), outer(s, len(s), run), ...across, outer(t, len(t), run), outer(t, len(t))];
+    return [outer(s, len(s)), from, ...across, to, outer(t, len(t))];
   };
-  return { leaves, groupLabels, route };
+  // One smooth curve between two circles: out of the name along its direction, over toward the middle,
+  // into the other name along its direction. `pull` bends it toward the middle, `tension` sets how far it
+  // carries on out of each name before it turns, `run` a straight start. It is two cubic pieces meeting
+  // at a point bent toward the middle; every joint keeps its direction, so the curve has no corners.
+  const curve = (s, t, len = () => 0, pull = 0.35, run = 0, tension = 0.85) => {
+    const a = outer(s, len(s));
+    const b = outer(t, len(t));
+    const a1 = outer(s, len(s), run);
+    const b1 = outer(t, len(t), run);
+    const unit = (x, y) => {
+      const d = Math.hypot(x, y) || 1;
+      return [x / d, y / d];
+    };
+    const [ax, ay] = unit(a1[0] - a[0] || Math.sin(leaves.get(s).a), a1[1] - a[1] || -Math.cos(leaves.get(s).a));
+    const [bx, by] = unit(b1[0] - b[0] || Math.sin(leaves.get(t).a), b1[1] - b[1] || -Math.cos(leaves.get(t).a));
+    const span = Math.hypot(b1[0] - a1[0], b1[1] - a1[1]);
+    const m = between(a1, b1, middle, pull);
+    const [tx, ty] = unit(b1[0] - a1[0], b1[1] - a1[1]);
+    const out = span * 0.35 * tension;
+    // Above 35% pull, the harder the pull the shorter the curve's turn through the centre, so links meet
+    // there; up to 35% the curve keeps its full, gentle turn.
+    const mid = span * 0.25 * (1 - 0.8 * Math.max(0, (pull - 0.35) / 0.65));
+    const f = (v) => v.toFixed(1);
+    const pt = (p) => `${f(p[0])},${f(p[1])}`;
+    let d = `M${pt(a)}`;
+    if (run) d += `L${pt(a1)}`;
+    d += `C${pt([a1[0] + ax * out, a1[1] + ay * out])} ${pt([m[0] - tx * mid, m[1] - ty * mid])} ${pt(m)}`;
+    d += `C${pt([m[0] + tx * mid, m[1] + ty * mid])} ${pt([b1[0] + bx * out, b1[1] + by * out])} ${pt(b1)}`;
+    if (run) d += `L${pt(b)}`;
+    return d;
+  };
+  return { leaves, groupLabels, route, curve };
 }
 
 // The view around the circles.
@@ -796,8 +846,9 @@ class BundleView extends ItemView {
     this.frame = 0;
   }
 
-  // Notes under the root folder, grouped by the folder below it: stack/web/react.md is in "web".
-  data() {
+  // Notes under the root folder, grouped by the folder below it: stack/web/react.md is in "web". Links on a
+  // "Works with:" line are loose: a tool used with something, not built with it; chains stop at them.
+  async data() {
     const root = this.plugin.settings.bundleRoot.replace(/^\/+|\/+$/g, '');
     const prefix = root ? root + '/' : '';
     const groups = new Map();
@@ -808,7 +859,7 @@ class BundleView extends ItemView {
       const name = rest[0];
       const fm = (this.app.metadataCache.getFileCache(file) || {}).frontmatter || {};
       if (!groups.has(name)) groups.set(name, { name, notes: [] });
-      groups.get(name).notes.push({ path: file.path, name: String(fm.title || file.basename), file });
+      groups.get(name).notes.push({ path: file.path, name: String(fm.title || file.basename), file, status: fm.status });
     }
     const list = [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
     for (const g of list) g.notes.sort((a, b) => a.name.localeCompare(b.name));
@@ -820,16 +871,32 @@ class BundleView extends ItemView {
         if (target !== source && inside.has(target)) links.push([source, target]);
       }
     }
-    return { groups: list, links };
+    const loose = new Set();
+    for (const g of list) {
+      for (const n of g.notes) {
+        const cache = this.app.metadataCache.getFileCache(n.file);
+        if (!cache || !cache.links) continue;
+        const lines = (await this.app.vault.cachedRead(n.file)).split('\n');
+        for (const l of cache.links) {
+          if (!/^Works with:/.test(lines[l.position.start.line] || '')) continue;
+          const target = this.app.metadataCache.getFirstLinkpathDest(l.link, n.path);
+          if (target) loose.add(`${n.path}\n${target.path}`);
+        }
+      }
+    }
+    return { groups: list, links, loose };
   }
 
-  draw() {
+  async draw() {
     this.stop();
     const el = this.contentEl;
     const win = el.win || window;
+    // Another draw may start while this one reads the notes: only the latest one draws.
+    const mine = (this.drawn = (this.drawn || 0) + 1);
+    const { groups, links, loose } = await this.data();
+    if (mine !== this.drawn) return;
     el.empty();
     el.addClass('folder-clouds-bundle');
-    const { groups, links } = this.data();
     if (!groups.length) {
       el.createEl('p', { text: `No notes in subfolders of "${this.plugin.settings.bundleRoot}". Set the root folder in Folder Clouds settings.` });
       return;
@@ -903,7 +970,9 @@ class BundleView extends ItemView {
     for (const g of groups) {
       for (const n of g.notes) {
         const holder = make(nodeLayer, 'g', {});
-        const text = make(holder, 'text', { dy: '0.31em', class: 'fcb-node' });
+        // Names fade with how actively the note is used: dropped ones are the faintest.
+        const rank = STATUS_RANK[n.status] ?? STATUS_RANK.unknown;
+        const text = make(holder, 'text', { dy: '0.31em', class: `fcb-node fcb-rank-${rank}` });
         text.textContent = n.name;
         texts.set(n.path, text);
         holders.set(n.path, holder);
@@ -955,8 +1024,11 @@ class BundleView extends ItemView {
     // of the name at each end; the gates and the middle bundle like a circle's centre does for links inside.
     const linkD = (c, s, t, gs, gt) => {
       const run = settings.bundleRun;
+      // Between circles, smooth style: one curve from name to name.
+      if (circles && gs !== gt && settings.bundleStyle !== 'bundled' && c.curve) return c.curve(s, t, lenOf, settings.bundleMiddle, run, settings.bundleBeta);
       const keep = circles && gs !== gt ? (run > 0 ? 2 : 1) : 0;
-      return bundlePath(c.route(s, t, gs, gt, lenOf, settings.bundleMiddle, run), settings.bundleBeta, keep, settings.bundleHold);
+      // Bundled style: through each circle's gate and the centre, bundled with the tension.
+      return bundlePath(c.route(s, t, gs, gt, lenOf, settings.bundleMiddle, run, 1), settings.bundleBeta, keep, settings.bundleHold);
     };
     const paths = [];
     for (const [s, t] of links) {
@@ -966,8 +1038,10 @@ class BundleView extends ItemView {
       paths.push({ s, t, gs, gt, path });
       if (!outgoing.has(s)) outgoing.set(s, []);
       if (!incoming.has(t)) incoming.set(t, []);
-      outgoing.get(s).push({ path, other: t });
-      incoming.get(t).push({ path, other: s });
+      const isLoose = loose.has(`${s}\n${t}`);
+      if (isLoose) path.addClass('fcb-loose');
+      outgoing.get(s).push({ path, other: t, loose: isLoose });
+      incoming.get(t).push({ path, other: s, loose: isLoose });
     }
     for (const [path, text] of texts) {
       const out = (outgoing.get(path) || []).length;
@@ -995,6 +1069,17 @@ class BundleView extends ItemView {
       for (const p of paths) p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
     };
     this.panel(el, physics, model, () => wake(0.3), redrawLinks);
+    // What the colours mean, shown while a note is hovered.
+    this.legend = el.createDiv({ cls: 'fcb-legend' });
+    const key = (label, stroke, opacity = 1) => {
+      const item = this.legend.createSpan();
+      const icon = item.createSvg('svg', { attr: { width: 18, height: 8 } });
+      icon.createSvg('line', { attr: { x1: 0, y1: 4, x2: 18, y2: 4, stroke, 'stroke-opacity': opacity } });
+      item.appendText(label);
+    };
+    key('built with', 'var(--fcb-built)');
+    key('used by', 'var(--fcb-used)');
+    key('works with', 'var(--fcb-works)');
 
     // Press a circle or a name to drag the circle; press the background to pan. A press on a name
     // that does not move opens the note. The wheel zooms; a double click on the background fits it all.
@@ -1124,12 +1209,23 @@ class BundleView extends ItemView {
         );
 
       section('Links');
+      new Setting(box).setName('Link style').addDropdown((d) =>
+        d
+          .addOption('smooth', 'Smooth')
+          .addOption('bundled', 'Bundled')
+          .setValue(settings.bundleStyle === 'bundled' ? 'bundled' : 'smooth')
+          .onChange((v) => {
+            settings.bundleStyle = v;
+            this.saveSoon();
+            redrawLinks();
+          })
+      );
       slider('Bundle tension', 0, 100, 5, () => Math.round(settings.bundleBeta * 100), (v) => {
         settings.bundleBeta = v / 100;
         this.saveSoon();
         redrawLinks();
       });
-      slider('Middle pull', 0, 100, 5, () => Math.round(settings.bundleMiddle * 100), (v) => {
+      slider('Centre pull', 0, 100, 5, () => Math.round(settings.bundleMiddle * 100), (v) => {
         settings.bundleMiddle = v / 100;
         this.saveSoon();
         redrawLinks();
@@ -1172,6 +1268,7 @@ class BundleView extends ItemView {
           settings.bundleMiddle = DEFAULTS.bundleMiddle;
           settings.bundleRun = DEFAULTS.bundleRun;
           settings.bundleHold = DEFAULTS.bundleHold;
+          settings.bundleStyle = DEFAULTS.bundleStyle;
           await this.plugin.saveData(settings);
           this.draw();
         })
@@ -1180,25 +1277,53 @@ class BundleView extends ItemView {
     render();
   }
 
-  // Hover: links into the note in blue, out of it in red, as in the notebook.
+  // Hover: what the note is built with in the accent colour, what uses it in grey, and on along the
+  // chain, fainter with every step (up to four). "Works with" links are fainter and end the chain.
   mark(path, on, texts, outgoing, incoming, svg) {
+    const marks = ['fcb-self', 'fcb-in', 'fcb-out', 'fcb-d2', 'fcb-d3', 'fcb-d4'];
+    for (const el of this.marked || []) el.removeClass(...marks);
+    this.marked = [];
     svg.toggleClass('fcb-hover', on);
-    texts.get(path).toggleClass('fcb-self', on);
-    for (const { path: p, other } of incoming.get(path) || []) {
-      p.toggleClass('fcb-in', on);
-      if (on) p.parentNode.appendChild(p);
-      texts.get(other).toggleClass('fcb-in', on);
-    }
-    for (const { path: p, other } of outgoing.get(path) || []) {
-      p.toggleClass('fcb-out', on);
-      if (on) p.parentNode.appendChild(p);
-      texts.get(other).toggleClass('fcb-out', on);
-    }
+    if (this.legend) this.legend.toggleClass('is-visible', on);
+    if (!on) return;
+    const touch = (el, ...cls) => {
+      el.addClass(...cls);
+      this.marked.push(el);
+    };
+    touch(texts.get(path), 'fcb-self');
+    const walk = (links, cls) => {
+      const seen = new Set([path]);
+      let frontier = [path];
+      for (let depth = 1; depth <= 4 && frontier.length; depth++) {
+        const step = depth > 1 ? [cls, `fcb-d${depth}`] : [cls];
+        const next = [];
+        for (const from of frontier) {
+          for (const { path: el, other, loose } of links.get(from) || []) {
+            if (el.hasClass(cls)) continue;
+            touch(el, ...step);
+            el.parentNode.appendChild(el);
+            if (seen.has(other)) continue;
+            seen.add(other);
+            // A "Works with" link lights its other end, and the chain stops there.
+            if (!loose) next.push(other);
+            touch(texts.get(other), ...step);
+          }
+        }
+        frontier = next;
+      }
+    };
+    walk(outgoing, 'fcb-out');
+    walk(incoming, 'fcb-in');
   }
 }
 
 const BUNDLE_CSS = `
-.folder-clouds-bundle { padding: 0; overflow: hidden; position: relative; }
+.folder-clouds-bundle { padding: 0; overflow: hidden; position: relative;
+  /* Every highlight is the accent colour, in shades: built with, used by, works with. */
+  --fcb-built: var(--color-accent);
+  --fcb-used: color-mix(in srgb, var(--color-accent) 55%, var(--background-primary));
+  --fcb-used-text: color-mix(in srgb, var(--color-accent) 75%, var(--background-primary));
+  --fcb-works: color-mix(in srgb, var(--color-accent) 30%, var(--background-primary)); }
 .folder-clouds-bundle .fcb-controls { position: absolute; top: 8px; right: 8px; z-index: 2; }
 .folder-clouds-bundle .fcb-controls.is-open { width: 260px; max-height: calc(100% - 16px); overflow-y: auto; padding: 4px 12px 8px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: var(--radius-m); box-shadow: var(--shadow-s); }
 .folder-clouds-bundle .fcb-controls-top { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; }
@@ -1213,13 +1338,29 @@ const BUNDLE_CSS = `
 .folder-clouds-bundle .fcb-body { fill: transparent; cursor: grab; }
 .folder-clouds-bundle svg.fcb-dragging, .folder-clouds-bundle svg.fcb-dragging * { cursor: grabbing; }
 .folder-clouds-bundle .fcb-link { stroke: var(--text-faint); stroke-opacity: 0.45; pointer-events: none; }
-.folder-clouds-bundle .fcb-link.fcb-in { stroke: var(--color-blue); stroke-opacity: 1; }
-.folder-clouds-bundle .fcb-link.fcb-out { stroke: var(--color-red); stroke-opacity: 1; }
+.folder-clouds-bundle .fcb-link.fcb-in { stroke: var(--fcb-used); stroke-opacity: 1; }
+.folder-clouds-bundle .fcb-link.fcb-out { stroke: var(--fcb-built); stroke-opacity: 1; }
 .folder-clouds-bundle svg.fcb-hover .fcb-link:not(.fcb-in):not(.fcb-out) { stroke-opacity: 0.15; }
 .folder-clouds-bundle .fcb-node { font-size: 10px; fill: var(--text-normal); cursor: pointer; }
-.folder-clouds-bundle .fcb-node.fcb-self { font-weight: 700; }
-.folder-clouds-bundle .fcb-node.fcb-in { fill: var(--color-blue); font-weight: 700; }
-.folder-clouds-bundle .fcb-node.fcb-out { fill: var(--color-red); font-weight: 700; }
+.folder-clouds-bundle .fcb-node.fcb-rank-3 { opacity: 0.85; }
+.folder-clouds-bundle .fcb-node.fcb-rank-2 { opacity: 0.65; }
+.folder-clouds-bundle .fcb-node.fcb-rank-0 { opacity: 0.4; }
+.folder-clouds-bundle .fcb-node:is(.fcb-self, .fcb-in, .fcb-out):not(.fcb-d2, .fcb-d3, .fcb-d4) { opacity: 1; }
+.folder-clouds-bundle .fcb-node.fcb-self { fill: var(--fcb-built); font-weight: 700; }
+.folder-clouds-bundle .fcb-node.fcb-in { fill: var(--fcb-used-text); font-weight: 700; }
+.folder-clouds-bundle .fcb-node.fcb-out { fill: var(--fcb-built); font-weight: 700; }
+.folder-clouds-bundle .fcb-legend { position: absolute; left: 12px; bottom: 10px; display: none; gap: 14px; align-items: center; padding: 4px 10px; font-size: var(--font-ui-smaller); color: var(--text-muted); background: var(--background-secondary); border: 1px solid var(--background-modifier-border); border-radius: var(--radius-s); pointer-events: none; }
+.folder-clouds-bundle .fcb-legend.is-visible { display: flex; }
+.folder-clouds-bundle .fcb-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.folder-clouds-bundle .fcb-legend svg line { stroke-width: 2; }
+.folder-clouds-bundle .fcb-link.fcb-d2 { stroke-opacity: 0.55; }
+.folder-clouds-bundle .fcb-link.fcb-d3 { stroke-opacity: 0.35; }
+.folder-clouds-bundle .fcb-link.fcb-d4 { stroke-opacity: 0.2; }
+.folder-clouds-bundle .fcb-link.fcb-loose { stroke-opacity: 0.2; }
+.folder-clouds-bundle .fcb-link.fcb-loose.fcb-in, .folder-clouds-bundle .fcb-link.fcb-loose.fcb-out { stroke: var(--fcb-works); stroke-opacity: 1; }
+.folder-clouds-bundle .fcb-node.fcb-d2 { opacity: 0.7; font-weight: 600; }
+.folder-clouds-bundle .fcb-node.fcb-d3 { opacity: 0.5; font-weight: 500; }
+.folder-clouds-bundle .fcb-node.fcb-d4 { opacity: 0.35; font-weight: 400; }
 .folder-clouds-bundle .fcb-group { font-size: 13px; font-weight: 600; fill: var(--text-faint); opacity: 0.6; pointer-events: none; }
 `;
 
