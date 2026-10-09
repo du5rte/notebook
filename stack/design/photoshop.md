@@ -1,0 +1,17 @@
+---
+title: "Photoshop"
+type: doc
+created: 2026-10-09
+updated: 2026-10-09
+aliases: [Adobe Photoshop]
+tags: [tool, graphics]
+categories: [graphics]
+url: https://www.adobe.com/products/photoshop.html
+---
+# Photoshop
+
+Image editor by Adobe.
+
+## Why I picked it
+
+## Why I would drop it

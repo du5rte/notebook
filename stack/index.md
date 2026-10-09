@@ -28,14 +28,14 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/mobile/react-native|React Native]] | framework | react-native | 2017 | [[stack/mobile/swift|Swift]] |
 | [[stack/web/react-native-web|React Native for Web]] | framework | web |  |  |
 | [[stack/mobile/expo|Expo]] | framework, tooling | react-native |  |  |
-| [[stack/design/react-native-svg|react-native-svg]] | graphics | react-native |  |  |
+| [[stack/mobile/react-native-svg|react-native-svg]] | graphics | react-native |  |  |
 | Lucide | icons |  |  | Feather |
 | [[stack/web/javascript|JavaScript]] | language | web, react-native, node | 2015 |  |
 | [[stack/web/typescript|TypeScript]] | language | web, react-native, node | 2015 | [[stack/web/coffeescript|CoffeeScript]] |
 | [[stack/mobile/react-navigation|React Navigation]] | navigation | react-native |  |  |
 | [[stack/web/legend-state|Legend State]] | state | web, react-native |  |  |
 | [[stack/mobile/mmkv|MMKV]] | state | react-native |  |  |
-| [[stack/design/restyle|Restyle]] | styling, ui | react-native |  |  |
+| [[stack/mobile/restyle|Restyle]] | styling, ui | react-native |  |  |
 | [[stack/devops/jest|Jest]] | testing | web, react-native, node |  |  |
 | [[stack/devops/maestro|Maestro]] | testing | react-native |  |  |
 | [[stack/devops/codesandbox|CodeSandbox]] | tooling | web |  |  |
@@ -69,10 +69,10 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 
 | Library | Categories | Platforms | Trying since | Replaces |
 |---|---|---|---|---|
-| [[stack/design/lottie|Lottie]] | animation, graphics | web, react-native |  |  |
+| [[stack/motion/lottie|Lottie]] | animation, graphics | web, react-native |  |  |
 | [[stack/backend/clerk|Clerk]] | auth | web, react-native |  |  |
-| [[stack/design/vector-icons|Vector Icons]] | icons | react-native |  |  |
-| [[stack/design/skia|Skia]] | graphics, animation | react-native |  |  |
+| [[stack/mobile/vector-icons|Vector Icons]] | icons | react-native |  |  |
+| [[stack/mobile/skia|Skia]] | graphics, animation | react-native |  |  |
 | [[stack/backend/python|Python]] | language | node | 2018 |  |
 | [[stack/mobile/bottom-sheet|Bottom Sheet (gorhom)]] | navigation | react-native |  |  |
 | [[stack/mobile/hold-menu|Hold Menu]] | navigation | react-native |  |  |
@@ -81,17 +81,17 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/backend/adjust|Adjust]] | services | react-native |  |  |
 | [[stack/backend/appdynamics|AppDynamics]] | services | react-native |  |  |
 | [[stack/web/zustand|Zustand]] | state | web, react-native |  | [[stack/web/redux|Redux]] |
-| [[stack/design/linear-gradient|Linear Gradient]] | styling | react-native |  |  |
-| [[stack/design/masked-view|Masked View]] | styling | react-native |  |  |
-| [[stack/design/react-native-dynamic|react-native-dynamic]] | styling | react-native |  |  |
-| [[stack/design/tailwind|Tailwind CSS]] | styling | web |  |  |
+| [[stack/mobile/linear-gradient|Linear Gradient]] | styling | react-native |  |  |
+| [[stack/mobile/masked-view|Masked View]] | styling | react-native |  |  |
+| [[stack/mobile/react-native-dynamic|react-native-dynamic]] | styling | react-native |  |  |
+| [[stack/web/tailwind|Tailwind CSS]] | styling | web |  |  |
 | [[stack/devops/browserstack|BrowserStack]] | testing | web, react-native |  |  |
 | [[stack/devops/reactotron|Reactotron]] | tooling | react-native |  |  |
 | [[stack/mobile/device-info|Device Info]] | ui | react-native |  |  |
 | [[stack/mobile/fast-image|FastImage]] | ui | react-native |  |  |
-| [[stack/design/shadcn-ui|shadcn/ui]] | ui-kit | web |  |  |
+| [[stack/web/shadcn-ui|shadcn/ui]] | ui-kit | web |  |  |
 | [[stack/web/sonner|Sonner]] | ui | web, react-native |  |  |
-| [[stack/design/tamagui|Tamagui]] | ui-kit, styling | web, react-native |  |  |
+| [[stack/mobile/tamagui|Tamagui]] | ui-kit, styling | web, react-native |  |  |
 | [[stack/web/delay|delay]] | utils | web, react-native, node |  |  |
 | [[stack/backend/ffmpeg|ffmpeg]] | utils | node |  |  |
 | [[stack/web/fuse|Fuse.js]] | utils | web, react-native |  |  |
@@ -119,31 +119,31 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/backend/instantdb|InstantDB]] | database | web, react-native |
 | [[stack/backend/watermelon-db|WatermelonDB]] | database | react-native |
 | [[stack/web/tanstack-form|TanStack Form]] | forms | web |
-| [[stack/design/nano-icons|Nano Icons]] | icons | react-native |
-| [[stack/design/fast-squircle|react-native-fast-squircle]] | graphics | react-native |
-| [[stack/design/victory-native|Victory Native]] | graphics | react-native |
-| [[stack/design/d3|D3.js]] | graphics, data | web |
+| [[stack/mobile/nano-icons|Nano Icons]] | icons | react-native |
+| [[stack/mobile/fast-squircle|react-native-fast-squircle]] | graphics | react-native |
+| [[stack/mobile/victory-native|Victory Native]] | graphics | react-native |
+| [[stack/web/d3|D3.js]] | graphics, data | web |
 | [[stack/backend/solidity|Solidity]] | language | web |
 | [[stack/mobile/detour|detour]] | navigation | react-native |
 | [[stack/mobile/expo-motion-tabs|expo-motion-tabs]] | navigation | react-native |
 | [[stack/mobile/react-native-onboarding|react-native-onboarding]] | navigation | react-native |
 | [[stack/backend/sendgrid|SendGrid]] | services | node |
-| [[stack/design/unocss|UnoCSS]] | styling | web |
+| [[stack/web/unocss|UnoCSS]] | styling | web |
 | [[stack/devops/radon-ide|Radon IDE]] | tooling | react-native |
 | [[stack/devops/re-pack|Re.Pack]] | tooling | react-native |
-| [[stack/design/animate-ui|Animate UI]] | ui-kit | web |
+| [[stack/web/animate-ui|Animate UI]] | ui-kit | web |
 | [[stack/web/boneyard|Boneyard]] | ui | web, react-native |
-| [[stack/design/daisyui|daisyUI]] | ui-kit | web |
+| [[stack/web/daisyui|daisyUI]] | ui-kit | web |
 | [[stack/mobile/expo-ui|Expo UI]] | ui | react-native |
 | [[stack/mobile/expo-live-activity|expo-live-activity]] | ui | react-native, ios |
 | [[stack/mobile/expo-quick-actions|expo-quick-actions]] | ui | react-native |
 | [[stack/mobile/flash-calendar|Flash Calendar]] | ui | react-native |
 | [[stack/mobile/gifted-chat|Gifted Chat]] | ui | react-native |
-| [[stack/design/heroui|HeroUI]] | ui-kit | web, react-native |
+| [[stack/web/heroui|HeroUI]] | ui-kit | web, react-native |
 | [[stack/mobile/legend-list|Legend List]] | ui | react-native |
-| [[stack/design/primer|Primer]] | ui-kit | web |
-| [[stack/design/react-bits|React Bits]] | ui-kit | web |
-| [[stack/design/react-native-reusables|React Native Reusables]] | ui-kit | react-native |
+| [[stack/web/primer|Primer]] | ui-kit | web |
+| [[stack/web/react-bits|React Bits]] | ui-kit | web |
+| [[stack/mobile/react-native-reusables|React Native Reusables]] | ui-kit | react-native |
 | [[stack/mobile/coachmark|react-native-coachmark]] | ui | react-native |
 | [[stack/mobile/enriched|react-native-enriched]] | ui | react-native |
 | [[stack/mobile/nitro-device-info|react-native-nitro-device-info]] | ui | react-native |
@@ -166,7 +166,7 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/mobile/swift|Swift]] | language | ios | 2016 | [[stack/mobile/react-native]] |
 | [[stack/web/jotai|Jotai]] | state | web, react-native |  |  |
 | [[stack/web/recoil|Recoil]] | state | web, react-native |  |  |
-| [[stack/design/sass|Sass]] | styling | web | 2015 |  |
+| [[stack/web/sass|Sass]] | styling | web | 2015 |  |
 | [[stack/devops/amd|AMD (RequireJS)]] | tooling | web | 2015 | [[stack/devops/webpack]] |
 | [[stack/devops/appcenter|App Center]] | tooling | react-native |  |  |
 | [[stack/devops/babel|Babel]] | tooling | web, node |  |  |
@@ -177,7 +177,7 @@ UI kits, icon sets, fonts and design links I've only bookmarked live in [[saved/
 | [[stack/devops/husky|Husky]] | tooling | node |  | [[stack/devops/lefthook]] |
 | [[stack/devops/simple-git-hooks|simple-git-hooks]] | tooling | node |  | [[stack/devops/lefthook]] |
 | [[stack/devops/yeoman|Yeoman]] | tooling | web | 2015 |  |
-| [[stack/design/bootstrap|Bootstrap]] | ui-kit | web |  |  |
+| [[stack/web/bootstrap|Bootstrap]] | ui-kit | web |  |  |
 | [[stack/web/jquery|jQuery]] | ui | web | 2015–2016 | [[stack/web/react]] |
 | [[stack/web/radix|Radix UI]] | ui | web |  | [[stack/web/react-aria]] |
 | [[stack/web/lodash|Lodash]] | utils | web, react-native, node |  | [[stack/web/remeda]] |

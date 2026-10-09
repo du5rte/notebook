@@ -23,7 +23,7 @@ Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform
 | Lordicon | set | animated | $16/month | [lordicon.com](https://lordicon.com/) |  | 19,700+ icons |
 | Lucide | set |  |  | [lucide.dev](https://lucide.dev/) | [[stack/design/lucide]] | 1,452 icons, superset of Feather; animated version: [lucide-animated.com](https://lucide-animated.com/) |
 | MyIcons | set |  | $135 | [myicons.co](https://myicons.co) |  | 15,000+ icons |
-| Nano Icons | set | react-native |  | [GitHub](https://github.com/software-mansion-labs/react-native-nano-icons) | [[stack/design/nano-icons]] |  |
+| Nano Icons | set | react-native |  | [GitHub](https://github.com/software-mansion-labs/react-native-nano-icons) | [[stack/mobile/nano-icons]] |  |
 | Noun Project | set |  |  |  |  | 5 million+ icons |
 | Nucleo | set |  |  |  |  | 33,954 icons |
 | Reicon | set | rounded, svg |  | [reicon.dev](https://reicon.dev/) |  | 1,100+ icons, MIT licence |
@@ -31,4 +31,4 @@ Columns, the same in every `saved/` file: **Kind** what it is, **Tags** platform
 | Streamline | set |  | $19/month | [streamlinehq.com](https://www.streamlinehq.com) |  | 180,000+ icons |
 | SVGL | set |  |  | [svgl.app](https://svgl.app/) |  |  |
 | Tabler Icons | set |  |  | [tablericons.com](https://tablericons.com) |  | 5,000+ icons |
-| Vector Icons | set | react-native |  | [GitHub](https://github.com/oblador/react-native-vector-icons) | [[stack/design/vector-icons]] |  |
+| Vector Icons | set | react-native |  | [GitHub](https://github.com/oblador/react-native-vector-icons) | [[stack/mobile/vector-icons]] |  |
