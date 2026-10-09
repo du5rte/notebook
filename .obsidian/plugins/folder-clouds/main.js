@@ -2,7 +2,7 @@
 // Every folder a cloud around a hidden centre.
 const { Plugin, PluginSettingTab, Setting, Notice, ItemView, setIcon } = require('obsidian');
 
-const DEFAULTS = { enabled: true, depth: 2, centre: 1, inside: true, cross: false, group: false, min: 2, labels: false, bundleRoot: 'stack', bundleBeta: 0.85, bundleMode: 'wheel', bundleMin: 3, bundlePhysics: true, bundleForces: {}, bundlePanel: false, bundleMiddle: 0.35, bundleRun: 50, bundleHold: 0, bundleStyle: 'smooth' };
+const DEFAULTS = { enabled: true, depth: 2, centre: 1, inside: true, cross: false, group: false, min: 2, labels: false, bundleRoot: 'stack', bundleBeta: 0.85, bundleMode: 'wheel', bundleMin: 3, bundlePhysics: true, bundleForces: {}, bundlePanel: false, bundleMiddle: 0.35, bundleRun: 50, bundleHold: 0, bundleStyle: 'smooth', bundleAnimate: true, bundleOpenSpeed: 1 };
 
 // Nodes without a folder of their own.
 const FOLLOWERS = new Set(['tag', 'unresolved', 'attachment']);
@@ -671,8 +671,9 @@ function place(model) {
       const turn = b.spins ? Math.atan2(ux, -uy) : 0;
       for (const note of b.notes) {
         const a = norm(model.floating ? model.angles.get(note.path) + (model.shift.get(note.path) || 0) : turn + model.offsets.get(note.path));
-        const [x, y] = polar(a, b.r);
-        leaves.set(note.path, { x: b.x + x, y: b.y + y, cx: b.x, cy: b.y, a, r: b.r });
+        const r = b.r * shown(model, note.path);
+        const [x, y] = polar(a, r);
+        leaves.set(note.path, { x: b.x + x, y: b.y + y, cx: b.x, cy: b.y, a, r });
       }
       groupLabels.set(b.name, [b.x, b.y]);
     } else {
@@ -680,7 +681,7 @@ function place(model) {
       // the folder name just behind it.
       const a = norm(Math.atan2(ux, -uy));
       b.notes.forEach((note, i) => {
-        const k = (i - (n - 1) / 2) * STEP;
+        const k = (i - (n - 1) / 2) * STEP * shown(model, note.path);
         const x = b.x - uy * k;
         const y = b.y + ux * k;
         leaves.set(note.path, { x, y, cx: x, cy: y, a, r: 0 });
@@ -753,6 +754,14 @@ function place(model) {
   return { leaves, groupLabels, route, curve };
 }
 
+// How far a name has appeared, 0 to 1: one at a time while the view opens, eased; otherwise fully.
+function shown(model, path) {
+  const rv = model.reveal;
+  if (!rv) return model.grow ?? 1;
+  const t = Math.min(1, Math.max(0, (rv.t - (rv.at.get(path) ?? 0)) / rv.dur));
+  return 1 - Math.pow(1 - t, 3);
+}
+
 // The view around the circles.
 function fitBox(model) {
   let [x0, y0, x1, y1] = [Infinity, Infinity, -Infinity, -Infinity];
@@ -776,6 +785,12 @@ function circlesChart(groups, min, links = []) {
 // force), circles never overlap (forceCollide), and a weak pull keeps them near the middle (forceX/Y).
 // A dragged circle is held at fx, fy.
 const ALPHA_MIN = 0.001;
+// How gradually the view opens: the pull of each circle toward its spot, and how fast names grow out.
+const OPEN_PULL = 0.08;
+const OPEN_GROW = 0.018;
+// Names appearing one at a time: over how many frames they all start, and how long each takes.
+const REVEAL_SPREAD = 120;
+const REVEAL_EACH = 24;
 const ALPHA_DECAY = 1 - Math.pow(ALPHA_MIN, 1 / 300);
 
 function simulate(model, alpha) {
@@ -809,7 +824,8 @@ function simulate(model, alpha) {
         dy = (Math.random() - 0.5) * 1e-3;
         d = Math.hypot(dx, dy);
       }
-      const min = a.reach + b.reach + f.spacing;
+      // While the view opens, circles are as big as their names have grown.
+      const min = (a.reach + b.reach) * (model.grow ?? 1) + f.spacing;
       if (d >= min) continue;
       const push = ((min - d) / d) * 0.7;
       const ra = a.reach * a.reach;
@@ -827,7 +843,21 @@ function simulate(model, alpha) {
   // Ring: every circle gets its spot on a chain around the middle, its edge touching an inner circle and
   // its sides touching its neighbours, and is pulled there. The order around the chain is the order the
   // circles are in now, so dragging one past another swaps them.
-  if (f.ring > 0 && bodies.length > 1) ringTargets(model, bodies);
+  // While the view opens, the opening path already ends on the ring.
+  if (f.ring > 0 && bodies.length > 1 && !model.opening) ringTargets(model, bodies);
+  // Opening the view: each circle follows a point sliding from where it started to where it settled, at
+  // the pace its names grow out, so circles and names open together and end in the planned layout.
+  if (model.opening) {
+    const t = model.grow ?? 1;
+    for (const b of bodies) {
+      const o = model.opening.get(b.name);
+      if (!o || b.fx != null) continue;
+      const tx = o.from[0] + (o.to[0] - o.from[0]) * t;
+      const ty = o.from[1] + (o.to[1] - o.from[1]) * t;
+      b.vx += (tx - b.x) * OPEN_PULL;
+      b.vy += (ty - b.y) * OPEN_PULL;
+    }
+  }
   // Keep the middle clear: a circle and its names stay outside the empty space there.
   else if (f.hole > 0) {
     const [mx, my] = middleOf(model);
@@ -1027,7 +1057,36 @@ class BundleView extends ItemView {
       if (physics) settle(model);
       orient(model);
       if (physics) settleNotes(model);
-      chart = Object.assign(place(model), { box: fitBox(model) });
+      const box = fitBox(model);
+      // Opening, like the graph view: the circles start bunched in the middle and spread out to where they
+      // settled, in the same directions, and the names grow out of each circle as it opens.
+      if (physics && settings.bundleAnimate !== false) {
+        model.opening = new Map();
+        for (const b of model.bodies.values()) {
+          const to = [b.x, b.y];
+          b.x *= 0.3;
+          b.y *= 0.3;
+          b.vx = 0;
+          b.vy = 0;
+          model.opening.set(b.name, { from: [b.x, b.y], to });
+        }
+        model.grow = 0;
+        // Names appear one at a time, the ones I use most and with the most links first.
+        const degree = new Map();
+        for (const [a, c] of links) {
+          degree.set(a, (degree.get(a) || 0) + 1);
+          degree.set(c, (degree.get(c) || 0) + 1);
+        }
+        const all = groups.flatMap((g) => g.notes);
+        all.sort((a, c) => rankOf(c) - rankOf(a) || (degree.get(c.path) || 0) - (degree.get(a.path) || 0) || a.name.localeCompare(c.name));
+        const speed = settings.bundleOpenSpeed || 1;
+        model.openSpeed = speed;
+        const spread = REVEAL_SPREAD / speed;
+        const each = REVEAL_EACH / speed;
+        const step = spread / Math.max(1, all.length);
+        model.reveal = { t: 0, dur: each, at: new Map(all.map((n, i) => [n.path, i * step])), end: spread + each };
+      }
+      chart = Object.assign(place(model), { box });
     } else {
       chart = wheelChart(groups);
     }
@@ -1108,6 +1167,8 @@ class BundleView extends ItemView {
       for (const [path, holder] of holders) {
         const { cx, cy, a, r } = c.leaves.get(path);
         holder.setAttribute('transform', `translate(${f(cx)},${f(cy)}) rotate(${f((a * 180) / Math.PI - 90)}) translate(${f(r)},0)`);
+        if (model && model.reveal) holder.setAttribute('opacity', f(shown(model, path)));
+        else if (holder.hasAttribute('opacity')) holder.removeAttribute('opacity');
         const flip = a >= Math.PI;
         if (flips.get(path) === flip) continue;
         flips.set(path, flip);
@@ -1156,6 +1217,7 @@ class BundleView extends ItemView {
       const gs = groupOf.get(s);
       const gt = groupOf.get(t);
       const path = make(linkLayer, 'path', { d: linkD(chart, s, t, gs, gt), class: 'fcb-link' });
+      if (model && model.reveal) path.setAttribute('opacity', '0');
       paths.push({ s, t, gs, gt, path });
       if (!outgoing.has(s)) outgoing.set(s, []);
       if (!incoming.has(t)) incoming.set(t, []);
@@ -1179,11 +1241,27 @@ class BundleView extends ItemView {
       model.noteHeat = model.held ? 0.3 : (model.noteHeat || 0) * 0.97;
       simulateNotes(model, Math.max(sim.alpha, model.noteHeat));
       const loose = simulateFree(model) || model.noteHeat > ALPHA_MIN || model.shift.size > 0;
+      if (model.grow != null && model.grow < 1) model.grow = Math.min(1, model.grow + ((1 - model.grow) * OPEN_GROW + 0.0008) * (model.openSpeed || 1));
+      // Opening ends once the names are grown and every circle has reached its spot.
+      if (model.opening && model.grow >= 1 && [...model.bodies.values()].every((b) => {
+        const o = model.opening.get(b.name);
+        return Math.hypot(o.to[0] - b.x, o.to[1] - b.y) < 1;
+      })) model.opening = null;
+      if (model.reveal && ++model.reveal.t > model.reveal.end) {
+        // Every name has appeared: from here they are fully grown.
+        model.reveal = null;
+        model.grow = 1;
+      }
+      const opening = (model.grow != null && model.grow < 1) || !!model.opening || !!model.reveal;
       sim.alpha += (sim.target - sim.alpha) * ALPHA_DECAY;
       const c = (current = place(model));
       lay(c);
-      for (const p of paths) p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
-      this.frame = sim.alpha < ALPHA_MIN && sim.target === 0 && !loose ? 0 : win.requestAnimationFrame(frame);
+      for (const p of paths) {
+        p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
+        if (model.reveal) p.path.setAttribute('opacity', f(Math.min(shown(model, p.s), shown(model, p.t))));
+        else if (p.path.hasAttribute('opacity')) p.path.removeAttribute('opacity');
+      }
+      this.frame = sim.alpha < ALPHA_MIN && sim.target === 0 && !loose && !opening ? 0 : win.requestAnimationFrame(frame);
     };
     const wake = (alpha) => {
       sim.alpha = Math.max(sim.alpha, alpha);
@@ -1194,6 +1272,7 @@ class BundleView extends ItemView {
       for (const p of paths) p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
     };
     this.panel(el, physics, model, () => wake(0.3), redrawLinks);
+    if (model && model.grow === 0) wake(1);
     // What the colours mean, shown while a note is hovered.
     this.legend = el.createDiv({ cls: 'fcb-legend' });
     const key = (label, stroke, opacity = 1) => {
@@ -1401,6 +1480,18 @@ class BundleView extends ItemView {
         box.createDiv({ cls: 'fcb-controls-note', text: 'Turn on Circles and Physics for the other forces.' });
         return;
       }
+      section('Opening');
+      new Setting(box).setName('Animate on open').addToggle((t) =>
+        t.setValue(settings.bundleAnimate !== false).onChange((v) => {
+          settings.bundleAnimate = v;
+          this.saveSoon();
+        })
+      );
+      slider('Opening speed', 0.25, 3, 0.25, () => settings.bundleOpenSpeed || 1, (v) => {
+        settings.bundleOpenSpeed = v;
+        this.saveSoon();
+      });
+      new Setting(box).addButton((b) => b.setButtonText('Replay opening').onClick(() => this.draw()));
       section('Circles');
       force('Center force', 'gravity', 0, 0.2, 0.005);
       force('Repel', 'spacing', 0, 300, 5);
@@ -1427,6 +1518,8 @@ class BundleView extends ItemView {
           settings.bundleRun = DEFAULTS.bundleRun;
           settings.bundleHold = DEFAULTS.bundleHold;
           settings.bundleStyle = DEFAULTS.bundleStyle;
+          settings.bundleAnimate = DEFAULTS.bundleAnimate;
+          settings.bundleOpenSpeed = DEFAULTS.bundleOpenSpeed;
           await this.plugin.saveData(settings);
           this.draw();
         })
@@ -1787,12 +1880,21 @@ class FolderCloudsSettingTab extends PluginSettingTab {
       );
     new Setting(this.containerEl)
       .setName('Physics')
-      .setDesc('In Circles, drag a circle by its middle or by a name and the others make room, like the graph view. Off keeps the circles still on one ring.')
+      .setDesc('In Circles, drag a circle by its middle or its folder name and the others make room, like the graph view; drag a name to pull that note out. Off keeps the circles still on one ring.')
       .addToggle((t) =>
         t.setValue(this.plugin.settings.bundlePhysics).onChange(async (v) => {
           this.plugin.settings.bundlePhysics = v;
           await this.plugin.saveData(this.plugin.settings);
           this.plugin.redrawBundles();
+        })
+      );
+    new Setting(this.containerEl)
+      .setName('Animate on open')
+      .setDesc('With Physics, the circles spread out from the middle and the names grow out of them when the view opens, like the graph view.')
+      .addToggle((t) =>
+        t.setValue(this.plugin.settings.bundleAnimate !== false).onChange(async (v) => {
+          this.plugin.settings.bundleAnimate = v;
+          await this.plugin.saveData(this.plugin.settings);
         })
       );
     new Setting(this.containerEl)

@@ -48,6 +48,8 @@ The conventions for writing these are in the vault's `CLAUDE.md`.
 
 **Notes** (`simulateNotes`). Notes slide along their circle like beads, never passing each other and never closer than *Name spacing*, with *Group gap* more room between kinds of note. Notes with links out are pulled toward where their links go (*Gather*); in a circle with such links, notes linked only inside go to the far side and notes without links join the bigger group (*Others pull*). Angles are kept unwrapped and increasing round the circle so every gap is a plain difference.
 
+**Opening.** The layout is settled before the first frame. Then, with *Animate on open* (plugin settings, on by default), the circles start at 30% of their distance from the middle and each follows a point sliding to where it settled (`model.opening`, paced by `model.grow`), and the names appear one at a time (`model.reveal`, `shown()`): the ones I use most and with the most links first, each fading in and growing out from its circle's centre, with a link fading in once both its names show. Collisions use the size the circles have grown to, and the ring pull waits until the opening ends, so it always ends in the planned layout. All names are out in about 2 s. `OPEN_GROW` and `OPEN_PULL` pace the circles; `REVEAL_SPREAD` (frames over which names start) and `REVEAL_EACH` (frames each takes) pace the names.
+
 **Small folders** (fewer than *Smallest circle* notes) are a short row pointing at the middle instead of a circle.
 
 **Where links gather.** With physics, the middle is the centre of the circles weighted by their links out; with *Ring pull* on, the middle of the chart.
@@ -91,6 +93,9 @@ Names also fade by status (using 100%, trying 85%, watching / legacy / none 65%,
 | | Centre pull | `bundleMiddle` | 0.35 |
 | | Straight run | `bundleRun` | 50 |
 | | Gate hold (Bundled) | `bundleHold` | 0 |
+| Opening | Animate on open | `bundleAnimate` | on |
+| | Opening speed | `bundleOpenSpeed` | 1× |
+| | Replay opening (button) | | |
 | Circles | Center force | `gravity` | 0.03 |
 | | Repel | `spacing` | 20 |
 | | Link force | `linkForce` | 0.4 |

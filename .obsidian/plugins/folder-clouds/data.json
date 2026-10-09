@@ -24,5 +24,7 @@
   "bundleMiddle": 0.05,
   "bundleRun": 0,
   "bundleHold": 0.1,
-  "bundleStyle": "smooth"
+  "bundleStyle": "smooth",
+  "bundleAnimate": true,
+  "bundleOpenSpeed": 1
 }
