@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "depth": 2,
+  "centre": 1,
+  "inside": true,
+  "cross": false,
+  "group": false,
+  "min": 1,
+  "labels": false
+}

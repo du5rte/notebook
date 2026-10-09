@@ -1,0 +1,9 @@
+{
+  "id": "folder-clouds",
+  "name": "Folder Clouds",
+  "version": "0.2.0",
+  "minAppVersion": "1.4.0",
+  "description": "Every folder becomes a cloud of notes in the graph view, held together by hidden links. Links between folders are drawn as usual but do not pull.",
+  "author": "Duarte Monteiro",
+  "isDesktopOnly": false
+}
