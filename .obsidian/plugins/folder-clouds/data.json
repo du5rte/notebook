@@ -10,5 +10,13 @@
   "bundleRoot": "stack",
   "bundleBeta": 0.85,
   "bundleMode": "circles",
-  "bundleMin": 3
+  "bundleMin": 3,
+  "bundlePhysics": true,
+  "bundleForces": {
+    "ring": 0.5
+  },
+  "bundlePanel": false,
+  "bundleMiddle": 1,
+  "bundleRun": 50,
+  "bundleHold": 0
 }
