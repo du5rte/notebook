@@ -7,7 +7,7 @@ tags: [library, index]
 ---
 # Stack
 
-Everything I have used: languages, frameworks, libraries, services and tools, one file each. Bookmarks I haven't used yet live in `saved/`. `status` is one of `using`, `trying`, `watching`, `legacy` (replaced by something better, but I still use it) or `dropped`; `verified: false` means the status is a guess from old notes and has not been confirmed. The Dropped table at the bottom is the retrospective: filter it by platform for web, backend or mobile.
+Everything I have used: languages, frameworks, libraries, services and tools, one file each. Bookmarks I haven't used yet live in `saved/`. `status` is one of `using`, `trying`, `watching`, `legacy` (replaced by something better, but I still use it), `dropped` or `deprecated` (the project itself is no longer maintained, listed with Dropped); `verified: false` means the status is a guess from old notes and has not been confirmed. The Dropped table at the bottom is the retrospective: filter it by platform for web, backend or mobile.
 
 Categories (usually one, sometimes two): `animation`, `auth`, `data`, `database`, `forms`, `framework`, `graphics`, `icons`, `language`, `navigation`, `services`, `state`, `styling`, `testing`, `tooling`, `ui`, `ui-kit`, `utils`.
 

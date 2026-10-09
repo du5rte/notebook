@@ -15,7 +15,7 @@ saved/     bookmarks I haven't used yet, or stopped using: ui-kits.md, icons.md,
 
 Saving a UI kit, icon set, font or design link: add a row to the matching `saved/` table. Once I use it in a project it moves to a `stack/` file (dropped ones included, with `replaced_by` as the plain stack filename, not a link, so the graph does not join replacements), and its `saved/` row links to that file.
 
-A `stack/` record links what it is directly built with, and nothing further, in the `built_with` property: `built_with: ["[[stack/mobile/react-native|React Native]]", "[[stack/web/tailwind|Tailwind CSS]]"]` for NativeWind, not React or JavaScript, which come through React Native → React → TypeScript → JavaScript. A tool used with something it is not built with says so in `works_with` on its own record (Fastlane: React Native); chains stop there. Never store the reverse (what uses a record): backlinks and the bundle view show it. The body holds no `Platforms:` or link lines, only notes.
+A `stack/` record links what it is directly built with, and nothing further, in the `built_with` property: `built_with: ["[[stack/mobile/react-native|React Native]]", "[[stack/web/tailwind|Tailwind CSS]]"]` for NativeWind, not React or JavaScript, which come through React Native → React → TypeScript → JavaScript. A tool used with something it is not built with says so in `works_with` on its own record (Fastlane: React Native); chains stop there. Never store the reverse (what uses a record): backlinks and the bundle view show it. The body holds no `Platforms:` or link lines, only notes. A project that is no longer maintained has `status: deprecated` (Realm).
 
 New `docs/` note: a language or tool with several notes gets its own folder (`docs/git/git-basics.md`, `docs/git/git-branching.md`): the intro note is `<topic>-basics.md`, the rest `<topic>-<name>.md`, so names stay unique in Obsidian's graph and tabs. A single-file note whose name matches a `stack/` record gets `-basics` too (`docs/python-basics.md`). The `stack/<topic>.md` record is the hub: each lesson lists it first under Related. Anything else is a single file (`docs/dns.md`), not grouped into a category folder. List it under its area in `docs/index.md` (in a folder, `<topic>-basics` first, then A-Z).
 
@@ -25,6 +25,10 @@ Old notes: if I still use the tool but the note is written for an old version, k
 - an archived technique of a language I still use goes in that language's folder: `archive/javascript/ajax.md`
 
 Max two levels deep; no area folders above topics. Areas (Web, JavaScript, Systems...) are sections in `docs/index.md`. Diagrams are Mermaid in the note, or `.svg` beside it.
+
+## Plugin
+
+`.obsidian/plugins/folder-clouds/` is my own plugin: folder clouds in the graph view, and the bundle view of `stack/`. Before changing it, read its `README.md` (how it works, every setting, gotchas). Check a change with `node .obsidian/plugins/folder-clouds/preview.js /tmp/bundle.svg` before asking me to reload Obsidian.
 
 ## Rules
 

@@ -291,7 +291,7 @@ function facingOrder(notes, centre, centres, groupOf, links, middle = [0, 0]) {
   // by status, then by how many links they have, and fill the block from the middle out.
   const score = (note) => {
     const p = pull.get(note.path);
-    return (STATUS_RANK[note.status] ?? STATUS_RANK.unknown) * 1000 + p.links + p.inner;
+    return rankOf(note) * 1000 + p.links + p.inner;
   };
   const middleOut = (block, centre) => {
     const ranked = [...block].sort((a, b) => score(b) - score(a) || rel(a.path, centre) - rel(b.path, centre));
@@ -315,7 +315,9 @@ function facingOrder(notes, centre, centres, groupOf, links, middle = [0, 0]) {
 }
 
 // How actively a note is used, from its status: higher sits nearer the middle of its group.
-const STATUS_RANK = { using: 4, trying: 3, watching: 2, legacy: 2, unknown: 2, dropped: 0 };
+const STATUS_RANK = { using: 4, trying: 3, watching: 2, legacy: 2, unknown: 2, dropped: 0, deprecated: -1 };
+// Deprecated (the project is no longer maintained) ranks below everything, dropped included.
+const rankOf = (note) => STATUS_RANK[note.status] ?? STATUS_RANK.unknown;
 
 // Circles: a circle per folder of at least `min` notes, a short column for smaller ones.
 // Links inside a folder bundle through its centre. Links between folders leave the outer end of a
@@ -334,6 +336,7 @@ const FORCES = {
   side: 0.05, // how hard other notes move beside the linked ones, or to the far side
   nameGap: 12, // the closest two names on a circle may come
   groupGap: 24, // extra room between notes with links out, notes without links, and notes linked inside
+  snap: 0.01, // how quickly a dragged note springs back to its place
   room: 1.4, // extra room along a circle, so notes can gather
 };
 
@@ -386,7 +389,7 @@ function circlesModel(groups, min, links = [], floating = false, forces = FORCES
     const [ga, gb] = key.split('\n');
     return { a: bodies.get(ga), b: bodies.get(gb), count };
   });
-  return { bodies, springs, groupOf, links, away, inner, forces, offsets: new Map(), angles: new Map(), spin: new Map(), floating };
+  return { bodies, springs, groupOf, links, away, inner, forces, free: new Map(), homes: new Map(), shift: new Map(), offsets: new Map(), angles: new Map(), spin: new Map(), floating };
 }
 
 // Where links between circles gather. On the ring: the middle of the chart. With physics: the centre
@@ -454,8 +457,44 @@ function simulateNotes(model, alpha) {
     };
     const [mx, my] = unit(middle[0], middle[1]);
     const toMiddle = Math.atan2(mx, -my);
-    const order = b.order;
+    // A note being dragged leaves the circle's physics, so the gap it leaves closes. While it is over the
+    // circle, the names either side of the place it is over lean apart to make room for it (fading out
+    // over a few neighbours), so as it passes the middle of a name, that name slides past it. Its rank in
+    // the circle (b.order) is untouched, so it goes back there when it is let go.
+    let order = b.order;
+    const held = model.held && model.held.body === b.name ? model.held : null;
+    const lean = new Map();
+    if (held) {
+      order = b.order.filter((p) => p !== held.path);
+      const fr = model.free.get(held.path);
+      if (fr && order.length) {
+        const dx = fr.x - b.x;
+        const dy = fr.y - b.y;
+        if (Math.abs(Math.hypot(dx, dy) - b.r) < OVER_CIRCLE) {
+          const a0 = model.angles.get(order[0]);
+          const at = a0 + norm(Math.atan2(dx, -dy) - a0);
+          let at_i = order.findIndex((p) => model.angles.get(p) > at);
+          if (at_i < 0) at_i = order.length;
+          const m = order.length;
+          const half = b.gap * 0.6;
+          for (let j = 0; j < m; j++) {
+            // Steps from the place it is over, going back (before it) and forward (after it).
+            const back = (at_i - 1 - j + m) % m;
+            const fwd = (j - at_i + m) % m;
+            const away = back < fwd ? -half * Math.max(0, 1 - back / LEAN_REACH) : half * Math.max(0, 1 - fwd / LEAN_REACH);
+            lean.set(order[j], away);
+          }
+        }
+      }
+    }
+    for (const p of b.order) {
+      const now = model.shift.get(p) || 0;
+      const next = now + ((lean.get(p) || 0) - now) * 0.25;
+      if (Math.abs(next) < 1e-5 && !lean.has(p)) model.shift.delete(p);
+      else model.shift.set(p, next);
+    }
     const n = order.length;
+    if (!n) continue;
     const gathers = mx || my;
     // Which group is bigger: notes with links out, on the side facing the middle, or notes linked only
     // inside, on the far side. Notes without links join the bigger group.
@@ -540,6 +579,75 @@ function simulateNotes(model, alpha) {
   }
 }
 
+// Physics for a note pulled off its circle: held where it is dragged, then a damped spring back to its
+// place on the circle; it rejoins the circle once it gets there. While it is held, its own circle leans a
+// little after it (CIRCLE_LEAN of the way), and settles back where it was when the note is let go.
+// Returns whether anything is still moving.
+const CIRCLE_LEAN = 0.15;
+// How close to its circle's ring a dragged note must be to take a place in it.
+const OVER_CIRCLE = 45;
+// How many names either side lean apart to make room for a dragged note.
+const LEAN_REACH = 4;
+
+// Let go of a dragged note: it goes back to its rank in the circle, between the same neighbours as before.
+function releaseHeld(model) {
+  const held = model.held;
+  model.held = null;
+  if (!held) return;
+  const b = model.bodies.get(held.body);
+  if (!b || !b.order) return;
+  const o = b.order;
+  const n = o.length;
+  const i = o.indexOf(held.path);
+  if (i < 0 || n < 2) return;
+  const before = model.angles.get(o[(i - 1 + n) % n]) - (i === 0 ? 2 * Math.PI : 0);
+  const after = model.angles.get(o[(i + 1) % n]) + (i === n - 1 ? 2 * Math.PI : 0);
+  model.angles.set(held.path, (before + after) / 2);
+  model.spin.set(held.path, 0);
+}
+function simulateFree(model) {
+  const groupOf = model.groupOf;
+  const leaning = new Map();
+  for (const [path, fr] of model.free) {
+    if (fr.fx == null || !fr.from) continue;
+    const b = model.bodies.get(groupOf.get(path));
+    if (!b || b.fx != null) continue;
+    if (!b.rest) b.rest = [b.x, b.y];
+    leaning.set(b, [b.rest[0] + (fr.fx - fr.from[0]) * CIRCLE_LEAN, b.rest[1] + (fr.fy - fr.from[1]) * CIRCLE_LEAN]);
+  }
+  for (const b of model.bodies.values()) {
+    if (!b.rest || b.fx != null) {
+      if (b.fx != null) b.rest = null;
+      continue;
+    }
+    const [tx, ty] = leaning.get(b) || b.rest;
+    b.vx += (tx - b.x) * 0.1;
+    b.vy += (ty - b.y) * 0.1;
+    if (!leaning.has(b) && Math.hypot(tx - b.x, ty - b.y) < 0.5) b.rest = null;
+  }
+  for (const [path, fr] of model.free) {
+    if (fr.fx != null) {
+      fr.x = fr.fx;
+      fr.y = fr.fy;
+      fr.vx = 0;
+      fr.vy = 0;
+      continue;
+    }
+    const home = model.homes.get(path);
+    if (!home) {
+      model.free.delete(path);
+      continue;
+    }
+    const k = model.forces.snap ?? FORCES.snap;
+    fr.vx = (fr.vx + (home.x - fr.x) * k) * 0.75;
+    fr.vy = (fr.vy + (home.y - fr.y) * k) * 0.75;
+    fr.x += fr.vx;
+    fr.y += fr.vy;
+    if (Math.hypot(home.x - fr.x, home.y - fr.y) < 0.3 && Math.hypot(fr.vx, fr.vy) < 0.3) model.free.delete(path);
+  }
+  return model.free.size > 0 || [...model.bodies.values()].some((b) => b.rest);
+}
+
 // Let the notes slide until they come to rest.
 function settleNotes(model) {
   for (let alpha = 1; alpha >= ALPHA_MIN; alpha -= alpha * ALPHA_DECAY) simulateNotes(model, alpha);
@@ -562,7 +670,7 @@ function place(model) {
     if (b.circle) {
       const turn = b.spins ? Math.atan2(ux, -uy) : 0;
       for (const note of b.notes) {
-        const a = norm(model.floating ? model.angles.get(note.path) : turn + model.offsets.get(note.path));
+        const a = norm(model.floating ? model.angles.get(note.path) + (model.shift.get(note.path) || 0) : turn + model.offsets.get(note.path));
         const [x, y] = polar(a, b.r);
         leaves.set(note.path, { x: b.x + x, y: b.y + y, cx: b.x, cy: b.y, a, r: b.r });
       }
@@ -578,6 +686,16 @@ function place(model) {
         leaves.set(note.path, { x, y, cx: x, cy: y, a, r: 0 });
       });
       groupLabels.set(b.name, [b.x - ux * 24, b.y - uy * 24]);
+    }
+  }
+  // A note pulled off its circle keeps its name's direction and sits where it is; its home stays its
+  // place on the circle, which it springs back to.
+  if (model.free) {
+    for (const [path, leaf] of leaves) model.homes.set(path, leaf);
+    for (const [path, fr] of model.free) {
+      const home = leaves.get(path);
+      if (!home) continue;
+      leaves.set(path, { x: fr.x, y: fr.y, cx: fr.x - (home.x - home.cx), cy: fr.y - (home.y - home.cy), a: home.a, r: home.r });
     }
   }
   // A point beyond the outer end of a note's name, given its length, along the name's direction.
@@ -919,6 +1037,7 @@ class BundleView extends ItemView {
     const svg = document.createElementNS(SVG_NS, 'svg');
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
+    if (physics) svg.addClass('fcb-physics');
     el.appendChild(svg);
     const home = chart.box.slice();
     let view = home.slice();
@@ -958,8 +1077,11 @@ class BundleView extends ItemView {
       const label = make(groupLayer, 'text', { 'text-anchor': 'middle', 'dominant-baseline': 'middle', class: 'fcb-group' });
       label.textContent = g.name;
       groupTexts.set(g.name, label);
+      if (physics) hits.set(label, { body: model.bodies.get(g.name) });
     }
 
+    // The note being dragged, if any.
+    let dragged = null;
     // Note names pointing out of their circle, as in the notebook.
     const texts = new Map();
     const holders = new Map();
@@ -969,14 +1091,15 @@ class BundleView extends ItemView {
       for (const n of g.notes) {
         const holder = make(nodeLayer, 'g', {});
         // Names fade with how actively the note is used: dropped ones are the faintest.
-        const rank = STATUS_RANK[n.status] ?? STATUS_RANK.unknown;
-        const text = make(holder, 'text', { dy: '0.31em', class: `fcb-node fcb-rank-${rank}` });
+        const rank = rankOf(n);
+        const text = make(holder, 'text', { dy: '0.31em', class: `fcb-node ${rank < 0 ? 'fcb-deprecated' : `fcb-rank-${rank}`}` });
         text.textContent = n.name;
         texts.set(n.path, text);
         holders.set(n.path, holder);
-        hits.set(text, { note: n, body: physics ? model.bodies.get(g.name) : null });
-        text.addEventListener('mouseenter', () => this.mark(n.path, true, texts, outgoing, incoming, svg));
-        text.addEventListener('mouseleave', () => this.mark(n.path, false, texts, outgoing, incoming, svg));
+        hits.set(text, { note: n });
+        // While a note is dragged its highlight stays on, whatever the pointer passes over.
+        text.addEventListener('mouseenter', () => !dragged && this.mark(n.path, true, texts, outgoing, incoming, svg));
+        text.addEventListener('mouseleave', () => !dragged && this.mark(n.path, false, texts, outgoing, incoming, svg));
       }
     }
 
@@ -1049,21 +1172,25 @@ class BundleView extends ItemView {
 
     // Physics: one tick a frame while the circles move, then rest.
     const sim = { alpha: 0, target: 0 };
+    let current = chart;
     const frame = () => {
       simulate(model, sim.alpha);
-      simulateNotes(model, sim.alpha);
+      // The names keep moving while one is dragged, and for a moment after, so they can make room and settle.
+      model.noteHeat = model.held ? 0.3 : (model.noteHeat || 0) * 0.97;
+      simulateNotes(model, Math.max(sim.alpha, model.noteHeat));
+      const loose = simulateFree(model) || model.noteHeat > ALPHA_MIN || model.shift.size > 0;
       sim.alpha += (sim.target - sim.alpha) * ALPHA_DECAY;
-      const c = place(model);
+      const c = (current = place(model));
       lay(c);
       for (const p of paths) p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
-      this.frame = sim.alpha < ALPHA_MIN && sim.target === 0 ? 0 : win.requestAnimationFrame(frame);
+      this.frame = sim.alpha < ALPHA_MIN && sim.target === 0 && !loose ? 0 : win.requestAnimationFrame(frame);
     };
     const wake = (alpha) => {
       sim.alpha = Math.max(sim.alpha, alpha);
       if (!this.frame) this.frame = win.requestAnimationFrame(frame);
     };
     const redrawLinks = () => {
-      const c = physics ? place(model) : chart;
+      const c = physics ? (current = place(model)) : chart;
       for (const p of paths) p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
     };
     this.panel(el, physics, model, () => wake(0.3), redrawLinks);
@@ -1079,8 +1206,9 @@ class BundleView extends ItemView {
     key('used by', 'var(--fcb-used)');
     key('works with', 'var(--fcb-works)');
 
-    // Press a circle or a name to drag the circle; press the background to pan. A press on a name
-    // that does not move opens the note. The wheel zooms; a double click on the background fits it all.
+    // Press a name to pull that note off its circle; let go and it springs back to its place. Press a
+    // circle's middle or its folder name to drag the whole circle; press the background to pan. A press on
+    // a name that does not move opens the note. The wheel zooms; a double click on the background fits it all.
     const toChart = (e) => {
       const pt = svg.createSVGPoint();
       pt.x = e.clientX;
@@ -1094,13 +1222,34 @@ class BundleView extends ItemView {
       const at = toChart(e);
       press = { id: e.pointerId, x: e.clientX, y: e.clientY, view: view.slice(), moved: false, note: hit.note, body: hit.body };
       if (press.body) press.grab = [at.x - press.body.x, at.y - press.body.y];
+      if (press.note && physics) {
+        const leaf = current.leaves.get(press.note.path);
+        press.pull = press.note.path;
+        press.grab = [at.x - leaf.x, at.y - leaf.y];
+        press.from = [leaf.x, leaf.y];
+      }
       svg.setPointerCapture(e.pointerId);
     });
     svg.addEventListener('pointermove', (e) => {
       if (!press || e.pointerId !== press.id) return;
       if (!press.moved && Math.hypot(e.clientX - press.x, e.clientY - press.y) < 4) return;
       press.moved = true;
-      if (press.body) {
+      if (press.pull) {
+        const at = toChart(e);
+        const fr = model.free.get(press.pull) || { x: press.from[0], y: press.from[1], vx: 0, vy: 0 };
+        fr.from = fr.from || press.from;
+        fr.fx = at.x - press.grab[0];
+        const home = model.bodies.get(model.groupOf.get(press.pull));
+        if (!model.held && home && home.circle) model.held = { path: press.pull, body: home.name };
+        if (dragged !== press.pull) {
+          dragged = press.pull;
+          this.mark(dragged, true, texts, outgoing, incoming, svg);
+        }
+        fr.fy = at.y - press.grab[1];
+        model.free.set(press.pull, fr);
+        wake(0);
+        svg.addClass('fcb-dragging');
+      } else if (press.body) {
         const at = toChart(e);
         press.body.fx = at.x - press.grab[0];
         press.body.fy = at.y - press.grab[1];
@@ -1115,7 +1264,17 @@ class BundleView extends ItemView {
     });
     const release = (e) => {
       if (!press || e.pointerId !== press.id) return;
-      if (press.body && press.moved) {
+      if (press.pull && press.moved) {
+        const fr = model.free.get(press.pull);
+        if (fr) fr.fx = fr.fy = fr.from = null;
+        releaseHeld(model);
+        // Keep the highlight if the pointer is still on the name, as after a plain hover.
+        const over = e.target === texts.get(dragged) || win.document.elementFromPoint(e.clientX, e.clientY) === texts.get(dragged);
+        if (!over) this.mark(dragged, false, texts, outgoing, incoming, svg);
+        dragged = null;
+        wake(0);
+        svg.removeClass('fcb-dragging');
+      } else if (press.body && press.moved) {
         press.body.fx = null;
         press.body.fy = null;
         sim.target = 0;
@@ -1254,6 +1413,7 @@ class BundleView extends ItemView {
       force('Others pull', 'side', 0, 0.3, 0.01);
       force('Name spacing', 'nameGap', 8, 30, 1, () => spaceNames(model));
       force('Group gap', 'groupGap', 0, 80, 2);
+      force('Snap back', 'snap', 0.002, 0.1, 0.001);
       // Room changes the size of the circles: draw again when the slider is let go.
       slider('Room', 100, 250, 10, () => Math.round(model.forces.room * 100), (v) => {
         settings.bundleForces = Object.assign({}, settings.bundleForces, { room: v / 100 });
@@ -1343,6 +1503,7 @@ const BUNDLE_CSS = `
 .folder-clouds-bundle .fcb-node.fcb-rank-3 { opacity: 0.85; }
 .folder-clouds-bundle .fcb-node.fcb-rank-2 { opacity: 0.65; }
 .folder-clouds-bundle .fcb-node.fcb-rank-0 { opacity: 0.4; }
+.folder-clouds-bundle .fcb-node.fcb-deprecated { opacity: 0.22; }
 .folder-clouds-bundle .fcb-node:is(.fcb-self, .fcb-in, .fcb-out):not(.fcb-d2, .fcb-d3, .fcb-d4) { opacity: 1; }
 .folder-clouds-bundle .fcb-node.fcb-self { fill: var(--fcb-built); font-weight: 700; }
 .folder-clouds-bundle .fcb-node.fcb-in { fill: var(--fcb-used-text); font-weight: 700; }
@@ -1360,6 +1521,7 @@ const BUNDLE_CSS = `
 .folder-clouds-bundle .fcb-node.fcb-d3 { opacity: 0.5; font-weight: 500; }
 .folder-clouds-bundle .fcb-node.fcb-d4 { opacity: 0.35; font-weight: 400; }
 .folder-clouds-bundle .fcb-group { font-size: 13px; font-weight: 600; fill: var(--text-faint); opacity: 0.6; pointer-events: none; }
+.folder-clouds-bundle svg.fcb-physics .fcb-group { pointer-events: auto; cursor: grab; }
 `;
 
 class FolderClouds extends Plugin {
@@ -1707,6 +1869,8 @@ module.exports.simulate = simulate;
 module.exports.settle = settle;
 module.exports.simulateNotes = simulateNotes;
 module.exports.settleNotes = settleNotes;
+module.exports.simulateFree = simulateFree;
+module.exports.releaseHeld = releaseHeld;
 module.exports.FORCES = FORCES;
 module.exports.between = between;
 module.exports.fitBox = fitBox;

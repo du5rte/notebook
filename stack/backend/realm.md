@@ -8,7 +8,7 @@ tags: [library, database]
 categories: [database]
 platforms: [react-native]
 works_with: ["[[stack/mobile/react-native|React Native]]", "[[stack/backend/mongodb|MongoDB]]"]
-status: dropped
+status: deprecated
 url: https://realm.io
 repo: https://github.com/realm/realm-js
 verified: false

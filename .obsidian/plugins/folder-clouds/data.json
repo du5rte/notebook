@@ -13,15 +13,16 @@
   "bundleMin": 3,
   "bundlePhysics": true,
   "bundleForces": {
-    "ring": 0.05,
+    "ring": 0.3,
     "gravity": 0.2,
     "hole": 0,
     "spacing": 0,
-    "groupGap": 12
+    "groupGap": 12,
+    "room": 1
   },
   "bundlePanel": false,
   "bundleMiddle": 0.05,
-  "bundleRun": 50,
+  "bundleRun": 0,
   "bundleHold": 0.1,
   "bundleStyle": "smooth"
 }
