@@ -689,20 +689,36 @@ function place(model) {
       groupLabels.set(b.name, [b.x - ux * 24, b.y - uy * 24]);
     }
   }
-  // Secondary notes on the outer ring, the most used at the very back, the rest either side of it.
+  // Secondary notes on the outer ring, centred on the back, in sections with a small gap between. Each
+  // section is as wide as its notes or its label, whichever is longer; its label runs along the arc just
+  // inside the ring, keyed "folder/section".
+  const ringLabels = new Map();
   for (const [name, notes] of model.outer || []) {
     const b = model.bodies.get(name);
     const dx = middle[0] - b.x;
     const dy = middle[1] - b.y;
     const back = Math.atan2(dx, -dy) + Math.PI;
     const R = outerRadius(b);
-    notes.forEach((note, i) => {
-      const k = i % 2 ? -(i + 1) / 2 : i / 2;
-      const a = norm(back + (k * OUTER_STEP) / R);
-      const r = R * shown(model, note.path);
-      const [x, y] = polar(a, r);
-      leaves.set(note.path, { x: b.x + x, y: b.y + y, cx: b.x, cy: b.y, a, r });
-    });
+    const sections = (model.outerSections && model.outerSections.get(name)) || [{ name: '', notes }];
+    const width = (sec) => Math.max(sec.notes.length, sec.name ? (sec.name.length * LABEL_CHAR * R) / ((R - LABEL_IN) * OUTER_STEP) + 0.5 : 0);
+    const slots = sections.reduce((n, sec) => n + width(sec), 0) + (sections.length - 1) * OUTER_GAP;
+    let k = -slots / 2;
+    const angle = (slot) => norm(back + (slot * OUTER_STEP) / R);
+    for (const sec of sections) {
+      const w = width(sec);
+      const first = k + (w - sec.notes.length) / 2 + 0.5;
+      sec.notes.forEach((note, i) => {
+        const a = angle(first + i);
+        const r = R * shown(model, note.path);
+        const [x, y] = polar(a, r);
+        leaves.set(note.path, { x: b.x + x, y: b.y + y, cx: b.x, cy: b.y, a, r });
+      });
+      if (sec.name) {
+        const a0 = back + (k * OUTER_STEP) / R;
+        ringLabels.set(`${name}/${sec.name}`, { cx: b.x, cy: b.y, r: (R - LABEL_IN) * shown(model, sec.notes[0].path), a0, a1: a0 + (w * OUTER_STEP) / R });
+      }
+      k += w + OUTER_GAP;
+    }
   }
   // A note pulled off its circle keeps its name's direction and sits where it is; its home stays its
   // place on the circle, which it springs back to.
@@ -766,7 +782,7 @@ function place(model) {
     if (run) d += `L${pt(b)}`;
     return d;
   };
-  return { leaves, groupLabels, route, curve };
+  return { leaves, groupLabels, ringLabels, route, curve };
 }
 
 // How far a name has appeared, 0 to 1: one at a time while the view opens, eased; otherwise fully.
@@ -785,19 +801,50 @@ const secondaryMode = (v) => (v === false || v === 'hidden' ? 'hidden' : v === t
 // the back (away from the middle), where nothing else is. The circle's size and forces do not change.
 // Returns the groups and links the physics sees, and the secondary notes of each circle.
 const OUTER_STEP = 9;
+// Room between sections on the outer ring, in names.
+const OUTER_GAP = 0.7;
+// Section labels: set along the circumference just inside the outer ring, like the hosts in a chord diagram.
+const LABEL_IN = 7;
+const LABEL_CHAR = 4.6;
+
+// The arc a section label is set on, as an SVG path, drawn so the text reads upright: clockwise over the
+// top half, anticlockwise along the bottom.
+function labelArc(L) {
+  const p = (a) => [L.cx + L.r * Math.sin(a), L.cy - L.r * Math.cos(a)];
+  const mid = norm((L.a0 + L.a1) / 2);
+  const bottom = mid > Math.PI / 2 && mid < (3 * Math.PI) / 2;
+  const [from, to] = bottom ? [p(L.a1), p(L.a0)] : [p(L.a0), p(L.a1)];
+  const large = L.a1 - L.a0 > Math.PI ? 1 : 0;
+  const f = (v) => v.toFixed(1);
+  return `M${f(from[0])},${f(from[1])}A${f(L.r)},${f(L.r)} 0 ${large} ${bottom ? 0 : 1} ${f(to[0])},${f(to[1])}`;
+}
 // How a link to the outer ring fades in, from the note it leaves (0) to the ring (1): [offset, opacity].
 const FADE_STOPS = [[0, 0], [0.5, 0], [0.8, 0.12], [1, 0.35]];
 function splitOuter(groups, min, links) {
   const outer = new Map();
+  const sections = new Map();
   const inner = groups.map((g) => {
     const primary = g.notes.filter((n) => !n.secondary);
     const secondary = g.notes.filter((n) => n.secondary);
     if (!secondary.length || primary.length < Math.max(1, min)) return g;
-    outer.set(g.name, secondary.slice().sort((a, b) => rankOf(b) - rankOf(a) || a.name.localeCompare(b.name)));
+    // Sections by category, the biggest at the very back and the rest either side of it; in a section,
+    // the most used first.
+    const by = new Map();
+    for (const n of secondary) {
+      const k = n.category || 'other';
+      if (!by.has(k)) by.set(k, []);
+      by.get(k).push(n);
+    }
+    const list = [...by].map(([name, notes]) => ({ name, notes: notes.sort((a, b) => rankOf(b) - rankOf(a) || a.name.localeCompare(b.name)) }));
+    list.sort((a, b) => b.notes.length - a.notes.length || a.name.localeCompare(b.name));
+    const ordered = [];
+    list.forEach((sec, i) => (i % 2 ? ordered.unshift(sec) : ordered.push(sec)));
+    sections.set(g.name, ordered);
+    outer.set(g.name, ordered.flatMap((sec) => sec.notes));
     return { ...g, notes: primary };
   });
   const out = new Set([...outer.values()].flat().map((n) => n.path));
-  return { inner, outer, links: links.filter(([s, t]) => !out.has(s) && !out.has(t)) };
+  return { inner, outer, sections, links: links.filter(([s, t]) => !out.has(s) && !out.has(t)) };
 }
 
 // Where the outer ring sits on a circle: past its longest name.
@@ -1056,7 +1103,7 @@ class BundleView extends ItemView {
       const mode = secondaryMode(this.plugin.settings.bundleSecondary);
       if (secondary && mode === 'hidden') continue;
       if (!groups.has(name)) groups.set(name, { name, notes: [] });
-      groups.get(name).notes.push({ path: file.path, name: String(fm.title || file.basename), file, status: fm.status, secondary });
+      groups.get(name).notes.push({ path: file.path, name: String(fm.title || file.basename), file, status: fm.status, secondary, category: [].concat(fm.categories || [])[0] });
     }
     const list = [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
     for (const g of list) g.notes.sort((a, b) => a.name.localeCompare(b.name));
@@ -1105,6 +1152,7 @@ class BundleView extends ItemView {
       const split = secondaryMode(settings.bundleSecondary) === 'outer' ? splitOuter(groups, settings.bundleMin, links) : { inner: groups, outer: new Map(), links };
       model = circlesModel(split.inner, settings.bundleMin, split.links, physics, this.forces());
       model.outer = split.outer;
+      model.outerSections = split.sections;
       if (physics) settle(model);
       orient(model);
       if (physics) settleNotes(model);
@@ -1213,6 +1261,19 @@ class BundleView extends ItemView {
       }
     }
 
+    // Section labels on the outer ring, along the circumference.
+    const ringTexts = new Map();
+    for (const [name, sections] of (model && model.outerSections) || []) {
+      for (const sec of sections) {
+        const key = `${name}/${sec.name}`;
+        const arc = make(nodeLayer, 'path', { id: `fcb-arc-${mine}-${ringTexts.size}`, fill: 'none', stroke: 'none' });
+        const text = make(nodeLayer, 'text', { class: 'fcb-ring-label', 'dominant-baseline': 'middle' });
+        const tp = make(text, 'textPath', { href: `#${arc.id}`, startOffset: '50%', 'text-anchor': 'middle' });
+        tp.textContent = sec.name;
+        ringTexts.set(key, { arc, text, first: sec.notes[0].path });
+      }
+    }
+
     // Move every name, group name and handle to where the chart says.
     const lay = (c) => {
       for (const [path, holder] of holders) {
@@ -1227,6 +1288,11 @@ class BundleView extends ItemView {
         text.setAttribute('x', flip ? -6 : 6);
         text.setAttribute('text-anchor', flip ? 'end' : 'start');
         text.setAttribute('transform', flip ? 'rotate(180)' : '');
+      }
+      for (const [key, t] of ringTexts) {
+        t.arc.setAttribute('d', labelArc(c.ringLabels.get(key)));
+        if (model.reveal) t.text.setAttribute('opacity', f(shown(model, t.first)));
+        else if (t.text.hasAttribute('opacity')) t.text.removeAttribute('opacity');
       }
       for (const [name, label] of groupTexts) {
         const [x, y] = c.groupLabels.get(name);
@@ -1682,6 +1748,7 @@ const BUNDLE_CSS = `
 .folder-clouds-bundle svg.fcb-hover .fcb-link:not(.fcb-in):not(.fcb-out) { stroke-opacity: 0.15; }
 .folder-clouds-bundle .fcb-node { font-size: 10px; fill: var(--text-normal); cursor: pointer; }
 .folder-clouds-bundle .fcb-node.fcb-secondary { font-size: 7.5px; }
+.folder-clouds-bundle .fcb-ring-label { font-size: 6.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--text-faint); pointer-events: none; }
 .folder-clouds-bundle .fcb-node.fcb-rank-3 { opacity: 0.85; }
 .folder-clouds-bundle .fcb-node.fcb-rank-2 { opacity: 0.65; }
 .folder-clouds-bundle .fcb-node.fcb-rank-0 { opacity: 0.4; }
@@ -2061,6 +2128,7 @@ module.exports.circlesModel = circlesModel;
 module.exports.orient = orient;
 module.exports.secondaryMode = secondaryMode;
 module.exports.splitOuter = splitOuter;
+module.exports.labelArc = labelArc;
 module.exports.FADE_STOPS = FADE_STOPS;
 module.exports.place = place;
 module.exports.simulate = simulate;

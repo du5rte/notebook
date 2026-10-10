@@ -72,6 +72,7 @@ for (const f of files) {
     name: (prop('title') || path.basename(f, '.md')).replace(/^"|"$/g, ''),
     status: prop('status'),
     secondary,
+    category: ((prop('categories') || '').match(/^\[?\s*([\w-]+)/) || [])[1],
   });
 }
 const list = [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
@@ -97,6 +98,7 @@ if (mode === 'circles') {
   const split = secMode === 'outer' ? FC.splitOuter(list, saved.bundleMin ?? 3, links) : { inner: list, outer: new Map(), links };
   model = FC.circlesModel(split.inner, saved.bundleMin ?? 3, split.links, physics, forces);
   model.outer = split.outer;
+  model.outerSections = split.sections;
   if (physics) FC.settle(model);
   FC.orient(model);
   if (physics) FC.settleNotes(model);
@@ -141,5 +143,8 @@ for (const g of list) {
     svg += `<g transform="translate(${cx},${cy}) rotate(${(a * 180) / Math.PI - 90}) translate(${r},0)"><text dy="0.31em" x="${flip ? -6 : 6}" text-anchor="${flip ? 'end' : 'start'}"${flip ? ' transform="rotate(180)"' : ''} font-size="${n.secondary ? 7.5 : 10}" opacity="${opacity}">${esc(n.name)}</text></g>`;
   }
 }
+[...(chart.ringLabels || new Map())].forEach(([key, L], i) => {
+  svg += `<path id="arc${i}" d="${FC.labelArc(L)}" fill="none"/><text font-size="6.5" font-weight="600" letter-spacing="0.5" fill="#aaa" dominant-baseline="middle"><textPath href="#arc${i}" startOffset="50%" text-anchor="middle">${esc(key.slice(key.indexOf('/') + 1).toUpperCase())}</textPath></text>`;
+});
 fs.writeFileSync(out, svg + '</svg>');
 console.log(`${out}: ${inside.size} notes, ${links.length} links (${loose.size} works_with), ${mode}${physics ? ' with physics' : ''}, ${style}`);
