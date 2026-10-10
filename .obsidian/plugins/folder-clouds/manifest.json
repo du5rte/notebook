@@ -3,7 +3,7 @@
   "name": "Folder Clouds",
   "version": "0.2.0",
   "minAppVersion": "1.4.0",
-  "description": "Every folder becomes a cloud of notes in the graph view, held together by hidden links. Links between folders are drawn as usual but do not pull.",
+  "description": "Folders become clouds in the graph view, and a bundle view draws stack/ as circles of linked notes.",
   "author": "Duarte Monteiro",
   "isDesktopOnly": false
 }

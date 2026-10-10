@@ -119,6 +119,14 @@ Forces are saved in `data.json` under `bundleForces`, only the ones changed from
 - **The graph clouds hook Obsidian internals** (`renderer.worker`, `renderer.links`, `sim.js` messages). If an update breaks them, the plugin shows a notice and changes nothing; *Restart folder clouds* re-hooks open graphs.
 - **`works_with` is read from `cache.frontmatterLinks`**, whose keys look like `works_with` or `works_with.0`.
 
+## Tried and dropped
+
+- Dashed weak links, and red/blue highlights: fainter lines and accent shades instead.
+- Pinning a dragged note in the ring: it bulldozes its neighbours. It leaves the ring instead.
+- A ring pull scaled by alpha: it fades before arriving.
+- Scattering circles on open: a new layout each time. They are steered to the settled one.
+- A fixed bend at the gate, and single-curve links: both make corners.
+
 ## Checking a change
 
 Draw the bundle view from the vault, with the saved settings, outside Obsidian:

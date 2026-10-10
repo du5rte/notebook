@@ -13,6 +13,8 @@ stack/     everything I have used (languages, frameworks, libraries, services, t
 saved/     bookmarks I haven't used yet, or stopped using: ui-kits.md, icons.md, fonts.md, design-resources.md, libraries.md (everything else). One table per file, no file per item, same columns everywhere: Name | Kind | Tags | Price | Link | Library | Notes, sorted A-Z.
 ```
 
+Areas: `design` is design apps only (Figma, not Tailwind); `motion` is motion apps plus Lottie and FFmpeg; `mobile` includes its release tools (Fastlane, QuickPush); `backend` includes servers and hosting; `tooling` includes editors, Git, package managers and testing. A record named like its area goes elsewhere (Motion is in `web/`).
+
 Saving a UI kit, icon set, font or design link: add a row to the matching `saved/` table. Once I use it in a project it moves to a `stack/` file (dropped ones included, with `replaced_by` as the plain stack filename, not a link, so the graph does not join replacements), and its `saved/` row links to that file.
 
 A `stack/` record links what it is directly built with, and nothing further, in the `built_with` property: `built_with: ["[[stack/mobile/react-native|React Native]]", "[[stack/web/tailwind|Tailwind CSS]]"]` for NativeWind, not React or JavaScript, which come through React Native → React → TypeScript → JavaScript. A tool used with something it is not built with says so in `works_with` on its own record (Fastlane: React Native); chains stop there. Never store the reverse (what uses a record): backlinks and the bundle view show it. The body holds no `Platforms:` or link lines, only notes. A project that is no longer maintained has `status: deprecated` (Realm).
