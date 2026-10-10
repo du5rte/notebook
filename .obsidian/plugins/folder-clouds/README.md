@@ -17,6 +17,7 @@ The notes under the root folder (`stack` by default), grouped by the folder belo
 | `built_with` | links: what the note is directly built with. Chains of these are what hovering follows. |
 | `works_with` | weak links: a tool used with something it is not built with. Drawn fainter; chains stop at them. |
 | any other `[[stack/...]]` link in the note | a link too (e.g. GraphQL's reference implementation line) |
+| `tier` | `secondary` marks a small library. *Secondary notes* in the panel: **Outer ring** (a second ring behind its circle, out of the physics, links fainter), small names in the circle, or hidden. |
 | `status` | ranking and fading: using, trying, watching / legacy / none, dropped, deprecated (the faintest, below dropped) |
 
 The conventions for writing these are in the vault's `CLAUDE.md`.
@@ -88,6 +89,7 @@ Names also fade by status (using 100%, trying 85%, watching / legacy / none 65%,
 
 | Section | Slider | Setting | Default |
 |---|---|---|---|
+| | Secondary notes | `bundleSecondary` | Outer ring |
 | Links | Link style | `bundleStyle` | Smooth |
 | | Bundle tension | `bundleBeta` | 0.85 |
 | | Centre pull | `bundleMiddle` | 0.35 |
@@ -126,6 +128,25 @@ Forces are saved in `data.json` under `bundleForces`, only the ones changed from
 - A ring pull scaled by alpha: it fades before arriving.
 - Scattering circles on open: a new layout each time. They are steered to the settled one.
 - A fixed bend at the gate, and single-curve links: both make corners.
+- Secondary notes as satellites (dots past their parent's name): it reads as a breadcrumb. The graph is text; keep everything a name.
+- Secondary notes in a bubble of their own behind the circle (all round, or only the far half): links into it look strange either way.
+
+## References
+
+The bundle view:
+
+- [Hierarchical edge bundling](https://observablehq.com/@d3/hierarchical-edge-bundling) and [its second version](https://observablehq.com/@d3/hierarchical-edge-bundling/2), D3 gallery: the technique (`d3.cluster`, `d3.curveBundle`)
+- [d3-graph-gallery: bundle](https://d3-graph-gallery.com/bundle), [basic example](https://d3-graph-gallery.com/graph/hierarchical_edge_bundling_basic.html)
+- [sjengle's gist](https://gist.github.com/sjengle/2e58e83685f6d854aa40c7bc546aeb24)
+- [My bilevel edge bundling](https://observablehq.com/@du5rte/bilevel-edge-bundling): what this view started from
+
+Obsidian's graph view is probably built on d3-force:
+
+- [Force-directed graph, canvas](https://observablehq.com/@d3/force-directed-graph-canvas/2), [d3-force](https://d3js.org/d3-force): what `simulate` copies (alpha, velocity decay, link, collide, x/y)
+
+Ideas for later:
+
+- [Radial tree](https://observablehq.com/@d3/radial-tree/2), [directed chord diagram](https://observablehq.com/@d3/directed-chord-diagram/2), [Hertzsprung–Russell diagram](https://observablehq.com/@d3/hertzsprung-russell-diagram), [arc diagram](https://observablehq.com/@d3/arc-diagram), [circle packing, monochrome](https://observablehq.com/@d3/circle-packing-monochrome)
 
 ## Checking a change
 

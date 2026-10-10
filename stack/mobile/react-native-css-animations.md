@@ -1,0 +1,22 @@
+---
+title: "react-native-css-animations"
+type: doc
+tier: secondary
+created: 2026-10-07
+updated: 2026-10-07
+aliases: []
+tags: [library, animation]
+categories: [animation]
+platforms: [react-native]
+built_with: ["[[stack/mobile/react-native|React Native]]", "[[stack/web/css|CSS]]"]
+status: watching
+url: https://github.com/software-mansion-labs/react-native-css-animations
+repo: https://github.com/software-mansion-labs/react-native-css-animations
+verified: false
+---
+# react-native-css-animations
+
+
+## Why I picked it
+
+## Why I would drop it

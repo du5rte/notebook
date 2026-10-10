@@ -3,7 +3,7 @@
 // Used to check layout and physics changes without reloading the app; see README.md.
 //
 //   node .obsidian/plugins/folder-clouds/preview.js [out.svg] [--mode circles|wheel] [--still]
-//        [--style smooth|bundled] [--forces '{"ring":0.5}']
+//        [--style smooth|bundled] [--forces '{"ring":0.5}'] [--secondary outer|names|hidden]
 //
 // Run it from the vault root. It reads the same notes the view does (subfolders of the root folder,
 // "stack" by default) and the plugin's saved settings in data.json, so the drawing matches what the
@@ -58,16 +58,20 @@ const walk = (dir) => {
 };
 walk(root);
 const groups = new Map();
+const secMode = flag('--secondary') || FC.secondaryMode(saved.bundleSecondary);
 for (const f of files) {
   const rest = f.slice(root.length + 1).split('/');
   if (rest.length < 2) continue;
   const text = fs.readFileSync(f, 'utf8');
   const prop = (k) => (text.match(new RegExp(`^${k}:\\s*(.*)$`, 'm')) || [])[1];
+  const secondary = prop('tier') === 'secondary';
+  if (secondary && secMode === 'hidden') continue;
   if (!groups.has(rest[0])) groups.set(rest[0], { name: rest[0], notes: [] });
   groups.get(rest[0]).notes.push({
     path: f,
     name: (prop('title') || path.basename(f, '.md')).replace(/^"|"$/g, ''),
     status: prop('status'),
+    secondary,
   });
 }
 const list = [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
@@ -90,7 +94,9 @@ for (const s of inside) {
 let chart;
 let model = null;
 if (mode === 'circles') {
-  model = FC.circlesModel(list, saved.bundleMin ?? 3, links, physics, forces);
+  const split = secMode === 'outer' ? FC.splitOuter(list, saved.bundleMin ?? 3, links) : { inner: list, outer: new Map(), links };
+  model = FC.circlesModel(split.inner, saved.bundleMin ?? 3, split.links, physics, forces);
+  model.outer = split.outer;
   if (physics) FC.settle(model);
   FC.orient(model);
   if (physics) FC.settleNotes(model);
@@ -99,7 +105,8 @@ if (mode === 'circles') {
   chart = FC.wheelChart(list);
 }
 const groupOf = new Map(list.flatMap((g) => g.notes.map((n) => [n.path, g.name])));
-const len = (p) => [...list.flatMap((g) => g.notes)].find((n) => n.path === p).name.length * 5.6;
+const noteOf = (p) => list.flatMap((g) => g.notes).find((n) => n.path === p);
+const len = (p) => noteOf(p).name.length * (noteOf(p).secondary ? 4.2 : 5.6);
 const linkD = (s, t) => {
   const gs = groupOf.get(s);
   const gt = groupOf.get(t);
@@ -112,7 +119,16 @@ const esc = (x) => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const [bx, by, bw, bh] = chart.box;
 let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${bx} ${by} ${bw} ${bh}" width="1600" height="${Math.round((1600 * bh) / bw)}" style="background:#fff;font-family:-apple-system,sans-serif">`;
 svg += '<g fill="none">';
-for (const [s, t] of links) svg += `<path d="${linkD(s, t)}" stroke="#999" stroke-opacity="${loose.has(`${s}\n${t}`) ? 0.2 : 0.45}"/>`;
+// A link to the outer ring fades in toward the ring, as in the view.
+const ring = (p) => model && model.outer.size && !model.groupOf.has(p);
+links.forEach(([s, t], i) => {
+  if (ring(s) !== ring(t)) {
+    const a = chart.leaves.get(ring(s) ? t : s);
+    const b = chart.leaves.get(ring(s) ? s : t);
+    svg += `<linearGradient id="fade${i}" gradientUnits="userSpaceOnUse" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}">${FC.FADE_STOPS.map(([o, op]) => `<stop offset="${o}" stop-color="#999" stop-opacity="${op}"/>`).join('')}</linearGradient>`;
+    svg += `<path d="${linkD(s, t)}" stroke="url(#fade${i})"/>`;
+  } else svg += `<path d="${linkD(s, t)}" stroke="#999" stroke-opacity="${loose.has(`${s}\n${t}`) ? 0.2 : 0.45}"/>`;
+});
 svg += '</g>';
 const fade = { using: 1, trying: 0.85, dropped: 0.4, deprecated: 0.22 };
 for (const g of list) {
@@ -122,7 +138,7 @@ for (const g of list) {
     const { cx, cy, a, r } = chart.leaves.get(n.path);
     const flip = a >= Math.PI;
     const opacity = fade[n.status] ?? 0.65;
-    svg += `<g transform="translate(${cx},${cy}) rotate(${(a * 180) / Math.PI - 90}) translate(${r},0)"><text dy="0.31em" x="${flip ? -6 : 6}" text-anchor="${flip ? 'end' : 'start'}"${flip ? ' transform="rotate(180)"' : ''} font-size="10" opacity="${opacity}">${esc(n.name)}</text></g>`;
+    svg += `<g transform="translate(${cx},${cy}) rotate(${(a * 180) / Math.PI - 90}) translate(${r},0)"><text dy="0.31em" x="${flip ? -6 : 6}" text-anchor="${flip ? 'end' : 'start'}"${flip ? ' transform="rotate(180)"' : ''} font-size="${n.secondary ? 7.5 : 10}" opacity="${opacity}">${esc(n.name)}</text></g>`;
   }
 }
 fs.writeFileSync(out, svg + '</svg>');

@@ -1,6 +1,7 @@
 ---
 title: "i18next"
 type: doc
+tier: secondary
 created: 2026-10-07
 updated: 2026-10-09
 aliases: []

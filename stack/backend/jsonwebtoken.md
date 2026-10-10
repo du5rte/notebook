@@ -1,6 +1,7 @@
 ---
 title: "jsonwebtoken"
 type: doc
+tier: secondary
 created: 2026-10-09
 updated: 2026-10-09
 aliases: [JWT, node-jsonwebtoken]

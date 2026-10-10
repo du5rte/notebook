@@ -20,11 +20,12 @@
     "groupGap": 12,
     "room": 1
   },
-  "bundlePanel": false,
+  "bundlePanel": true,
   "bundleMiddle": 0.05,
   "bundleRun": 0,
   "bundleHold": 0.1,
   "bundleStyle": "smooth",
-  "bundleAnimate": true,
-  "bundleOpenSpeed": 1
+  "bundleAnimate": false,
+  "bundleOpenSpeed": 0.25,
+  "bundleSecondary": "outer"
 }

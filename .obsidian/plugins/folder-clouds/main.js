@@ -2,7 +2,7 @@
 // Every folder a cloud around a hidden centre.
 const { Plugin, PluginSettingTab, Setting, Notice, ItemView, setIcon } = require('obsidian');
 
-const DEFAULTS = { enabled: true, depth: 2, centre: 1, inside: true, cross: false, group: false, min: 2, labels: false, bundleRoot: 'stack', bundleBeta: 0.85, bundleMode: 'wheel', bundleMin: 3, bundlePhysics: true, bundleForces: {}, bundlePanel: false, bundleMiddle: 0.35, bundleRun: 50, bundleHold: 0, bundleStyle: 'smooth', bundleAnimate: true, bundleOpenSpeed: 1 };
+const DEFAULTS = { enabled: true, depth: 2, centre: 1, inside: true, cross: false, group: false, min: 2, labels: false, bundleRoot: 'stack', bundleBeta: 0.85, bundleMode: 'wheel', bundleMin: 3, bundlePhysics: true, bundleForces: {}, bundlePanel: false, bundleMiddle: 0.35, bundleRun: 50, bundleHold: 0, bundleStyle: 'smooth', bundleAnimate: true, bundleOpenSpeed: 1, bundleSecondary: 'outer' };
 
 // Nodes without a folder of their own.
 const FOLLOWERS = new Set(['tag', 'unresolved', 'attachment']);
@@ -689,6 +689,21 @@ function place(model) {
       groupLabels.set(b.name, [b.x - ux * 24, b.y - uy * 24]);
     }
   }
+  // Secondary notes on the outer ring, the most used at the very back, the rest either side of it.
+  for (const [name, notes] of model.outer || []) {
+    const b = model.bodies.get(name);
+    const dx = middle[0] - b.x;
+    const dy = middle[1] - b.y;
+    const back = Math.atan2(dx, -dy) + Math.PI;
+    const R = outerRadius(b);
+    notes.forEach((note, i) => {
+      const k = i % 2 ? -(i + 1) / 2 : i / 2;
+      const a = norm(back + (k * OUTER_STEP) / R);
+      const r = R * shown(model, note.path);
+      const [x, y] = polar(a, r);
+      leaves.set(note.path, { x: b.x + x, y: b.y + y, cx: b.x, cy: b.y, a, r });
+    });
+  }
   // A note pulled off its circle keeps its name's direction and sits where it is; its home stays its
   // place on the circle, which it springs back to.
   if (model.free) {
@@ -762,14 +777,44 @@ function shown(model, path) {
   return 1 - Math.pow(1 - t, 3);
 }
 
+// How secondary notes are shown: on an outer ring behind their circle, as smaller names in it, or not.
+// Older settings saved true or false.
+const secondaryMode = (v) => (v === false || v === 'hidden' ? 'hidden' : v === true || v === 'names' ? 'names' : 'outer');
+
+// The outer ring: a circle's secondary notes leave its physics and sit on a second ring past its names, on
+// the back (away from the middle), where nothing else is. The circle's size and forces do not change.
+// Returns the groups and links the physics sees, and the secondary notes of each circle.
+const OUTER_STEP = 9;
+// How a link to the outer ring fades in, from the note it leaves (0) to the ring (1): [offset, opacity].
+const FADE_STOPS = [[0, 0], [0.5, 0], [0.8, 0.12], [1, 0.35]];
+function splitOuter(groups, min, links) {
+  const outer = new Map();
+  const inner = groups.map((g) => {
+    const primary = g.notes.filter((n) => !n.secondary);
+    const secondary = g.notes.filter((n) => n.secondary);
+    if (!secondary.length || primary.length < Math.max(1, min)) return g;
+    outer.set(g.name, secondary.slice().sort((a, b) => rankOf(b) - rankOf(a) || a.name.localeCompare(b.name)));
+    return { ...g, notes: primary };
+  });
+  const out = new Set([...outer.values()].flat().map((n) => n.path));
+  return { inner, outer, links: links.filter(([s, t]) => !out.has(s) && !out.has(t)) };
+}
+
+// Where the outer ring sits on a circle: past its longest name.
+function outerRadius(b) {
+  return b.r + 6 + Math.max(0, ...b.notes.map((n) => n.name.length * 5.6)) + 14;
+}
+
 // The view around the circles.
 function fitBox(model) {
   let [x0, y0, x1, y1] = [Infinity, Infinity, -Infinity, -Infinity];
   for (const b of model.bodies.values()) {
-    x0 = Math.min(x0, b.x - b.reach);
-    y0 = Math.min(y0, b.y - b.reach);
-    x1 = Math.max(x1, b.x + b.reach);
-    y1 = Math.max(y1, b.y + b.reach);
+    const sec = model.outer && model.outer.get(b.name);
+    const reach = sec ? Math.max(b.reach, outerRadius(b) + 10 + Math.max(...sec.map((n) => n.name.length * 4.2))) : b.reach;
+    x0 = Math.min(x0, b.x - reach);
+    y0 = Math.min(y0, b.y - reach);
+    x1 = Math.max(x1, b.x + reach);
+    y1 = Math.max(y1, b.y + reach);
   }
   return [x0 - 20, y0 - 20, x1 - x0 + 40, y1 - y0 + 40];
 }
@@ -1006,8 +1051,12 @@ class BundleView extends ItemView {
       if (rest.length < 2) continue;
       const name = rest[0];
       const fm = (this.app.metadataCache.getFileCache(file) || {}).frontmatter || {};
+      // Secondary records (tier: secondary) are small libraries: drawn smaller, or hidden (Secondary notes in the panel).
+      const secondary = fm.tier === 'secondary';
+      const mode = secondaryMode(this.plugin.settings.bundleSecondary);
+      if (secondary && mode === 'hidden') continue;
       if (!groups.has(name)) groups.set(name, { name, notes: [] });
-      groups.get(name).notes.push({ path: file.path, name: String(fm.title || file.basename), file, status: fm.status });
+      groups.get(name).notes.push({ path: file.path, name: String(fm.title || file.basename), file, status: fm.status, secondary });
     }
     const list = [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
     for (const g of list) g.notes.sort((a, b) => a.name.localeCompare(b.name));
@@ -1053,7 +1102,9 @@ class BundleView extends ItemView {
     let model = null;
     let chart;
     if (circles) {
-      model = circlesModel(groups, settings.bundleMin, links, physics, this.forces());
+      const split = secondaryMode(settings.bundleSecondary) === 'outer' ? splitOuter(groups, settings.bundleMin, links) : { inner: groups, outer: new Map(), links };
+      model = circlesModel(split.inner, settings.bundleMin, split.links, physics, this.forces());
+      model.outer = split.outer;
       if (physics) settle(model);
       orient(model);
       if (physics) settleNotes(model);
@@ -1151,7 +1202,7 @@ class BundleView extends ItemView {
         const holder = make(nodeLayer, 'g', {});
         // Names fade with how actively the note is used: dropped ones are the faintest.
         const rank = rankOf(n);
-        const text = make(holder, 'text', { dy: '0.31em', class: `fcb-node ${rank < 0 ? 'fcb-deprecated' : `fcb-rank-${rank}`}` });
+        const text = make(holder, 'text', { dy: '0.31em', class: `fcb-node ${rank < 0 ? 'fcb-deprecated' : `fcb-rank-${rank}`}${n.secondary ? ' fcb-secondary' : ''}` });
         text.textContent = n.name;
         texts.set(n.path, text);
         holders.set(n.path, holder);
@@ -1213,6 +1264,15 @@ class BundleView extends ItemView {
       return bundlePath(c.route(s, t, gs, gt, lenOf, settings.bundleMiddle, run, 1), settings.bundleBeta, keep, settings.bundleHold);
     };
     const paths = [];
+    const defs = make(svg, 'defs', {});
+    const fadeTo = (c, p) => {
+      const a = c.leaves.get(p.fade.from);
+      const b = c.leaves.get(p.fade.to);
+      p.fade.grad.setAttribute('x1', f(a.x));
+      p.fade.grad.setAttribute('y1', f(a.y));
+      p.fade.grad.setAttribute('x2', f(b.x));
+      p.fade.grad.setAttribute('y2', f(b.y));
+    };
     for (const [s, t] of links) {
       const gs = groupOf.get(s);
       const gt = groupOf.get(t);
@@ -1223,6 +1283,21 @@ class BundleView extends ItemView {
       if (!incoming.has(t)) incoming.set(t, []);
       const isLoose = loose.has(`${s}\n${t}`);
       if (isLoose) path.addClass('fcb-loose');
+      // A link to a note on the outer ring fades in along its length (FADE_STOPS): invisible for the first
+      // half, faint at the ring, so the circle's centre stays clear. A gradient in chart space, moved every frame.
+      const ringS = model && model.outer.size && !model.groupOf.has(s);
+      const ringT = model && model.outer.size && !model.groupOf.has(t);
+      if (ringS !== ringT) {
+        const id = `fcb-fade-${paths.length - 1}-${mine}`;
+        const grad = make(defs, 'linearGradient', { id, gradientUnits: 'userSpaceOnUse', class: 'fcb-fade' });
+        for (const [offset, opacity] of FADE_STOPS) make(grad, 'stop', { offset, 'stop-opacity': opacity });
+        // Highlighted, the fade stays and takes the highlight's colour (mark() marks the gradient too).
+        path.fcbFade = grad;
+        path.addClass('fcb-faint');
+        path.style.setProperty('--fcb-fade', `url(#${id})`);
+        paths[paths.length - 1].fade = { grad, from: ringS ? t : s, to: ringS ? s : t };
+        fadeTo(chart, paths[paths.length - 1]);
+      }
       outgoing.get(s).push({ path, other: t, loose: isLoose });
       incoming.get(t).push({ path, other: s, loose: isLoose });
     }
@@ -1258,6 +1333,7 @@ class BundleView extends ItemView {
       lay(c);
       for (const p of paths) {
         p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
+        if (p.fade) fadeTo(c, p);
         if (model.reveal) p.path.setAttribute('opacity', f(Math.min(shown(model, p.s), shown(model, p.t))));
         else if (p.path.hasAttribute('opacity')) p.path.removeAttribute('opacity');
       }
@@ -1269,7 +1345,10 @@ class BundleView extends ItemView {
     };
     const redrawLinks = () => {
       const c = physics ? (current = place(model)) : chart;
-      for (const p of paths) p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
+      for (const p of paths) {
+        p.path.setAttribute('d', linkD(c, p.s, p.t, p.gs, p.gt));
+        if (p.fade) fadeTo(c, p);
+      }
     };
     this.panel(el, physics, model, () => wake(0.3), redrawLinks);
     if (model && model.grow === 0) wake(1);
@@ -1444,6 +1523,13 @@ class BundleView extends ItemView {
           }
         );
 
+      new Setting(box).setName('Secondary notes').addDropdown((d) =>
+        d.addOption('outer', 'Outer ring').addOption('names', 'Small names').addOption('hidden', 'Hidden').setValue(secondaryMode(settings.bundleSecondary)).onChange(async (v) => {
+          settings.bundleSecondary = v;
+          await this.plugin.saveData(settings);
+          this.draw();
+        })
+      );
       section('Links');
       new Setting(box).setName('Link style').addDropdown((d) =>
         d
@@ -1552,6 +1638,7 @@ class BundleView extends ItemView {
           for (const { path: el, other, loose } of links.get(from) || []) {
             if (el.hasClass(cls)) continue;
             touch(el, ...step);
+            if (el.fcbFade) touch(el.fcbFade, ...step);
             el.parentNode.appendChild(el);
             if (seen.has(other)) continue;
             seen.add(other);
@@ -1589,10 +1676,12 @@ const BUNDLE_CSS = `
 .folder-clouds-bundle .fcb-body { fill: transparent; cursor: grab; }
 .folder-clouds-bundle svg.fcb-dragging, .folder-clouds-bundle svg.fcb-dragging * { cursor: grabbing; }
 .folder-clouds-bundle .fcb-link { stroke: var(--text-faint); stroke-opacity: 0.45; pointer-events: none; }
+.folder-clouds-bundle .fcb-link.fcb-faint { stroke: var(--fcb-fade); stroke-opacity: 1; }
 .folder-clouds-bundle .fcb-link.fcb-in { stroke: var(--fcb-used); stroke-opacity: 1; }
 .folder-clouds-bundle .fcb-link.fcb-out { stroke: var(--fcb-built); stroke-opacity: 1; }
 .folder-clouds-bundle svg.fcb-hover .fcb-link:not(.fcb-in):not(.fcb-out) { stroke-opacity: 0.15; }
 .folder-clouds-bundle .fcb-node { font-size: 10px; fill: var(--text-normal); cursor: pointer; }
+.folder-clouds-bundle .fcb-node.fcb-secondary { font-size: 7.5px; }
 .folder-clouds-bundle .fcb-node.fcb-rank-3 { opacity: 0.85; }
 .folder-clouds-bundle .fcb-node.fcb-rank-2 { opacity: 0.65; }
 .folder-clouds-bundle .fcb-node.fcb-rank-0 { opacity: 0.4; }
@@ -1610,6 +1699,10 @@ const BUNDLE_CSS = `
 .folder-clouds-bundle .fcb-link.fcb-d4 { stroke-opacity: 0.2; }
 .folder-clouds-bundle .fcb-link.fcb-loose { stroke-opacity: 0.2; }
 .folder-clouds-bundle .fcb-link.fcb-loose.fcb-in, .folder-clouds-bundle .fcb-link.fcb-loose.fcb-out { stroke: var(--fcb-works); stroke-opacity: 1; }
+.folder-clouds-bundle .fcb-link.fcb-faint.fcb-in, .folder-clouds-bundle .fcb-link.fcb-faint.fcb-out { stroke: var(--fcb-fade); stroke-opacity: 1; }
+.folder-clouds-bundle .fcb-fade stop { stop-color: var(--text-faint); }
+.folder-clouds-bundle .fcb-fade.fcb-out stop { stop-color: var(--fcb-built); }
+.folder-clouds-bundle .fcb-fade.fcb-in stop { stop-color: var(--fcb-used); }
 .folder-clouds-bundle .fcb-node.fcb-d2 { opacity: 0.7; font-weight: 600; }
 .folder-clouds-bundle .fcb-node.fcb-d3 { opacity: 0.5; font-weight: 500; }
 .folder-clouds-bundle .fcb-node.fcb-d4 { opacity: 0.35; font-weight: 400; }
@@ -1966,6 +2059,9 @@ module.exports.wheelChart = wheelChart;
 module.exports.circlesChart = circlesChart;
 module.exports.circlesModel = circlesModel;
 module.exports.orient = orient;
+module.exports.secondaryMode = secondaryMode;
+module.exports.splitOuter = splitOuter;
+module.exports.FADE_STOPS = FADE_STOPS;
 module.exports.place = place;
 module.exports.simulate = simulate;
 module.exports.settle = settle;

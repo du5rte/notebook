@@ -1,20 +1,21 @@
 ---
-title: "Portal (gorhom)"
+title: "Masked View"
 type: doc
 tier: secondary
 created: 2026-10-07
-updated: 2026-10-09
+updated: 2026-10-07
 aliases: []
-tags: [library, navigation]
-categories: [navigation]
+tags: [library, styling]
+categories: [styling]
 platforms: [react-native]
 built_with: ["[[stack/mobile/react-native|React Native]]"]
 status: trying
-url: https://github.com/gorhom/react-native-portal
-repo: https://github.com/gorhom/react-native-portal
+url: https://github.com/react-native-masked-view/masked-view
+repo: https://github.com/react-native-masked-view/masked-view
 verified: false
 ---
-# Portal (gorhom)
+# Masked View
+
 
 ## Why I picked it
 

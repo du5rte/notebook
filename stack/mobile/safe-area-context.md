@@ -1,20 +1,21 @@
 ---
-title: "Gifted Chat"
+title: "Safe Area Context"
 type: doc
 tier: secondary
 created: 2026-10-07
-updated: 2026-10-09
+updated: 2026-10-07
 aliases: []
 tags: [library, ui]
 categories: [ui]
 platforms: [react-native]
 built_with: ["[[stack/mobile/react-native|React Native]]"]
-status: watching
-url: https://github.com/FaridSafi/react-native-gifted-chat
-repo: https://github.com/FaridSafi/react-native-gifted-chat
+status: using
+url: https://github.com/th3rdwave/react-native-safe-area-context
+repo: https://github.com/th3rdwave/react-native-safe-area-context
 verified: false
 ---
-# Gifted Chat
+# Safe Area Context
+
 
 ## Why I picked it
 

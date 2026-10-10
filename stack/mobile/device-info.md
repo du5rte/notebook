@@ -1,20 +1,21 @@
 ---
-title: "Gifted Chat"
+title: "Device Info"
 type: doc
 tier: secondary
 created: 2026-10-07
-updated: 2026-10-09
+updated: 2026-10-07
 aliases: []
 tags: [library, ui]
 categories: [ui]
 platforms: [react-native]
 built_with: ["[[stack/mobile/react-native|React Native]]"]
-status: watching
-url: https://github.com/FaridSafi/react-native-gifted-chat
-repo: https://github.com/FaridSafi/react-native-gifted-chat
+status: trying
+url: https://github.com/react-native-device-info/react-native-device-info
+repo: https://github.com/react-native-device-info/react-native-device-info
 verified: false
 ---
-# Gifted Chat
+# Device Info
+
 
 ## Why I picked it
 

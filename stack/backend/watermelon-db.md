@@ -1,20 +1,21 @@
 ---
-title: "Gifted Chat"
+title: "WatermelonDB"
 type: doc
 tier: secondary
 created: 2026-10-07
-updated: 2026-10-09
+updated: 2026-10-07
 aliases: []
-tags: [library, ui]
-categories: [ui]
+tags: [library, database]
+categories: [database]
 platforms: [react-native]
 built_with: ["[[stack/mobile/react-native|React Native]]"]
 status: watching
-url: https://github.com/FaridSafi/react-native-gifted-chat
-repo: https://github.com/FaridSafi/react-native-gifted-chat
+url: https://watermelondb.dev
+repo: https://github.com/Nozbe/WatermelonDB
 verified: false
 ---
-# Gifted Chat
+# WatermelonDB
+
 
 ## Why I picked it
 

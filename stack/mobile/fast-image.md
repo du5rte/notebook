@@ -1,20 +1,21 @@
 ---
-title: "Portal (gorhom)"
+title: "FastImage"
 type: doc
 tier: secondary
 created: 2026-10-07
-updated: 2026-10-09
+updated: 2026-10-07
 aliases: []
-tags: [library, navigation]
-categories: [navigation]
+tags: [library, ui]
+categories: [ui]
 platforms: [react-native]
 built_with: ["[[stack/mobile/react-native|React Native]]"]
 status: trying
-url: https://github.com/gorhom/react-native-portal
-repo: https://github.com/gorhom/react-native-portal
+url: https://github.com/DylanVann/react-native-fast-image
+repo: https://github.com/DylanVann/react-native-fast-image
 verified: false
 ---
-# Portal (gorhom)
+# FastImage
+
 
 ## Why I picked it
 

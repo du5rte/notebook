@@ -1,20 +1,21 @@
 ---
-title: "Portal (gorhom)"
+title: "react-native-onboarding"
 type: doc
 tier: secondary
 created: 2026-10-07
-updated: 2026-10-09
+updated: 2026-10-07
 aliases: []
 tags: [library, navigation]
 categories: [navigation]
 platforms: [react-native]
 built_with: ["[[stack/mobile/react-native|React Native]]"]
-status: trying
-url: https://github.com/gorhom/react-native-portal
-repo: https://github.com/gorhom/react-native-portal
+status: watching
+url: https://github.com/software-mansion-labs/react-native-onboarding
+repo: https://github.com/software-mansion-labs/react-native-onboarding
 verified: false
 ---
-# Portal (gorhom)
+# react-native-onboarding
+
 
 ## Why I picked it
 
